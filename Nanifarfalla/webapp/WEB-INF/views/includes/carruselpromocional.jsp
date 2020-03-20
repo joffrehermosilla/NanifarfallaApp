@@ -11,11 +11,7 @@
 <head>
 <spring:url value="/resources" var="urlPublic" />
 
-
-
 </head>
-
-
 
 <section class="cz-carousel cz-controls-lg">
 	<nav class="navbar  navbar-expand-lg fixed top navbar-preview">
@@ -32,7 +28,9 @@
 			<%!String test = new String();%>
 
 			<ol class="carousel-indicators">
-				<c:forEach items="${anuncios}" var="anuncios">
+				<!--	Solucion Joffre
+			
+			<c:forEach items="${anuncios}" var="anuncios">
 
 					<fmt:parseNumber var="i" value="${anuncios.codigo_anuncio}" />
 
@@ -40,13 +38,29 @@
 					<li data-target="#carousel1_indicator" data-slide-to="${i}"
 						class="active"></li>
 				</c:forEach>
+				
+				-->
+
+
+				<c:forEach items="${anuncios}" var="anuncios" varStatus="loop">
+					<c:choose>
+						<c:when test="${loop.index==0}">
+							<li data-target="#carousel1_indicator"
+								data-slide-to="${loop.index}" class="active"></li>
+						</c:when>
+						<c:otherwise>
+							<li data-target="#carousel1_indicator"
+								data-slide-to="${loop.index}"></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
 				<!-- 	<li data-target="#carousel1_indicator" data-slide-to="0"
 					class="active"></li>
 				<li data-target="#carousel1_indicator" data-slide-to="1"></li>
 				<li data-target="#carousel1_indicator" data-slide-to="2"></li>
 				<li data-target="#carousel1_indicator" data-slide-to="3"></li> -->
 			</ol>
-
 
 			<div class="carousel-inner" align="center">
 				<c:forEach items="${anuncios}" var="anuncios">
@@ -319,16 +333,6 @@
 				class="sr-only">Next</span>
 			</a>
 		</div>
-
-
-
-
-
-
-
-
-
-
 
 
 	</nav>

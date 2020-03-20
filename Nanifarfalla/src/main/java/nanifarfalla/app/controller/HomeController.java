@@ -14,6 +14,7 @@ import nanifarfalla.app.model.Carrusel;
 import nanifarfalla.app.model.Ceo;
 import nanifarfalla.app.model.Linea;
 import nanifarfalla.app.model.Usuario;
+import nanifarfalla.app.service.IAnunciosService;
 import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.util.Utileria;
 
@@ -27,6 +28,10 @@ import java.util.List;
 public class HomeController {
 	@Autowired
 	private ILineasService serviceLineas;
+	
+	@Autowired
+	private IAnunciosService serviceAnuncios;
+	
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -55,10 +60,10 @@ public class HomeController {
 		model.addAttribute("fechabusqueda", fecha);
 		model.addAttribute("lineas", lineas);
 		model.addAttribute("alertas", alertas);
-		model.addAttribute("anuncios", anuncios);
+		//model.addAttribute("anuncios", anuncios);
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
-
+		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
 		System.out.println("Buscando todas las lineas creadas en exhibicion para la fecha: " + fecha);
 		return "page-index-1";
 
@@ -107,9 +112,10 @@ public class HomeController {
 		model.addAttribute("fechabusqueda", dateformat.format(new Date()));
 		model.addAttribute("lineas", lineas);
 		model.addAttribute("alertas", alertas);
-		model.addAttribute("anuncios", anuncios);
+		//model.addAttribute("anuncios", anuncios);
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
+		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
 		return "page-index-1";
 		// return "home";
 	}
