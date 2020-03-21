@@ -72,8 +72,6 @@
 									aria-hidden="true" tabindex="-1">
 									<div
 										class="d-lg-flex justify-content-between align-items-center pl-lg-4">
-
-
 										<img class="d-block order-lg-2 mr-lg-n5 flex-shrink-0"
 											src="${urlPublic}/images/yellowbutterfly.png"
 											alt="Summer Collection">
@@ -88,33 +86,27 @@
 												</p>
 												<a href="#"></a>
 											</figcaption>
-
 										</figure>
-
-
-
-
 										<div
 											class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
 											style="max-width: 42rem; z-index: 10;">
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado1" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
 
 													<div class="divefectomovimiento">
 														<ol>
 															<span>${anuncios.mensaje_anuncio}</span>
 														</ol>
 													</div>
-
 												</h2>
 												<h1 class="text-light display-4 from-bottom delay-1">${anuncios.anuncio_principal }
 												</h1>
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie1" />
+													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
 													<ol></ol>
 													<div class="divefectomovimiento">
 														<span>${anuncios.pie_mensaje}</span>
@@ -131,21 +123,14 @@
 									</div>
 								</div>
 							</div>
-
 						</c:when>
 						<c:when test="${anuncios.fkcodigo_tipoalerta==carruselcat2}">
-
 							<div class="carousel-item">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(112, 224, 161);" id="tns2-item0"
 									aria-hidden="true" tabindex="-1">
 									<div
 										class="d-lg-flex justify-content-between align-items-center pl-lg-4">
-
-
-
-
-
 										<img class="d-block order-lg-2 mr-lg-n5 flex-shrink-0"
 											src="${urlPublic}/images/yellowbutterfly.png"
 											alt="Summer Collection">
@@ -160,19 +145,14 @@
 												</p>
 												<a href="#"></a>
 											</figcaption>
-
 										</figure>
-
-
-
-
 										<div
 											class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
 											style="max-width: 42rem; z-index: 10;">
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado2" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -184,7 +164,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie2" />
+													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>
@@ -222,7 +202,6 @@
 												</p>
 												<a href="#"></a>
 											</figcaption>
-
 										</figure>
 										<div
 											class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
@@ -230,7 +209,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado3" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -242,7 +221,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie3" />
+													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>
@@ -280,7 +259,6 @@
 												</p>
 												<a href="#"></a>
 											</figcaption>
-
 										</figure>
 										<div
 											class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
@@ -288,7 +266,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado3" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -300,7 +278,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie3" />
+													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>
@@ -317,11 +295,8 @@
 								</div>
 							</div>
 						</c:when>
-
-
 					</c:choose>
 				</c:forEach>
-
 			</div>
 			<a class="carousel-control-prev" href="#carousel1_indicator"
 				role="button" data-slide="prev"> <span

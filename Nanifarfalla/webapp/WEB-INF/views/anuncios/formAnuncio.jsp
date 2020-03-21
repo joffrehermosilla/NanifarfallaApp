@@ -24,56 +24,30 @@
 
 	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 	<header class="section-header">
-
 		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
-
-
 	</header>
 	<div class="container theme-showcase" role="main">
-
 		<h3 class="blog-title">
 			<span class="label label-success">Datos del Anuncio</span>
 		</h3>
-
-
-
-
-
-
-
-
 		<form action="${urlForm}" method="post" enctype="multipart/form-data">
-
-
 			<div class="row">
 				<div class="col-sm-6">
-
 					<div class="form-group">
-
 						<label for="codigo_anuncio">Codigo Anuncio</label>
 						<c:forEach var="anuncio" items="${anuncios}">
-
-
 							<c:set var="i" value="${anuncio.codigo_anuncio}" />
-
 						</c:forEach>
 						<div class="col-sm-2">
-
-
-							<input width="4" type="text" class="form-control"
-							hidden="true"	 name="codigo_anuncio" id="codigo_anuncio"
-								required="required" value="${i +1}" />
+							<input width="4" type="text" class="form-control" hidden="true"
+								name="codigo_anuncio" id="codigo_anuncio" required="required"
+								value="${i +1}" />
 						</div>
 					</div>
-
-
-
 					<div class="form-group">
 						<label for="mensaje_anuncio">Mensaje del Anuncio</label> <input
 							type="text" class="form-control" name="mensaje_anuncio"
 							id="mensaje_anuncio" required="required" />
-
-
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="version">Version</label> <input type="date"
@@ -81,17 +55,11 @@
 									required="required" required
 									pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" />
 							</div>
-
-
-
-
-
 						</div>
 
 						<label for="pie_mensaje">Pie de Mensaje </label> <input
 							type="text" class="form-control" name="pie_mensaje"
 							id="pie_mensaje" required="required" />
-
 					</div>
 
 					<div class="form-group">
@@ -99,29 +67,21 @@
 							id="archivoImagen" name="archivoImagen" />
 						<p class="help-block">Imagen del Anuncio</p>
 					</div>
-
-
 				</div>
-
-
-
-
 				<div class="col-sm-2">
 					<div class="form-group">
-					 <label for="estatus">Estatus</label> <select id="estatus"
+						<label for="estatus">Estatus</label> <select id="estatus"
 							name="estatus" class="form-control">
 							<option value="importante">importante</option>
 							<option value="info">info</option>
 							<option value="alerta">alerta</option>
 							<option value="eventos">eventos</option>
-						</select>
-					
-						<label for="fkcodigo_tipoalerta">Categoria Anuncio: </label> 
-						<select id="fkcodigo_tipoalerta" name="fkcodigo_tipoalerta"
+						</select> <label for="fkcodigo_tipoalerta">Categoria Anuncio: </label> <select
+							id="fkcodigo_tipoalerta" name="fkcodigo_tipoalerta"
 							class="form-control">
 							<c:forEach items="${anuncios}" var="anuncio">
-							
-							<c:set var="i" value="${anuncio.fkcodigo_tipoalerta}" />
+
+								<c:set var="i" value="${anuncio.fkcodigo_tipoalerta}" />
 								<c:choose>
 									<c:when test="${i eq 1}">
 										<option value="${i}" selected>importante</option>
@@ -129,7 +89,7 @@
 									<c:when test="${i eq 2}">
 										<option value="${i}" selected>info</option>
 									</c:when>
-										<c:when test="${i eq 3}">
+									<c:when test="${i eq 3}">
 										<option value="${i}" selected>alerta</option>
 									</c:when>
 									<c:otherwise>
@@ -140,16 +100,6 @@
 						</select>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
@@ -160,14 +110,9 @@
 					</div>
 				</div>
 			</div>
-
 			<button type="submit" class="btn btn-danger">Guardar</button>
 		</form>
-
 		<hr class="featurette-divider">
-
-
-
 	</div>
 	<!-- /container -->
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
