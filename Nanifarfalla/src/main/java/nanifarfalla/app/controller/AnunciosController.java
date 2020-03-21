@@ -17,6 +17,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,9 +38,9 @@ public class AnunciosController {
 	private IAnunciosService serviceAnuncios;
 
 	@GetMapping(value = "/create")
-	public String crear(Model model) {
-		List<Anuncio> lista = serviceAnuncios.buscarTodas();
-		model.addAttribute("anuncios", lista);
+	public String crear(@ModelAttribute  Anuncio anuncio,Model model) {
+		List<Anuncio> anuncios = serviceAnuncios.buscarTodas();
+		model.addAttribute("anuncios", anuncios);
 		return "anuncios/formAnuncio";
 
 	}
@@ -47,8 +48,8 @@ public class AnunciosController {
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
 
-		List<Anuncio> lista = serviceAnuncios.buscarTodas();
-		model.addAttribute("anuncios", lista);
+		List<Anuncio> anuncios = serviceAnuncios.buscarTodas();
+		model.addAttribute("anuncios", anuncios);
 
 		return "anuncios/listAnuncios";
 	}
@@ -57,7 +58,7 @@ public class AnunciosController {
 	// @RequestParam("estatus") String estatus,
 	// @RequestParam("detalle") String detalle) {
 	@PostMapping(value = "/save")
-	public String guardar(Anuncio anuncios, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute Anuncio anuncios, BindingResult result, RedirectAttributes attributes,
 			@RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request) {
 
 		System.out.println("Recibiendo objeto anuncios: " + anuncios);

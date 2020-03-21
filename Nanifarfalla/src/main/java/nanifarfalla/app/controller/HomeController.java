@@ -48,7 +48,7 @@ public class HomeController {
 
 		List<Linea> lineas = serviceLineas.buscarTodas();
 		List<Alerta> alertas = getLista2();
-		List<Anuncio> anuncios = getLista3();
+	//	List<Anuncio> anuncios = getLista3();
 		List<Usuario> usuarios = getLista5();
 		List<Ceo> ceos = getLista4();
 
