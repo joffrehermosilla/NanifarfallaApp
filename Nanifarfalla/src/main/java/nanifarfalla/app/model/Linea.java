@@ -4,9 +4,18 @@ import java.util.Date;
 
 public class Linea {
 	private int codigo_linea;
-	private String nombre_linea;
+	private String nombre_linea="nombre de linea";
 	private String foto_linea = "nanifarfalla.jpeg";
+	private String claveApi="clave api";
 	private Date fechacreacion;
+
+	public String getClaveApi() {
+		return claveApi;
+	}
+
+	public void setClaveApi(String claveApi) {
+		this.claveApi = claveApi;
+	}
 
 	@Override
 	public String toString() {

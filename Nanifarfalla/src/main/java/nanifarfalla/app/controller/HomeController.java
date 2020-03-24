@@ -1,5 +1,4 @@
 package nanifarfalla.app.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,17 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import nanifarfalla.app.model.Alerta;
-import nanifarfalla.app.model.Anuncio;
-import nanifarfalla.app.model.Carrusel;
 import nanifarfalla.app.model.Ceo;
 import nanifarfalla.app.model.Linea;
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.service.IAnunciosService;
 import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.util.Utileria;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,7 +41,7 @@ public class HomeController {
 
 //	System.out.println(listaFechas);
 
-		List<Linea> lineas = serviceLineas.buscarTodas();
+	//	List<Linea> lineas = serviceLineas.buscarTodas();
 		List<Alerta> alertas = getLista2();
 	//	List<Anuncio> anuncios = getLista3();
 		List<Usuario> usuarios = getLista5();
@@ -58,7 +53,8 @@ public class HomeController {
 		// lineas.add("Joyas");
 		model.addAttribute("fechas", listaFechas);
 		model.addAttribute("fechabusqueda", fecha);
-		model.addAttribute("lineas", lineas);
+		//model.addAttribute("lineas", lineas);
+		model.addAttribute("lineas", serviceLineas.buscarTodas());
 		model.addAttribute("alertas", alertas);
 		//model.addAttribute("anuncios", anuncios);
 		model.addAttribute("usuarios", usuarios);
@@ -100,7 +96,7 @@ public class HomeController {
 
 		List<Linea> lineas = serviceLineas.buscarTodas();
 		List<Alerta> alertas = getLista2();
-		List<Anuncio> anuncios = getLista3();
+	//	List<Anuncio> anuncios = getLista3();
 		List<Usuario> usuarios = getLista5();
 		List<Ceo> ceos = getLista4();
 
@@ -173,69 +169,6 @@ public class HomeController {
 
 	}
 
-	private List<Anuncio> getLista3() {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		List<Anuncio> lista = null;
-		try {
-
-			lista = new LinkedList<Anuncio>();
-			Anuncio anuncio1 = new Anuncio();
-			anuncio1.setCodigo_anuncio(1);
-			anuncio1.setAnuncio_principal("Este Anuncio principal 1");
-			anuncio1.setFkcodigo_tipoalerta(1);
-			anuncio1.setLink_mensaje("http://facebook");
-			anuncio1.setMensaje_anuncio("importante");
-			anuncio1.setPie_mensaje("prueba 1");
-			anuncio1.setPrecio(9.0);
-			anuncio1.setRuta_imagen("nanifarfalla.jpeg");
-			anuncio1.setVersion(formatter.parse("18-11-2019"));
-
-			Anuncio anuncio2 = new Anuncio();
-			anuncio2.setCodigo_anuncio(2);
-			anuncio2.setAnuncio_principal("Este Anuncio principal 2");
-			anuncio2.setFkcodigo_tipoalerta(2);
-			anuncio2.setLink_mensaje("http://facebook");
-			anuncio2.setMensaje_anuncio("info");
-			anuncio2.setPie_mensaje("prueba 2");
-			anuncio2.setPrecio(9.0);
-			anuncio2.setRuta_imagen("nanifarfalla.jpeg");
-			anuncio2.setVersion(formatter.parse("18-11-2019"));
-
-			Anuncio anuncio3 = new Anuncio();
-			anuncio3.setCodigo_anuncio(3);
-			anuncio3.setAnuncio_principal("Este Anuncio principal 3");
-			anuncio3.setFkcodigo_tipoalerta(3);
-			anuncio3.setLink_mensaje("http://facebook");
-			anuncio3.setMensaje_anuncio("alerta");
-			anuncio3.setPie_mensaje("prueba 3");
-			anuncio3.setPrecio(9.0);
-			anuncio3.setRuta_imagen("nanifarfalla.jpeg");
-			anuncio3.setVersion(formatter.parse("18-11-2019"));
-
-			Anuncio anuncio4 = new Anuncio();
-			anuncio4.setCodigo_anuncio(4);
-			anuncio4.setAnuncio_principal("Este Anuncio principal 4");
-			anuncio4.setFkcodigo_tipoalerta(4);
-			anuncio4.setLink_mensaje("http://facebook");
-			anuncio4.setMensaje_anuncio("alerta");
-			anuncio4.setPie_mensaje("prueba 4");
-			anuncio4.setPrecio(9.0);
-			anuncio4.setRuta_imagen("nanifarfalla.jpeg");
-			anuncio4.setVersion(formatter.parse("18-11-2019"));
-
-			lista.add(anuncio1);
-			lista.add(anuncio2);
-			lista.add(anuncio3);
-			lista.add(anuncio4);
-
-			return lista;
-
-		} catch (ParseException ex) {
-			System.out.println("Error: " + ex.getMessage());
-			return null;
-		}
-
-	}
 
 	private List<Ceo> getLista4() {
 

@@ -75,5 +75,12 @@ public class LineasServiceImpl implements ILineasService {
 		return null;
 	}
 
+	@Override
+	public void inserta(Linea linea) {
+		// TODO Auto-generated method stub
+		lista.add(linea);
+		
+	}
+
 
 }

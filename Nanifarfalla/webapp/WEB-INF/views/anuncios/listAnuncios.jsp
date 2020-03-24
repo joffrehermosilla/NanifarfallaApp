@@ -24,27 +24,15 @@
 <body>
 	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 	<header class="section-header">
-
 		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
-
-
 	</header>
-
 	<div class="container theme-showcase" role="main">
-
 		<h3>Listado de Anuncios</h3>
-
 		<c:if test="${mensaje!=null }">
-
 			<div class='alert alert-success' role="alert">${ mensaje}</div>
-
 		</c:if>
-
-
-
 		<a href="${urlCreate}" class="btn btn-success" role="button"
 			title="Nuevo Anuncio">Nuevo</a><br> <br>
-
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
@@ -59,15 +47,11 @@
 					<th>Imagen 1</th>
 					<th>Imagen 2</th>
 					<th>estado del Mensaje</th>
-
 					<th>Link del Mensaje</th>
 					<th>Mensaje Principal</th>
 					<th>Tipo de Mensaje</th>
 					<th>Opciones</th>
-
 				</tr>
-
-
 				<c:forEach var="anuncio" items="${anuncios}">
 					<tr>
 						<td>Tabla Usuario</td>
@@ -106,24 +90,17 @@
 							<c:otherwise>
 								<td align="center"><span
 									class="badge badge-pill badge-dark">Evento</span></td>
-
 							</c:otherwise>
 						</c:choose>
-
 						<td align="center">
 							<table border="1">
-
 								<tr>
-
 									<td><a href="#" class="btn btn-success btn-sm"
 										role="button" title="Edit"> <span
 											class="glyphicon glyphicon-trash">Actualizar<i
 												class="fa fa-pencil"></i></span></a></td>
-
-
 								</tr>
 								<tr>
-
 									<td><a href="#" class="btn btn-danger btn-sm"
 										role="button" title="Eliminar"><span
 											class="glyphicon glyphicon-trash">Eliminar <i
@@ -132,33 +109,16 @@
 								</tr>
 
 							</table>
-
-
 						</td>
 					</tr>
 				</c:forEach>
-
 			</table>
 		</div>
-
 		<hr class="featurette-divider">
-
-
 		<!-- /container -->
 		<jsp:include page="../includes/footer.jsp"></jsp:include>
 		<!-- Bootstrap core JavaScript -->
-
 	</div>
 	<!-- /container -->
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
