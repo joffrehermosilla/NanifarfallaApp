@@ -16,16 +16,10 @@
 <section class="cz-carousel cz-controls-lg">
 	<nav class="navbar  navbar-expand-lg fixed top navbar-preview">
 
-		<c:set var="carruselcat1" value="${1}" />
-		<c:set var="carruselcat2" value="${2}" />
-		<c:set var="carruselcat3" value="${3}" />
-		<c:set var="carruselcat4" value="${4}" />
+	
 
 
-		<div id="carousel1_indicator" class="carousel slide"
-			data-ride="carousel">
-
-			<%!String test = new String();%>
+		<div id="carousel1_indicator" class="carousel slide" data-ride="carousel">
 
 			<ol class="carousel-indicators">
 				<!--	Solucion Joffre
@@ -65,7 +59,7 @@
 			<div class="carousel-inner" align="center">
 				<c:forEach items="${anuncios}" var="anuncios">
 					<c:choose>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==carruselcat1}">
+						<c:when test="${anuncios.fkcodigo_tipoalerta==1}">
 							<div class="carousel-item active">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(235, 161, 112);" id="tns2-item0"
@@ -124,7 +118,7 @@
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==carruselcat2}">
+						<c:when test="${anuncios.fkcodigo_tipoalerta==2}">
 							<div class="carousel-item">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(112, 224, 161);" id="tns2-item0"
@@ -181,7 +175,7 @@
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==carruselcat3}">
+						<c:when test="${anuncios.fkcodigo_tipoalerta==3}">
 							<div class="carousel-item">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(58, 175, 210);" id="tns2-item0"
@@ -238,7 +232,7 @@
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==carruselcat4}">
+						<c:when test="${anuncios.fkcodigo_tipoalerta==4}">
 							<div class="carousel-item">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(245, 177, 176);" id="tns2-item0"
@@ -312,3 +306,4 @@
 
 	</nav>
 </section>
+</html>

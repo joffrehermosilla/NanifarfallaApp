@@ -13,10 +13,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Administración de Lineas</title>
+<title>Administración de Alertas</title>
 <spring:url value="/resources" var="urlPublic"></spring:url>
-<spring:url value="/lineas/index" var="urlForm"></spring:url>
-<spring:url value="/lineas/create" var="urlCreate" />
+<spring:url value="/alertas/index" var="urlForm"></spring:url>
+<spring:url value="/alertas/create" var="urlCreate" />
 
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
@@ -29,7 +29,7 @@
 	</header>
 	
 		<div class="container theme-showcase" role="main">
-		<h3>Listado de Anuncios</h3>
+		<h3>Listado de Alertas</h3>
 			<c:if test="${mensaje!=null }">
 			<div class='alert alert-success' role="alert">${ mensaje}</div>
 		</c:if>
@@ -44,23 +44,45 @@
 		<table class="table table-hover table-striped table-bordered">
 			<tr>
 				<th>Nombre Usuario</th>
-				<th>Codigo Linea</th>
+				<th>Codigo Alerta</th>
 				<th>fecha creacion</th>
-				<th>Nombre de Linea</th>
+				<th>Mensaje Alerta</th>
 				<th>estado de la linea</th>
-				<th>Foto Linea</th>
-				
+				<th>precio</th>
+				<th>categoria</th>
+				<th>fk categoria</th>
 			</tr>
 
-			<c:forEach var="linea" items="${lineas}">
+			<c:forEach var="alerta" items="${alertas}">
 				<tr>
-					<td>Tabla Usuario</td>
-					<td>${linea.codigo_linea}</td>
+					<td>Tabla Alertas</td>
+					<td>${alerta.codigo_alerta}</td>
 					<td><fmt:formatDate pattern="dd-MM-yyyy"
-							value="${linea.fechacreacion}" />
-					<td>${linea.nombre_linea}</td>
+							value="${alerta.version}" />
+					<td>${alerta.mensaje_alerta}</td>
 					<td>Renovar/Bloquear/Esperar</td>
-					<td>${linea.foto_linea}</td>
+					<td>${alerta.precio}</td>
+					<td>${alerta.categoria}</td>
+							<fmt:parseNumber var="i" value="${alerta.fkcodigo_tipoalerta}" />
+						<c:choose>
+							<c:when test="${alerta.fkcodigo_tipoalerta == 1}">
+								<td align="center"><span
+									class="badge badge-pill badge-danger">Importante</span></td>
+
+							</c:when>
+							<c:when test="${alerta.fkcodigo_tipoalerta == 2}">
+								<td align="center"><span
+									class="badge badge-pill badge-info">Info</span></td>
+							</c:when>
+							<c:when test="${alerta.fkcodigo_tipoalerta == 3}">
+								<td align="center"><span
+									class="badge badge-pill badge-warning">Alerta</span></td>
+							</c:when>
+							<c:otherwise>
+								<td align="center"><span
+									class="badge badge-pill badge-dark">Evento</span></td>
+							</c:otherwise>
+						</c:choose>
 					
 					<td align="center">
 						<table border="1">

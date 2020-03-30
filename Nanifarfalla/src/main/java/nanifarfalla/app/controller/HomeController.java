@@ -1,4 +1,5 @@
 package nanifarfalla.app.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,10 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import nanifarfalla.app.model.Alerta;
 import nanifarfalla.app.model.Ceo;
-import nanifarfalla.app.model.Linea;
 import nanifarfalla.app.model.Usuario;
+import nanifarfalla.app.service.IAlertaService;
 import nanifarfalla.app.service.IAnunciosService;
 import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.util.Utileria;
@@ -23,10 +23,10 @@ import java.util.List;
 public class HomeController {
 	@Autowired
 	private ILineasService serviceLineas;
-	
+	@Autowired
+	private IAlertaService serviceAlertas;
 	@Autowired
 	private IAnunciosService serviceAnuncios;
-	
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -41,9 +41,9 @@ public class HomeController {
 
 //	System.out.println(listaFechas);
 
-	//	List<Linea> lineas = serviceLineas.buscarTodas();
-		List<Alerta> alertas = getLista2();
-	//	List<Anuncio> anuncios = getLista3();
+		// List<Linea> lineas = serviceLineas.buscarTodas();
+		// List<Alerta> alertas = getLista2();
+		// List<Anuncio> anuncios = getLista3();
 		List<Usuario> usuarios = getLista5();
 		List<Ceo> ceos = getLista4();
 
@@ -53,10 +53,12 @@ public class HomeController {
 		// lineas.add("Joyas");
 		model.addAttribute("fechas", listaFechas);
 		model.addAttribute("fechabusqueda", fecha);
-		//model.addAttribute("lineas", lineas);
+		// model.addAttribute("lineas", lineas);
 		model.addAttribute("lineas", serviceLineas.buscarTodas());
-		model.addAttribute("alertas", alertas);
-		//model.addAttribute("anuncios", anuncios);
+		// model.addAttribute("alertas", alertas);
+		model.addAttribute("alertas", serviceAlertas.buscarTodas());
+
+		// model.addAttribute("anuncios", anuncios);
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
@@ -89,86 +91,29 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
-
 		List<String> listaFechas = Utileria.getNextDays(4);
-
 //		System.out.println(listaFechas);
-
-		List<Linea> lineas = serviceLineas.buscarTodas();
-		List<Alerta> alertas = getLista2();
-	//	List<Anuncio> anuncios = getLista3();
+		// List<Linea> lineas = serviceLineas.buscarTodas();
+		// List<Alerta> alertas = getLista2();
+		// List<Anuncio> anuncios = getLista3();
 		List<Usuario> usuarios = getLista5();
 		List<Ceo> ceos = getLista4();
-
 		// lineas.add("Carteras");
 		// lineas.add("Mochilas");
 		// lineas.add("Neceser");
 		// lineas.add("Joyas");
 		model.addAttribute("fechas", listaFechas);
 		model.addAttribute("fechabusqueda", dateformat.format(new Date()));
-		model.addAttribute("lineas", lineas);
-		model.addAttribute("alertas", alertas);
-		//model.addAttribute("anuncios", anuncios);
+		model.addAttribute("lineas", serviceLineas.buscarTodas());
+		// model.addAttribute("alertas", alertas);
+		model.addAttribute("alertas", serviceAlertas.buscarTodas());
+		// model.addAttribute("anuncios", anuncios);
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
 		return "page-index-1";
 		// return "home";
 	}
-
-	private List<Alerta> getLista2() {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		List<Alerta> lista = null;
-		try {
-
-			lista = new LinkedList<Alerta>();
-
-			Alerta alerta1 = new Alerta();
-
-			alerta1.setCodigo_alerta(1);
-			alerta1.setMensaje_alerta("Anuncio Importante");
-			alerta1.setPrecio(3.5);
-			alerta1.setCategoria("importante");
-			alerta1.setVersion(formatter.parse("18-11-2019"));
-
-			Alerta alerta2 = new Alerta();
-
-			alerta2.setCodigo_alerta(2);
-			alerta2.setMensaje_alerta("Anuncio Informativo");
-			alerta2.setPrecio(3.5);
-			alerta2.setCategoria("info");
-			alerta2.setVersion(formatter.parse("18-11-2019"));
-
-			Alerta alerta3 = new Alerta();
-
-			alerta3.setCodigo_alerta(3);
-			alerta3.setMensaje_alerta("Anuncio alerta");
-			alerta3.setPrecio(3.5);
-			alerta3.setCategoria("alerta");
-			alerta3.setVersion(formatter.parse("18-11-2019"));
-
-			Alerta alerta4 = new Alerta();
-
-			alerta4.setCodigo_alerta(4);
-			alerta4.setMensaje_alerta("Anuncio evento");
-			alerta4.setPrecio(3.5);
-			alerta4.setCategoria("eventos");
-			alerta4.setVersion(formatter.parse("18-11-2019"));
-
-			lista.add(alerta1);
-			lista.add(alerta2);
-			lista.add(alerta3);
-			lista.add(alerta4);
-
-			return lista;
-
-		} catch (ParseException ex) {
-			System.out.println("Error: " + ex.getMessage());
-			return null;
-		}
-
-	}
-
 
 	private List<Ceo> getLista4() {
 

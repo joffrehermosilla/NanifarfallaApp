@@ -402,11 +402,11 @@
 									<h6 class="font-size-base mb-2">Mensajes Publicitarios</h6>
 									<ul class="widget-list">
 										<li class="widget-list-item"><a class="widget-list-link"
-											href="#">En Espera</a></li>
+											href="${urlRoot}alertas/index">Alertas</a></li>
 										<li class="widget-list-item"><a class="widget-list-link"
-											href="#">Por vencer</a></li>
+											href="${urlRoot}lineas/index">Lineas</a></li>
 										<li class="widget-list-item"><a class="widget-list-link"
-											href="${urlRoot}anuncios/index">Todos</a></li>
+											href="${urlRoot}anuncios/index">Banner</a></li>
 									</ul>
 								</div>
 							</div>

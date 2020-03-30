@@ -7,21 +7,25 @@ public class Alerta {
 
 	}
 
-	@Override
-	public String toString() {
-		return "Alerta [codigo_alerta=" + codigo_alerta + ", mensaje_alerta=" + mensaje_alerta + ", categoria="
-				+ categoria + ", precio=" + precio + ", version=" + version + "]";
-	}
+
 
 	private int codigo_alerta;
 	private String mensaje_alerta;
 	private String categoria;
 	private Double precio;
 	private Date version;
+	private int fkcodigo_tipoalerta;
+	
+	
+	
+	public int getFkcodigo_tipoalerta() {
+		return fkcodigo_tipoalerta;
+	}
 
-	
-	
-	
+	public void setFkcodigo_tipoalerta(int fkcodigo_tipoalerta) {
+		this.fkcodigo_tipoalerta = fkcodigo_tipoalerta;
+	}
+
 	public String getCategoria() {
 		return categoria;
 	}

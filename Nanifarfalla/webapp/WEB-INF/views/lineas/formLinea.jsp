@@ -65,6 +65,27 @@
 							<form:input type="text" class="form-control" path="claveApi"
 								id="claveApi" required="required" />
 						</div>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label for="estatus">Estatus</label> <select id="estatus"
+									name="estatus" class="form-control">
+									<option value="importante">importante</option>
+									<option value="info">info</option>
+									<option value="alerta">alerta</option>
+									<option value="eventos">eventos</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="ruta_imagen">Imagen</label> <input type="file"
+								id="archivoImagen" name="archivoImagen" />
+							<p class="help-block">Imagen del Anuncio</p>
+						</div>
+					</div>
+				</div>
+				<div class="form-buttons">
+					<div class="button">
+						<button type="submit" class="btn btn-danger">Guardar</button>
 					</div>
 				</div>
 			</fieldset>
@@ -75,7 +96,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-<script>
+	<script>
 		$(function() {
 			$("#version").datepicker({
 				dateFormat : 'dd-mm-yy'
