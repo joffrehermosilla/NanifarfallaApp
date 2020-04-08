@@ -42,6 +42,7 @@
 <script src="${urlPublic}/js/whishlist.js?ver=4.9.8"></script>
 
 <script src="${urlPublic}/js/chart.bundle.min.js"></script>
+<script src="${urlPublic}/js/calendar.js"></script>
 
 
 <script type="text/javascript"

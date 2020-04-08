@@ -152,6 +152,7 @@
 <link rel="stylesheet" id="figuracaption-css"
 	href="${urlPublic}/css/figuracaption.css" type="text/css" media="all">
 	
-	
+	<link rel="stylesheet" id="calendar-css"
+	href="${urlPublic}/css/calendar.css" type="text/css" media="all">
 
 	

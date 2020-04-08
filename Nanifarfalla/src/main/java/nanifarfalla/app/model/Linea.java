@@ -4,10 +4,26 @@ import java.util.Date;
 
 public class Linea {
 	private int codigo_linea;
-	private String nombre_linea="nombre de linea";
+	private String nombre_linea;
 	private String foto_linea = "nanifarfalla.jpeg";
-	private String claveApi="clave api";
 	private Date fechacreacion;
+	private String claveApi;
+    private Producto producto;
+
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	@Override
+	public String toString() {
+		return "Linea [codigo_linea=" + codigo_linea + ", nombre_linea=" + nombre_linea + ", foto_linea=" + foto_linea
+				+ ", fechacreacion=" + fechacreacion + ", claveApi=" + claveApi + ", producto=" + producto + "]";
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
 
 	public String getClaveApi() {
 		return claveApi;
@@ -15,12 +31,6 @@ public class Linea {
 
 	public void setClaveApi(String claveApi) {
 		this.claveApi = claveApi;
-	}
-
-	@Override
-	public String toString() {
-		return "Linea [codigo_linea=" + codigo_linea + ", nombre_linea=" + nombre_linea + ", foto_linea=" + foto_linea
-				+ ", fechacreacion=" + fechacreacion + "]";
 	}
 
 	public int getCodigo_linea() {
