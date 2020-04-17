@@ -140,20 +140,20 @@ public class ProductoServiceImpl implements IProductoService {
 			producto7.setFkcodigo_linea(2);
 			
 			Producto producto8 = new Producto();
-			producto2.setCodigo_producto(8);
-			producto2.setNombre_producto("Producto 8 Nanifarfalla");
-			producto2.setIngreso_almacen(formatter.parse("18-11-2019"));
-			producto2.setSalida_almacen(formatter.parse("18-11-2019"));
-			producto2.setStock_producto(120);
-			producto2.setPreparacion_producto("preparacion Producto 8 Nanifarfalla");
-			producto2.setFoto_ruta("nanifarfalla.jpg");
-			producto2.setColores_producto("turquesa,violeta,oro,plato");
-			producto2.setQr_producto("ruta del qr");
-			producto2.setPpv_producto(150.8);
-			producto2.setPvf_producto(68.3);
-			producto2.setClaveApi("clave APi");
-			producto2.setVersion(formatter.parse("18-11-2019"));
-			producto2.setFkcodigo_linea(2);
+			producto8.setCodigo_producto(8);
+			producto8.setNombre_producto("Producto 8 Nanifarfalla");
+			producto8.setIngreso_almacen(formatter.parse("18-11-2019"));
+			producto8.setSalida_almacen(formatter.parse("18-11-2019"));
+			producto8.setStock_producto(120);
+			producto8.setPreparacion_producto("preparacion Producto 8 Nanifarfalla");
+			producto8.setFoto_ruta("nanifarfalla.jpg");
+			producto8.setColores_producto("turquesa,violeta,oro,plato");
+			producto8.setQr_producto("ruta del qr");
+			producto8.setPpv_producto(150.8);
+			producto8.setPvf_producto(68.3);
+			producto8.setClaveApi("clave APi");
+			producto8.setVersion(formatter.parse("18-11-2019"));
+			producto8.setFkcodigo_linea(2);
 			
 			Producto producto9 = new Producto();
 			producto9.setCodigo_producto(9);
