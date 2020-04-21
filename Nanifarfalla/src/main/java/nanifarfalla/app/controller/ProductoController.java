@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.Anuncio;
 import nanifarfalla.app.model.Producto;
+import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.service.IProductoService;
 import nanifarfalla.app.util.Utileria;
 
@@ -35,10 +36,14 @@ public class ProductoController {
 	@Autowired
 	private IProductoService productoService;
 
+	@Autowired
+	private ILineasService serviceLineas;
+	
 	@GetMapping(value = "/create")
 	public String crear(@ModelAttribute Producto producto, Model model) {
 		List<Producto> productos = productoService.buscarTodas();
 		model.addAttribute("productos", productos);
+		model.addAttribute("lineas", serviceLineas.buscarTodas());
 		return "productos/formProducto";
 
 	}

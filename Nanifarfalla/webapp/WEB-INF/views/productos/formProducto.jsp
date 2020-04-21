@@ -118,9 +118,9 @@
 								class="form-control">
 								<c:forEach items="${lineas}" var="linea">
 
-									<c:set var="i" value="${linea.fkcodigo_linea}" />
+									<c:set var="i" value="${linea.codigo_linea}" />
 									
-											<form:option value="${i}">${linea.nombre_linea}</form:option>
+											<option value="${i}">${linea.nombre_linea}<option>
 									
 									
 								</c:forEach>

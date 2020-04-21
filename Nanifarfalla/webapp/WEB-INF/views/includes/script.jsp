@@ -54,7 +54,20 @@
 
 
 
+<script  type="text/javascript" 
+src="${urlPublic}/js/zoom.js"></script>
 
+
+<script type="text/javascript"
+	src="${urlPublic}/js/zoomwindow.js"></script>
+
+
+<script type="text/javascript"
+	src="${urlPublic}/js/twinmax.js"></script>
+
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
 
 
 
