@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//webapp/WEB-INF/views/detalle.jsp=UTF-8
 encoding//webapp/WEB-INF/views/includes/aleatoriocatalogo.jsp=UTF-8
+encoding//webapp/WEB-INF/views/productos/detalleProducto.jsp=UTF-8

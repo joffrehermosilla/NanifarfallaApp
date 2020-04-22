@@ -8,10 +8,10 @@
 <fmt:setBundle basename="messages" />
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-
+<head>
 <spring:url value="/resources" var="urlPublic" />
 
-
+</head>
 
 <script src="${urlPublic}/js/script.js" type="text/javascript"></script>
 
@@ -31,7 +31,7 @@
 
 <script src="${urlPublic}/js/Chart.min.js"></script>
 <script src="${urlPublic}/js/tether.min.js"></script>
-<script src="${urlPublic}/js/popper.min.js"></script>	
+<script src="${urlPublic}/js/popper.min.js"></script>
 <script src="${urlPublic}/js/popper.min.js"></script>
 <script src="${urlPublic}/js/cookie.js"></script>
 <script src="${urlPublic}/js/ceoshowing.js"></script>
@@ -47,29 +47,22 @@
 
 <script type="text/javascript"
 	src="https://www.google-analytics.com/analytics.js"></script>
-	
+
 <script src="${urlPublic}/js/owl.carousel.min.js"></script>
 
 
 
 
 
-<script  type="text/javascript" 
-src="${urlPublic}/js/zoom.js"></script>
 
 
-<script type="text/javascript"
-	src="${urlPublic}/js/zoomwindow.js"></script>
+
+<script type="text/javascript" src="${urlPublic}/js/zoomwindow.js"></script>
 
 
-<script type="text/javascript"
-	src="${urlPublic}/js/twinmax.js"></script>
+<script type="text/javascript" src="${urlPublic}/js/twinmax.js"></script>
 
-<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
-
-
+<script type="text/javascript" src="${urlPublic}/js/pen.js"></script>
 
 
 

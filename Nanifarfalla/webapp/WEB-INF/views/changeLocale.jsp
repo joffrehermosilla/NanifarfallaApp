@@ -2,12 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
+
 
 <fmt:setLocale value="${param.lang}"/>
 <fmt:setBundle basename="messages"/>
 
 <html lang="${param.lang}">
 <head>
+<spring:url value="/resources" var="urlPublic" />
     <title>PhraseApp - i18n</title>
 </head>
 <body>

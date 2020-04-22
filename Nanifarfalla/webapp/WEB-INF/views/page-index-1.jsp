@@ -106,7 +106,7 @@
 
 			<div class="row">
 				<div class="col-md-3">
-					<div href="#" class="card card-product-grid">
+					<div  class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
 							src="${urlPublic}/images/items/1.jpg">
 						</a>

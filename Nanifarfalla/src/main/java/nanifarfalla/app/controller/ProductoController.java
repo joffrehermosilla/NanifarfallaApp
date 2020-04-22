@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -56,6 +57,33 @@ public class ProductoController {
 
 		return "productos/listProductos";
 	}
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String mostrarDetalle(Model model, @RequestParam("codigo_producto") int codigo_producto,
+			@RequestParam("fecha") String fecha) {
+		List<String> listaFechas = Utileria.getNextDays(4);
+		System.out.println("Buscamos el producto : " + codigo_producto);
+		System.out.println("creadas en las fechas : " + fecha);
+		model.addAttribute("producto", productoService.buscarPorId(codigo_producto));
+		
+		model.addAttribute("productos", productoService.buscarTodas());
+		model.addAttribute("fechas", listaFechas);
+		model.addAttribute("fechabusqueda", fecha);
+//		String tituloLinea = "Carteras";
+//		String estado = "disponible";
+//		int stock = 136;
+//		double precio = 34.5;
+//
+//		model.addAttribute("linea", tituloLinea);
+//		model.addAttribute("estado", estado);
+//		model.addAttribute("stock", stock);
+//		model.addAttribute("precio", precio);
+		return "productos/listProductos";
+
+	}
+	
+	
+	
 	
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Producto productos, BindingResult result, RedirectAttributes attributes,
