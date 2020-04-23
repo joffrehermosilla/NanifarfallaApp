@@ -217,7 +217,7 @@ function init() {
 
   enterTL.
   to(mainImg, 0.5, { filter: "grayscale(1)", "-webkit-filter": "grayscale(1)" }, 0).
-  to(zoom, 0.5, { autoAlpha: 1.5, scale: 1.5 }, 0);
+  to(zoom, 0.5, { autoAlpha: 2.5, scale: 2.5 }, 0);
 
   window.addEventListener("resize", resize);
   mainImg.addEventListener("mouseleave", leaveAction);
