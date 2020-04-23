@@ -17,8 +17,8 @@
 	
 #zoom {
   position: absolute;
-  width: 5250px;
-  height: 5250px;
+  width: 250px;
+  height: 250px;
   box-shadow: 0 0 0 2px rgba(255,0,255,0.5),
     5px 5px 10px 5px rgba(0,0,0,0.2);
   border-radius: 50%;  

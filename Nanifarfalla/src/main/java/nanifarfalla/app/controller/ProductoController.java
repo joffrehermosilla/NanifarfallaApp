@@ -24,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.Anuncio;
+import nanifarfalla.app.model.Ceo;
 import nanifarfalla.app.model.Producto;
+import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.service.IProductoService;
 import nanifarfalla.app.util.Utileria;
@@ -58,17 +60,16 @@ public class ProductoController {
 		return "productos/listProductos";
 	}
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String mostrarDetalle(Model model, @RequestParam("codigo_producto") int codigo_producto,
-			@RequestParam("fecha") String fecha) {
+	@RequestMapping(value = "/detalle", method = RequestMethod.GET)
+	public String mostrarDetalle(Model model, @RequestParam("codigo_producto") int codigo_producto) {
 		List<String> listaFechas = Utileria.getNextDays(4);
 		System.out.println("Buscamos el producto : " + codigo_producto);
-		System.out.println("creadas en las fechas : " + fecha);
-		model.addAttribute("producto", productoService.buscarPorId(codigo_producto));
 		
+		model.addAttribute("producto", productoService.buscarPorId(codigo_producto));
+	//	model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
 		model.addAttribute("productos", productoService.buscarTodas());
 		model.addAttribute("fechas", listaFechas);
-		model.addAttribute("fechabusqueda", fecha);
+	
 //		String tituloLinea = "Carteras";
 //		String estado = "disponible";
 //		int stock = 136;
@@ -78,10 +79,11 @@ public class ProductoController {
 //		model.addAttribute("estado", estado);
 //		model.addAttribute("stock", stock);
 //		model.addAttribute("precio", precio);
-		return "productos/listProductos";
+		return "productos/detalleProducto";
 
 	}
 	
+
 	
 	
 	

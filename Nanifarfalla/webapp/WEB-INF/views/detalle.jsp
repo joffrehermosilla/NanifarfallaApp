@@ -19,6 +19,7 @@
 <spring:url value="/productos/index" var="urlForm"></spring:url>
 <spring:url value="/productos/create" var="urlCreate" />
 <spring:url value="/lineas/create" var="lineaCreate" />
+<spring:url value="/" var="urlRoot" />
 
 <jsp:include page="includes/link.jsp"></jsp:include>
 <jsp:include page="includes/script.jsp"></jsp:include>
@@ -310,12 +311,13 @@
 												<p class="text-success">Free shipping</p>
 												<br>
 												<p>
-												<a href="detail/${producto.codigo_producto}/${fechabusqueda}" class="btn btn-primary">Go somewhere</a>
-													<a	
-													href="detail?codigo_linea=${producto.codigo_producto}&fecha=${fechabusqueda}"
-														class="btn btn-primary">Detalle del producto</a> <a href="#"
-														class="btn btn-light btn-block"><i class="fa fa-heart"></i>
-														<span class="text">Add to wishlist</span> </a>
+
+													<a
+														href="${urlRoot}productos/detalle?codigo_producto=${producto.codigo_producto}"
+														class="btn btn-primary">Detalle del producto</a> <a
+														href="#" class="btn btn-light btn-block"><i
+														class="fa fa-heart"></i> <span class="text">Add to
+															wishlist</span> </a>
 												</p>
 											</div>
 											<!-- info-aside.// -->
