@@ -71,7 +71,7 @@
 
 
 						<a
-							href="detail?codigo_linea=${linea.codigo_linea}&fecha=${fechabusqueda}"
+							href="${urlRoot}lineas/detail?codigo_linea=${linea.codigo_linea}&fecha=${fechabusqueda}"
 							class="btn btn-primary">Go somewhere</a>
 
 					</div>

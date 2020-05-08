@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -228,6 +230,14 @@ public class ProductoServiceImpl implements IProductoService {
 		// TODO Auto-generated method stub
 		lista.add(producto);
 
+	}
+
+	@Override
+	public Page<Producto> buscarTodas(Pageable page) {
+		// TODO Auto-generated method stub
+		
+//return productoRepo.findAll(page);		
+		return null;
 	}
 
 }

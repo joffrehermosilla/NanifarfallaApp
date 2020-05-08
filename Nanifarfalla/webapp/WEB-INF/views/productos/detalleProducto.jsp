@@ -2,39 +2,34 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<!-- Titulo -->
-<title>Nanifarfalla | Bienvenido</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Creacion de Anuncios</title>
+<spring:url value="/resources" var="urlPublic"></spring:url>
 
-<spring:url value="/resources" var="urlPublic" />
-
-<!-- Styles CSS -->
 <jsp:include page="../includes/link.jsp"></jsp:include>
-
-<!-- custom javascript -->
 <jsp:include page="../includes/script.jsp"></jsp:include>
-
-	<section class="section-content padding-y-sm">
+</head>
+<body>
+<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
+	<header class="section-header">
 		<div class="container">
 			<jsp:include page="../includes/presentacioncreador.jsp"></jsp:include>
 
 		</div>
-		
-		<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
-	
 		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
 		
-		<!-- container .//  -->
-	</section>
-
-</head>
-<body>
-
+	</header>
 	<section class="section-content padding-y">
 		<!-- container .//  -->
 
@@ -212,7 +207,7 @@ function init() {
   ratio = mainImg.naturalWidth / mainImg.width;
   resize();
 
-  TweenLite.set([zoom, zoomImg], { xPercent: -50, yPercent: -50 });
+  TweenLite.set([zoom, zoomImg], { xPercent: -50, yPercent: -60 });
   TweenLite.set(zoom, { autoAlpha: 0, scale: 0 });
 
   enterTL.

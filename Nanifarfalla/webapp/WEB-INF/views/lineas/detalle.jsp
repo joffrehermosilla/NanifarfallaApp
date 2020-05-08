@@ -1,10 +1,12 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${param.lang}" />
+<fmt:setBundle basename="messages" />
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
@@ -19,8 +21,8 @@
 <spring:url value="/lineas/create" var="lineaCreate" />
 <spring:url value="/" var="urlRoot" />
 
-<jsp:include page="includes/link.jsp"></jsp:include>
-<jsp:include page="includes/script.jsp"></jsp:include>
+<jsp:include page="../includes/link.jsp"></jsp:include>
+<jsp:include page="../includes/script.jsp"></jsp:include>
 </head>
 <body>
 
@@ -28,14 +30,14 @@
 
 		<section class="section-content padding-y-sm">
 			<div class="container">
-				<jsp:include page="includes/presentacioncreador.jsp"></jsp:include>
+				<jsp:include page="../includes/presentacioncreador.jsp"></jsp:include>
 
 			</div>
 			<!-- container .//  -->
 		</section>
-		<jsp:include page="includes/estadoymenu.jsp"></jsp:include>
+		<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 
-		<jsp:include page="includes/navbarheader.jsp"></jsp:include>
+		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
 
 	</header>
 	<!-- section-header.// -->
@@ -375,7 +377,7 @@
 
 		<hr class="featurette-divider">
 		<!-- /container -->
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+		<jsp:include page="../includes/footer.jsp"></jsp:include>
 		<!-- Bootstrap core JavaScript -->
 
 		<!-- /container -->
