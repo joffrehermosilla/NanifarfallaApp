@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,14 +36,13 @@ import nanifarfalla.app.util.Utileria;
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
-	
-	
+
 	@Autowired
 	private IProductoService productoService;
 
 	@Autowired
 	private ILineasService serviceLineas;
-	
+
 	@GetMapping(value = "/create")
 	public String crear(@ModelAttribute Producto producto, Model model) {
 		List<Producto> productos = productoService.buscarTodas();
@@ -50,7 +51,7 @@ public class ProductoController {
 		return "productos/formProducto";
 
 	}
-	
+
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
 
@@ -59,17 +60,17 @@ public class ProductoController {
 
 		return "productos/listProductos";
 	}
-	
+
 	@RequestMapping(value = "/detalle", method = RequestMethod.GET)
 	public String mostrarDetalle(Model model, @RequestParam("codigo_producto") int codigo_producto) {
 		List<String> listaFechas = Utileria.getNextDays(4);
 		System.out.println("Buscamos el producto : " + codigo_producto);
-		
+
 		model.addAttribute("producto", productoService.buscarPorId(codigo_producto));
-	//	model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
+		// model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
 		model.addAttribute("productos", productoService.buscarTodas());
 		model.addAttribute("fechas", listaFechas);
-	
+
 //		String tituloLinea = "Carteras";
 //		String estado = "disponible";
 //		int stock = 136;
@@ -82,11 +83,7 @@ public class ProductoController {
 		return "productos/detalleProducto";
 
 	}
-	
 
-	
-	
-	
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Producto productos, BindingResult result, RedirectAttributes attributes,
 			@RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request) {
@@ -100,7 +97,7 @@ public class ProductoController {
 
 		if (!multiPart.isEmpty()) {
 			String nombreImagen = Utileria.guardarImagen(multiPart, request);
-			
+
 			productos.setFoto_ruta(nombreImagen);
 		}
 
@@ -120,14 +117,17 @@ public class ProductoController {
 		return "redirect:/productos/index";
 	}
 
-
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		Page<Producto> lista = productoService.buscarTodas(page);
+		model.addAttribute("productos", lista);
+		return "productos/listProductos";
+	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
-	
-	
-	
+
 }

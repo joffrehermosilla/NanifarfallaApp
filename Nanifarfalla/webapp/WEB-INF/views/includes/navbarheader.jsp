@@ -417,7 +417,7 @@
 									<h6 class="font-size-base mb-2">Shoes</h6>
 									<ul class="widget-list">
 										<li class="widget-list-item"><a class="widget-list-link"
-											href="${urlRoot}productos/index">Productos</a></li>
+											href="${urlRoot}productos/indexPaginate?page=0">Productos</a></li>
 										<li class="widget-list-item"><a class="widget-list-link"
 											href="#">Men's shoes</a></li>
 										<li class="widget-list-item"><a class="widget-list-link"

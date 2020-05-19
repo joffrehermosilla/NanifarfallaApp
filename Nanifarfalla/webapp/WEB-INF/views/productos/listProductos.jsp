@@ -18,7 +18,7 @@
 <spring:url value="/productos/index" var="urlForm"></spring:url>
 <spring:url value="/productos/create" var="urlCreate" />
 <spring:url value="/lineas/create" var="lineaCreate" />
-
+<spring:url value="/productos" var="urlPeliculas" />
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 </head>
@@ -39,7 +39,7 @@
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
-					
+
 
 					<th>Nombre Usuario</th>
 					<th>Codigo Producto</th>
@@ -57,7 +57,7 @@
 					<th>version</th>
 					<th>codigo Linea</th>
 				</tr>
-				<c:forEach var="producto" items="${productos}">
+				<c:forEach var="producto" items="${productos.content}">
 					<tr>
 						<td>Tabla Usuario</td>
 						<td>${producto.codigo_producto}</td>
@@ -79,7 +79,7 @@
 								value="${producto.version}" /></td>
 						<td>${producto.fkcodigo_linea}</td>
 
-			
+
 						<td align="center">
 							<table border="1">
 								<tr>
@@ -101,7 +101,17 @@
 					</tr>
 				</c:forEach>
 			</table>
+
 		</div>
+		<nav aria-label="Pagination">
+			<ul class="pagination justify-content-center font-weight-bold">
+				<li class="page-item"><a
+					href="${urlPeliculas}/indexPaginate?page=${productos.number - 1 }">[    Anterior   ] </a></li>
+				
+				<li class="page-item"><a
+					href="${urlPeliculas}/indexPaginate?page=${productos.number + 1 }">[   Siguiente   ]  </a></li>
+			</ul>
+		</nav>
 		<hr class="featurette-divider">
 		<!-- /container -->
 		<jsp:include page="../includes/footer.jsp"></jsp:include>
