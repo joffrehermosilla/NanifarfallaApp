@@ -25,10 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import nanifarfalla.app.model.Anuncio;
-import nanifarfalla.app.model.Ceo;
 import nanifarfalla.app.model.Producto;
-import nanifarfalla.app.model.Usuario;
+
 import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.service.IProductoService;
 import nanifarfalla.app.util.Utileria;

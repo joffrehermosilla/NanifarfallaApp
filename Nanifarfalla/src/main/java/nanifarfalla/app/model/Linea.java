@@ -1,29 +1,55 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "linea")
 public class Linea {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_linea;
+	
+	
+	@OneToMany(mappedBy = "mLinea",fetch = FetchType.EAGER)
+	private Collection<Producto> productos = new ArrayList<>();
+	
+	public Collection<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(Collection<Producto> productos) {
+		this.productos = productos;
+	}
+
 	private String nombre_linea;
 	private String foto_linea = "nanifarfalla.jpeg";
 	private Date fechacreacion;
 	private String claveApi;
-    private Producto producto;
+	private Date version;
+	
+	//@Transient
+	//private Producto producto;
 
-
-	public Producto getProducto() {
-		return producto;
+	public Date getVersion() {
+		return version;
 	}
 
-	@Override
-	public String toString() {
-		return "Linea [codigo_linea=" + codigo_linea + ", nombre_linea=" + nombre_linea + ", foto_linea=" + foto_linea
-				+ ", fechacreacion=" + fechacreacion + ", claveApi=" + claveApi + ", producto=" + producto + "]";
+	public void setVersion(Date version) {
+		this.version = version;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
+
 
 	public String getClaveApi() {
 		return claveApi;

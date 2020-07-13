@@ -2,18 +2,18 @@ package nanifarfalla.app.service.Impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+
 
 
 import nanifarfalla.app.model.Producto;
 import nanifarfalla.app.service.IProductoService;
-@Service
+//@Service
 public class ProductoServiceImpl implements IProductoService {
 	private List<Producto> lista = null;
 
@@ -39,7 +39,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto1.setPvf_producto(68.3);
 			producto1.setClaveApi("clave APi");
 			producto1.setVersion(formatter.parse("18-11-2019"));
-			producto1.setFkcodigo_linea(3);
+			
 			
 			Producto producto2 = new Producto();
 			producto2.setCodigo_producto(2);
@@ -55,7 +55,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto2.setPvf_producto(68.3);
 			producto2.setClaveApi("clave APi");
 			producto2.setVersion(formatter.parse("18-11-2019"));
-			producto2.setFkcodigo_linea(3);
+		
 			
 			Producto producto3 = new Producto();
 			producto3.setCodigo_producto(3);
@@ -71,7 +71,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto3.setPvf_producto(68.3);
 			producto3.setClaveApi("clave APi");
 			producto3.setVersion(formatter.parse("18-11-2019"));
-			producto3.setFkcodigo_linea(1);
+	
 			
 			
 			Producto producto4 = new Producto();
@@ -88,7 +88,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto4.setPvf_producto(68.3);
 			producto4.setClaveApi("clave APi");
 			producto4.setVersion(formatter.parse("18-11-2019"));
-			producto4.setFkcodigo_linea(1);
+			
 			
 			
 			
@@ -106,7 +106,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto5.setPvf_producto(68.3);
 			producto5.setClaveApi("clave APi");
 			producto5.setVersion(formatter.parse("18-11-2019"));
-			producto5.setFkcodigo_linea(2);
+		
 			
 			Producto producto6 = new Producto();
 			producto6.setCodigo_producto(6);
@@ -122,7 +122,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto6.setPvf_producto(68.3);
 			producto6.setClaveApi("clave APi");
 			producto6.setVersion(formatter.parse("18-11-2019"));
-			producto6.setFkcodigo_linea(2);
+		
 			
 			
 			Producto producto7 = new Producto();
@@ -139,7 +139,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto7.setPvf_producto(68.3);
 			producto7.setClaveApi("clave APi");
 			producto7.setVersion(formatter.parse("18-11-2019"));
-			producto7.setFkcodigo_linea(2);
+	
 			
 			Producto producto8 = new Producto();
 			producto8.setCodigo_producto(8);
@@ -155,7 +155,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto8.setPvf_producto(68.3);
 			producto8.setClaveApi("clave APi");
 			producto8.setVersion(formatter.parse("18-11-2019"));
-			producto8.setFkcodigo_linea(2);
+		
 			
 			Producto producto9 = new Producto();
 			producto9.setCodigo_producto(9);
@@ -171,7 +171,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto9.setPvf_producto(68.3);
 			producto9.setClaveApi("clave APi");
 			producto9.setVersion(formatter.parse("18-11-2019"));
-			producto9.setFkcodigo_linea(2);
+	
 			
 			Producto producto10 = new Producto();
 			producto10.setCodigo_producto(10);
@@ -187,7 +187,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto10.setPvf_producto(68.3);
 			producto10.setClaveApi("clave APi");
 			producto10.setVersion(formatter.parse("18-11-2019"));
-			producto10.setFkcodigo_linea(1);
+			
 			
 			
 			
@@ -238,6 +238,12 @@ public class ProductoServiceImpl implements IProductoService {
 		
 //return productoRepo.findAll(page);		
 		return null;
+	}
+
+	@Override
+	public void inserta(Collection<Producto> productos) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

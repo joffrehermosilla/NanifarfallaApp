@@ -1,7 +1,6 @@
 package nanifarfalla.app.controller;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -109,7 +108,14 @@ public class LineasController {
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
-	
+
+		System.out.println("Recibiendo objeto Productos: " + lineas.getProductos());
+
+		System.out.println("Elementos en la lista antes de la insersion: " + lineas.getProductos().size());
+		
+		productoService.inserta(lineas.getProductos());
+		System.out.println("Elementos en la lista despues de la insersion: " + productoService.buscarTodas().size());
+		
 		System.out.println("Recibiendo objeto Lineas: " + lineas);
 
 		System.out.println("Elementos en la lista antes de la insersion: " + serviceLineas.buscarTodas().size());

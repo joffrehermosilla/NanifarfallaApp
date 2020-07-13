@@ -5,12 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+
 
 import nanifarfalla.app.model.Linea;
 import nanifarfalla.app.service.ILineasService;
 
-@Service
+//@Service
 public class LineasServiceImpl implements ILineasService {
 
 	private List<Linea> lista = null;

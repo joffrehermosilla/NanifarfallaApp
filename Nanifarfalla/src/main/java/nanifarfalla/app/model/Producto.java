@@ -2,8 +2,31 @@ package nanifarfalla.app.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+@Entity
+@Table(name = "producto")
 public class Producto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_producto;
+	@JoinColumn(name = "fkcodigo_linea", referencedColumnName = "codigo_linea")
+	@ManyToOne
+	Linea mLinea;
+	
+	public Linea getmLinea() {
+		return mLinea;
+	}
+
+	public void setmLinea(Linea mLinea) {
+		this.mLinea = mLinea;
+	}
+
 	String nombre_producto;
 	Date ingreso_almacen;
 	Date salida_almacen;
@@ -16,25 +39,12 @@ public class Producto {
 	double pvf_producto;
 	String claveApi;
 	Date version;
-	int fkcodigo_linea;
+	
 
-	@Override
-	public String toString() {
-		return "Producto [codigo_producto=" + codigo_producto + ", nombre_producto=" + nombre_producto
-				+ ", ingreso_almacen=" + ingreso_almacen + ", salida_almacen=" + salida_almacen + ", stock_producto="
-				+ stock_producto + ", preparacion_producto=" + preparacion_producto + ", foto_ruta=" + foto_ruta
-				+ ", colores_producto=" + colores_producto + ", qr_producto=" + qr_producto + ", ppv_producto="
-				+ ppv_producto + ", pvf_producto=" + pvf_producto + ", claveApi=" + claveApi + ", version=" + version
-				+ ", fkcodigo_linea=" + fkcodigo_linea + "]";
-	}
 
-	public int getFkcodigo_linea() {
-		return fkcodigo_linea;
-	}
+	
 
-	public void setFkcodigo_linea(int fkcodigo_linea) {
-		this.fkcodigo_linea = fkcodigo_linea;
-	}
+
 
 	public Producto() {
 		System.out.println("Constructor Producto");
