@@ -1,6 +1,11 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 public class Usuario {
 	private int codigo_usuario;
@@ -10,6 +15,17 @@ public class Usuario {
 	private String foto_usuario;
 	private String mensaje_usuario;
 	private Date fechacreacion;
+
+	public Collection<UserAnuncios> getUseranuncios() {
+		return useranuncios;
+	}
+
+	public void setUseranuncios(Collection<UserAnuncios> useranuncios) {
+		this.useranuncios = useranuncios;
+	}
+
+	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
 
 	@Override
 	public String toString() {
