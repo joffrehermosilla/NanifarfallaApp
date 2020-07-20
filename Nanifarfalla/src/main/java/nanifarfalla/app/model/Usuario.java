@@ -27,6 +27,19 @@ public class Usuario {
 	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
 	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	private Collection<PasswordResetToken> passwordResetTokens = new ArrayList<>();
+
+	
+	
+	public Collection<PasswordResetToken> getPasswordResetTokens() {
+		return passwordResetTokens;
+	}
+
+	public void setPasswordResetTokens(Collection<PasswordResetToken> passwordResetTokens) {
+		this.passwordResetTokens = passwordResetTokens;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuariox [codigo_usuario=" + codigo_usuario + ", nombre_usuario=" + nombre_usuario

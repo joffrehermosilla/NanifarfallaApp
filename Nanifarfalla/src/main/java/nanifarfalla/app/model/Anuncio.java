@@ -4,9 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "anuncios")
 public class Anuncio {
 
 	public Anuncio() {
@@ -14,7 +21,8 @@ public class Anuncio {
 		this.version = new Date();
 
 	}
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_anuncio;
 	private String mensaje_anuncio;
 	private String anuncio_principal;
