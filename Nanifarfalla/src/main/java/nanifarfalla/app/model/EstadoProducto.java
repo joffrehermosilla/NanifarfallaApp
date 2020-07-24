@@ -1,11 +1,15 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +21,9 @@ public class EstadoProducto {
 	String nombre_estado_producto;
 	String claveApi;
 	Date version;
+
+	@OneToMany(mappedBy = "mEstadoProducto", fetch = FetchType.EAGER)
+	private Collection<Producto> productos = new ArrayList<>();
 
 	public EstadoProducto() {
 
@@ -52,6 +59,14 @@ public class EstadoProducto {
 
 	public void setVersion(Date version) {
 		this.version = version;
+	}
+
+	public Collection<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(Collection<Producto> productos) {
+		this.productos = productos;
 	}
 
 }

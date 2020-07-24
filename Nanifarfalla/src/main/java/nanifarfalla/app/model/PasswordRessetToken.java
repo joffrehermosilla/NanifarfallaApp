@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "passwordresettoken")
-public class PasswordResetToken {
+public class PasswordRessetToken {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_passwordresttoken;
@@ -24,7 +24,7 @@ public class PasswordResetToken {
 	// int fkcodigo_usuario;
 	Date version;
 
-	public PasswordResetToken() {
+	public PasswordRessetToken() {
 
 	}
 

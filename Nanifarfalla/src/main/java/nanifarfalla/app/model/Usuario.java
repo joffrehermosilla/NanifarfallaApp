@@ -16,6 +16,12 @@ public class Usuario {
 	private String mensaje_usuario;
 	private Date fechacreacion;
 
+	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	private Collection<PasswordRessetToken> passwordResetTokens = new ArrayList<>();
+
 	public Collection<UserAnuncios> getUseranuncios() {
 		return useranuncios;
 	}
@@ -24,19 +30,11 @@ public class Usuario {
 		this.useranuncios = useranuncios;
 	}
 
-	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
-	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
-
-	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
-	private Collection<PasswordResetToken> passwordResetTokens = new ArrayList<>();
-
-	
-	
-	public Collection<PasswordResetToken> getPasswordResetTokens() {
+	public Collection<PasswordRessetToken> getPasswordResetTokens() {
 		return passwordResetTokens;
 	}
 
-	public void setPasswordResetTokens(Collection<PasswordResetToken> passwordResetTokens) {
+	public void setPasswordResetTokens(Collection<PasswordRessetToken> passwordResetTokens) {
 		this.passwordResetTokens = passwordResetTokens;
 	}
 

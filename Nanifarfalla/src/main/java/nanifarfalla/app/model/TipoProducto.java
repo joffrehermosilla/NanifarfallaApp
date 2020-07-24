@@ -1,11 +1,15 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +24,17 @@ public class TipoProducto {
 	String foto_ruta;
 	String claveApi;
 	Date version;
+
+	public Collection<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(Collection<Producto> productos) {
+		this.productos = productos;
+	}
+
+	@OneToMany(mappedBy = "mTipoProducto", fetch = FetchType.EAGER)
+	private Collection<Producto> productos = new ArrayList<>();
 
 	public TipoProducto() {
 
