@@ -24,6 +24,7 @@ public class Ciudad {
 	@JoinColumn(name = "fkcodigo_provincia", referencedColumnName = "codigo_provincia")
 	@ManyToOne
 	Provincia mProvincia;
+	
 	//int fkcodigo_provincia;
 	String nombre_ciudad;
 	Date version;

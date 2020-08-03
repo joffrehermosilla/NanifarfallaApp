@@ -1,11 +1,15 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +23,19 @@ public class ElaboracionProducto {
 	String temporada_producto;
 	String claveApi;
 	Date version;
+	
+
+	@OneToMany(mappedBy = "mElaboracionProducto", fetch = FetchType.EAGER)
+	private Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+
+
+	public Collection<RecetaProductotieneInsumo> getRecetaproductostienenInsumo() {
+		return recetaproductostienenInsumo;
+	}
+
+	public void setRecetaproductostienenInsumo(Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo) {
+		this.recetaproductostienenInsumo = recetaproductostienenInsumo;
+	}
 
 	public ElaboracionProducto() {
 

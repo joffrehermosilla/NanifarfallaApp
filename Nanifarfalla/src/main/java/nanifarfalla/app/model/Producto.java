@@ -1,13 +1,17 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -44,6 +48,17 @@ public class Producto {
 	@JoinColumn(name = "fkcodigo_linea", referencedColumnName = "codigo_linea")
 	@ManyToOne
 	Linea mLinea;
+
+	@OneToMany(mappedBy = "mProducto", fetch = FetchType.EAGER)
+	private Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+
+	public Collection<RecetaProductotieneInsumo> getRecetaproductostienenInsumo() {
+		return recetaproductostienenInsumo;
+	}
+
+	public void setRecetaproductostienenInsumo(Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo) {
+		this.recetaproductostienenInsumo = recetaproductostienenInsumo;
+	}
 
 	public Linea getmLinea() {
 		return mLinea;
