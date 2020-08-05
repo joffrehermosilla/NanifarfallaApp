@@ -36,7 +36,18 @@ public class Producto {
 	String foto_ruta2;
 	String foto_ruta3;
 	String foto_ruta4;
+	
+	public Collection<ProductoTieneColores> getProductoTieneColores() {
+		return productoTieneColores;
+	}
 
+	public void setProductoTieneColores(Collection<ProductoTieneColores> productoTieneColores) {
+		this.productoTieneColores = productoTieneColores;
+	}
+
+	@OneToMany(mappedBy = "mColores", fetch = FetchType.EAGER)
+	private Collection<ProductoTieneColores> productoTieneColores = new ArrayList<>();
+	
 	@JoinColumn(name = "fkcodigo_tipoproducto", referencedColumnName = "codigo_tipoproducto")
 	@ManyToOne
 	TipoProducto mTipoProducto;
