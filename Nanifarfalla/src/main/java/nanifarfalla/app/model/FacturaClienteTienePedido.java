@@ -1,11 +1,15 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +21,17 @@ public class FacturaClienteTienePedido {
 	String nombre_factura_cliente_tiene_pedido;
 	String claveApi;
 	Date version;
+	
+	@OneToMany(mappedBy = "mFactura_cliente_tiene_pedido", fetch = FetchType.EAGER)
+	private Collection<ClienteTienePedido> clientetienepedidos = new ArrayList<>();
+
+	public Collection<ClienteTienePedido> getClientetienepedidos() {
+		return clientetienepedidos;
+	}
+
+	public void setClientetienepedidos(Collection<ClienteTienePedido> clientetienepedidos) {
+		this.clientetienepedidos = clientetienepedidos;
+	}
 
 	public FacturaClienteTienePedido() {
 

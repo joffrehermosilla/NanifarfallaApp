@@ -22,6 +22,19 @@ public class Usuario {
 	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
 	private Collection<PasswordRessetToken> passwordResetTokens = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	private Collection<ClienteTienePedido> clientetienepedidos = new ArrayList<>();
+	
+	
+	
+	public Collection<ClienteTienePedido> getClientetienepedidos() {
+		return clientetienepedidos;
+	}
+
+	public void setClientetienepedidos(Collection<ClienteTienePedido> clientetienepedidos) {
+		this.clientetienepedidos = clientetienepedidos;
+	}
+
 	public Collection<UserAnuncios> getUseranuncios() {
 		return useranuncios;
 	}
