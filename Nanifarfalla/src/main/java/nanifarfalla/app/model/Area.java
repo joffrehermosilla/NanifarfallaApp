@@ -1,11 +1,15 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +21,17 @@ public class Area {
 	String nombre_area;
 	String claveApi;
 	Date version;
+
+	@OneToMany(mappedBy = "mArea", fetch = FetchType.EAGER)
+	private Collection<Vendedor> vendedores = new ArrayList<>();
+
+	public Collection<Vendedor> getVendedores() {
+		return vendedores;
+	}
+
+	public void setVendedores(Collection<Vendedor> vendedores) {
+		this.vendedores = vendedores;
+	}
 
 	public Area() {
 

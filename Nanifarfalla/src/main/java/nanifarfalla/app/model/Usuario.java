@@ -24,9 +24,18 @@ public class Usuario {
 
 	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
 	private Collection<ClienteTienePedido> clientetienepedidos = new ArrayList<>();
-	
-	
-	
+
+	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	private Collection<Vendedor> vendedores = new ArrayList<>();
+
+	public Collection<Vendedor> getVendedores() {
+		return vendedores;
+	}
+
+	public void setVendedores(Collection<Vendedor> vendedores) {
+		this.vendedores = vendedores;
+	}
+
 	public Collection<ClienteTienePedido> getClientetienepedidos() {
 		return clientetienepedidos;
 	}
