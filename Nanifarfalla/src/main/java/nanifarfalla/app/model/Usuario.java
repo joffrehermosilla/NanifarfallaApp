@@ -28,8 +28,19 @@ public class Usuario {
 	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
 	private Collection<Vendedor> vendedores = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	private Collection<UserRoles> userRoles = new ArrayList<>();
+
 	public Collection<Vendedor> getVendedores() {
 		return vendedores;
+	}
+
+	public Collection<UserRoles> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Collection<UserRoles> userRoles) {
+		this.userRoles = userRoles;
 	}
 
 	public void setVendedores(Collection<Vendedor> vendedores) {

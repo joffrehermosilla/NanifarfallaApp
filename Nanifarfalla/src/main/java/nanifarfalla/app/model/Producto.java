@@ -36,7 +36,7 @@ public class Producto {
 	String foto_ruta2;
 	String foto_ruta3;
 	String foto_ruta4;
-	
+
 	public Collection<ProductoTieneColores> getProductoTieneColores() {
 		return productoTieneColores;
 	}
@@ -47,7 +47,7 @@ public class Producto {
 
 	@OneToMany(mappedBy = "mColores", fetch = FetchType.EAGER)
 	private Collection<ProductoTieneColores> productoTieneColores = new ArrayList<>();
-	
+
 	@JoinColumn(name = "fkcodigo_tipoproducto", referencedColumnName = "codigo_tipoproducto")
 	@ManyToOne
 	TipoProducto mTipoProducto;
@@ -62,6 +62,17 @@ public class Producto {
 
 	@OneToMany(mappedBy = "mProducto", fetch = FetchType.EAGER)
 	private Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mProducto")
+	private Collection<ProductoxPedido> productoxpedido = new ArrayList<>();
+
+	public Collection<ProductoxPedido> getProductoxpedido() {
+		return productoxpedido;
+	}
+
+	public void setProductoxpedido(Collection<ProductoxPedido> productoxpedido) {
+		this.productoxpedido = productoxpedido;
+	}
 
 	public Collection<RecetaProductotieneInsumo> getRecetaproductostienenInsumo() {
 		return recetaproductostienenInsumo;
