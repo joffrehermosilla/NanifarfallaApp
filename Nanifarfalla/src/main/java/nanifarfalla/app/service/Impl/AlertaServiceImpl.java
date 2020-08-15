@@ -11,7 +11,7 @@ import nanifarfalla.app.model.Alerta;
 
 import nanifarfalla.app.service.IAlertaService;
 
-@Service
+//@Service
 public class AlertaServiceImpl implements IAlertaService {
 
 	private List<Alerta> lista = null;
@@ -28,7 +28,7 @@ public class AlertaServiceImpl implements IAlertaService {
 			alerta1.setMensaje_alerta("Anuncio Importante");
 			alerta1.setPrecio(3.5);
 			alerta1.setCategoria("importante");
-			alerta1.setFkcodigo_tipoalerta(1);
+		//	alerta1.setFkcodigo_tipoalerta(1);
 			alerta1.setVersion(formatter.parse("18-11-2019"));
 
 			Alerta alerta2 = new Alerta();
@@ -37,7 +37,7 @@ public class AlertaServiceImpl implements IAlertaService {
 			alerta2.setMensaje_alerta("Anuncio Informativo");
 			alerta2.setPrecio(3.5);
 			alerta2.setCategoria("info");
-			alerta2.setFkcodigo_tipoalerta(2);
+			//alerta2.setFkcodigo_tipoalerta(2);
 			alerta2.setVersion(formatter.parse("18-11-2019"));
 
 			Alerta alerta3 = new Alerta();
@@ -46,7 +46,7 @@ public class AlertaServiceImpl implements IAlertaService {
 			alerta3.setMensaje_alerta("Anuncio alerta");
 			alerta3.setPrecio(3.5);
 			alerta3.setCategoria("alerta");
-			alerta3.setFkcodigo_tipoalerta(3);
+		//	alerta3.setFkcodigo_tipoalerta(3);
 			alerta3.setVersion(formatter.parse("18-11-2019"));
 
 			Alerta alerta4 = new Alerta();
@@ -55,7 +55,7 @@ public class AlertaServiceImpl implements IAlertaService {
 			alerta4.setMensaje_alerta("Anuncio evento");
 			alerta4.setPrecio(3.5);
 			alerta4.setCategoria("eventos");
-			alerta4.setFkcodigo_tipoalerta(4);
+		//	alerta4.setFkcodigo_tipoalerta(4);
 			alerta4.setVersion(formatter.parse("18-11-2019"));
 
 			lista.add(alerta1);

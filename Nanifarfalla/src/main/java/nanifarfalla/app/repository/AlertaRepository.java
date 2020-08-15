@@ -3,7 +3,9 @@ package nanifarfalla.app.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import nanifarfalla.app.model.Alerta;
+
 @Repository
-public interface RecetaProductotieneInsumo extends JpaRepository<RecetaProductotieneInsumo, Integer> {
+public interface AlertaRepository extends JpaRepository<Alerta, Integer> {
 
 }

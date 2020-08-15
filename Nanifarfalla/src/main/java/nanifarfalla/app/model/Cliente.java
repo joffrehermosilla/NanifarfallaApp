@@ -33,14 +33,22 @@ public class Cliente {
 
 	@JoinColumn(name = "fkcodigo_estadocliente", referencedColumnName = "codigo_estadocliente")
 	@ManyToOne
-	EstadoCliente mEstado_cliente;
+	EstadoCliente mEstadoCliente;
+
+	public EstadoCliente getmEstadoCliente() {
+		return mEstadoCliente;
+	}
+
+	public void setmEstadoCliente(EstadoCliente mEstadoCliente) {
+		this.mEstadoCliente = mEstadoCliente;
+	}
 
 	@OneToMany(mappedBy = "mCliente")
 	private Collection<ClienteTienePedido> cliente_tiene_pedido = new ArrayList<>();
 
-	int fkcodigo_usuario;
-	int fkcodigo_regimencliente;
-	int fkcodigo_estadocliente;
+	// int fkcodigo_usuario;
+	// int fkcodigo_regimencliente;
+	// int fkcodigo_estadocliente;
 	Double latitud_cliente;
 	Double longitud_cliente;
 	String type_cliente;
@@ -95,44 +103,12 @@ public class Cliente {
 		this.mRegimen_cliente = mRegimen_cliente;
 	}
 
-	public EstadoCliente getmEstado_cliente() {
-		return mEstado_cliente;
-	}
-
-	public void setmEstado_cliente(EstadoCliente mEstado_cliente) {
-		this.mEstado_cliente = mEstado_cliente;
-	}
-
 	public Collection<ClienteTienePedido> getCliente_tiene_pedido() {
 		return cliente_tiene_pedido;
 	}
 
 	public void setCliente_tiene_pedido(Collection<ClienteTienePedido> cliente_tiene_pedido) {
 		this.cliente_tiene_pedido = cliente_tiene_pedido;
-	}
-
-	public int getFkcodigo_usuario() {
-		return fkcodigo_usuario;
-	}
-
-	public void setFkcodigo_usuario(int fkcodigo_usuario) {
-		this.fkcodigo_usuario = fkcodigo_usuario;
-	}
-
-	public int getFkcodigo_regimencliente() {
-		return fkcodigo_regimencliente;
-	}
-
-	public void setFkcodigo_regimencliente(int fkcodigo_regimencliente) {
-		this.fkcodigo_regimencliente = fkcodigo_regimencliente;
-	}
-
-	public int getFkcodigo_estadocliente() {
-		return fkcodigo_estadocliente;
-	}
-
-	public void setFkcodigo_estadocliente(int fkcodigo_estadocliente) {
-		this.fkcodigo_estadocliente = fkcodigo_estadocliente;
 	}
 
 	public Double getLatitud_cliente() {

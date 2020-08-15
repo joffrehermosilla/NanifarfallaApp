@@ -60,8 +60,12 @@ public class Producto {
 	@ManyToOne
 	Linea mLinea;
 
-	@OneToMany(mappedBy = "mProducto", fetch = FetchType.EAGER)
-	private Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+	@OneToMany(mappedBy = "mProducto", fetch = FetchType.LAZY)
+	private Collection<RecetaProductoTieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+
+	public void setRecetaproductostienenInsumo(Collection<RecetaProductoTieneInsumo> recetaproductostienenInsumo) {
+		this.recetaproductostienenInsumo = recetaproductostienenInsumo;
+	}
 
 	@OneToMany(mappedBy = "mProducto")
 	private Collection<ProductoxPedido> productoxpedido = new ArrayList<>();
@@ -74,13 +78,7 @@ public class Producto {
 		this.productoxpedido = productoxpedido;
 	}
 
-	public Collection<RecetaProductotieneInsumo> getRecetaproductostienenInsumo() {
-		return recetaproductostienenInsumo;
-	}
 
-	public void setRecetaproductostienenInsumo(Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo) {
-		this.recetaproductostienenInsumo = recetaproductostienenInsumo;
-	}
 
 	public Linea getmLinea() {
 		return mLinea;

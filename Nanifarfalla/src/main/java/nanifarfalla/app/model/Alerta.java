@@ -2,28 +2,32 @@ package nanifarfalla.app.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "alertas")
 public class Alerta {
-	public Alerta() {
-
-	}
-
-
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_alerta;
 	private String mensaje_alerta;
 	private String categoria;
 	private Double precio;
-	private Date version;
-	private int fkcodigo_tipoalerta;
-	
-	
-	
-	public int getFkcodigo_tipoalerta() {
-		return fkcodigo_tipoalerta;
-	}
 
-	public void setFkcodigo_tipoalerta(int fkcodigo_tipoalerta) {
-		this.fkcodigo_tipoalerta = fkcodigo_tipoalerta;
+	private Date version;
+	@JoinColumn(name = "fkcodigo_tipoalerta", referencedColumnName = "codigo_tipoalerta")
+	@ManyToOne
+	TipoAlerta mTipoAlerta;
+
+	// private int fkcodigo_tipoalerta;
+	public Alerta() {
+
 	}
 
 	public String getCategoria() {

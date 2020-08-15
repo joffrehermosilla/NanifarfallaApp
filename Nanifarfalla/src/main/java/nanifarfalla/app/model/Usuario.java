@@ -4,10 +4,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "usuario")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_usuario;
 	private String nombre_usuario;
 	private String paterno_usuario;
@@ -16,20 +27,44 @@ public class Usuario {
 	private String mensaje_usuario;
 	private Date fechacreacion;
 
-	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
 
-	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mUsuario")
 	private Collection<PasswordRessetToken> passwordResetTokens = new ArrayList<>();
 
-	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mUsuario")
 	private Collection<ClienteTienePedido> clientetienepedidos = new ArrayList<>();
 
-	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mUsuario")
 	private Collection<Vendedor> vendedores = new ArrayList<>();
 
-	@OneToMany(mappedBy = "mUsuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserRoles> userRoles = new ArrayList<>();
+
+	Date fecha_nacimiento_usuario;
+	String direccion_usuario;
+	String nombre_logeo_usuario;
+	String password_usuario;
+	String email_usuario;
+	String ruta_foto;
+	int enabled;
+	int isUsing2FA;
+
+	@JoinColumn(name = "fkcodigo_distrito", referencedColumnName = "codigo_distrito")
+	@ManyToOne
+	Distrito mDistrito;
+//fkcodigo_distrito	
+	@JoinColumn(name = "fkcodigo_tipousuario", referencedColumnName = "codigo_tipousuario")
+	@ManyToOne
+	TipoUsuario mTipoUsuario;
+//fkcodigo_tipousuario	
+	@JoinColumn(name = "fkcodigo_estadousuario", referencedColumnName = "codigo_estadousuario")
+	@ManyToOne
+	EstadoUsuario mEstadoUsuario;
+
+//fkcodigo_estadousuario	
+	Date version;
 
 	public Collection<Vendedor> getVendedores() {
 		return vendedores;

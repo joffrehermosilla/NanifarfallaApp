@@ -26,10 +26,21 @@ public class Distrito {
 //	int fkcodigo_ciudad;
 	String nombre_distrito;
 	Date version;
+
 	@OneToMany(mappedBy = "mDistrito", fetch = FetchType.EAGER)
+	private Collection<Usuario> usuarios = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mDistrito", fetch = FetchType.LAZY)
 	private Collection<ZonaTieneDistrito> zonatienedistritos = new ArrayList<>();
-	
-	
+
+	public Collection<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Collection<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
 	public Collection<ZonaTieneDistrito> getZonatienedistritos() {
 		return zonatienedistritos;
 	}

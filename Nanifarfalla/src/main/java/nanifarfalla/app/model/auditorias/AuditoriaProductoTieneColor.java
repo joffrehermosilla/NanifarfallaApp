@@ -3,11 +3,16 @@ package nanifarfalla.app.model.auditorias;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "audi_producto_tiene_color")
 public class AuditoriaProductoTieneColor {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_audiproducto_tienecolor;
 	String usuario;
 	Date fecha_cambio;

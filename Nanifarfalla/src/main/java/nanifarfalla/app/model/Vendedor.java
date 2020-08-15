@@ -32,7 +32,7 @@ public class Vendedor {
 	String claveApi;
 	Date version;
 
-	@OneToMany(mappedBy = "mVendedor", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mVendedor")
 	private Collection<ClienteTienePedido> clientetienepedidos = new ArrayList<>();
 
 	public int getCodigo_vendedor() {

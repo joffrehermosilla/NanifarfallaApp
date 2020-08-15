@@ -55,7 +55,11 @@ public class Insumo {
 	private LoteInsumo mLoteinsumo;
 
 	@OneToMany(mappedBy = "mInsumo")
-	private Collection<RecetaProductotieneInsumo> recetasproductoinsumos = new ArrayList<>();
+	private Collection<RecetaProductoTieneInsumo> recetasproductoinsumos = new ArrayList<>();
+
+	public void setRecetasproductoinsumos(Collection<RecetaProductoTieneInsumo> recetasproductoinsumos) {
+		this.recetasproductoinsumos = recetasproductoinsumos;
+	}
 
 	public int getCodigo_insumo() {
 		return codigo_insumo;
@@ -247,14 +251,6 @@ public class Insumo {
 
 	public void setmLoteinsumo(LoteInsumo mLoteinsumo) {
 		this.mLoteinsumo = mLoteinsumo;
-	}
-
-	public Collection<RecetaProductotieneInsumo> getRecetasproductoinsumos() {
-		return recetasproductoinsumos;
-	}
-
-	public void setRecetasproductoinsumos(Collection<RecetaProductotieneInsumo> recetasproductoinsumos) {
-		this.recetasproductoinsumos = recetasproductoinsumos;
 	}
 
 	public Insumo() {

@@ -26,16 +26,9 @@ public class ElaboracionProducto {
 	
 
 	@OneToMany(mappedBy = "mElaboracionProducto", fetch = FetchType.EAGER)
-	private Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+	private Collection<RecetaProductoTieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
 
 
-	public Collection<RecetaProductotieneInsumo> getRecetaproductostienenInsumo() {
-		return recetaproductostienenInsumo;
-	}
-
-	public void setRecetaproductostienenInsumo(Collection<RecetaProductotieneInsumo> recetaproductostienenInsumo) {
-		this.recetaproductostienenInsumo = recetaproductostienenInsumo;
-	}
 
 	public ElaboracionProducto() {
 
