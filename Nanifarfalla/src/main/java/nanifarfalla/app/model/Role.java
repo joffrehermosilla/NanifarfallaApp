@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +21,21 @@ public class Role {
 	int codigo_role;
 	String nombre_role;
 	Date version;
-	@OneToMany(mappedBy = "mRole", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mRole")
 	private Collection<UserRoles> userRoles = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mRole")
+	private Collection<RoleHasPrivileges> roleHasPrivileges = new ArrayList<>();
+
+	
+	
+	public Collection<RoleHasPrivileges> getRoleHasPrivileges() {
+		return roleHasPrivileges;
+	}
+
+	public void setRoleHasPrivileges(Collection<RoleHasPrivileges> roleHasPrivileges) {
+		this.roleHasPrivileges = roleHasPrivileges;
+	}
 
 	public Role() {
 

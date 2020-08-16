@@ -1,11 +1,14 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +19,17 @@ public class Privilege {
 	int codigo_privilege;
 	String nombre_privilege;
 	Date version;
+
+	@OneToMany(mappedBy = "mPrivilege")
+	private Collection<RoleHasPrivileges> roleHasPrivileges = new ArrayList<>();
+
+	public Collection<RoleHasPrivileges> getRoleHasPrivileges() {
+		return roleHasPrivileges;
+	}
+
+	public void setRoleHasPrivileges(Collection<RoleHasPrivileges> roleHasPrivileges) {
+		this.roleHasPrivileges = roleHasPrivileges;
+	}
 
 	public int getCodigo_privilege() {
 		return codigo_privilege;
