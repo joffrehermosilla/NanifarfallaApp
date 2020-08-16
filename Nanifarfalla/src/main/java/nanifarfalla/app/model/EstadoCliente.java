@@ -24,6 +24,14 @@ public class EstadoCliente {
 	@OneToMany(mappedBy = "mEstadoCliente")
 	private Collection<Cliente> clientes = new ArrayList<>();
 
+	public Collection<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(Collection<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	public EstadoCliente() {
 
 	}

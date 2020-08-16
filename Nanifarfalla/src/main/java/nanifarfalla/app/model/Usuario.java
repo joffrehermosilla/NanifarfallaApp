@@ -42,6 +42,9 @@ public class Usuario {
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserRoles> userRoles = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mUsuario")
+	private Collection<VerificationToken> verificationToken = new ArrayList<>();
+
 	Date fecha_nacimiento_usuario;
 	String direccion_usuario;
 	String nombre_logeo_usuario;
@@ -65,6 +68,114 @@ public class Usuario {
 
 //fkcodigo_estadousuario	
 	Date version;
+
+	public Usuario() {
+
+	}
+
+	public Collection<VerificationToken> getVerificationToken() {
+		return verificationToken;
+	}
+
+	public void setVerificationToken(Collection<VerificationToken> verificationToken) {
+		this.verificationToken = verificationToken;
+	}
+
+	public Date getFecha_nacimiento_usuario() {
+		return fecha_nacimiento_usuario;
+	}
+
+	public void setFecha_nacimiento_usuario(Date fecha_nacimiento_usuario) {
+		this.fecha_nacimiento_usuario = fecha_nacimiento_usuario;
+	}
+
+	public String getDireccion_usuario() {
+		return direccion_usuario;
+	}
+
+	public void setDireccion_usuario(String direccion_usuario) {
+		this.direccion_usuario = direccion_usuario;
+	}
+
+	public String getNombre_logeo_usuario() {
+		return nombre_logeo_usuario;
+	}
+
+	public void setNombre_logeo_usuario(String nombre_logeo_usuario) {
+		this.nombre_logeo_usuario = nombre_logeo_usuario;
+	}
+
+	public String getPassword_usuario() {
+		return password_usuario;
+	}
+
+	public void setPassword_usuario(String password_usuario) {
+		this.password_usuario = password_usuario;
+	}
+
+	public String getEmail_usuario() {
+		return email_usuario;
+	}
+
+	public void setEmail_usuario(String email_usuario) {
+		this.email_usuario = email_usuario;
+	}
+
+	public String getRuta_foto() {
+		return ruta_foto;
+	}
+
+	public void setRuta_foto(String ruta_foto) {
+		this.ruta_foto = ruta_foto;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
+	public int getIsUsing2FA() {
+		return isUsing2FA;
+	}
+
+	public void setIsUsing2FA(int isUsing2FA) {
+		this.isUsing2FA = isUsing2FA;
+	}
+
+	public Distrito getmDistrito() {
+		return mDistrito;
+	}
+
+	public void setmDistrito(Distrito mDistrito) {
+		this.mDistrito = mDistrito;
+	}
+
+	public TipoUsuario getmTipoUsuario() {
+		return mTipoUsuario;
+	}
+
+	public void setmTipoUsuario(TipoUsuario mTipoUsuario) {
+		this.mTipoUsuario = mTipoUsuario;
+	}
+
+	public EstadoUsuario getmEstadoUsuario() {
+		return mEstadoUsuario;
+	}
+
+	public void setmEstadoUsuario(EstadoUsuario mEstadoUsuario) {
+		this.mEstadoUsuario = mEstadoUsuario;
+	}
+
+	public Date getVersion() {
+		return version;
+	}
+
+	public void setVersion(Date version) {
+		this.version = version;
+	}
 
 	public Collection<Vendedor> getVendedores() {
 		return vendedores;
