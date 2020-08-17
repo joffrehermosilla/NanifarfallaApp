@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +22,18 @@ public class Cliente {
 	int codigo_cliente;
 	String razonsocial_cliente;
 	String mensaje_cliente;
+	// int fkcodigo_usuario;
+	// int fkcodigo_regimencliente;
+	// int fkcodigo_estadocliente;
+	Double latitud_cliente;
+	Double longitud_cliente;
+	String type_cliente;
+	String foto_ruta;
+	String ruc_cliente;
+	String dni_cliente;
+	Date fecha_empadronamiento_cliente;
+	String claveApi;
+	Date version;
 
 	@JoinColumn(name = "fkcodigo_usuario", referencedColumnName = "codigo_usuario")
 	@ManyToOne
@@ -35,6 +47,12 @@ public class Cliente {
 	@ManyToOne
 	EstadoCliente mEstadoCliente;
 
+	@OneToMany(mappedBy = "mCliente")
+	private Collection<ClienteTienePedido> cliente_tiene_pedido = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mCliente")
+	private Collection<Contrato> contratos = new ArrayList<>();
+
 	public EstadoCliente getmEstadoCliente() {
 		return mEstadoCliente;
 	}
@@ -43,21 +61,13 @@ public class Cliente {
 		this.mEstadoCliente = mEstadoCliente;
 	}
 
-	@OneToMany(mappedBy = "mCliente")
-	private Collection<ClienteTienePedido> cliente_tiene_pedido = new ArrayList<>();
+	public Collection<Contrato> getContratos() {
+		return contratos;
+	}
 
-	// int fkcodigo_usuario;
-	// int fkcodigo_regimencliente;
-	// int fkcodigo_estadocliente;
-	Double latitud_cliente;
-	Double longitud_cliente;
-	String type_cliente;
-	String foto_ruta;
-	String ruc_cliente;
-	String dni_cliente;
-	Date fecha_empadronamiento_cliente;
-	String claveApi;
-	Date version;
+	public void setContratos(Collection<Contrato> contratos) {
+		this.contratos = contratos;
+	}
 
 	public Cliente() {
 

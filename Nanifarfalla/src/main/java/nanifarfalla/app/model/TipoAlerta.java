@@ -25,6 +25,25 @@ public class TipoAlerta {
 	@OneToMany(mappedBy = "mTipoAlerta", fetch = FetchType.EAGER)
 	private Collection<Alerta> alertas = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mTipoAlerta")
+	private Collection<UserAlerta> useralertas = new ArrayList<>();
+
+	public Collection<Alerta> getAlertas() {
+		return alertas;
+	}
+
+	public void setAlertas(Collection<Alerta> alertas) {
+		this.alertas = alertas;
+	}
+
+	public Collection<UserAlerta> getUseralertas() {
+		return useralertas;
+	}
+
+	public void setUseralertas(Collection<UserAlerta> useralertas) {
+		this.useralertas = useralertas;
+	}
+
 	public int getCodigo_tipoalerta() {
 		return codigo_tipoalerta;
 	}

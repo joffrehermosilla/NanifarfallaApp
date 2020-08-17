@@ -1,8 +1,8 @@
 package nanifarfalla.app.model;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,52 +14,54 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_anuncios")
-public class UserAnuncios {
+@Table(name = "user_alertas")
+public class UserAlerta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int codigo_user_anuncio;
-	@JoinColumn(name = "fkcodigo_anuncio", referencedColumnName = "codigo_anuncio")
+	int codigo_user_alerta;
+
+	@JoinColumn(name = "fkcodigo_alerta", referencedColumnName = "codigo_alerta")
 	@ManyToOne
-	Anuncio mAnuncio;
-	// int fkcodigo_anuncio;
+	Alerta mAlerta;
+
+	// fkcodigo_alerta
 	@JoinColumn(name = "fkcodigo_usuario", referencedColumnName = "codigo_usuario")
 	@ManyToOne
 	Usuario mUsuario;
-	// int fkcodigo_usuario;
+
+	// fkcodigo_usuario
+	@JoinColumn(name = "fkcodigo_tipoalerta", referencedColumnName = "codigo_tipoalerta")
+	@ManyToOne
+	TipoAlerta mTipoAlerta;
+
+	// int fkcodigo_tipoalerta;
+
 	Date fecha_inicio;
 	Date fecha_fin;
 	Double precio;
 	Date version;
-	@OneToMany(mappedBy = "mUserAnuncios")
+
+	@OneToMany(mappedBy = "mUserAlerta")
 	private Collection<Contrato> contratos = new ArrayList<>();
 
-	public UserAnuncios() {
+	public UserAlerta() {
 
 	}
 
-	public Collection<Contrato> getContratos() {
-		return contratos;
+	public int getCodigo_user_alerta() {
+		return codigo_user_alerta;
 	}
 
-	public void setContratos(Collection<Contrato> contratos) {
-		this.contratos = contratos;
+	public void setCodigo_user_alerta(int codigo_user_alerta) {
+		this.codigo_user_alerta = codigo_user_alerta;
 	}
 
-	public int getCodigo_user_anuncio() {
-		return codigo_user_anuncio;
+	public Alerta getmAlerta() {
+		return mAlerta;
 	}
 
-	public void setCodigo_user_anuncio(int codigo_user_anuncio) {
-		this.codigo_user_anuncio = codigo_user_anuncio;
-	}
-
-	public Anuncio getmAnuncio() {
-		return mAnuncio;
-	}
-
-	public void setmAnuncio(Anuncio mAnuncio) {
-		this.mAnuncio = mAnuncio;
+	public void setmAlerta(Alerta mAlerta) {
+		this.mAlerta = mAlerta;
 	}
 
 	public Usuario getmUsuario() {
@@ -68,6 +70,14 @@ public class UserAnuncios {
 
 	public void setmUsuario(Usuario mUsuario) {
 		this.mUsuario = mUsuario;
+	}
+
+	public TipoAlerta getmTipoAlerta() {
+		return mTipoAlerta;
+	}
+
+	public void setmTipoAlerta(TipoAlerta mTipoAlerta) {
+		this.mTipoAlerta = mTipoAlerta;
 	}
 
 	public Date getFecha_inicio() {
@@ -100,6 +110,14 @@ public class UserAnuncios {
 
 	public void setVersion(Date version) {
 		this.version = version;
+	}
+
+	public Collection<Contrato> getContratos() {
+		return contratos;
+	}
+
+	public void setContratos(Collection<Contrato> contratos) {
+		this.contratos = contratos;
 	}
 
 }

@@ -24,14 +24,14 @@ public class Ciudad {
 	@JoinColumn(name = "fkcodigo_provincia", referencedColumnName = "codigo_provincia")
 	@ManyToOne
 	Provincia mProvincia;
-	
-	//int fkcodigo_provincia;
+
+	// int fkcodigo_provincia;
 	String nombre_ciudad;
 	Date version;
 
 	@OneToMany(mappedBy = "mCiudad", fetch = FetchType.EAGER)
 	private Collection<Distrito> distritos = new ArrayList<>();
-	
+
 	public Ciudad() {
 
 	}
@@ -59,8 +59,6 @@ public class Ciudad {
 	public void setmProvincia(Provincia mProvincia) {
 		this.mProvincia = mProvincia;
 	}
-
-
 
 	public String getNombre_ciudad() {
 		return nombre_ciudad;

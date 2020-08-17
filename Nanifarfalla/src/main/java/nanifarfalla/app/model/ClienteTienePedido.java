@@ -52,6 +52,8 @@ public class ClienteTienePedido {
 	@OneToMany(mappedBy = "mClientetienepedido")
 	private Collection<ProductoxPedido> productoxpedido = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mClienteTienePedido")
+	private Collection<Contrato> contratos = new ArrayList<>();
 //	int fkcodigo_usuario;
 //	int fkcodigo_cliente;
 //	int fkcodigo_vendedor;
@@ -71,6 +73,14 @@ public class ClienteTienePedido {
 
 	public ClienteTienePedido() {
 
+	}
+
+	public Collection<Contrato> getContratos() {
+		return contratos;
+	}
+
+	public void setContratos(Collection<Contrato> contratos) {
+		this.contratos = contratos;
 	}
 
 	public int getCodigo_pedido_web() {
@@ -216,6 +226,5 @@ public class ClienteTienePedido {
 	public void setVersion(Date version) {
 		this.version = version;
 	}
-
 
 }

@@ -1,13 +1,17 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +28,9 @@ public class Alerta {
 	@JoinColumn(name = "fkcodigo_tipoalerta", referencedColumnName = "codigo_tipoalerta")
 	@ManyToOne
 	TipoAlerta mTipoAlerta;
+
+	@OneToMany(mappedBy = "mAlerta")
+	private Collection<UserAlerta> useralertas = new ArrayList<>();
 
 	// private int fkcodigo_tipoalerta;
 	public Alerta() {

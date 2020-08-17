@@ -21,7 +21,7 @@ public class EstadoCatalogo {
 	String claveApi;
 	Date version;
 
-	@OneToMany(mappedBy = "mEstadoCliente")
+	@OneToMany(mappedBy = "mEstadoCatalogo")
 	private Collection<Catalogo> catalogos = new ArrayList<>();
 
 	public int getCodigo_estadoCatalogo() {

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,6 +44,29 @@ public class Usuario {
 
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<VerificationToken> verificationToken = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mUsuario")
+	private Collection<Contrato> contratos = new ArrayList<>();
+
+	
+	@OneToMany(mappedBy = "mUsuario")
+	private Collection<UserAlerta> useralertas = new ArrayList<>();
+	
+	public Collection<UserAlerta> getUseralertas() {
+		return useralertas;
+	}
+
+	public void setUseralertas(Collection<UserAlerta> useralertas) {
+		this.useralertas = useralertas;
+	}
+
+	public Collection<Contrato> getContratos() {
+		return contratos;
+	}
+
+	public void setContratos(Collection<Contrato> contratos) {
+		this.contratos = contratos;
+	}
 
 	Date fecha_nacimiento_usuario;
 	String direccion_usuario;
