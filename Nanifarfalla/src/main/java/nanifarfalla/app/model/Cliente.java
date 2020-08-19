@@ -53,6 +53,17 @@ public class Cliente {
 	@OneToMany(mappedBy = "mCliente")
 	private Collection<Contrato> contratos = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mCliente")
+	private Collection<ClienteTienePreferencia> clientetienepreferencias = new ArrayList<>();
+
+	public Collection<ClienteTienePreferencia> getClientetienepreferencias() {
+		return clientetienepreferencias;
+	}
+
+	public void setClientetienepreferencias(Collection<ClienteTienePreferencia> clientetienepreferencias) {
+		this.clientetienepreferencias = clientetienepreferencias;
+	}
+
 	public EstadoCliente getmEstadoCliente() {
 		return mEstadoCliente;
 	}

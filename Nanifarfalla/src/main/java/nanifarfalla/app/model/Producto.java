@@ -63,6 +63,21 @@ public class Producto {
 	@OneToMany(mappedBy = "mProducto", fetch = FetchType.LAZY)
 	private Collection<RecetaProductoTieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mProducto")
+	private Collection<ClienteTienePreferencia> clientetienepreferencias = new ArrayList<>();
+
+	public Collection<ClienteTienePreferencia> getClientetienepreferencias() {
+		return clientetienepreferencias;
+	}
+
+	public void setClientetienepreferencias(Collection<ClienteTienePreferencia> clientetienepreferencias) {
+		this.clientetienepreferencias = clientetienepreferencias;
+	}
+
+	public Collection<RecetaProductoTieneInsumo> getRecetaproductostienenInsumo() {
+		return recetaproductostienenInsumo;
+	}
+
 	public void setRecetaproductostienenInsumo(Collection<RecetaProductoTieneInsumo> recetaproductostienenInsumo) {
 		this.recetaproductostienenInsumo = recetaproductostienenInsumo;
 	}
@@ -77,8 +92,6 @@ public class Producto {
 	public void setProductoxpedido(Collection<ProductoxPedido> productoxpedido) {
 		this.productoxpedido = productoxpedido;
 	}
-
-
 
 	public Linea getmLinea() {
 		return mLinea;
