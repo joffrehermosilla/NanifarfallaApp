@@ -66,6 +66,9 @@ public class Producto {
 	@OneToMany(mappedBy = "mProducto")
 	private Collection<ClienteTienePreferencia> clientetienepreferencias = new ArrayList<>();
 
+
+
+
 	public Collection<ClienteTienePreferencia> getClientetienepreferencias() {
 		return clientetienepreferencias;
 	}

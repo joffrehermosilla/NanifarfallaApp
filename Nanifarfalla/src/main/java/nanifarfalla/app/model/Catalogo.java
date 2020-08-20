@@ -1,5 +1,7 @@
 package nanifarfalla.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,8 +40,27 @@ public class Catalogo {
 	// int fkcodigo_estadoCatalogo;
 	Date version;
 
+	@OneToMany(mappedBy = "mCatalogo")
+	private Collection<ClienteTieneCatalogo> clientetienecatalogos = new ArrayList<>();
+
 	public Catalogo() {
 
+	}
+
+	public EstadoCatalogo getmEstadoCatalogo() {
+		return mEstadoCatalogo;
+	}
+
+	public void setmEstadoCatalogo(EstadoCatalogo mEstadoCatalogo) {
+		this.mEstadoCatalogo = mEstadoCatalogo;
+	}
+
+	public Collection<ClienteTieneCatalogo> getClientetienecatalogos() {
+		return clientetienecatalogos;
+	}
+
+	public void setClientetienecatalogos(Collection<ClienteTieneCatalogo> clientetienecatalogos) {
+		this.clientetienecatalogos = clientetienecatalogos;
 	}
 
 	public int getCodigo_catalogo() {
