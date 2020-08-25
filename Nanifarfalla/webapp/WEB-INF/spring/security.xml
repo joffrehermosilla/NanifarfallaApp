@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <b:beans xmlns="http://www.springframework.org/schema/security"
-   xmlns:b="http://www.springframework.org/schema/beans" 
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
      http://www.springframework.org/schema/beans/spring-beans.xsd
      http://www.springframework.org/schema/security 
      http://www.springframework.org/schema/security/spring-security.xsd">
 
-   <http />
+	<http />
 
-   <authentication-manager>
+	<authentication-manager>
 
-      <authentication-provider>
-		<user-service>
-		  <user name="luis" password="{noop}luis123" authorities="EDITOR" />		  
-		  <user name="marisol" password="{noop}mari123" authorities="GERENTE" />  
-		</user-service>
-      </authentication-provider>
+		<authentication-provider>
 
-   </authentication-manager>
+			<!-- <authentication-provider user-service-ref="userDetailsService" /> -->
+
+			<user-service>
+				<user name="luis" password="{noop}luis123" authorities="EDITOR" />
+				<user name="marisol" password="{noop}mari123"
+					authorities="GERENTE" />
+			</user-service>
+		</authentication-provider>
+
+	</authentication-manager>
+
+
+
+	<b:bean id="authProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<b:property name="userDetailsService"
+			ref="userDetailsService" />
+		<b:property name="passwordEncoder" ref="passwordEncoder" />
+	</b:bean>
+
+
+
+	<b:bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<b:constructor-arg value="11" />
+	</b:bean>
+
+	<b:bean id="myAuthenticationSuccessHandler"
+		class="nanifarfalla.app.security.MySimpleUrlAuthenticationSuccessHandler" />
+
+
+	<b:bean id="userDetailsService"
+		class="nanifarfalla.app.security.MyUserDetailsService" />
+
+
+
 
 </b:beans>

@@ -3,21 +3,25 @@ package nanifarfalla.app.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.jboss.aerogear.security.otp.api.Base32;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
 	@Id
+	@Column(unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_usuario;
 	private String nombre_usuario;
@@ -26,6 +30,23 @@ public class Usuario {
 	private String foto_usuario;
 	private String mensaje_usuario;
 	private Date fechacreacion;
+	Date fecha_nacimiento_usuario;
+	String direccion_usuario;
+	String nombre_logeo_usuario;
+	String genero;
+	@Column(length = 60)
+	String password_usuario;
+	private String email;
+	String ruta_foto;
+	int enabled;
+	private boolean enabled2;
+	int isUsing2FA;
+	private boolean isUsing2FA2;
+	private String secret;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "UserRoles", joinColumns = @JoinColumn(name = "fkcodigo_usuario", referencedColumnName = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "fkcodigo_role", referencedColumnName = "codigo_role"))
+	private Collection<Role> roles;
 
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
@@ -48,34 +69,8 @@ public class Usuario {
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<Contrato> contratos = new ArrayList<>();
 
-	
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserAlerta> useralertas = new ArrayList<>();
-	
-	public Collection<UserAlerta> getUseralertas() {
-		return useralertas;
-	}
-
-	public void setUseralertas(Collection<UserAlerta> useralertas) {
-		this.useralertas = useralertas;
-	}
-
-	public Collection<Contrato> getContratos() {
-		return contratos;
-	}
-
-	public void setContratos(Collection<Contrato> contratos) {
-		this.contratos = contratos;
-	}
-
-	Date fecha_nacimiento_usuario;
-	String direccion_usuario;
-	String nombre_logeo_usuario;
-	String password_usuario;
-	String email_usuario;
-	String ruta_foto;
-	int enabled;
-	int isUsing2FA;
 
 	@JoinColumn(name = "fkcodigo_distrito", referencedColumnName = "codigo_distrito")
 	@ManyToOne
@@ -92,8 +87,58 @@ public class Usuario {
 //fkcodigo_estadousuario	
 	Date version;
 
-	public Usuario() {
+	public String getGenero() {
+		return genero;
+	}
 
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public Collection<UserAlerta> getUseralertas() {
+		return useralertas;
+	}
+
+	public void setUseralertas(Collection<UserAlerta> useralertas) {
+		this.useralertas = useralertas;
+	}
+
+	public Collection<Contrato> getContratos() {
+		return contratos;
+	}
+
+	public void setContratos(Collection<Contrato> contratos) {
+		this.contratos = contratos;
+	}
+
+	public Usuario() {
+		super();
+		this.secret = Base32.random();
+		this.enabled2 = false;
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+	public String getSecret() {
+		return secret;
+	}
+
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+
+	public boolean isUsing2FA2() {
+		return isUsing2FA2;
+	}
+
+	public void setUsing2FA2(boolean isUsing2FA2) {
+		this.isUsing2FA2 = isUsing2FA2;
 	}
 
 	public Collection<VerificationToken> getVerificationToken() {
@@ -136,12 +181,12 @@ public class Usuario {
 		this.password_usuario = password_usuario;
 	}
 
-	public String getEmail_usuario() {
-		return email_usuario;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmail_usuario(String email_usuario) {
-		this.email_usuario = email_usuario;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getRuta_foto() {
@@ -240,13 +285,6 @@ public class Usuario {
 		this.passwordResetTokens = passwordResetTokens;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuariox [codigo_usuario=" + codigo_usuario + ", nombre_usuario=" + nombre_usuario
-				+ ", paterno_usuario=" + paterno_usuario + ", materno_usuario=" + materno_usuario + ", foto_usuario="
-				+ foto_usuario + ", mensaje_usuario=" + mensaje_usuario + ", fechacreacion=" + fechacreacion + "]";
-	}
-
 	public int getCodigo_usuario() {
 		return codigo_usuario;
 	}
@@ -301,6 +339,51 @@ public class Usuario {
 
 	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
+	}
+
+	public boolean isEnabled2() {
+		return enabled2;
+	}
+
+	public void setEnabled2(boolean enabled2) {
+		this.enabled2 = enabled2;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = (prime * result) + ((getEmail() == null) ? 0 : getEmail().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Usuario user = (Usuario) obj;
+		if (!getEmail().equals(user.getEmail())) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append("Usuario [codigo_usuario=").append(codigo_usuario).append(", nombre_usuario=")
+				.append(nombre_usuario).append(", paterno_usuario=").append(paterno_usuario).append(", email_usuario=")
+				.append(email).append(", password_usuario=").append(password_usuario).append(", enabled=")
+				.append(enabled2).append(", isUsing2FA2=").append(isUsing2FA2).append(", secret=").append(secret)
+				.append(", roles=").append(roles).append("]");
+		return builder.toString();
 	}
 
 }

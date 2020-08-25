@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+
 
 import nanifarfalla.app.model.Alerta;
 
