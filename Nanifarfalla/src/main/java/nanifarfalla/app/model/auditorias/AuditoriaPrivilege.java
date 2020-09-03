@@ -16,10 +16,29 @@ public class AuditoriaPrivilege {
 	int codigo_audi_privilege;
 	String usuario;
 	Date fecha_cambio;
-	String nombre_privilege_old;
+	String name_old;
 	Date version_old;
-	String nombre_privilege_new;
+	String name_new;
 	Date version_new;
+
+	
+	
+	
+	public String getName_old() {
+		return name_old;
+	}
+
+	public void setName_old(String name_old) {
+		this.name_old = name_old;
+	}
+
+	public String getName_new() {
+		return name_new;
+	}
+
+	public void setName_new(String name_new) {
+		this.name_new = name_new;
+	}
 
 	public int getCodigo_audi_privilege() {
 		return codigo_audi_privilege;
@@ -45,13 +64,7 @@ public class AuditoriaPrivilege {
 		this.fecha_cambio = fecha_cambio;
 	}
 
-	public String getNombre_privilege_old() {
-		return nombre_privilege_old;
-	}
 
-	public void setNombre_privilege_old(String nombre_privilege_old) {
-		this.nombre_privilege_old = nombre_privilege_old;
-	}
 
 	public Date getVersion_old() {
 		return version_old;
@@ -61,13 +74,7 @@ public class AuditoriaPrivilege {
 		this.version_old = version_old;
 	}
 
-	public String getNombre_privilege_new() {
-		return nombre_privilege_new;
-	}
 
-	public void setNombre_privilege_new(String nombre_privilege_new) {
-		this.nombre_privilege_new = nombre_privilege_new;
-	}
 
 	public Date getVersion_new() {
 		return version_new;
