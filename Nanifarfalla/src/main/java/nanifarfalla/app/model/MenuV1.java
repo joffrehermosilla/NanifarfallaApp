@@ -36,8 +36,31 @@ public class MenuV1 {
 	@OneToMany(mappedBy = "mMenuV1")
 	private Collection<MenuV1> menuV1 = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mMenuV1")
+	private Collection<MenuRoles> menuRoles = new ArrayList<>();
+
 	public MenuV1() {
 
+	}
+
+	public MenuV1(int id, String nombre, MenuV1 mMenuV1, String ruta, String icon, Date version, int lft, int rgt) {
+
+		this.id = id;
+		this.nombre = nombre;
+		this.mMenuV1 = mMenuV1;
+		this.ruta = ruta;
+		this.icon = icon;
+		this.version = version;
+		this.lft = lft;
+		this.rgt = rgt;
+	}
+
+	public Collection<MenuRoles> getMenuRoles() {
+		return menuRoles;
+	}
+
+	public void setMenuRoles(Collection<MenuRoles> menuRoles) {
+		this.menuRoles = menuRoles;
 	}
 
 	public int getId() {
@@ -110,6 +133,12 @@ public class MenuV1 {
 
 	public void setMenuV1(Collection<MenuV1> menuV1) {
 		this.menuV1 = menuV1;
+	}
+
+	@Override
+	public String toString() {
+		return "MenuV1 [id=" + id + ", nombre=" + nombre + ", mMenuV1=" + mMenuV1 + ", ruta="
+				+ ruta + ", icon=" + icon + ", version=" + version + ", lft=" + lft + ", rgt=" + rgt + "]";
 	}
 
 }

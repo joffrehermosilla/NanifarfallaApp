@@ -407,6 +407,8 @@
 											href="${urlRoot}lineas/index">Lineas</a></li>
 										<li class="widget-list-item"><a class="widget-list-link"
 											href="${urlRoot}anuncios/index">Banner</a></li>
+												<li class="widget-list-item"><a class="widget-list-link"
+											href="${urlRoot}menus/index">Menu</a></li>
 									</ul>
 								</div>
 							</div>

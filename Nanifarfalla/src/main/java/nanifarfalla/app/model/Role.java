@@ -43,9 +43,18 @@ public class Role {
 
 	// private String name;
 
+	@OneToMany(mappedBy = "mRole")
+		private Collection<MenuRoles> menuRoles = new ArrayList<>();
 	
 	
-	
+	public Collection<MenuRoles> getMenuRoles() {
+		return menuRoles;
+	}
+
+	public void setMenuRoles(Collection<MenuRoles> menuRoles) {
+		this.menuRoles = menuRoles;
+	}
+
 	public Collection<RoleHasPrivileges> getRoleHasPrivileges() {
 		return roleHasPrivileges;
 	}
