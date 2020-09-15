@@ -15,7 +15,7 @@
 <section class="container pt-md-3 pb-5 mb-md-3"
 	style="align-self: center;">
 	<h2 class="h3 text-center">Trending products</h2>
-	<div class="row pt-4 mx-n2">
+	
 		<!-- Product-->
 		<div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
 			<div class="card product-card">

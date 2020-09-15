@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Administración de Anuncios</title>
+<title>Administración de Menus</title>
 <spring:url value="/resources" var="urlPublic"></spring:url>
 <spring:url value="/menus/index" var="urlForm"></spring:url>
 <spring:url value="/menus/create" var="urlCreate" />
@@ -49,7 +49,7 @@
 					<tr>
 						<td>Tabla Menu</td>
 						<td>${menu.id}</td>
-						<td>${menu.mMenuV1}</td>
+						<td>${menu.mMenuV1.id}</td>
 						<td>${menu.ruta}</td>
 						<td>${menu.icon}</td>
 						<td>${menu.lft}</td>

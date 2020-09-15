@@ -41,7 +41,17 @@ public class MenuV1Controller {
 
 		List<MenuV1> menus = menuservice.buscarTodas();
 		model.addAttribute("menus", menus);
-
+		System.out.println("Buscamos el menu concurrente nombre: " + menuservice.Concurrentenombre());
+		System.out.println("Buscamos el menu map Service : " + menuservice.map());
+		System.out.println("Buscamos el menu mapa service : " + menuservice.mapa());
+		System.out.println("Buscamos el menu menusByNombre : " + menuservice.menusByNombre());
+		System.out.println("Buscamos el menu menu por Nombre : " + menuservice.menusporNombre());
+		System.out.println("Buscamos el menu x NOMBRE : " + menuservice.menusxNombre());
+		System.out.println("Buscamos el menuxnombreMap() : " + menuservice.MenuxNombrerMap());
+		System.out.println("Buscamos el menu post perPadre Hijos: " + menuservice.postsPerPadreAndhijos());
+		 menuservice.arbolHijos();
+		 menuservice.loadChilds();
+		 menuservice.JpaHijos();
 		return "menus/listMenus";
 	}
 	

@@ -10,6 +10,7 @@
 
 
 <spring:url value="/resources" var="urlPublic" />
+<spring:url value="/menus/index" var="urlForm"></spring:url>
 <spring:url value="/" var="urlRoot" />
 <nav
 	class="navbar navbar-preview navbar-dark navbar-expand p-0 bg-primary fixed-bottom">
@@ -80,8 +81,9 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-2 col-6 " align="center">
-				<a href="${urlRoot}" class="brand-wrap"> <img
-					class="" width="93" align="middle" height="98" src="${urlPublic}/images/frontend/iconos/mainsite/logos/LOGO-PAPELERIA.png">
+				<a href="${urlRoot}" class="brand-wrap"> <img class=""
+					width="93" align="middle" height="98"
+					src="${urlPublic}/images/frontend/iconos/mainsite/logos/LOGO-PAPELERIA.png">
 				</a>
 				<!-- brand-wrap.// -->
 			</div>
@@ -140,18 +142,26 @@
 
 		<div class="collapse navbar-collapse" id="main_nav">
 			<ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
-				<li class="nav-item dropdown"><a class="nav-link pl-0"
-					data-toggle="dropdown" href="#"><strong> <i
-							class="fa fa-bars"></i> All category
-					</strong></a>
+				<c:forEach items="${menus}" var="menu">
+					<c:choose>
+						<c:when test="${menu.id>=1}">
+							<li class="nav-item dropdown"><a class="nav-link pl-0"
+								data-toggle="dropdown" href="#"><strong> <i
+										class="fa fa-bars"></i> ${menu.nombre}
+								</strong></a>
+						</c:when>
+					</c:choose>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Foods and Drink</a> <a
-							class="dropdown-item" href="#">Home interior</a>
+						<a class="dropdown-item" href="#">${menu.mMenuV1}</a> 
+							
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Category 1</a> <a
-							class="dropdown-item" href="#">Category 2</a> <a
-							class="dropdown-item" href="#">Category 3</a>
-					</div></li>
+						<a class="dropdown-item" href="#">${menu.mMenuV1.nombre}</a> 
+							
+					</div>
+				
+
+				</c:forEach>
+
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle pl-0" href="#"
 					data-toggle="dropdown"><i class="czi-view-grid mr-2"></i>Departments</a>
@@ -388,8 +398,8 @@
 							</div>
 						</div>
 					</div></li>
-					
-					
+
+
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle pl-0" href="#"
 					data-toggle="dropdown"><i class="czi-view-grid mr-2"></i>Pendientes</a>
@@ -407,7 +417,7 @@
 											href="${urlRoot}lineas/index">Lineas</a></li>
 										<li class="widget-list-item"><a class="widget-list-link"
 											href="${urlRoot}anuncios/index">Banner</a></li>
-												<li class="widget-list-item"><a class="widget-list-link"
+										<li class="widget-list-item"><a class="widget-list-link"
 											href="${urlRoot}menus/index">Menu</a></li>
 									</ul>
 								</div>
