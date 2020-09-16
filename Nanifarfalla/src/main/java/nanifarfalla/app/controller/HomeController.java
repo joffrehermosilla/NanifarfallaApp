@@ -12,6 +12,7 @@ import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.service.IAlertaService;
 import nanifarfalla.app.service.IAnunciosService;
 import nanifarfalla.app.service.ILineasService;
+import nanifarfalla.app.service.IMenuService;
 import nanifarfalla.app.service.IProductoService;
 import nanifarfalla.app.util.Utileria;
 import java.text.ParseException;
@@ -28,10 +29,13 @@ public class HomeController {
 	private IAlertaService serviceAlertas;
 	@Autowired
 	private IAnunciosService serviceAnuncios;
-	
+
 	@Autowired
 	private IProductoService serviceProductos;
-	
+
+	@Autowired
+	private IMenuService menuservice;
+
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -62,7 +66,7 @@ public class HomeController {
 		model.addAttribute("lineas", serviceLineas.buscarTodas());
 		// model.addAttribute("alertas", alertas);
 		model.addAttribute("alertas", serviceAlertas.buscarTodas());
-	
+
 		model.addAttribute("productos", serviceProductos.buscarTodas());
 
 		// model.addAttribute("anuncios", anuncios);
@@ -83,7 +87,7 @@ public class HomeController {
 		System.out.println("Buscamos las lineas : " + codigo_linea);
 		System.out.println("creadas en las fechas : " + fecha);
 		model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
-		
+
 		model.addAttribute("productos", serviceProductos.buscarTodas());
 //		String tituloLinea = "Carteras";
 //		String estado = "disponible";
@@ -121,6 +125,7 @@ public class HomeController {
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
+		model.addAttribute("menus", menuservice.buscarTodas());
 		return "page-index-1";
 		// return "home";
 	}

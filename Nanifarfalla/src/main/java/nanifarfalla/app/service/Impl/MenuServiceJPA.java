@@ -262,10 +262,15 @@ public class MenuServiceJPA implements IMenuService {
 
 	@Override
 	public SetMultimap<String, MenuV1> MenuxNombrerMap() {
-		MenuV1 menux = new MenuV1();
+
+		List<MenuV1> menulista = menuV1Repository.findAll();
 		SetMultimap<String, MenuV1> MenuxNombrerMap = LinkedHashMultimap.create();
 		// .. other stuff, then whenever you need it:
-		MenuxNombrerMap.put(menux.getNombre(), menux);
+
+		for (MenuV1 menux : menulista) {
+			MenuxNombrerMap.put(menux.getNombre(), menux);
+		}
+
 		return MenuxNombrerMap;
 	}
 

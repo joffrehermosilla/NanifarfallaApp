@@ -47,7 +47,7 @@
 				</tr>
 				<c:forEach var="menu" items="${menus}">
 					<tr>
-						<td>Tabla Menu</td>
+						<td>${menu.nombre}</td>
 						<td>${menu.id}</td>
 						<td>${menu.mMenuV1.id}</td>
 						<td>${menu.ruta}</td>

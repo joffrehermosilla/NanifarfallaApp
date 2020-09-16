@@ -26,12 +26,12 @@ import nanifarfalla.app.util.Utileria;
 public class MenuV1Controller {
 	@Autowired
 	private IMenuService menuservice;
-	
+
 	@GetMapping(value = "/create")
 	public String crear(@ModelAttribute MenuV1 menu, Model model) {
 		List<MenuV1> menus = menuservice.buscarTodas();
 		model.addAttribute("menus", menus);
-		
+
 		return "menus/formMenu";
 
 	}
@@ -40,6 +40,7 @@ public class MenuV1Controller {
 	public String mostrarIndex(Model model) {
 
 		List<MenuV1> menus = menuservice.buscarTodas();
+
 		model.addAttribute("menus", menus);
 		System.out.println("Buscamos el menu concurrente nombre: " + menuservice.Concurrentenombre());
 		System.out.println("Buscamos el menu map Service : " + menuservice.map());
@@ -49,13 +50,12 @@ public class MenuV1Controller {
 		System.out.println("Buscamos el menu x NOMBRE : " + menuservice.menusxNombre());
 		System.out.println("Buscamos el menuxnombreMap() : " + menuservice.MenuxNombrerMap());
 		System.out.println("Buscamos el menu post perPadre Hijos: " + menuservice.postsPerPadreAndhijos());
-		 menuservice.arbolHijos();
-		 menuservice.loadChilds();
-		 menuservice.JpaHijos();
+		menuservice.arbolHijos();
+		menuservice.loadChilds();
+		menuservice.JpaHijos();
 		return "menus/listMenus";
 	}
-	
-	
+
 	@RequestMapping(value = "/detalle", method = RequestMethod.GET)
 	public String mostrarDetalle(Model model, @RequestParam("id") int id) {
 		List<String> listaFechas = Utileria.getNextDays(4);
@@ -78,7 +78,6 @@ public class MenuV1Controller {
 		return "menus/detalleMenu";
 
 	}
-	
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -86,6 +85,4 @@ public class MenuV1Controller {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
-	
-	
 }
