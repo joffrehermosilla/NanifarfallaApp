@@ -96,7 +96,7 @@ public class MenuServiceJPA implements IMenuService {
 		List<MenuV1> menulista = menuV1Repository.findAll();
 		arbolDato = new Arbol();
 		for (MenuV1 menus : menulista) {
-			arbolDato.insertar(menus.getRgt() - menus.getLft());
+			arbolDato.insertar(menus.getRgt() + menus.getLft());
 		}
 
 		System.out.println("Recorriendo inorden:");
