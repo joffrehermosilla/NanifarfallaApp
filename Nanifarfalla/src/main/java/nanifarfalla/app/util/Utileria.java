@@ -39,6 +39,27 @@ public class Utileria {
 		return nextDays;
 	}
 	
+	public static List<String> getPastDays(int count) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		// Today's Date
+		Date start = new Date();
+		Calendar cal = Calendar.getInstance();
+		
+		
+		cal.add(Calendar.DAY_OF_MONTH, count); // Next N days from now
+		Date endDate = cal.getTime();
+
+		GregorianCalendar gcal = new GregorianCalendar();
+		gcal.setTime(start);
+		List<String> pastDays = new ArrayList<String>();
+		while (gcal.getTime().before(endDate)) {
+			Date d = gcal.getTime();
+		
+			gcal.add(Calendar.DATE, 1);
+			pastDays.add(sdf.format(d));
+		}
+		return pastDays;
+	}
 	
 	public static String guardarImagen(MultipartFile multiPart, HttpServletRequest request) {
 		// Obtenemos el nombre original del archivo

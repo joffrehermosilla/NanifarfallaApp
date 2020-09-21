@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<jsp:useBean id="now" class="java.util.Date" />
 
 <spring:url value="/resources" var="urlPublic" />
 <spring:url value="/menus/index" var="urlForm"></spring:url>
@@ -144,7 +145,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="main_nav">
 			<ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
-
 				<c:forEach items="${menus}" var="menux" varStatus="i">
 					<c:choose>
 						<c:when test="${menux.lft == 1}">
@@ -152,56 +152,97 @@
 								class="nav-link dropdown-toggle pl-0" href="${menux.ruta}"
 								data-toggle="dropdown"> <strong><i
 										class="czi-view-grid mr-2">${menux.icon}</i>${menux.nombre} </strong></a> <c:choose>
-									<c:when test="${menux.nombre == 'Todo'}">
-
-
+									<c:when test="${menux.nombre == 'Todo' }">
 
 										<ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
 											<li class="nav-item dropdown"><a
 												class="nav-link dropdown-toggle pl-0" href="#"
-												data-toggle="dropdown"><i class="czi-view-grid mr-2"></i></a>
+												data-toggle="dropdown"><i class="czi-view-grid mr-2">
+												</i></a>
 												<div class="dropdown-menu px-2 pl-0 pb-4">
 													<div class="d-flex flex-wrap flex-md-nowrap">
+														<div class="d-flex flex-wrap flex-md-nowrap">
+															<div class="mega-dropdown-column pt-4 px-3">
+																<c:forEach items="${menus}" var="menunietos"
+																	varStatus="i">
+																	<c:choose>
+																		<c:when test="${menunietos.lft == menux.id}">
+																			<div class="widget widget-links">
+																				<a class="d-block overflow-hidden rounded-lg mb-3"
+																					href="#"><img src="img/shop/departments/01.jpg"
+																					alt="Imagen"></a>
+																				<h6 class="font-size-base mb-2"></h6>
+																				<ul class="widget-list">
+																					<li class="nav-item dropdown"><a
+																						class="widget-list-link"
+																						href="${urlRoot}${menunietos.ruta}">${menunietos.nombre}</a>
+																						<div class="mega-dropdown-column pt-4 px-3">
+																							<c:forEach items="${menus}" var="menubis"
+																								varStatus="i">
+																								<c:choose>
+																									<c:when test="${menubis.lft == menunietos.id}">
+																										<div class="widget widget-links">
+																											<a
+																												class="d-block overflow-hidden rounded-lg mb-3"
+																												href="#"><img
+																												src="img/shop/departments/01.jpg"
+																												alt="Imagen"></a>
+																											<h6 class="font-size-base mb-2"></h6>
+																											<ul class="widget-list">
+																												<li class="nav-item dropdown"><a
+																													class="widget-list-link"
+																													href="${urlRoot}${menubis.ruta}">${menubis.nombre}</a>
 
-														<div class="mega-dropdown-column pt-4 px-3">
-															<c:forEach items="${menus}" var="menunietos"
-																varStatus="i">
-																<c:choose>
-																	<c:when test="${menunietos.lft == menux.id}">
-																		<div class="widget widget-links">
 
-																			<a class="d-block overflow-hidden rounded-lg mb-3"
-																				href="#"><img src="img/shop/departments/01.jpg"
-																				alt="Imagen"></a>
-																			<h6 class="font-size-base mb-2"></h6>
 
-																			<ul class="widget-list">
+																													<fmt:parseNumber
+																														value="${ now.time / (1000*60*60*24) }"
+																														integerOnly="true" var="nowDays"
+																														scope="request" /> <fmt:parseNumber
+																														value="${ menubis.version.time / (1000*60*60*24) }"
+																														integerOnly="true" var="otherDays"
+																														scope="page" /> <c:set
+																														value="${nowDays - otherDays}"
+																														var="dateDiff" /> <c:choose>
 
-																				<li class="nav-item dropdown"><a
-																					class="widget-list-link"
-																					href="${urlRoot}${menunietos.ruta}">${menunietos.nombre}</a>
-																				</li>
-																			</ul>
 
-																		</div>
-																	</c:when>
-																</c:choose>
-															</c:forEach>
+
+
+																														<c:when test="${ dateDiff le 7}">
+																															<div class="ml-2">
+																																<span class="d-block text-heading">
+																																	Descuento/Informe/Usuario/Permiso--${ dateDiff}
+																																	<span class="badge badge-success ml-2">New</span>
+																																</span><small class="d-block text-muted">Regular
+																																	updates</small>
+																															</div>
+																														</c:when>
+																													</c:choose></li>
+																											</ul>
+																										</div>
+																									</c:when>
+																								</c:choose>
+																							</c:forEach>
+																						</div></li>
+																				</ul>
+																			</div>
+																		</c:when>
+																	</c:choose>
+																</c:forEach>
+															</div>
 														</div>
 													</div>
 												</div></li>
 										</ul>
 									</c:when>
-
-									<c:when test="${menux.nombre == 'Novedades'}">
-
-
+									<c:when test="${menux.rgt % 2 == 0 }">
 										<ul class="dropdown-menu">
 											<c:choose>
 												<c:when test="${menunietos.lft == menux.id}">
+												
+												
 													<li><a class="dropdown-item"
 														href="docs/dev-setup.html">
-
 															<div class="d-flex">
 																<div class="lead text-muted pt-1">
 																	<i class="czi-book"></i>
@@ -256,26 +297,37 @@
 													</div>
 											</a></li>
 										</ul>
-
-
-
 									</c:when>
-
-									<c:when test="${menux.nombre == 'Pendientes'}">
-									</c:when>
-
-
+									<c:otherwise>
+										<div class="dropdown-menu px-2 pl-0 pb-4">
+											<div class="d-flex flex-wrap flex-md-nowrap">
+												<div class="mega-dropdown-column pt-4 px-3">
+													<div class="widget widget-links">
+														<a class="d-block overflow-hidden rounded-lg mb-3"
+															href="#"><img src="img/shop/departments/01.jpg"
+															alt="Shoes"></a>
+														<h6 class="font-size-base mb-2">Clothing</h6>
+														<ul class="widget-list">
+															<li class="widget-list-item"><a
+																class="widget-list-link" href="#">Women's clothing</a></li>
+															<li class="widget-list-item"><a
+																class="widget-list-link" href="#">Men's clothing</a></li>
+															<li class="widget-list-item"><a
+																class="widget-list-link" href="#">Kid's clothing</a></li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:otherwise>
 								</c:choose></li>
 						</c:when>
 					</c:choose>
 				</c:forEach>
-
-
 			</ul>
 		</div>
 		<!-- collapse .// -->
 	</div>
-
 
 	<!-- container .// -->
 </nav>

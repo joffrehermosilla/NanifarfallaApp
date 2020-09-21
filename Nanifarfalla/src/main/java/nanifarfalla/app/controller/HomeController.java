@@ -47,7 +47,7 @@ public class HomeController {
 	public String buscar(@RequestParam("fecha") String fecha, Model model) {
 
 		List<String> listaFechas = Utileria.getNextDays(4);
-
+		// List<String> listaFechas = Utileria.getPastDays(-4);
 //	System.out.println(listaFechas);
 
 		// List<Linea> lineas = serviceLineas.buscarTodas();
@@ -74,6 +74,9 @@ public class HomeController {
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
 		System.out.println("Buscando todas las lineas creadas en exhibicion para la fecha: " + fecha);
+		for (int i = 0; i < listaFechas.size(); i++) {
+			System.out.println(listaFechas.get(i));
+		}
 		return "page-index-1";
 
 	}
@@ -105,6 +108,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		List<String> listaFechas = Utileria.getNextDays(4);
+		// List<String> listaFechas = Utileria.getPastDays(-4);
 //		System.out.println(listaFechas);
 		// List<Linea> lineas = serviceLineas.buscarTodas();
 		// List<Alerta> alertas = getLista2();
@@ -126,6 +130,11 @@ public class HomeController {
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
 		model.addAttribute("menus", menuservice.buscarTodas());
+
+		for (int i = 0; i < listaFechas.size(); i++) {
+			System.out.println(listaFechas.get(i));
+		}
+
 		return "page-index-1";
 		// return "home";
 	}
