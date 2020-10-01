@@ -43,7 +43,7 @@
 
 	</header>>
 
-	<jsp:include page="../includes/menu.jsp"></jsp:include>
+
 	
 	<div class="container theme-showcase" role="main">
 

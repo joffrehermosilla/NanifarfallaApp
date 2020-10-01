@@ -115,7 +115,7 @@
 						<div class="text">
 							<span class="text-muted">Welcome!</span>
 							<div>
-								<a href="#">Sign in</a> | <a href="#"> Register</a>
+								<a href="${urlRoot}login">Sign in</a> <a href="${urlRoot}admin/logout">Salida</a>| <a href="#"> Register</a>
 							</div>
 						</div>
 					</div>
@@ -211,7 +211,7 @@
 																														<c:when test="${ dateDiff le 7}">
 																															<div class="ml-2">
 																																<span class="d-block text-heading">
-																																	Descuento/Informe/Usuario/Permiso--${ dateDiff}
+																																	Descuento/Informe/Usuario/Permiso 	${ dateDiff}
 																																	<span class="badge badge-success ml-2">New</span>
 																																</span><small class="d-block text-muted">Regular
 																																	updates</small>

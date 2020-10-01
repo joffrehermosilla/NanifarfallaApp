@@ -139,6 +139,11 @@ public class HomeController {
 		// return "home";
 	}
 
+	@RequestMapping(value = "/login", method=RequestMethod.GET)
+	public String mostrarLogin() {
+		return "/login/formLogin";
+	}
+
 	private List<Ceo> getLista4() {
 
 		List<Ceo> lista = null;

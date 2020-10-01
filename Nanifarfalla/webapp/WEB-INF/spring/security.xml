@@ -8,7 +8,21 @@
      http://www.springframework.org/schema/security 
      http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<http />
+	<http auto-config="true">
+		<!-- Declaramos todos los recursos que estaran protegidos -->
+		<intercept-url pattern="/anuncios/*"
+			access="hasAnyAuthority('EDITOR','GERENTE')" />
+		<intercept-url pattern="/lineas/*"
+			access="hasAnyAuthority('EDITOR','GERENTE')" />
+		<intercept-url pattern="/alertas/*"
+			access="hasAnyAuthority('EDITOR','GERENTE')" />
+		<intercept-url pattern="/productos/*"
+			access="hasAnyAuthority('GERENTE','GERENTE')" />
+
+
+		<!-- Custom login form -->
+		<form-login login-page="/login" />
+	</http>
 
 	<authentication-manager>
 
