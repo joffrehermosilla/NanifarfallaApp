@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <!DOCTYPE html>
@@ -111,9 +111,9 @@
 					</div>
 					<div class="widget-header icontext">
 						<a href="#" class="icon icon-sm rounded-circle border"><i
-							class="fa fa-user"></i></a>
+							class="fa fa-user"></i> </a>
 						<div class="text">
-							<span class="text-muted">Welcome!</span>
+							<span class="text-muted">Welcome!  </span>
 							<div>
 								<a href="${urlRoot}login">Sign in</a> <a href="${urlRoot}admin/logout">Salida</a>| <a href="#"> Register</a>
 							</div>

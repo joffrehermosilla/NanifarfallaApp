@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-//@Component("myAuthenticationSuccessHandler")
+@Component("myAuthenticationSuccessHandler")
 public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
