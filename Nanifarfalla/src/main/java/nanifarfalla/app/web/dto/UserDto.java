@@ -89,6 +89,11 @@ public class UserDto {
         this.isUsing2FA = isUsing2FA;
     }
 
+    
+    
+    
+    
+    
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

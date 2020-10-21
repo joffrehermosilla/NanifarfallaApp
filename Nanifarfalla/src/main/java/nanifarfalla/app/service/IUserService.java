@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
+
 import nanifarfalla.app.model.PasswordRessetToken;
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.model.VerificationToken;
@@ -48,5 +49,7 @@ public interface IUserService {
     Usuario updateUser2FA(boolean use2FA);
 
     List<String> getUsersFromSessionRegistry();
+    
+	List<Usuario> buscarTodas();
 
 }

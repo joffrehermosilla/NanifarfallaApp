@@ -1,7 +1,7 @@
 package nanifarfalla.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 //import org.springframework.web.bind.annotation.PathVariable;
@@ -144,6 +144,12 @@ public class HomeController {
 	public String mostrarLogin() {
 
 		return "/login/formLogin";
+	}
+
+	@RequestMapping(value = "/registrar", method = RequestMethod.GET)
+	public String mostrarregister() {
+
+		return "/usuarios/formUsuario";
 	}
 
 	private List<Ceo> getLista4() {

@@ -46,6 +46,7 @@ public class UserService implements IUserService {
 	@Autowired
 	private RoleRepository roleRepository;
 
+
 	private SessionRegistry sessionRegistry;
 
 	public static final String TOKEN_INVALID = "invalidToken";
@@ -220,6 +221,12 @@ public class UserService implements IUserService {
 					}
 				}).collect(Collectors.toList());
 
+	}
+
+	@Override
+	public List<Usuario> buscarTodas() {
+
+		return userRepository.findAll();
 	}
 
 }
