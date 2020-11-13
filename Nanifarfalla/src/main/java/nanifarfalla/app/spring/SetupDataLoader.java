@@ -93,13 +93,13 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 			user = new Usuario();
 			user.setNombre_usuario(firstName);
 			// user.setFirstName(firstName);
-			user.setPaterno_usuario(lastName);
+			user.setApellido_usuario(lastName);
 			// user.setLastName(lastName);
 			user.setPassword_usuario(passwordEncoder.encode(password));
 			// user.setPassword(passwordEncoder.encode(password));
 			user.setEmail(email);
 			// user.setEmail(email);
-			user.setEnabled2(true);
+			user.setEnabled(true);
 		}
 		user.setRoles(roles);
 		user = userRepository.save(user);

@@ -46,7 +46,7 @@ public class UserService implements IUserService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-
+	
 	private SessionRegistry sessionRegistry;
 
 	public static final String TOKEN_INVALID = "invalidToken";
@@ -65,18 +65,20 @@ public class UserService implements IUserService {
 		}
 		final Usuario user = new Usuario();
 
-		user.setNombre_usuario(accountDto.getFirstName());
+		user.setNombre_usuario(accountDto.getNombre_usuario());
 		// user.setFirstName(accountDto.getFirstName());
-		user.setPaterno_usuario(accountDto.getLastName());
+		user.setApellido_usuario(accountDto.getApellido_usuario());
 		// user.setLastName(accountDto.getLastName());
-		user.setPassword_usuario(passwordEncoder.encode(accountDto.getPassword()));
+		user.setPassword_usuario(passwordEncoder.encode(accountDto.getPassword_usuario()));
+		System.out.println("contraseña encriptada" + user.getPassword_usuario());
 		// user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
 		user.setEmail(accountDto.getEmail());
 		// user.setEmail(accountDto.getEmail());
-		user.setUsing2FA2(accountDto.isUsing2FA());
+		user.setUsing2FA(accountDto.isUsing2FA());
 		// user.setUsing2FA(accountDto.isUsing2FA());
 
-		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
+		System.out.println("Role/es asociados" + user.getRoles());
 		return userRepository.save(user);
 	}
 
@@ -182,7 +184,7 @@ public class UserService implements IUserService {
 			return TOKEN_EXPIRED;
 		}
 
-		user.setEnabled2(true);
+		user.setEnabled(true);
 		// tokenRepository.delete(verificationToken);
 		userRepository.save(user);
 		return TOKEN_VALID;
@@ -198,7 +200,7 @@ public class UserService implements IUserService {
 	public Usuario updateUser2FA(boolean use2FA) {
 		final Authentication curAuth = SecurityContextHolder.getContext().getAuthentication();
 		Usuario currentUser = (Usuario) curAuth.getPrincipal();
-		currentUser.setUsing2FA2(use2FA);
+		currentUser.setUsing2FA(use2FA);
 		currentUser = userRepository.save(currentUser);
 		final Authentication auth = new UsernamePasswordAuthenticationToken(currentUser,
 				currentUser.getPassword_usuario(), curAuth.getAuthorities());
@@ -227,6 +229,12 @@ public class UserService implements IUserService {
 	public List<Usuario> buscarTodas() {
 
 		return userRepository.findAll();
+	}
+
+	@Override
+	public void guardar(Usuario usuario) {
+		userRepository.save(usuario);
+
 	}
 
 }

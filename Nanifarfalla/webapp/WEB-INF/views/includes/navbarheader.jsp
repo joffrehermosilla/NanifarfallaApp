@@ -115,7 +115,7 @@
 						<div class="text">
 							<span class="text-muted">Welcome!  </span>
 							<div>
-								<a href="${urlRoot}login">Sign in</a> <a href="${urlRoot}admin/logout">Salida</a>| <a href="${urlRoot}registrar"> Register</a>
+								<a href="${urlRoot}login">Sign in</a> <a href="${urlRoot}admin/logout">Salida</a>| <a href="${urlRoot}usuarios/create"> Register</a>
 							</div>
 						</div>
 					</div>

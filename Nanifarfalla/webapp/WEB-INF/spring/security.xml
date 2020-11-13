@@ -11,15 +11,31 @@
 	<http use-expressions="true">
 		<!-- Declaramos todos los recursos que estaran protegidos -->
 		<intercept-url pattern="/anuncios/*"
-			access="hasAnyAuthority('EDITOR','GERENTE')" />
+			access="hasAnyAuthority('ROLE_ADMIN')" />
 		<intercept-url pattern="/lineas/*"
-			access="hasAnyAuthority('EDITOR','GERENTE')" />
+			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
 		<intercept-url pattern="/alertas/*"
-			access="hasAnyAuthority('EDITOR','GERENTE')" />
+			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
 		<intercept-url pattern="/productos/*"
-			access="hasAnyAuthority('GERENTE','GERENTE')" />
+			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
+		<intercept-url pattern="/login*" access="permitAll" />
+		<intercept-url pattern="/logout*" access="permitAll" />
+		<intercept-url pattern="/signin/**" access="permitAll" />
+		<intercept-url pattern="/signup/**" access="permitAll" />
+		<intercept-url pattern="/user/registration*"
+			access="permitAll" />
+		<intercept-url pattern="/registrationConfirm*"
+			access="permitAll" />
+		<intercept-url pattern="/expiredAccount*"
+			access="permitAll" />
+		<intercept-url pattern="/registration*"
+			access="permitAll" />
+		<intercept-url pattern="/badUser*" access="permitAll" />
+		<intercept-url pattern="/resources/**"
+			access="permitAll" />
+		<intercept-url pattern="/invalidSession*"
+			access="isAnonymous()" />
 
-	
 
 
 
@@ -29,7 +45,22 @@
 			authentication-success-handler-ref="myAuthenticationSuccessHandler"
 			default-target-url="/admin/index" />
 
-		
+
+		<session-management
+			invalid-session-url="/invalidSession"
+			session-fixation-protection="none">
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" expired-url="/login"
+				session-registry-alias="sessionRegistry" />
+		</session-management>
+
+
+		<logout invalidate-session="false"
+			logout-success-url="/login/logout.html?logSucc=true"
+			logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID" />
+
+
+
 	</http>
 
 	<b:bean id="myAuthenticationSuccessHandler"
@@ -43,10 +74,13 @@
 
 
 
-	<authentication-manager>
+	<authentication-manager
+		alias="authenticationManager">
 		<authentication-provider
 			user-service-ref="userDetailsService" />
 	</authentication-manager>
+
+
 	<b:bean id="userDetailsService"
 		class="nanifarfalla.app.security.MyUserDetailsService" />
 

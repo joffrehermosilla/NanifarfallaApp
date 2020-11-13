@@ -32,10 +32,10 @@
 <script src="${urlPublic}/js/Chart.min.js"></script>
 <script src="${urlPublic}/js/tether.min.js"></script>
 <script src="${urlPublic}/js/popper.min.js"></script>
-<script src="${urlPublic}/js/popper.min.js"></script>
+
 <script src="${urlPublic}/js/cookie.js"></script>
 <script src="${urlPublic}/js/ceoshowing.js"></script>
-
+<script src="${urlPublic}/js/jquery.js"></script>
 <script src="${urlPublic}/js/popupmensaje.js"></script>
 <script src="${urlPublic}/js/lazysizes.min.js"></script>
 <script src="${urlPublic}/js/scripts.js?ver=1576164497"></script>
@@ -64,7 +64,7 @@
 
 <script type="text/javascript" src="${urlPublic}/js/pen.js"></script>
 
-
+<script type="text/javascript" src="${urlPublic}/js/pwstrength.js"></script>
 
 
 
@@ -79,7 +79,7 @@
 <!--
 <script src="${urlPublic}/js/vendor.min.js"></script>
 <script src="${urlPublic}/js/theme.min.js"></script>
-<script src="${urlPublic}/js/jquery.min.js"></script>
+
 <script src="${urlPublic}/js/Chart.min.js"></script>
 <script src="${urlPublic}/js/tether.min.js"></script>
 <script src="${urlPublic}/js/popper.min.js"></script>

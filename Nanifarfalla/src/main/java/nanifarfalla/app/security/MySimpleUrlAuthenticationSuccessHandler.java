@@ -27,7 +27,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 
-	ActiveUserStore activeUserStore;
+	 ActiveUserStore activeUserStore;
 
 	@Autowired
 	private DeviceService deviceService;
@@ -98,9 +98,9 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 				username = authentication.getName();
 			}
 
-			return "/homepage.html?user=" + username;
+			return "/?user=" + username;
 		} else if (isAdmin) {
-			return "/console.html";
+			return "/login/console.html";
 		} else {
 			throw new IllegalStateException();
 		}

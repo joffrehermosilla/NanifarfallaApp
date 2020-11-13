@@ -96,7 +96,7 @@ public class OldRegistrationController {
 			return "redirect:/badUser.html?lang=" + locale.getLanguage();
 		}
 
-		user.setEnabled2(true);
+		user.setEnabled(true);
 		userService.saveRegisteredUser(user);
 		model.addAttribute("message", messages.getMessage("message.accountVerified", null, locale));
 		return "redirect:/login.html?lang=" + locale.getLanguage();
@@ -210,7 +210,7 @@ public class OldRegistrationController {
 		final Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		userService.changeUserPassword(user, password);
 		model.addAttribute("message", messages.getMessage("message.resetPasswordSuc", null, locale));
-		return "redirect:/login.html?lang=" + locale;
+		return "redirect:/login?lang=" + locale;
 	}
 
 	// NON-API

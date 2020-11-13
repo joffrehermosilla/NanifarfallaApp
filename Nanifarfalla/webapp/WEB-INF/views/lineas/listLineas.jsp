@@ -31,7 +31,7 @@
 	<div class="container theme-showcase" role="main">
 		<h3>Listado de Lineas</h3>
 		<c:if test="${mensaje!=null }">
-			<div class='alert alert-success' role="alert">${ mensaje}</div>
+			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
 			title="Nueva Linea">Nuevo</a> <br> <br>
@@ -52,7 +52,7 @@
 
 				<c:forEach var="linea" items="${lineas}">
 					<tr>
-						<td>Tabla Usuario</td>
+						<td>Tabla Lineas</td>
 						<td>${linea.codigo_linea}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${linea.fechacreacion}" />

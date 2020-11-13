@@ -4,23 +4,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import nanifarfalla.app.model.Ceo;
+
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.service.IAlertaService;
 import nanifarfalla.app.service.IAnunciosService;
 import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.service.IMenuService;
 import nanifarfalla.app.service.IProductoService;
+import nanifarfalla.app.service.IUserService;
 import nanifarfalla.app.util.Utileria;
+
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
@@ -36,6 +50,9 @@ public class HomeController {
 
 	@Autowired
 	private IMenuService menuservice;
+
+	@Autowired
+	private IUserService userService;
 
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -146,11 +163,53 @@ public class HomeController {
 		return "/login/formLogin";
 	}
 
-	@RequestMapping(value = "/registrar", method = RequestMethod.GET)
-	public String mostrarregister() {
+	@GetMapping(value = "/registro")
+	public String registro(Model model) {
+		List<Usuario> usuarios = userService.buscarTodas();
+		model.addAttribute("usuarios", usuarios);
 
 		return "/usuarios/formUsuario";
 	}
+
+	@PostMapping(value = "/register")
+	public String guardar(@ModelAttribute Usuario usuarios, BindingResult result, RedirectAttributes attributes,
+			@RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request) {
+
+		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
+		// Pendiente: Guardar el objeto noticia en la BD
+		if (result.hasErrors()) {
+			System.out.println("Existen errores");
+			return "page-index-1";
+		}
+
+		if (!multiPart.isEmpty()) {
+			String nombreImagen = Utileria.guardarImagen(multiPart, request);
+
+			usuarios.setRuta_foto(nombreImagen);
+		}
+
+		for (ObjectError error : result.getAllErrors()) {
+			System.out.println(error.getDefaultMessage() + " ");
+		}
+
+
+		for (ObjectError error : result.getAllErrors()) {
+			System.out.println(error.getDefaultMessage() + " ");
+		}
+
+		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
+
+		System.out.println("Elementos en la lista antes de la insersion: " + userService.buscarTodas().size());
+
+		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
+
+		userService.guardar(usuarios);
+		attributes.addFlashAttribute("mensaje", "El usuario fue guardado");
+
+		return "redirect:/login/users";
+	}
+
+	
 
 	private List<Ceo> getLista4() {
 
@@ -183,47 +242,47 @@ public class HomeController {
 			Usuario usuario1 = new Usuario();
 			usuario1.setCodigo_usuario(1);
 			usuario1.setNombre_usuario("Allison");
-			usuario1.setPaterno_usuario("Jara");
-			usuario1.setMaterno_usuario("Salas");
+			usuario1.setApellido_usuario("Jara");
+
 			usuario1.setFoto_usuario("image20.jpg");
 			usuario1.setMensaje_usuario("Nos centramos en una cultura de paz");
-			usuario1.setFechacreacion(formatter.parse("18-11-2019"));
+			usuario1.setVersion(formatter.parse("18-11-2019"));
 
 			Usuario usuario2 = new Usuario();
 			usuario2.setCodigo_usuario(2);
 			usuario2.setNombre_usuario("Hilo");
-			usuario2.setPaterno_usuario("Rojo");
-			usuario2.setMaterno_usuario("Barranco");
+			usuario2.setApellido_usuario("Rojo");
+
 			usuario2.setFoto_usuario("image34.jpg");
 			usuario2.setMensaje_usuario("VIVE AL MAXIMO");
-			usuario2.setFechacreacion(formatter.parse("18-11-2019"));
+			usuario2.setVersion(formatter.parse("18-11-2019"));
 
 			Usuario usuario3 = new Usuario();
 			usuario3.setCodigo_usuario(3);
 			usuario3.setNombre_usuario("Constanza");
-			usuario3.setPaterno_usuario("Hermosilla");
-			usuario3.setMaterno_usuario("Salas");
+			usuario3.setApellido_usuario("Hermosilla");
+
 			usuario3.setFoto_usuario("image22.jpg");
 			usuario3.setMensaje_usuario("TRATO JUSTO");
-			usuario3.setFechacreacion(formatter.parse("18-11-2019"));
+			usuario3.setVersion(formatter.parse("18-11-2019"));
 
 			Usuario usuario4 = new Usuario();
 			usuario4.setCodigo_usuario(4);
 			usuario4.setNombre_usuario("Nobunaga");
-			usuario4.setPaterno_usuario("takeshi");
-			usuario4.setMaterno_usuario("Salas");
+			usuario4.setApellido_usuario("takeshi");
+
 			usuario4.setFoto_usuario("image39.jpg");
 			usuario4.setMensaje_usuario("NosASDAS z");
-			usuario4.setFechacreacion(formatter.parse("18-11-2019"));
+			usuario4.setVersion(formatter.parse("18-11-2019"));
 
 			Usuario usuario5 = new Usuario();
 			usuario5.setCodigo_usuario(5);
 			usuario5.setNombre_usuario("fang fANG");
-			usuario5.setPaterno_usuario("XIE");
-			usuario5.setMaterno_usuario("Salas");
+			usuario5.setApellido_usuario("XIE");
+
 			usuario5.setFoto_usuario("image23.jpg");
 			usuario5.setMensaje_usuario("Nos ceFLJSDLFJAultura de ");
-			usuario5.setFechacreacion(formatter.parse("18-11-2019"));
+			usuario5.setVersion(formatter.parse("18-11-2019"));
 
 			lista.add(usuario1);
 			lista.add(usuario2);

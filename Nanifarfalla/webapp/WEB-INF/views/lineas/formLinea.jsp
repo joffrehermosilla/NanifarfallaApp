@@ -37,7 +37,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="codigo_anuncio">Codigo Linea</label>
+							<label for="codigo_linea">Codigo Linea</label>
 							<c:forEach var="linea" items="${lineas}">
 								<c:set var="i" value="${linea.codigo_linea}" />
 							</c:forEach>

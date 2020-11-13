@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.model.Role;
 import nanifarfalla.app.model.Usuario;
-
-
-
+import nanifarfalla.app.repository.RoleRepository;
 import nanifarfalla.app.repository.UserRepository;
+import nanifarfalla.app.service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +29,14 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private IUserService service;
+ 
+    @Autowired
+    private MessageSource messages;
+ 
+    @Autowired
+    private RoleRepository roleRepository;
   
     private LoginAttemptService loginAttemptService;
 
@@ -55,7 +62,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 throw new UsernameNotFoundException("No user found with username: " + email);
             }
 
-            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword_usuario(), user.isEnabled2(), true, true, true, getAuthorities(user.getRoles()));
+            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword_usuario(), user.isEnable(), true, true, true, getAuthorities(user.getRoles()));
         } catch (final Exception e) {
             throw new RuntimeException(e);
         }

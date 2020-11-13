@@ -25,11 +25,10 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_usuario;
 	private String nombre_usuario;
-	private String paterno_usuario;
-	private String materno_usuario;
+	private String apellido_usuario;
 	private String foto_usuario;
 	private String mensaje_usuario;
-	private Date fechacreacion;
+	Date version;
 	Date fecha_nacimiento_usuario;
 	String direccion_usuario;
 	String nombre_logeo_usuario;
@@ -38,14 +37,12 @@ public class Usuario {
 	String password_usuario;
 	private String email;
 	String ruta_foto;
-	int enabled;
-	private boolean enabled2;
-	int isUsing2FA;
-	private boolean isUsing2FA2;
+	private boolean enabled;
+	private boolean isUsing2FA;
 	private String secret;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "UserRoles", joinColumns = @JoinColumn(name = "fkcodigo_usuario", referencedColumnName = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "fkcodigo_role", referencedColumnName = "codigo_role"))
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "fkcodigo_usuario", referencedColumnName = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "fkcodigo_role", referencedColumnName = "codigo_role"))
 	private Collection<Role> roles;
 
 	@OneToMany(mappedBy = "mUsuario")
@@ -85,7 +82,7 @@ public class Usuario {
 	EstadoUsuario mEstadoUsuario;
 
 //fkcodigo_estadousuario	
-	Date version;
+
 
 	public String getGenero() {
 		return genero;
@@ -114,7 +111,7 @@ public class Usuario {
 	public Usuario() {
 		super();
 		this.secret = Base32.random();
-		this.enabled2 = false;
+		this.enabled = false;
 	}
 
 	public Collection<Role> getRoles() {
@@ -133,12 +130,12 @@ public class Usuario {
 		this.secret = secret;
 	}
 
-	public boolean isUsing2FA2() {
-		return isUsing2FA2;
+	public boolean isUsing2FA() {
+		return isUsing2FA;
 	}
 
-	public void setUsing2FA2(boolean isUsing2FA2) {
-		this.isUsing2FA2 = isUsing2FA2;
+	public void setUsing2FA(boolean isUsing2FA) {
+		this.isUsing2FA = isUsing2FA;
 	}
 
 	public Collection<VerificationToken> getVerificationToken() {
@@ -197,21 +194,6 @@ public class Usuario {
 		this.ruta_foto = ruta_foto;
 	}
 
-	public int getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
-	}
-
-	public int getIsUsing2FA() {
-		return isUsing2FA;
-	}
-
-	public void setIsUsing2FA(int isUsing2FA) {
-		this.isUsing2FA = isUsing2FA;
-	}
 
 	public Distrito getmDistrito() {
 		return mDistrito;
@@ -301,20 +283,19 @@ public class Usuario {
 		this.nombre_usuario = nombre_usuario;
 	}
 
-	public String getPaterno_usuario() {
-		return paterno_usuario;
+
+
+
+	public String getApellido_usuario() {
+		return apellido_usuario;
 	}
 
-	public void setPaterno_usuario(String paterno_usuario) {
-		this.paterno_usuario = paterno_usuario;
+	public void setApellido_usuario(String apellido_usuario) {
+		this.apellido_usuario = apellido_usuario;
 	}
 
-	public String getMaterno_usuario() {
-		return materno_usuario;
-	}
-
-	public void setMaterno_usuario(String materno_usuario) {
-		this.materno_usuario = materno_usuario;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
 	public String getFoto_usuario() {
@@ -333,20 +314,14 @@ public class Usuario {
 		this.mensaje_usuario = mensaje_usuario;
 	}
 
-	public Date getFechacreacion() {
-		return fechacreacion;
+
+
+	public boolean isEnable() {
+		return enabled;
 	}
 
-	public void setFechacreacion(Date fechacreacion) {
-		this.fechacreacion = fechacreacion;
-	}
-
-	public boolean isEnabled2() {
-		return enabled2;
-	}
-
-	public void setEnabled2(boolean enabled2) {
-		this.enabled2 = enabled2;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override
@@ -379,9 +354,9 @@ public class Usuario {
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("Usuario [codigo_usuario=").append(codigo_usuario).append(", nombre_usuario=")
-				.append(nombre_usuario).append(", paterno_usuario=").append(paterno_usuario).append(", email_usuario=")
+				.append(nombre_usuario).append(", apellido_usuario=").append(apellido_usuario).append(", email_usuario=")
 				.append(email).append(", password_usuario=").append(password_usuario).append(", enabled=")
-				.append(enabled2).append(", isUsing2FA2=").append(isUsing2FA2).append(", secret=").append(secret)
+				.append(enabled).append(", isUsing2FA2=").append(isUsing2FA).append(", secret=").append(secret)
 				.append(", roles=").append(roles).append("]");
 		return builder.toString();
 	}

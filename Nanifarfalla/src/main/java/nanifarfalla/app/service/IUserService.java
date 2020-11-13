@@ -51,5 +51,7 @@ public interface IUserService {
     List<String> getUsersFromSessionRegistry();
     
 	List<Usuario> buscarTodas();
+	
+	void guardar(Usuario usuario);
 
 }

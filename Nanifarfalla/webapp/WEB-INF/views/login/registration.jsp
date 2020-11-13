@@ -8,6 +8,7 @@
 <fmt:setBundle basename="messages" />
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
@@ -21,13 +22,25 @@
 <script th:src="@{/resources/pwstrength.js}"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII" />
 <title th:text="${label.form.title}">form</title>
+
+<title>Registrar Usuario</title>
+<spring:url value="/resources" var="urlPublic"></spring:url>
+<spring:url value="/usuarios/registration" var="urlForm"></spring:url>
+<jsp:include page="../includes/link.jsp"></jsp:include>
+<jsp:include page="../includes/script.jsp"></jsp:include>
+
 </head>
 <body>
+	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
+	<header class="section-header">
+		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
+	</header>
+
 	<div class="container">
 		<div>
 			<h1 th:text="${label.form.title}">form</h1>
 			<br />
-			<form action="/" method="POST" enctype="utf8">
+			<form action="${urlForm}" method="POST" enctype="utf8" enctype="multipart/form-data" modelAttribute="usuario">
 				<div class="form-group row">
 					<label class="col-sm-3" th:text="${label.user.firstName}">first</label>
 					<span class="col-sm-5"><input class="form-control"
@@ -80,7 +93,7 @@
 	</div>
 
 	<script th:inline="javascript">
-var serverContext = [[@{/}]];
+var serverContext = "\/";
 
 $(document).ready(function () {
 	$('form').submit(function(event) {
@@ -89,7 +102,7 @@ $(document).ready(function () {
 	
 	$(":password").keyup(function(){
 		if($("password").val() != $("matchPassword").val()){
-	        $("globalError").show().html(/*[[{PasswordMatches.user}]]*/);
+	        $("globalError").show().html(/*[[${PasswordMatches.user}]]*/);
 	    }else{
 	    	$("globalError").html("").hide();
 	    }
@@ -101,13 +114,13 @@ $(document).ready(function () {
 		    	showVerdictsInsideProgressBar:true,
 		    	showErrors:true,
 		    	errorMessages:{
-		    		  wordLength: /*[[{error.wordLength}]]*/,
-		    		  wordNotEmail: /*[[{error.wordNotEmail}]]*/,
-		    		  wordSequences: /*[[{error.wordSequences}]]*/,
-		    		  wordLowercase: /*[[{error.wordLowercase}]]*/,
-		    		  wordUppercase: /*[[{error.wordUppercase}]]*/,
-		    	          wordOneNumber: /*[[{error.wordOneNumber}]]*/,
-		    		  wordOneSpecialChar: /*[[{error.wordOneSpecialChar}]]*/
+		    		  wordLength: /*[[${error.wordLength}]]*/,
+		    		  wordNotEmail: /*[[${error.wordNotEmail}]]*/,
+		    		  wordSequences: /*[[${error.wordSequences}]]*/,
+		    		  wordLowercase: /*[[${error.wordLowercase}]]*/,
+		    		  wordUppercase: /*[[${error.wordUppercase}]]*/,
+		    	          wordOneNumber: /*[$[{error.wordOneNumber}]]*/,
+		    		  wordOneSpecialChar: /*[[${error.wordOneSpecialChar}]]*/
 		    		}
 		    	}
 		};
@@ -123,9 +136,9 @@ function register(event){
     	return;
     }
     var formData= $('form').serialize();
-    $.post(serverContext + "user/registration",formData ,function(data){
+    $.post(serverContext + "usuarios/registration",formData ,function(data){
         if(data.message == "success"){
-            window.location.href = serverContext + "successRegister.html";
+            window.location.href = serverContext + "/login/successRegister.html";
         }
         
     })

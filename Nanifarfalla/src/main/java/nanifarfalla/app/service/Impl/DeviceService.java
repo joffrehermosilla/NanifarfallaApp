@@ -64,7 +64,7 @@ public class DeviceService implements IDataService {
 
 		String deviceDetails = getDeviceDetails(request.getHeader("user-agent"));
 
-		DeviceMetadata existingDevice = findExistingDevice(user.getEnabled(), deviceDetails, location);
+		DeviceMetadata existingDevice = findExistingDevice(user.getCodigo_usuario(), deviceDetails, location);
 
 		if (Objects.isNull(existingDevice)) {
 			unknownDeviceNotification(deviceDetails, location, ip, user.getEmail(), request.getLocale());

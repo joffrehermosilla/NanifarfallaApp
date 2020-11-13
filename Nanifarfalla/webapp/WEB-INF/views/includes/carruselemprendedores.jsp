@@ -34,8 +34,8 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 			<c:when test="${usuario.codigo_usuario==ceocentral-1}">
 				<c:set var="ceolcodigo" value="${usuario.codigo_usuario}" />
 				<c:set var="ceolnombre" value="${usuario.nombre_usuario}" />
-				<c:set var="ceolpaterno" value="${usuario.paterno_usuario}" />
-				<c:set var="ceolmaterno" value="${usuario.materno_usuario}" />
+				<c:set var="ceolpaterno" value="${usuario.apellido_usuario}" />
+				
 				<c:set var="ceolmensaje" value="${usuario.mensaje_usuario}" />
 				<c:set var="ceolfoto" value="${usuario.foto_usuario}" />
 
@@ -44,8 +44,8 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 			<c:when test="${usuario.codigo_usuario==ceocentral}">
 				<c:set var="ceocodigo" value="${usuario.codigo_usuario}" />
 				<c:set var="ceonombre" value="${usuario.nombre_usuario}" />
-				<c:set var="ceopaterno" value="${usuario.paterno_usuario}" />
-				<c:set var="ceomaterno" value="${usuario.materno_usuario}" />
+				<c:set var="ceopaterno" value="${usuario.apellido_usuario}" />
+			
 				<c:set var="ceomensaje" value="${usuario.mensaje_usuario}" />
 				<c:set var="ceofoto" value="${usuario.foto_usuario}" />
 			</c:when>
@@ -53,8 +53,8 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 			<c:when test="${usuario.codigo_usuario==ceocentral+1}">
 				<c:set var="ceorcodigo" value="${usuario.codigo_usuario}" />
 				<c:set var="ceornombre" value="${usuario.nombre_usuario}" />
-				<c:set var="ceorpaterno" value="${usuario.paterno_usuario}" />
-				<c:set var="ceormaterno" value="${usuario.materno_usuario}" />
+				<c:set var="ceorpaterno" value="${usuario.apellido_usuario}" />
+		
 				<c:set var="ceormensaje" value="${usuario.mensaje_usuario}" />
 				<c:set var="ceorfoto" value="${usuario.foto_usuario}" />
 			</c:when>
@@ -63,7 +63,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 				<c:set var="ceorcodigo" value="${ceocodigo}" />
 				<c:set var="ceornombre" value="${ceonombre}" />
 				<c:set var="ceorpaterno" value="${ceopaterno}" />
-				<c:set var="ceormaterno" value="${ceomaterno}" />
+				
 				<c:set var="ceormensaje" value="${ceomensaje}" />
 				<c:set var="ceorfoto" value="${ceofoto}" />
 			</c:when>
@@ -105,7 +105,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 									<img src="${urlPublic}/images/${ceofoto}"
 										class="center-block img-circle" alt="Nanifarfalla Customer">
 									<h3 class="customer-name">${ceonombre}${ceopaterno}
-										${ceomaterno}</h3>
+										</h3>
 									<p>${ceomensaje}</p>
 									<span class="light-bg customer-rating"
 										data-rating="${ceocodigo}"> ${ceocodigo}
@@ -121,7 +121,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 									<img src="${urlPublic}/images/${ceolfoto}"
 										class="center-block img-circle" alt="Nanifarfalla Customer">
 									<h3 class="customer-name">${ceolnombre}${ceolpaterno}
-										${ceolmaterno}</h3>
+										</h3>
 									<p>${ceolmensaje}</p>
 									<span class="light-bg customer-rating"
 										data-rating="${ceorcodigo}"> ${ceolcodigo} 
@@ -142,7 +142,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 									<img src="${urlPublic}/images/${ceorfoto}}"
 										class="center-block  img-circle" alt="Nanifarfalla Customer">
 									<h3 class="customer-name">${ceornombre}${ceorpaterno}
-										${ceormaterno}</h3>
+									</h3>
 									<p>${ceormensaje}</p>
 									<span class="light-bg customer-rating"
 										data-rating="${ceorcodigo}"> <i class="fa fa-star"></i>
