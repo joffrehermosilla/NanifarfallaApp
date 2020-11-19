@@ -5,6 +5,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
+
+
+
+
+
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <!DOCTYPE html>
@@ -15,11 +21,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta http-equiv="Content-Type" content="text/html">
+
+<style>
+.password-verdict {
+	color: #000;
+}
+</style>
+<meta charset="utf-8">
+<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<script th:src="@{/resources/js/pwstrength.js}"></script>
 <title>Registrar Usuario</title>
 <spring:url value="/resources" var="urlPublic"></spring:url>
 <spring:url value="/usuarios/registration" var="urlForm"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="${urlPublic}/js/pwstrength.js"></script>
+
+<script type="text/javascript" src="${urlPublic}/js/registerpassword.js"></script>
 </head>
 
 <body>
@@ -27,10 +48,6 @@
 	<header class="section-header">
 		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
 	</header>
-
-
-
-
 
 	<!-- ========================= SECTION CONTENT ========================= -->
 	<section class="section-content padding-y">
@@ -77,10 +94,11 @@
 						</div>
 						<!-- form-row end.// -->
 						<div class="form-group">
-							<form:label path="email">Email</form:label> <span><form:input
-								type="email" path="email" class="form-control" name="email" value=""
-								required="required" /></span> <small class="form-text text-muted">We'll
-								never share your email with anyone else.</small> <span id="emailError"
+							<form:label path="email">Email</form:label>
+							<span><form:input type="email" path="email"
+									class="form-control" name="email" value="" required="required" /></span>
+							<small class="form-text text-muted">We'll never share
+								your email with anyone else.</small> <span id="emailError"
 								class="alert alert-danger col-sm-4" style="display: none"></span>
 						</div>
 
@@ -128,31 +146,70 @@
 						<!-- form-row.// -->
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<form:label for="password_usuario" path="password_usuario">Create password</form:label>
+								<form:label for="password" path="password_usuario">Create password</form:label>
 								<form:input path="password_usuario" id="password"
 									class="form-control" name="password_usuario" value=""
 									type="password" required="required" />
 
 								<span id="passwordError" class="alert alert-danger col-sm-4"
 									style="display: none"></span>
-							</div>
-							<!-- form-group end.// -->
-							<div class="form-group col-md-6">
-								<label>Repeat password</label> <input id="matchPassword"
-									class="form-control" name="matchingPassword" value=""
-									type="password" required="required" /> <span id="globalError"
-									class="alert alert-danger col-sm-4" style="display: none"></span>
-							</div>
-							<!-- form-group end.// -->
-						</div>
-						<div class="form-group">
-							<div class="form-buttons">
-								<div class="button">
-									<button type="submit" class="btn btn-danger">Guardar</button>
+								<div class="col-sm-6 col-sm-offset-2" style="padding-top: 30px;">
+									<div class="pwstrength_viewport_progress"></div>
 								</div>
+								<div class="row">
+									<div id="messages" class="col-sm-12"></div>
+								</div>
+
+								<!-- form-group end.// -->
 							</div>
+
+							<div class="form-group col-md-6">
+								<label>Repeat password</label> <input type="password"
+									id="password-verify" name="matchingPassword"
+									class="form-control" placeholder="Verify Password"
+									required="required" /> <span id="globalError"
+									class="alert alert-danger col-sm-4" style="display: none"></span>
+								<button class="pswd_show passwordButton">Show</button>
+								<p class="incorrectMsg">passwords do not match!</p>
+							</div>
+
+							<div class="pswd_info">
+								<h4 class="pswd_reqs">Password must meet the following
+									requirements:</h4>
+								<ul>
+									<li id='letter' class='invalid'>Contains <strong>a
+											lowercase letter</strong></li>
+
+									<li id='capital' class='invalid'>Contains <strong>a
+											capital letter</strong></li>
+
+									<li id='number' class='invalid'>Contains <strong>a
+											number</strong></li>
+
+									<li id='special' class='invalid'>Contains <strong>a
+											special character</strong></li>
+
+									<li id='length' class='invalid'>Contains <strong>8
+											characters</strong></li>
+								</ul>
+							</div>
+							<iframe name="hiddenFrame" width="0" height="0" border="0"
+								style="display: none;"></iframe>
+
+
+
+							<div class="form-group" align="center">
+								<div class="form-buttons">
+									<div class="button">
+										<button type="submit" value="submit" class="btn btn-danger">Guardar</button>
+									</div>
+								</div>
+								
+							</div>
+
+							<!-- form-group// -->
+
 						</div>
-						<!-- form-group// -->
 						<div class="form-group">
 							<label class="custom-control custom-checkbox"> <input
 								type="checkbox" class="custom-control-input" checked="">
@@ -164,6 +221,9 @@
 					</fieldset>
 					<!-- form-group end.// -->
 				</form:form>
+
+
+
 			</article>
 			<!-- card-body.// -->
 		</div>
@@ -176,6 +236,11 @@
 
 
 	</section>
+
+
+
+
+
 	<!-- ========================= SECTION CONTENT END// ========================= -->
 
 	<!-- /container -->
@@ -191,7 +256,6 @@
 		});
 	</script>
 
-
 	<spring:hasBindErrors name="usuario">
 		<div class='alert alert-danger' role='alert'>
 			Por favor corrija los siguientes errores:
@@ -203,94 +267,84 @@
 		</div>
 	</spring:hasBindErrors>
 
-	<script>
-		var serverContext = "\/";
 
-		$(document).ready(function() {
-			$('form').submit(function(event) {
-				register(event);
-			});
 
-			$(":password").keyup(function() {
-				if ($("#password_usuario").val() != $("#matchPassword").val()) {
-					$("#globalError").show().html("${PasswordMatches.user}");
-				} else {
-					$("#globalError").html("").hide();
-				}
-			});
+	<script th:inline="javascript">
+var serverContext = [[@{/}]];
 
-			options = {
-				common : {
-					minChar : 8
-				},
-				ui : {
-					showVerdictsInsideProgressBar : true,
-					showErrors : true,
-					errorMessages : {
-						wordLength : "${error.wordLength}",
-						wordNotEmail : "${error.wordNotEmail}",
-						wordSequences : "${error.wordSequences}",
-						wordLowercase : "${error.wordLowercase}",
-						wordUppercase : "${error.wordUppercase}",
-						wordOneNumber : "${error.wordOneNumber}",
-						wordOneSpecialChar : "${error.wordOneSpecialChar}"
-					}
-				}
-			};
+$(document).ready(function () {
+	$('form').submit(function(event) {
+		register(event);
+	});
+	
+	$(":password").keyup(function(){
+		if($("#password_usuario").val() != $("#matchPassword").val()){
+	        $("#globalError").show().html(/*[[${PasswordMatches.user}]]*/);
+	    }else{
+	    	$("#globalError").html("").hide();
+	    }
+	});
+	
+	options = {
+		    common: {minChar:8},
+		    ui: {
+		    	showVerdictsInsideProgressBar:true,
+		    	showErrors:true,
+		    	errorMessages:{
+		    		  wordLength: /*[[${error.wordLength}]]*/,
+		    		  wordNotEmail: /*[[${error.wordNotEmail}]]*/,
+		    		  wordSequences: /*[[${error.wordSequences}]]*/,
+		    		  wordLowercase: /*[[${error.wordLowercase}]]*/,
+		    		  wordUppercase: /*[[${error.wordUppercase}]]*/,
+		    	          wordOneNumber: /*[[${error.wordOneNumber}]]*/,
+		    		  wordOneSpecialChar: /*[[${error.wordOneSpecialChar}]]*/
+		    		}
+		    	}
+		};
+	 $('#password').pwstrength(options);
+});
 
-			$(':password').pwstrength(options);
-		});
+function register(event){
+	event.preventDefault();
+    $(".alert").html("").hide();
+    $(".error-list").html("");
+    if($("#password_usuario").val() != $("#matchPassword").val()){
+    	$("#globalError").show().html(/*[[${PasswordMatches.user}]]*/);
+    	return;
+    }
+    var formData= $('form').serialize();
+    $.post(serverContext + "usuarios/registration",formData ,function(data){
+        if(data.message == "success"){
+            window.location.href = serverContext + "/login/successRegister.html";
+        }
+        
+    })
+    .fail(function(data) {
+        if(data.responseJSON.error.indexOf("MailError") > -1)
+        {
+            window.location.href = serverContext + "/login/emailError.html";
+        }
+        else if(data.responseJSON.error == "UserAlreadyExist"){
+            $("#emailError").show().html(data.responseJSON.message);
+        }
+        else if(data.responseJSON.error.indexOf("InternalError") > -1){
+            window.location.href = serverContext + "login?message=" + data.responseJSON.message;
+        }
+        else{
+        	var errors = $.parseJSON(data.responseJSON.message);
+            $.each( errors, function( index,item ){
+            	if (item.field){
+            		$("#"+item.field+"Error").show().append(item.defaultMessage+"<br/>");
+            	}
+            	else {
+            		$("#globalError").show().append(item.defaultMessage+"<br/>");
+            	}
+               
+            });
+        }
+    });
+}
 
-		function register(event) {
-			event.preventDefault();
-			$(".alert").html("").hide();
-			$(".error-list").html("");
-			if ($("#password_usuario").val() != $("#matchPassword").val()) {
-				$("#globalError").show().html("Password does not match!");
-				return;
-			}
-			var formData = $('form').serialize();
-			$
-					.post(serverContext + "usuarios/registration", formData,
-							function(data) {
-								if (data.message == "success") {
-									window.location.href = serverContext + "/login/successRegister";
-								}
-
-							})
-					.fail(
-							function(data) {
-								if (data.responseJSON.error
-										.indexOf("MailError") > -1) {
-									window.location.href = serverContext
-											+ "/login/emailError.html";
-								} else if (data.responseJSON.error == "UserAlreadyExist") {
-									$("#emailError").show().html(
-											data.responseJSON.message);
-								} else if (data.responseJSON.error
-										.indexOf("InternalError") > -1) {
-									window.location.href = serverContext
-											+ "login?message="
-											+ data.responseJSON.message;
-								} else {
-									var errors = $
-											.parseJSON(data.responseJSON.message);
-									$.each(errors, function(index, item) {
-										if (item.field) {
-											$("#" + item.field + "Error")
-													.show().append(
-															item.defaultMessage
-																	+ "<br/>");
-										} else {
-											$("#globalError").show().append(
-													item.defaultMessage
-															+ "<br/>");
-										}
-
-									});
-								}
-							});
-		}
-	</script>
+</script>
 </body>
 </html>

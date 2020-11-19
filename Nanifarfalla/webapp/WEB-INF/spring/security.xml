@@ -47,10 +47,10 @@
 
 
 		<session-management
-			invalid-session-url="/invalidSession"
+			invalid-session-url="/"
 			session-fixation-protection="none">
 			<concurrency-control max-sessions="1"
-				error-if-maximum-exceeded="true" expired-url="/login"
+				error-if-maximum-exceeded="true" expired-url="/login?error=sessionExpiredDuplicateLogin"
 				session-registry-alias="sessionRegistry" />
 		</session-management>
 

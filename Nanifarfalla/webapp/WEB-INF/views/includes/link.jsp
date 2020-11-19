@@ -7,40 +7,28 @@
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
 <spring:url value="/resources" var="urlPublic" />
-
-
 <link href="${urlPublic}/images/frontend/iconos/mainsite/logos/MARIPOSAS.ico" rel="shortcut icon"
 	type="image/x-icon">
-
 <!-- jQuery -->
 <script src="${urlPublic}/js/jquery-2.0.0.min.js" type="text/javascript"></script>
-
 <!-- Bootstrap4 files-->
 <script src="${urlPublic}/js/bootstrap.bundle.min.js"
 	type="text/javascript"></script>
 <link href="${urlPublic}/css/bootstrap.css" rel="stylesheet"
 	type="text/css" />
-
 <!-- Font awesome 5 -->
 <link href="${urlPublic}/fonts/fontawesome/css/all.min.css"
 	type="text/css" rel="stylesheet">
-
 <!-- custom style -->
 <link href="${urlPublic}/css/ui.css" rel="stylesheet" type="text/css" />
 <link href="${urlPublic}/css/responsive.css" rel="stylesheet"
 	media="only screen and (max-width: 1200px)" />
-
 <link href="${urlPublic}/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
-
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <link rel="profile" href="http://gmpg.org/xfn/11">
-
 <link rel="apple-touch-icon" sizes="180x180"
 	href="${urlPublic}/images/frontend/iconos/mainsite/logos/MARIPOSAS.ico">
 <link rel="icon" type="image/png" sizes="32x32"
@@ -52,27 +40,21 @@
 <link rel="shortcut icon" href="${urlPublic}/images/frontend/iconos/mainsite/logos/MARIPOSAS.ico">
 <meta name="msapplication-config"
 	content="${urlPublic}/images/icons/nanifarfalllaicon.ico">
-
 <link rel="stylesheet" id="buttons-css"
 	href="${urlPublic}/css/buttons.min.css" type="text/css" media="all">
 <link rel="stylesheet" id="dashicons-css"
 	href="${urlPublic}/css/dashicons.min.css" type="text/css" media="all">
-
 <link rel="stylesheet" id="dokan-opensans-css"
 	href="https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C700&amp;ver=4.8.4"
 	type="text/css" media="all">
-
 <link rel="stylesheet" id="flexslider-css"
 	href="${urlPublic}/css/flexslider.css" type="text/css" media="all">
-
 <link rel="stylesheet" id="dokan-theme-skin-css"
 	href="${urlPublic}/css/purple.css" type="text/css" media="all">
-
 <link rel="" id="strip" href="${urlPublic}/css/efectoletras.css"
 	type="text/css" media="all">
-	
-
-
+	<link rel="stylesheet" id="apariencia" href="${urlPublic}/css/registerpassword.css"
+	type="text/css" media="all">
 <link rel="stylesheet" id="letrasmovibles-css"
 	href="${urlPublic}/css/letrasmovimiento.css" type="text/css"
 	media="all">

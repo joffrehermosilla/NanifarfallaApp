@@ -79,8 +79,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 		</tr>
 	</c:forEach>
 
-	<section class="container pt-md-3 pb-5 mb-md-3"
-		style="align-content: center;">
+	<section class="container pt-md-3 pb-5 mb-md-3"style="align-content: center;">
 		<div class="customer-feedback" style="align-content: center;">
 			<div class="container text-center" align="center">
 				<div class="row" align="center">

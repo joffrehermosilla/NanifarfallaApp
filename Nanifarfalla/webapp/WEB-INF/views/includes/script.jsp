@@ -66,7 +66,7 @@
 
 <script type="text/javascript" src="${urlPublic}/js/pwstrength.js"></script>
 
-
+<script type="text/javascript" src="${urlPublic}/js/registerpassword.js"></script>
 
 
 
