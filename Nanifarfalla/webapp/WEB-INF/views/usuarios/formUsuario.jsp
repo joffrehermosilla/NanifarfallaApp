@@ -127,20 +127,18 @@
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label>City</label> <input type="text" class="form-control">
-							</div>
-							<!-- form-group end.// -->
-							<div class="form-group col-md-6">
 								<label>Country</label> <select id="inputState"
 									class="form-control">
 									<option>Choose...</option>
-									<option>Uzbekistan</option>
-									<option>Russia</option>
-									<option selected="">United States</option>
-									<option>India</option>
-									<option>Afganistan</option>
+									<c:forEach items="${listapais}" var="pais" varStatus="i">
+										
+												<option value=${pais.codigo_pais}>${pais.nombre_pais}</option>
+										
+									</c:forEach>
 								</select>
 							</div>
+							<!-- form-group end.// -->
+							
 							<!-- form-group end.// -->
 						</div>
 						<!-- form-row.// -->
@@ -169,7 +167,7 @@
 									class="form-control" placeholder="Verify Password"
 									required="required" /> <span id="globalError"
 									class="alert alert-danger col-sm-4" style="display: none"></span>
-								<button class="pswd_show passwordButton">Show</button>
+								<button class="pswd_show passwordButton btn btn-warning">Show</button>
 								<p class="incorrectMsg">passwords do not match!</p>
 							</div>
 
@@ -204,7 +202,7 @@
 										<button type="submit" value="submit" class="btn btn-danger">Guardar</button>
 									</div>
 								</div>
-								
+
 							</div>
 
 							<!-- form-group// -->

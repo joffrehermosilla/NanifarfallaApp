@@ -1,7 +1,7 @@
 package nanifarfalla.app.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -25,6 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.model.VerificationToken;
+import nanifarfalla.app.service.ICiudadService;
+import nanifarfalla.app.service.IDistritoService;
+import nanifarfalla.app.service.IPaisService;
+import nanifarfalla.app.service.IProvinciaService;
 import nanifarfalla.app.service.IUserService;
 import nanifarfalla.app.web.dto.PasswordDto;
 import nanifarfalla.app.web.dto.UserDto;
@@ -32,7 +36,7 @@ import nanifarfalla.app.web.error.InvalidOldPasswordException;
 import nanifarfalla.app.web.util.GenericResponse;
 import javax.validation.Valid;
 import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
-import nanifarfalla.app.repository.RoleRepository;
+
 import nanifarfalla.app.security.ISecurityUserService;
 
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,13 +70,25 @@ public class UsuarioController {
 
 	@Autowired
 	private IUserService userService;
-
+	
 	@Autowired
-	private RoleRepository roleRepository;
+	private IPaisService paisService;
+	
+	@Autowired
+	private IProvinciaService provinciaService;
+	
+	@Autowired
+	private ICiudadService ciudadService;
+	
+	
+	@Autowired
+	private IDistritoService distritoService;
+
+	
+	
+	
 	@Autowired
 	private MessageSource messages;
-
-	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
@@ -87,8 +103,10 @@ public class UsuarioController {
 	private ISecurityUserService securityUserService;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Usuario usuario) {
-
+	public String crear(@ModelAttribute Usuario usuario, Model model) {
+	
+		
+      model.addAttribute("listapais", paisService.buscarTodas());
 		return "/usuarios/formUsuario";
 	}
 
@@ -100,7 +118,8 @@ public class UsuarioController {
 
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Usuario usuarios, BindingResult result, RedirectAttributes attributes,
-			HttpServletRequest request, UserDto accountDto) {
+			HttpServletRequest request, UserDto accountDto, @RequestParam("role") int role,
+			@RequestParam("distrito") int codigo_distrito) {
 
 		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
 		// Pendiente: Guardar el objeto noticia en la BD
@@ -124,21 +143,25 @@ public class UsuarioController {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 
+		System.out.println("Recibiendo opcion de rol: " + role);
+
+		System.out.println("Recibiendo opcion de rol: " + codigo_distrito);
+
 		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
 
 		System.out.println("Elementos en la lista antes de la insersion: " + userService.buscarTodas().size());
 
-	
+		LOGGER.debug("Registering user account with information: {}", accountDto);
 
-		usuarios.setNombre_usuario(accountDto.getNombre_usuario());
-		usuarios.setApellido_usuario(accountDto.getApellido_usuario());
-		usuarios.setPassword_usuario(passwordEncoder.encode(accountDto.getPassword_usuario()));
-		usuarios.setEmail(accountDto.getEmail());
+		final Usuario registered = userService.registerNewUserAccount(accountDto);
+		eventPublisher
+				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 
-		usuarios.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
+		System.out.println("Elementos en la lista antes de la insersion: " + userService.buscarTodas().size());
 
 		userService.guardar(usuarios);
-		attributes.addFlashAttribute("mensaje", "El usuario fue guardado");
+		attributes.addFlashAttribute("mensaje",
+				"El usuario fue registrado espera la autorizacion " + new GenericResponse("success"));
 		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
 		return "redirect:/";
 	}

@@ -14,7 +14,7 @@ import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.model.VerificationToken;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
-
+import nanifarfalla.app.repository.DistritoRepository;
 import nanifarfalla.app.repository.PasswordResetTokenRepository;
 import nanifarfalla.app.repository.RoleRepository;
 import nanifarfalla.app.repository.UserRepository;
@@ -34,6 +34,9 @@ public class UserService implements IUserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private DistritoRepository distritoRepository;
+	
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
 
@@ -79,6 +82,7 @@ public class UserService implements IUserService {
 
 		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
 		System.out.println("Role/es asociados" + user.getRoles());
+		
 		return userRepository.save(user);
 	}
 

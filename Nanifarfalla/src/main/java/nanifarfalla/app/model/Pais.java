@@ -20,7 +20,7 @@ public class Pais {
 	int codigo_pais;
 
 	String nombre_pais;
-	String claveApi;
+
 	Date version;
 	@OneToMany(mappedBy = "mPais", fetch = FetchType.EAGER)
 	private Collection<Provincia> provincias = new ArrayList<>();
@@ -59,14 +59,6 @@ public class Pais {
 
 	public void setNombre_pais(String nombre_pais) {
 		this.nombre_pais = nombre_pais;
-	}
-
-	public String getClaveApi() {
-		return claveApi;
-	}
-
-	public void setClaveApi(String claveApi) {
-		this.claveApi = claveApi;
 	}
 
 }

@@ -38,7 +38,15 @@ public class UserDto {
 	public void setEmail(final String email) {
 		this.email = email;
 	}
+	private Integer distrito;
+	
+	public Integer getDistrito() {
+		return distrito;
+	}
 
+	public void setDistrito(Integer distrito) {
+		this.distrito = distrito;
+	}
 	private Integer role;
 
 	public Integer getRole() {
