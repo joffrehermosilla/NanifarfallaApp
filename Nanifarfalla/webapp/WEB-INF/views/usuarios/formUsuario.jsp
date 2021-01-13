@@ -126,13 +126,13 @@
 							<div class="myForm14 form-group col-md-6">
 
 								<label for="pais">Pais</label> <select id="comboboxPais"
-								name="idpais"	class="form-control"  >
+								path="country" name="country"	class="form-control"  >
 									<option value="-1">Seleccione Pais</option>
 									<c:forEach items="${listapais}" var="pais" varStatus="t">
 
-										<option value="${pais.codigo_pais}">${pais.nombre_pais}</option>
-									<%--<c:set var="idcontry" value="${urlCreate}?idpais=${pais.codigo_pais}" /> --%>	
-										<a href="${urlCreate}?idcontry=${pais.codigo_pais}"></a>
+										<option path="country" name="country" value="${pais.codigo_pais}">${pais.nombre_pais}</option>
+									<c:set var="country"  value="${urlCreate}?country=${pais.codigo_pais}" /> 	
+										<a href="${urlCreate}?country=${pais.codigo_pais}"></a>
 									</c:forEach>
 								</select>
 							</div>

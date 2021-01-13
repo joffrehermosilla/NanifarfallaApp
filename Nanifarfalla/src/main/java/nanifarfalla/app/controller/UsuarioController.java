@@ -106,11 +106,10 @@ public class UsuarioController {
 	private ISecurityUserService securityUserService;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Usuario usuario, Model model) {
+	public String crear(@ModelAttribute Usuario usuario, Model model,@RequestParam("country") int codigo_pais) {
 
 		model.addAttribute("listapais", paisService.buscarTodas());
-		// model.addAttribute("listaprovincia",
-		// provinciaService.findByPaisIdParamsNative(codigo_pais));
+		model.addAttribute("listaprovincia",provinciaService.findByPaisIdParamsNative(codigo_pais));
 		return "/usuarios/formUsuario";
 	}
 
@@ -120,14 +119,25 @@ public class UsuarioController {
 		return "/login/registration";
 	}
 
-	@RequestMapping(value = "cargarPais/{idpais}", method = RequestMethod.GET)
-	@ResponseBody
-	public String cargarPais(@PathVariable("idpais") int idpais, HttpServletResponse response) {
-		Gson gson = new Gson();
-		response.setContentType("text/plain;charset=UTF-8");
-		return gson.toJson(provinciaService.findByPaisIdParamsNative(idpais));
-	}
+	/*
+	 * @RequestMapping(value = "/cargarPais/{idpais}", method = RequestMethod.GET)
+	 * 
+	 * @ResponseBody public String cargarPais(@PathVariable("idpais") int idpais,
+	 * HttpServletResponse response) { Gson gson = new Gson();
+	 * response.setContentType("text/plain;charset=UTF-8"); return
+	 * gson.toJson(provinciaService.findByPaisIdParamsNative(idpais)); }
+	 */
 
+
+	@PostMapping("/cargarPais")
+	@ResponseBody
+	public String cargarPaispost(@RequestParam("country") int codigo_pais) {
+		Gson gson = new Gson();
+		
+		return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
+	}
+	
+	
 	@PostMapping(value = "/save")
 	public String guardar(BindingResult result, RedirectAttributes attributes, HttpServletRequest request,
 			UserDto accountDto) {

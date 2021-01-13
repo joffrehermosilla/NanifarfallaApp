@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 	             ajax : 'true',
 
-	            url:'../usuarios/cargarPais/' + idPais ,            
+	            url:'../cargarPais/' + idPais ,            
 
 
 	            success: function(data,statusText){             
