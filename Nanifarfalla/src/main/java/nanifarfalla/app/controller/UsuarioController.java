@@ -48,7 +48,6 @@ import nanifarfalla.app.security.ISecurityUserService;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Locale;
@@ -78,23 +77,19 @@ public class UsuarioController {
 
 	@Autowired
 	private IUserService userService;
-	
+
 	@Autowired
 	private IPaisService paisService;
-	
+
 	@Autowired
 	private IProvinciaService provinciaService;
-	
+
 	@Autowired
 	private ICiudadService ciudadService;
-	
-	
+
 	@Autowired
 	private IDistritoService distritoService;
 
-	
-	
-	
 	@Autowired
 	private MessageSource messages;
 
@@ -111,10 +106,11 @@ public class UsuarioController {
 	private ISecurityUserService securityUserService;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Usuario usuario,Model model,@RequestParam("idcountry") int codigo_pais) {
-	
-	   model.addAttribute("listapais", paisService.buscarTodas());
-     model.addAttribute("listaprovincia", provinciaService.findByPaisIdParamsNative(codigo_pais));
+	public String crear(@ModelAttribute Usuario usuario, Model model) {
+
+		model.addAttribute("listapais", paisService.buscarTodas());
+		// model.addAttribute("listaprovincia",
+		// provinciaService.findByPaisIdParamsNative(codigo_pais));
 		return "/usuarios/formUsuario";
 	}
 
@@ -124,36 +120,24 @@ public class UsuarioController {
 		return "/login/registration";
 	}
 
-	@RequestMapping(value="cargarPais/{idpais}",method = RequestMethod.GET)	
+	@RequestMapping(value = "cargarPais/{idpais}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarPais(@PathVariable("idpais") int idpais, HttpServletResponse response) {
-	    Gson gson=new Gson();
-	     response.setContentType("text/plain;charset=UTF-8");
-	    return gson.toJson(provinciaService.findByPaisIdParamsNative(idpais));
+		Gson gson = new Gson();
+		response.setContentType("text/plain;charset=UTF-8");
+		return gson.toJson(provinciaService.findByPaisIdParamsNative(idpais));
 	}
 
-	
-	
-	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute Usuario usuarios,@ModelAttribute Pais pais, BindingResult result, RedirectAttributes attributes,
-			HttpServletRequest request, UserDto accountDto, @RequestParam("role") int role,
-			@RequestParam("distrito") int codigo_distrito) {
+	public String guardar(BindingResult result, RedirectAttributes attributes, HttpServletRequest request,
+			UserDto accountDto) {
 
-		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
 		// Pendiente: Guardar el objeto noticia en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
 			return "page-index-1";
 		}
 
-		/*
-		 * if (!multiPart.isEmpty()) { String nombreImagen =
-		 * Utileria.guardarImagen(multiPart, request);
-		 * 
-		 * usuarios.setRuta_foto(nombreImagen); }
-		 */
-
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
@@ -161,24 +145,16 @@ public class UsuarioController {
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
-
-		System.out.println("Recibiendo opcion de rol: " + role);
-
-		System.out.println("Recibiendo opcion de rol: " + codigo_distrito);
-
-		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
-
-		System.out.println("Elementos en la lista antes de la insersion: " + userService.buscarTodas().size());
 
 		LOGGER.debug("Registering user account with information: {}", accountDto);
 
 		final Usuario registered = userService.registerNewUserAccount(accountDto);
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
+		System.out.println("Recibiendo objeto Usuarios: " + registered);
 
-		System.out.println("Elementos en la lista antes de la insersion: " + userService.buscarTodas().size());
+		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
 
-		userService.guardar(usuarios);
 		attributes.addFlashAttribute("mensaje",
 				"El usuario fue registrado espera la autorizacion " + new GenericResponse("success"));
 		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
