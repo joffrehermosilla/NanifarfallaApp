@@ -5,12 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
-
-
-
-
-
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <!DOCTYPE html>
@@ -32,7 +26,9 @@
 <script th:src="@{/resources/js/pwstrength.js}"></script>
 <title>Registrar Usuario</title>
 <spring:url value="/resources" var="urlPublic"></spring:url>
-<spring:url value="/usuarios/registration" var="urlForm"></spring:url>
+<spring:url value="/" var="urlRoot"></spring:url>
+<spring:url value="/usuarios/save" var="urlForm"></spring:url>
+<spring:url value="/usuarios/create" var="urlCreate"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -41,6 +37,7 @@
 <script type="text/javascript" src="${urlPublic}/js/pwstrength.js"></script>
 
 <script type="text/javascript" src="${urlPublic}/js/registerpassword.js"></script>
+<script type="text/javascript" src="${urlPublic}/js/ubicacion.js"></script>
 </head>
 
 <body>
@@ -126,20 +123,38 @@
 							</div>
 						</div>
 						<div class="form-row">
+							<div class="myForm14 form-group col-md-6">
+
+								<label for="pais">Pais</label> <select id="comboboxPais"
+								name="idpais"	class="form-control"  >
+									<option value="-1">Seleccione Pais</option>
+									<c:forEach items="${listapais}" var="pais" varStatus="t">
+
+										<option value="${pais.codigo_pais}">${pais.nombre_pais}</option>
+									<%--<c:set var="idcontry" value="${urlCreate}?idpais=${pais.codigo_pais}" /> --%>	
+										<a href="${urlCreate}?idcontry=${pais.codigo_pais}"></a>
+									</c:forEach>
+								</select>
+							</div>
+							<!-- form-group end.// -->
 							<div class="form-group col-md-6">
-								<label>Country</label> <select id="inputState"
-									class="form-control">
-									<option>Choose...</option>
-									<c:forEach items="${listapais}" var="pais" varStatus="i">
+								<label for="comboboxDepartamento">Provincia</label> <select
+									id="comboboxDepartamento" class="form-control">
+									<option value="-1">Seleccione Departamento</option>
+									<c:forEach items="${listaprovincia}" var="provincia"
+										varStatus="s">
 										
-												<option value=${pais.codigo_pais}>${pais.nombre_pais}</option>
+												<option value="${provincia.codigo_provincia}">${provincia.nombre_provincia}</option>
 										
 									</c:forEach>
 								</select>
 							</div>
 							<!-- form-group end.// -->
-							
-							<!-- form-group end.// -->
+
+
+
+
+
 						</div>
 						<!-- form-row.// -->
 						<div class="form-row">

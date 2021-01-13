@@ -1,16 +1,12 @@
 package nanifarfalla.app.service.Impl;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import nanifarfalla.app.model.Pais;
+import org.springframework.transaction.annotation.Transactional;
 import nanifarfalla.app.model.Provincia;
-
+import nanifarfalla.app.repository.PaisRepository;
 import nanifarfalla.app.repository.ProvinciaRepository;
-import nanifarfalla.app.service.IPaisService;
 import nanifarfalla.app.service.IProvinciaService;
 
 @Service
@@ -19,7 +15,13 @@ public class ProvinciaServiceJPA implements IProvinciaService {
 	ProvinciaRepository provinciaRepository;
 
 	@Autowired
-	private IPaisService paisService;
+	PaisRepository paisRepository;
+
+	public ProvinciaServiceJPA(PaisRepository paisRepository, ProvinciaRepository provinciaRepository) {
+		this.paisRepository = paisRepository;
+		this.provinciaRepository = provinciaRepository;
+
+	}
 
 	@Override
 	public List<Provincia> buscarTodas() {
@@ -28,18 +30,10 @@ public class ProvinciaServiceJPA implements IProvinciaService {
 	}
 
 	@Override
-	public List<Provincia> findByPais(int idPais) {
-	
-		Provincia provincia = new Provincia();
-       List <Provincia> provinciaxpais=provinciaRepository.findAll();
-		if (provincia.getmPais().getCodigo_pais() == idPais) {
-			for (int i = 0; i < paisService.buscarTodas().size(); i++) {
-				provinciaxpais.get(i).setNombre_provincia(provincia.getNombre_provincia());
-			}
-		}
+	@Transactional(readOnly = true)
+	public List<Provincia> findByPaisIdParamsNative(int idPais) {
 
-		return provinciaxpais;
-	
+		return provinciaRepository.findByPaisIdParamsNative(idPais);
 
 	}
 

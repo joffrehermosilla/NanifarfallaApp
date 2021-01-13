@@ -22,13 +22,13 @@
 		<intercept-url pattern="/logout*" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
 		<intercept-url pattern="/signup/**" access="permitAll" />
-		<intercept-url pattern="/user/registration*"
+		<intercept-url pattern="/usuarios/registration*"
 			access="permitAll" />
 		<intercept-url pattern="/registrationConfirm*"
 			access="permitAll" />
 		<intercept-url pattern="/expiredAccount*"
 			access="permitAll" />
-		<intercept-url pattern="/registration*"
+		<intercept-url pattern="/usuarios*"
 			access="permitAll" />
 		<intercept-url pattern="/badUser*" access="permitAll" />
 		<intercept-url pattern="/resources/**"

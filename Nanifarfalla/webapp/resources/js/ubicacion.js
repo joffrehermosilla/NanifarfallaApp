@@ -1,41 +1,40 @@
 $(document).ready(function(){
+	$('.myForm14 #comboboxPais').on('change', function(){
 
-$('.myForm14 #comboboxPais').on('change', function(){
+	    var idPais= $('.myForm14 select#comboboxPais option:selected').val();
+	        alert(idPais);
+	        $.getJSON({         
 
-    var codigo_pais= $('.myForm14 select#comboboxPais option:selected').val();
-        alert(codigo_pais);
-        $.getJSON({         
+	             ajax : 'true',
 
-             ajax : 'true',
-
-            url:'../usuarios/cargarPais/' + codigo_pais,            
-           
-
-            success: function(data,statusText){             
-            	 var data = $.parseJSON(data);
-                 
-
-                var html= '<option value="">Seleccione Provincia</option>';  
+	            url:'../usuarios/cargarPais/' + idPais ,            
 
 
-                for(var i=0; i< data.length; i++){
+	            success: function(data,statusText){             
 
-                    html += '<option value="' + data[i].codigo_provincia + ' " >' +data[i].nombre_provincia + '</option>';
-                }
+	                 var data = $.parseJSON(data);
 
-
-                  alert(data);
-                  html += '</option>';
-                  $('.myForm14 select#comboboxDepartamento').html(html);
+	                var html= '<option value="">Seleccione Provincia</option>';  
 
 
-            },
-             error: function(ob,errStr) {
-                    alert('error');
-                    console.log(ob,errStr);
+	                for(var i=0; i< data.length; i++){
 
-                }
-    });         
+	                    html += '<option value="' + data[i].codigo_provincia + ' " >' +data[i].nombre_provincia + '</option>';
+	                }
 
-});
+
+	                  alert(data);
+	                  html += '</option>';
+	                  $('.myForm14 select#comboboxDepartamento').html(html);
+
+
+	            },
+	             error: function(ob,errStr) {
+	                    alert('error');
+	                    console.log(ob,errStr);
+
+	                }
+	    });         
+
+	});
 });

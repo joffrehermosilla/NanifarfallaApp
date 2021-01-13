@@ -11,6 +11,31 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.3.RELEASE</version>
 	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+         
+         
+         <joffre.logstash.version>4.8</joffre.logstash.version>
+           <joffre.jspapi.version>2.2</joffre.jspapi.version>
+               <joffre.springsecurity.version>5.2.0.RELEASE</joffre.springsecurity.version>
+         <joffre.geoip2.version>2.14.0</joffre.geoip2.version>
+       <joffre.uapjava.version>1.4.0</joffre.uapjava.version>
+        <joffre.guava.version>23.0</joffre.guava.version>
+         <joffre.hibernatevalidator.version>6.0.17.Final</joffre.hibernatevalidator.version>
+        <joffre.hibernatecore.version>5.4.6.Final</joffre.hibernatecore.version>
+        <joffre.datajpa.version>2.2.7.RELEASE</joffre.datajpa.version>
+        <joffre.gson.version>2.8.6</joffre.gson.version>
+        <joffre.richfaces.version>3.3.3.Final</joffre.richfaces.version>
+        <joffre.passay.version>1.0</joffre.passay.version>
+		<joffre.elapi.version>2.2</joffre.elapi.version>
+		<joffre.servletapi.version>4.0.1</joffre.servletapi.version>
+		<joffre.jstl.version>1.2</joffre.jstl.version>
+		<joffre.springwebmvc.version>5.2.8.RELEASE
+		</joffre.springwebmvc.version>
+		<joffre.aerogear.version>1.0.0</joffre.aerogear.version>
+		<joffre.junit.version>4.12</joffre.junit.version>
+		<joffre.mysql.version>5.1.48</joffre.mysql.version>
+	</properties>
 
 
 	<dependencies>
@@ -18,10 +43,10 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${joffre.junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -39,7 +64,7 @@
 		<dependency>
 			<groupId>org.jboss.aerogear</groupId>
 			<artifactId>aerogear-otp-java</artifactId>
-			<version>1.0.0</version>
+			<version>${joffre.aerogear.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -49,20 +74,20 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>5.2.8.RELEASE</version>
+			<version>${joffre.springwebmvc.version}</version>
 		</dependency>
 
 		<!-- Servlet -->
 
 		<dependency>
-			<groupId>jstl</groupId><!--$NO-MVN-MAN-VER$-->
+			<groupId>jstl</groupId><!--$NO-MVN-MAN-VER$ -->
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>${joffre.jstl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
+			<version>${joffre.servletapi.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -70,23 +95,27 @@
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>el-api</artifactId>
-			<version>2.2</version>
+			<version>${joffre.elapi.version}</version>
 		</dependency>
 
 		<!-- Password Validation -->
 		<dependency>
 			<groupId>org.passay</groupId>
 			<artifactId>passay</artifactId>
-			<version>1.0</version>
+			<version>${joffre.passay.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.richfaces.framework</groupId>
 			<artifactId>richfaces-impl-jsf2</artifactId>
-			<version>3.3.3.Final</version>
+			<version>${joffre.richfaces.version}</version>
 		</dependency>
-
-
+		<!-- Gson dependencies -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${joffre.gson.version}</version>
+		</dependency>
 
 
 		<!-- Spring Data JPA dependencies -->
@@ -99,31 +128,31 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>2.2.7.RELEASE</version>
+			<version>${joffre.datajpa.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.6.Final</version>
+			<version>${joffre.hibernatecore.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>6.0.17.Final</version>
+			<version>${joffre.hibernatevalidator.version}</version>
 		</dependency>
 
 		<!-- DB dependencies -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.48</version>
+			<version>${joffre.mysql.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId><!--$NO-MVN-MAN-VER$ -->
-			<version>23.0</version>
+			<version>${joffre.guava.version}</version>
 		</dependency>
 
 
@@ -131,7 +160,7 @@
 		<dependency>
 			<groupId>com.github.ua-parser</groupId>
 			<artifactId>uap-java</artifactId>
-			<version>1.4.0</version>
+			<version>${joffre.uapjava.version}</version>
 		</dependency>
 
 		<!-- maxmind dependency -->
@@ -139,7 +168,7 @@
 		<dependency>
 			<groupId>com.maxmind.geoip2</groupId>
 			<artifactId>geoip2</artifactId>
-			<version>2.14.0</version>
+			<version>${joffre.geoip2.version}</version>
 		</dependency>
 
 
@@ -155,15 +184,17 @@
 			<artifactId>spring-security-config</artifactId>
 
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>5.2.0.RELEASE</version>
+			<version>${joffre.springsecurity.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.2</version>
+			<version>${joffre.jspapi.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -171,7 +202,7 @@
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
-			<version>4.8</version>
+			<version>${joffre.logstash.version}</version>
 		</dependency>
 
 

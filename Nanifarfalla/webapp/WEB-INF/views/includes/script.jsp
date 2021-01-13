@@ -38,6 +38,7 @@
 <script src="${urlPublic}/js/jquery.js"></script>
 <script src="${urlPublic}/js/popupmensaje.js"></script>
 <script src="${urlPublic}/js/lazysizes.min.js"></script>
+
 <script src="${urlPublic}/js/scripts.js?ver=1576164497"></script>
 <script src="${urlPublic}/js/whishlist.js?ver=4.9.8"></script>
 
@@ -68,7 +69,7 @@
 
 <script type="text/javascript" src="${urlPublic}/js/registerpassword.js"></script>
 
-
+<script src="${urlPublic}/js/ubicacion.js"></script>
 
 
 

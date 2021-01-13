@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,16 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+
+import nanifarfalla.app.model.Pais;
 import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.model.VerificationToken;
@@ -40,6 +47,7 @@ import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
 import nanifarfalla.app.security.ISecurityUserService;
 
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -103,10 +111,10 @@ public class UsuarioController {
 	private ISecurityUserService securityUserService;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Usuario usuario, Model model) {
+	public String crear(@ModelAttribute Usuario usuario,Model model,@RequestParam("idcountry") int codigo_pais) {
 	
-		
-      model.addAttribute("listapais", paisService.buscarTodas());
+	   model.addAttribute("listapais", paisService.buscarTodas());
+     model.addAttribute("listaprovincia", provinciaService.findByPaisIdParamsNative(codigo_pais));
 		return "/usuarios/formUsuario";
 	}
 
@@ -116,8 +124,19 @@ public class UsuarioController {
 		return "/login/registration";
 	}
 
+	@RequestMapping(value="cargarPais/{idpais}",method = RequestMethod.GET)	
+	@ResponseBody
+	public String cargarPais(@PathVariable("idpais") int idpais, HttpServletResponse response) {
+	    Gson gson=new Gson();
+	     response.setContentType("text/plain;charset=UTF-8");
+	    return gson.toJson(provinciaService.findByPaisIdParamsNative(idpais));
+	}
+
+	
+	
+	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute Usuario usuarios, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute Usuario usuarios,@ModelAttribute Pais pais, BindingResult result, RedirectAttributes attributes,
 			HttpServletRequest request, UserDto accountDto, @RequestParam("role") int role,
 			@RequestParam("distrito") int codigo_distrito) {
 
