@@ -34,7 +34,7 @@
 		</joffre.springwebmvc.version>
 		<joffre.aerogear.version>1.0.0</joffre.aerogear.version>
 		<joffre.junit.version>4.12</joffre.junit.version>
-		<joffre.mysql.version>5.1.48</joffre.mysql.version>
+		<joffre.mysql.version>8.0.16</joffre.mysql.version>
 	</properties>
 
 
