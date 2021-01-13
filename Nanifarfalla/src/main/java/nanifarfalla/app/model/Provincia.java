@@ -25,7 +25,7 @@ public class Provincia {
 	Pais mPais;
 	// int fkcodigo_pais;
 	String nombre_provincia;
-	Date version;
+
 	@OneToMany(mappedBy = "mPais", fetch = FetchType.EAGER)
 	private Collection<Provincia> provincias = new ArrayList<>();
 	
@@ -67,12 +67,6 @@ public class Provincia {
 		this.nombre_provincia = nombre_provincia;
 	}
 
-	public Date getVersion() {
-		return version;
-	}
 
-	public void setVersion(Date version) {
-		this.version = version;
-	}
 
 }

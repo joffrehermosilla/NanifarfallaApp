@@ -30,11 +30,16 @@ public class ProvinciaServiceJPA implements IProvinciaService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public List<Provincia> findByPaisIdParamsNative(int idPais) {
 
 		return provinciaRepository.findByPaisIdParamsNative(idPais);
 
+	}
+	
+	@Override
+	public List<Provincia> findByFkcodigo_pais(int codigo_pais) {
+		// TODO Auto-generated method stub
+		return provinciaRepository.findByFkcodigo_pais(codigo_pais);
 	}
 
 }

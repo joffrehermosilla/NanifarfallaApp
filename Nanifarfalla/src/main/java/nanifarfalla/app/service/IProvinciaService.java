@@ -8,4 +8,6 @@ public interface IProvinciaService {
 	List<Provincia> buscarTodas();
 	
 	List<Provincia> findByPaisIdParamsNative(int idPais);
+	
+	List<Provincia> findByFkcodigo_pais(int codigo_pais);
 }

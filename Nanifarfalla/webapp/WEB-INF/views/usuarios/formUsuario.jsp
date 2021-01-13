@@ -123,36 +123,35 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="myForm14 form-group col-md-6">
+							<form:form action="${urlForm}" method="post"
+								modelAttribute="paises">
+								<div class=" form-group col-md-6">
 
-								<label for="pais">Pais</label> <select id="comboboxPais"
-								path="country" name="country"	class="form-control"  >
-									<option value="-1">Seleccione Pais</option>
-									<c:forEach items="${listapais}" var="pais" varStatus="t">
+									<label for="pais">Pais</label> <select id="comboboxPais"
+										name="country" class="form-control">
+										<option value="-1">Seleccione Pais</option>
+										<c:forEach items="${listapais}" var="pais" varStatus="t">
 
-										<option path="country" name="country" value="${pais.codigo_pais}">${pais.nombre_pais}</option>
-									<c:set var="country"  value="${urlCreate}?country=${pais.codigo_pais}" /> 	
-										<a href="${urlCreate}?country=${pais.codigo_pais}"></a>
-									</c:forEach>
-								</select>
-							</div>
-							<!-- form-group end.// -->
-							<div class="form-group col-md-6">
-								<label for="comboboxDepartamento">Provincia</label> <select
-									id="comboboxDepartamento" class="form-control">
-									<option value="-1">Seleccione Departamento</option>
-									<c:forEach items="${listaprovincia}" var="provincia"
-										varStatus="s">
-										
-												<option value="${provincia.codigo_provincia}">${provincia.nombre_provincia}</option>
-										
-									</c:forEach>
-								</select>
-							</div>
-							<!-- form-group end.// -->
+											<option 
+												value="${pais.codigo_pais}">${pais.nombre_pais}</option>
+											<c:set var="country"
+												value="${urlCreate}?country=${pais.codigo_pais}" />
+											<a href="${urlCreate}?country=${pais.codigo_pais}"></a>
+										</c:forEach>
+									</select>
+								</div>
+								<!-- form-group end.// -->
+								<div class="form-group col-md-6">
+									<label for="comboboxDepartamento">Provincia</label> <select
+										id="comboboxDepartamento" class="form-control">
+										<option value="-1">Seleccione Departamento</option>
 
+									</select>
+								</div>
+								<!-- form-group end.// -->
 
 
+							</form:form>
 
 
 						</div>
