@@ -20,7 +20,6 @@ public class EstadoUsuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_estadousuario;
 	String nombre_estadousuario;
-	String claveApi;
 
 	@OneToMany(mappedBy = "mEstadoUsuario", fetch = FetchType.EAGER)
 	private Collection<Usuario> usuarios = new ArrayList<>();
@@ -31,14 +30,6 @@ public class EstadoUsuario {
 
 	public void setUsuarios(Collection<Usuario> usuarios) {
 		this.usuarios = usuarios;
-	}
-
-	public String getClaveApi() {
-		return claveApi;
-	}
-
-	public void setClaveApi(String claveApi) {
-		this.claveApi = claveApi;
 	}
 
 	public EstadoUsuario() {

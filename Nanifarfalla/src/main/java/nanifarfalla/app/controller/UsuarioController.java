@@ -107,11 +107,12 @@ public class UsuarioController {
 	private ISecurityUserService securityUserService;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Usuario usuario, Model model,@ModelAttribute Pais paises) {
+	public String crear(@ModelAttribute Usuario usuario, Model model, @ModelAttribute Pais paises) {
 
 		model.addAttribute("listapais", paisService.buscarTodas());
 		model.addAttribute("listaprovincia", provinciaService.findByPaisIdParamsNative(paises.getCodigo_pais()));
-
+		model.addAttribute("listaciudad", ciudadService.buscarTodas());
+		model.addAttribute("listadistrito", distritoService.buscarTodas());
 		return "/usuarios/formUsuario";
 	}
 
@@ -139,12 +140,13 @@ public class UsuarioController {
 	}
 
 	@PostMapping(value = "/save")
-	public String guardar(Model model, BindingResult result, RedirectAttributes attributes, HttpServletRequest request,
-			UserDto accountDto, @RequestParam("country") int codigo_pais) {
+	@ResponseBody
+	public String guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
+			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("district") int codigo_distrito) {
 
 		// model.addAttribute("listaprovincia",
 		// provinciaService.findByFkcodigo_pais(codigo_pais));
-		model.addAttribute("listaprovincia", provinciaService.findByPaisIdParamsNative(codigo_pais));
+		model.addAttribute("listaprovincia", provinciaService.findByPaisIdParamsNative(codigo_distrito));
 		// Pendiente: Guardar el objeto noticia en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
@@ -161,7 +163,7 @@ public class UsuarioController {
 
 		LOGGER.debug("Registering user account with information: {}", accountDto);
 
-		final Usuario registered = userService.registerNewUserAccount(accountDto);
+		final Usuario registered = userService.registerNewUserAccount(accountDto,codigo_distrito );
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 		System.out.println("Recibiendo objeto Usuarios: " + registered);

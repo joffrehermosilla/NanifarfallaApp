@@ -15,6 +15,8 @@ import nanifarfalla.app.model.VerificationToken;
 public interface IUserService {
 
     Usuario registerNewUserAccount(UserDto accountDto) throws UserAlreadyExistException;
+    
+    Usuario registerNewUserAccount(UserDto accountDto, int codigo_distrito) throws UserAlreadyExistException;
 
     Usuario getUser(String verificationToken);
 

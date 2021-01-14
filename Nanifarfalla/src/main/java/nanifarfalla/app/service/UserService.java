@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import nanifarfalla.app.model.Distrito;
 import nanifarfalla.app.model.PasswordRessetToken;
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.model.VerificationToken;
@@ -36,7 +37,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private DistritoRepository distritoRepository;
-	
+
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
 
@@ -49,7 +50,6 @@ public class UserService implements IUserService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	
 	private SessionRegistry sessionRegistry;
 
 	public static final String TOKEN_INVALID = "invalidToken";
@@ -67,22 +67,50 @@ public class UserService implements IUserService {
 			throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
 		}
 		final Usuario user = new Usuario();
-
+		final Distrito distrito = new Distrito();
 		user.setNombre_usuario(accountDto.getNombre_usuario());
-		// user.setFirstName(accountDto.getFirstName());
+
 		user.setApellido_usuario(accountDto.getApellido_usuario());
-		// user.setLastName(accountDto.getLastName());
+
 		user.setPassword_usuario(passwordEncoder.encode(accountDto.getPassword_usuario()));
 		System.out.println("contraseña encriptada" + user.getPassword_usuario());
-		// user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+
 		user.setEmail(accountDto.getEmail());
-		// user.setEmail(accountDto.getEmail());
+
 		user.setUsing2FA(accountDto.isUsing2FA());
-		// user.setUsing2FA(accountDto.isUsing2FA());
+
+		user.setmDistrito(distrito);
 
 		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
 		System.out.println("Role/es asociados" + user.getRoles());
-		
+
+		return userRepository.save(user);
+	}
+
+	@Override
+	public Usuario registerNewUserAccount(UserDto accountDto, int codigo_distrito) throws UserAlreadyExistException {
+		if (emailExists(accountDto.getEmail())) {
+			throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
+		}
+		final Usuario user = new Usuario();
+		final Distrito distrito = new Distrito();
+		user.setNombre_usuario(accountDto.getNombre_usuario());
+
+		user.setApellido_usuario(accountDto.getApellido_usuario());
+
+		user.setPassword_usuario(passwordEncoder.encode(accountDto.getPassword_usuario()));
+		System.out.println("contraseña encriptada" + user.getPassword_usuario());
+
+		user.setEmail(accountDto.getEmail());
+
+		user.setUsing2FA(accountDto.isUsing2FA());
+		if (distrito.getCodigo_distrito() == codigo_distrito) {
+			user.setmDistrito(distrito);
+		}
+
+		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
+		System.out.println("Role/es asociados" + user.getRoles());
+
 		return userRepository.save(user);
 	}
 

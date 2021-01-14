@@ -21,7 +21,7 @@
 	color: #000;
 }
 </style>
-<meta charset="utf-8">
+
 <!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
 <script th:src="@{/resources/js/pwstrength.js}"></script>
 <title>Registrar Usuario</title>
@@ -29,6 +29,7 @@
 <spring:url value="/" var="urlRoot"></spring:url>
 <spring:url value="/usuarios/save" var="urlForm"></spring:url>
 <spring:url value="/usuarios/create" var="urlCreate"></spring:url>
+<spring:url value="/usuarios/cargarPais" var="urlUbigeo"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -123,39 +124,71 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<form:form action="${urlForm}" method="post"
-								modelAttribute="paises">
-								<div class=" form-group col-md-6">
 
-									<label for="pais">Pais</label> <select id="comboboxPais"
-										name="country" class="form-control">
-										<option value="-1">Seleccione Pais</option>
-										<c:forEach items="${listapais}" var="pais" varStatus="t">
+							<div class="myForm14 form-group col-md-6">
 
-											<option 
-												value="${pais.codigo_pais}">${pais.nombre_pais}</option>
-											<c:set var="country"
-												value="${urlCreate}?country=${pais.codigo_pais}" />
-											<a href="${urlCreate}?country=${pais.codigo_pais}"></a>
-										</c:forEach>
-									</select>
-								</div>
-								<!-- form-group end.// -->
-								<div class="form-group col-md-6">
-									<label for="comboboxDepartamento">Provincia</label> <select
-										id="comboboxDepartamento" class="form-control">
-										<option value="-1">Seleccione Departamento</option>
+								<label for="pais">Pais</label> <select id="comboboxPais"
+									name="country" class="form-control">
+									<option value="-1">Seleccione Pais</option>
+									<c:forEach items="${listapais}" var="pais" varStatus="t">
 
-									</select>
-								</div>
-								<!-- form-group end.// -->
+										<option value="${pais.codigo_pais}">${pais.nombre_pais}</option>
+										<c:set var="country"
+											value="${urlUbigeo}?country=${pais.codigo_pais}" />
+										<a href="${urlUbigeo}?country=${pais.codigo_pais}"></a>
+									</c:forEach>
+								</select>
+							</div>
+							<!-- form-group end.// -->
+							<div class="form-group col-md-6">
+								<label for="provincia">Provincia</label> <select
+									id="comboboxDepartamento" class="form-control">
+									<option value="-1">Seleccione Provincia</option>
 
+									<c:forEach items="${listaprovincia}" var="provincia"
+										varStatus="t">
 
-							</form:form>
+										<option value="${provincia.codigo_provincia}">${provincia.nombre_provincia}</option>
 
+									</c:forEach>
+								</select>
+							</div>
+							<div class=" form-group col-md-6">
+
+								<label for="pais">Ciudad</label> <select id="" name=""
+									class="form-control">
+									<option value="-1">Seleccione Ciudad</option>
+									<c:forEach items="${listaciudad}" var="ciudad" varStatus="t">
+
+										<option value="${ciudad.codigo_ciudad}">${ciudad.nombre_ciudad}</option>
+
+									</c:forEach>
+								</select>
+							</div>
+							<!-- form-group end.// -->
+							<div class="form-group col-md-6">
+								<form:label for="mDistrito.codigo_distrito" value="district"
+									path="mDistrito.codigo_distrito">Distrito</form:label>
+								<form:select id="mDistrito.codigo_distrito" class="form-control"
+									path="mDistrito.codigo_distrito" value="district" required="required">
+									<option value="-1">Seleccione Distrito</option>
+
+									<c:forEach items="${listadistrito}" var="distrito"
+										varStatus="t">
+
+										<form:option value="${distrito.codigo_distrito}">${distrito.nombre_distrito}</form:option>
+										<c:set var="district"
+											value="${urlUbigeo}?district=${distrito.codigo_distrito}" />
+										<a href="${urlUbigeo}?district=${distrito.codigo_distrito}"></a>
+									</c:forEach>
+								</form:select>
+							</div>
+							<!-- form-group end.// -->
 
 						</div>
 						<!-- form-row.// -->
+
+
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<form:label for="password" path="password_usuario">Create password</form:label>
