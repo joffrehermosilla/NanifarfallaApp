@@ -32,12 +32,41 @@
 <spring:url value="/usuarios/cargarPais" var="urlUbigeo"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="${urlPublic}/js/jquery.min.js"></script>
+<script type="text/javascript">
+ 
+	// Variable Javascript que guardar el contextPath para formar la URL a la cual haremos la peticion
+   var contextPath = '${urlRoot}';	
+	
+	function buscarCiudades(idPais) {
+ 
+		var select = $("#idProvincia"); // Referencia al <select> de ciudades.
+		$.ajax({
+		   method:'GET',
+	 		data: {"idPais": idPais}, // Aqui mandamos al controlador el idPais seleccionado
+		   url:  contextPath + "usuarios/buscarPorPais",
+		   success : function(data) {
+		   	select.empty(); // Vaciamos el <select> de ciudades.	
+		   	select.append('<option value=""></option>');
+		   	select.prop('selectedIndex', 0);
+		   	$.each(data, function (key, entry) {
+		   		select.append($('<option></option>').attr('value', entry.codigo_provincia).text(entry.nombre_provincia));
+		   	});
+		   }
+	  });
+	}
+</script>
+
+
+
+
+
 <script type="text/javascript" src="${urlPublic}/js/pwstrength.js"></script>
 
 <script type="text/javascript" src="${urlPublic}/js/registerpassword.js"></script>
+
+<script type="text/javascript" src="${urlPublic}/js/cargarubigeo.js"></script>
+
 <script type="text/javascript" src="${urlPublic}/js/ubicacion.js"></script>
 </head>
 
@@ -124,33 +153,48 @@
 							</div>
 						</div>
 						<div class="form-row">
+						<div class=" myForm14 form-group col-md-6">
 
-							<div class="myForm14 form-group col-md-6">
-
-								<label for="pais">Pais</label> <select id="comboboxPais"
-									name="country" class="form-control">
+								<label for="pais">Pais</label> 
+								<select id="comboboxPais"
+									class="form-control" >
 									<option value="-1">Seleccione Pais</option>
 									<c:forEach items="${listapais}" var="pais" varStatus="t">
 
 										<option value="${pais.codigo_pais}">${pais.nombre_pais}</option>
-										<c:set var="country"
-											value="${urlUbigeo}?country=${pais.codigo_pais}" />
-										<a href="${urlUbigeo}?country=${pais.codigo_pais}"></a>
+										
 									</c:forEach>
 								</select>
 							</div>
 							<!-- form-group end.// -->
 							<div class="form-group col-md-6">
-								<label for="provincia">Provincia</label> <select
-									id="comboboxDepartamento" class="form-control">
-									<option value="-1">Seleccione Provincia</option>
+								<label for="comboboxDepartamento">Provincia</label>
+								 <select id="comboboxDepartamento"  class="form-control">
+								<option value="-1">Seleccione Provincia</option>
 
-									<c:forEach items="${listaprovincia}" var="provincia"
-										varStatus="t">
+									
+								</select>
+							</div>
+							<div class="form-group col-md-6">
 
-										<option value="${provincia.codigo_provincia}">${provincia.nombre_provincia}</option>
+								<label >Pais</label> 
+								<select id="idPais"
+									name="idPais" class="form-control" onchange="buscarProvincias(this.value)">
+									<option value="-1">Seleccione Pais</option>
+									<c:forEach items="${listapais}" var="pais" varStatus="t">
 
+										<option value="${pais.codigo_pais}">${pais.nombre_pais}</option>
+										
 									</c:forEach>
+								</select>
+							</div>
+							<!-- form-group end.// -->
+							<div class="form-group col-md-6">
+								<label >Provincia</label>
+								 <select id="idProvincia" name="idProvincia" class="form-control">
+								
+
+									
 								</select>
 							</div>
 							<div class=" form-group col-md-6">
@@ -170,7 +214,8 @@
 								<form:label for="mDistrito.codigo_distrito" value="district"
 									path="mDistrito.codigo_distrito">Distrito</form:label>
 								<form:select id="mDistrito.codigo_distrito" class="form-control"
-									path="mDistrito.codigo_distrito" value="district" required="required">
+									path="mDistrito.codigo_distrito" value="district"
+									required="required">
 									<option value="-1">Seleccione Distrito</option>
 
 									<c:forEach items="${listadistrito}" var="distrito"

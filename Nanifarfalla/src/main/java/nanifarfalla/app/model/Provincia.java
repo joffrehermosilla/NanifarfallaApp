@@ -2,7 +2,7 @@ package nanifarfalla.app.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,12 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name = "provincia")
 public class Provincia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_provincia;
+	
 	@JoinColumn(name = "fkcodigo_pais", referencedColumnName = "codigo_pais")
 	@ManyToOne
 	Pais mPais;

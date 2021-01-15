@@ -14,7 +14,7 @@ $(document).ready(function(){
 					for(var i = 0; i< result.length; i++){
 						d += '<option value="' + result[i].codigo_provincia + '">' + result[i].nombre_provincia + '</option>'
 					}
-					$('comboboxDepartamento').html(d);
+					$('#comboboxDepartamento').html(d);
 				}
 			});
 

@@ -17,7 +17,7 @@ public interface ProvinciaRepository extends JpaRepository<Provincia, Integer> {
 			+ "where p.codigo_pais = :idPais ", nativeQuery = true)
 	List<Provincia> findByPaisIdParamsNative(@Param("idPais") int idPais);
 
-	@Query(value = "select p from Provincia p where p.fkcodigo_pais = ?1", nativeQuery = true)
+	@Query(value = "select p.codigo_provincia, fkcodigo_pais, p.nombre_provincia from Provincia p where p.fkcodigo_pais = ?1", nativeQuery = true)
 	List<Provincia> findByFkcodigo_pais(int codigo_pais);
 
 }

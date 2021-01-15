@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -47,7 +48,7 @@ import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
 
 import nanifarfalla.app.security.ISecurityUserService;
 
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -125,7 +126,7 @@ public class UsuarioController {
 	@RequestMapping(value = "/cargarPais/{codigo_pais}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarPais(@PathVariable("codigo_pais") int codigo_pais, HttpServletResponse response) {
-		Gson gson = new Gson();
+		//Gson gson = new Gson();
 		response.setContentType("text/plain;charset=UTF-8");
 		// return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
 		return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
@@ -139,6 +140,14 @@ public class UsuarioController {
 		return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
 	}
 
+	
+	@GetMapping (value = "/buscarPorPais")
+	public @ResponseBody List<Provincia> buscarPorPais(@RequestParam("idPais") int idPais){						
+	   return provinciaService.findByFkcodigo_pais(idPais);
+	}
+	
+	
+	
 	@PostMapping(value = "/save")
 	@ResponseBody
 	public String guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
