@@ -126,10 +126,10 @@ public class UsuarioController {
 	@RequestMapping(value = "/cargarPais/{codigo_pais}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarPais(@PathVariable("codigo_pais") int codigo_pais, HttpServletResponse response) {
-		//Gson gson = new Gson();
+		Gson gson = new Gson();
 		response.setContentType("text/plain;charset=UTF-8");
-		// return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
-		return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
+		 return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
+		//return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
 	}
 
 	@GetMapping("/cargarPais")

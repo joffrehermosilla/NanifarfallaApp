@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pais")
-public class Pais {
+public class Pais  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_pais;
@@ -23,7 +23,7 @@ public class Pais {
 
 	Date version;
 	@OneToMany(mappedBy = "mPais", fetch = FetchType.EAGER)
-	private Collection<Provincia> provincias = new ArrayList<>();
+	private transient Collection<Provincia> provincias = new ArrayList<>();
 
 	public Collection<Provincia> getProvincias() {
 		return provincias;
@@ -37,6 +37,15 @@ public class Pais {
 
 	}
 
+	public Pais(String nombre_pais) {
+     this.nombre_pais= nombre_pais;
+	}
+	public Pais(String nombre_pais,Collection<Provincia> provincias) {
+       this.nombre_pais = nombre_pais;
+	}
+	
+	
+	
 	public Date getVersion() {
 		return version;
 	}

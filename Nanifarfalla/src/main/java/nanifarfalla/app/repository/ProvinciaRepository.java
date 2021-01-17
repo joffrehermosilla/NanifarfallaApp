@@ -12,7 +12,7 @@ import nanifarfalla.app.model.Provincia;
 @Repository
 public interface ProvinciaRepository extends JpaRepository<Provincia, Integer> {
 
-	@Query(value = "select distinct x.codigo_provincia, x.fkcodigo_pais, x.nombre_provincia " + "from provincia as x "
+	@Query(value = "select  x.codigo_provincia, x.fkcodigo_pais, x.nombre_provincia " + "from provincia as x "
 			+ "inner join pais as p on x.fkcodigo_pais = p.codigo_pais "
 			+ "where p.codigo_pais = :idPais ", nativeQuery = true)
 	List<Provincia> findByPaisIdParamsNative(@Param("idPais") int idPais);

@@ -33,29 +33,9 @@
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 <script type="text/javascript" src="${urlPublic}/js/jquery.min.js"></script>
-<script type="text/javascript">
- 
-	// Variable Javascript que guardar el contextPath para formar la URL a la cual haremos la peticion
-   var contextPath = '${urlRoot}';	
-	
-	function buscarCiudades(idPais) {
- 
-		var select = $("#idProvincia"); // Referencia al <select> de ciudades.
-		$.ajax({
-		   method:'GET',
-	 		data: {"idPais": idPais}, // Aqui mandamos al controlador el idPais seleccionado
-		   url:  contextPath + "usuarios/buscarPorPais",
-		   success : function(data) {
-		   	select.empty(); // Vaciamos el <select> de ciudades.	
-		   	select.append('<option value=""></option>');
-		   	select.prop('selectedIndex', 0);
-		   	$.each(data, function (key, entry) {
-		   		select.append($('<option></option>').attr('value', entry.codigo_provincia).text(entry.nombre_provincia));
-		   	});
-		   }
-	  });
-	}
-</script>
+
+
+
 
 
 
@@ -67,7 +47,9 @@
 
 <script type="text/javascript" src="${urlPublic}/js/cargarubigeo.js"></script>
 
+
 <script type="text/javascript" src="${urlPublic}/js/ubicacion.js"></script>
+
 </head>
 
 <body>

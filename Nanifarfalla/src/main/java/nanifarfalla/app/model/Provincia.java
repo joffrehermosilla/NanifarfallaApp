@@ -30,7 +30,7 @@ public class Provincia {
 	String nombre_provincia;
 
 	@OneToMany(mappedBy = "mPais", fetch = FetchType.EAGER)
-	private Collection<Provincia> provincias = new ArrayList<>();
+	private transient Collection<Provincia> provincias = new ArrayList<>();
 	
 	
 	
