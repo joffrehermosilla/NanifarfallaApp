@@ -126,6 +126,8 @@ public class UsuarioController {
 	@RequestMapping(value = "/cargarPais/{codigo_pais}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarPais(@PathVariable("codigo_pais") int codigo_pais, HttpServletResponse response) {
+		
+		System.out.println("buscarPorPais path variable /" + codigo_pais);
 		Gson gson = new Gson();
 		response.setContentType("text/plain;charset=UTF-8");
 		 return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
@@ -142,8 +144,18 @@ public class UsuarioController {
 
 	
 	@GetMapping (value = "/buscarPorPais")
-	public @ResponseBody List<Provincia> buscarPorPais(@RequestParam("idPais") int idPais){						
-	   return provinciaService.findByFkcodigo_pais(idPais);
+	public @ResponseBody List<Provincia> buscarPorPais(@RequestParam("idPais") int idPais){	
+		System.out.println("buscarPorPais/" + idPais);
+	   //return provinciaService.findByFkcodigo_pais(idPais);
+	//   return provinciaService.findByPaisIdParamsNative(idPais);
+	 //  return provinciaService.BuscaPaisporClase(idPais);
+	   
+	  // return provinciaService.findByCountry(idPais);
+	   
+	   
+		return provinciaService.BuscarPaisClaseconParam(idPais);
+		
+		
 	}
 	
 	

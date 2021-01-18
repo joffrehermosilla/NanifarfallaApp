@@ -9,7 +9,7 @@
 		$.ajax({
 		   method:'GET',
 	 		data: {"idPais": idPais}, // Aqui mandamos al controlador el idPais seleccionado
-		    url: "/buscarPorPais?idPais ="+idPais,
+		    url: "buscarPorPais?idPais ="+idPais,
 		    success : function(data) {
 		   	select.empty(); // Vaciamos el <select> de ciudades.	
 		   	select.append('<option value=""></option>');

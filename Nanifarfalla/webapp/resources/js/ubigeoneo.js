@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-$('.myForm14 #comboboxPais').on('change', function(){
+$('.myForm15 #comboboxCountry').on('change', function(){
 
     var idPais= $('.myForm14 select#comboboxPais option:selected').val();
         alert(idPais);
@@ -26,7 +26,7 @@ $('.myForm14 #comboboxPais').on('change', function(){
 
                   alert(data);
                   html += '</option>';
-                  $('.myForm14 select#comboboxDepartamento').html(html);
+                  $('.myForm15 select#comboboxState').html(html);
 
 
             },

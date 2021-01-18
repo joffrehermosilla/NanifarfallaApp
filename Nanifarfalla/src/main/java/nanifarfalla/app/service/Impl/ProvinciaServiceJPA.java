@@ -42,4 +42,22 @@ public class ProvinciaServiceJPA implements IProvinciaService {
 		return provinciaRepository.findByFkcodigo_pais(codigo_pais);
 	}
 
+	@Override
+	public List<Provincia> findByCountry(int id) {
+		// TODO Auto-generated method stub
+		return provinciaRepository.findByCountry(id);
+	}
+
+	@Override
+	public List<Provincia> BuscaPaisporClase(int id) {
+		// TODO Auto-generated method stub
+		return provinciaRepository.BuscaPaisporClase(id);
+	}
+
+	@Override
+	public List<Provincia> BuscarPaisClaseconParam(int codig_pais) {
+		// TODO Auto-generated method stub
+		return provinciaRepository.BuscarPaisClaseconParam(codig_pais);
+	}
+
 }

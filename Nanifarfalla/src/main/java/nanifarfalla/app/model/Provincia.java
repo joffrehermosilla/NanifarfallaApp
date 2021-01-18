@@ -3,7 +3,6 @@ package nanifarfalla.app.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,36 +13,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "provincia")
 public class Provincia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_provincia;
-	
+
 	@JoinColumn(name = "fkcodigo_pais", referencedColumnName = "codigo_pais")
 	@ManyToOne
 	Pais mPais;
 	// int fkcodigo_pais;
 	String nombre_provincia;
 
-	@OneToMany(mappedBy = "mPais", fetch = FetchType.EAGER)
-	private transient Collection<Provincia> provincias = new ArrayList<>();
-	
-	
-	
-	public Collection<Provincia> getProvincias() {
-		return provincias;
+	@OneToMany(mappedBy = "mProvincias", fetch = FetchType.EAGER)
+	private transient Collection<Ciudad> ciudades = new ArrayList<>();
+
+	public Collection<Ciudad> getCiudades() {
+		return ciudades;
 	}
 
-	public void setProvincias(Collection<Provincia> provincias) {
-		this.provincias = provincias;
+	public void setCiudades(Collection<Ciudad> ciudades) {
+		this.ciudades = ciudades;
 	}
 
 	public Provincia() {
 
+	}
+
+	public Provincia(int codigo_provincia, String nombre_provincia) {
+		this.codigo_provincia = codigo_provincia;
+		this.nombre_provincia = nombre_provincia;
 	}
 
 	public int getCodigo_provincia() {
@@ -69,7 +69,5 @@ public class Provincia {
 	public void setNombre_provincia(String nombre_provincia) {
 		this.nombre_provincia = nombre_provincia;
 	}
-
-
 
 }

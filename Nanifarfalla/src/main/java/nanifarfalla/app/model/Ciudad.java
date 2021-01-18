@@ -30,10 +30,16 @@ public class Ciudad {
 	Date version;
 
 	@OneToMany(mappedBy = "mCiudad", fetch = FetchType.EAGER)
-	private Collection<Distrito> distritos = new ArrayList<>();
+	private transient Collection<Distrito> distritos = new ArrayList<>();
 
 	public Ciudad() {
 
+	}
+	
+	
+	public Ciudad(int codigo_ciudad, String nombre_ciudad) {
+          this.codigo_ciudad=codigo_ciudad;
+          this.nombre_ciudad=nombre_ciudad;		
 	}
 
 	public Collection<Distrito> getDistritos() {

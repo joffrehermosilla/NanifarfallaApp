@@ -47,8 +47,9 @@
 
 <script type="text/javascript" src="${urlPublic}/js/cargarubigeo.js"></script>
 
-
 <script type="text/javascript" src="${urlPublic}/js/ubicacion.js"></script>
+
+
 
 </head>
 
@@ -135,6 +136,8 @@
 							</div>
 						</div>
 						<div class="form-row">
+						
+							<!--combo box ubicacion.js.// -->
 						<div class=" myForm14 form-group col-md-6">
 
 								<label for="pais">Pais</label> 
@@ -157,6 +160,7 @@
 									
 								</select>
 							</div>
+							<!--combo box cargarubigeo.js.// -->
 							<div class="form-group col-md-6">
 
 								<label >Pais</label> 
@@ -174,11 +178,12 @@
 							<div class="form-group col-md-6">
 								<label >Provincia</label>
 								 <select id="idProvincia" name="idProvincia" class="form-control">
-								
+								<option value="-1">Seleccione Provincia</option>
 
 									
 								</select>
 							</div>
+						
 							<div class=" form-group col-md-6">
 
 								<label for="pais">Ciudad</label> <select id="" name=""

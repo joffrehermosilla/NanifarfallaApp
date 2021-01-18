@@ -17,7 +17,16 @@ public interface ProvinciaRepository extends JpaRepository<Provincia, Integer> {
 			+ "where p.codigo_pais = :idPais ", nativeQuery = true)
 	List<Provincia> findByPaisIdParamsNative(@Param("idPais") int idPais);
 
-	@Query(value = "select p.codigo_provincia, fkcodigo_pais, p.nombre_provincia from Provincia p where p.fkcodigo_pais = ?1", nativeQuery = true)
+	@Query(value = "select p.codigo_provincia, p.fkcodigo_pais, p.nombre_provincia from Provincia p where p.fkcodigo_pais = ?1", nativeQuery = true)
 	List<Provincia> findByFkcodigo_pais(int codigo_pais);
+
+	@Query("select new nanifarfalla.app.model.Provincia(codigo_provincia, nombre_provincia) from Provincia where mPais.codigo_pais = :id")
+	List<Provincia> findByCountry(@Param("id") int id);
+
+	@Query("select p from Provincia p where p.mPais.codigo_pais = ?1")
+	List<Provincia> BuscaPaisporClase(int id);
+
+	@Query("select p from Provincia p where p.mPais.codigo_pais = :idPais")
+	List<Provincia> BuscarPaisClaseconParam(@Param("idPais") int codig_pais);
 
 }

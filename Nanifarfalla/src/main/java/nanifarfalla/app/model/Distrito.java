@@ -28,10 +28,10 @@ public class Distrito {
 	Date version;
 
 	@OneToMany(mappedBy = "mDistrito", fetch = FetchType.EAGER)
-	private Collection<Usuario> usuarios = new ArrayList<>();
+	private transient Collection<Usuario> usuarios = new ArrayList<>();
 
 	@OneToMany(mappedBy = "mDistrito", fetch = FetchType.LAZY)
-	private Collection<ZonaTieneDistrito> zonatienedistritos = new ArrayList<>();
+	private transient Collection<ZonaTieneDistrito> zonatienedistritos = new ArrayList<>();
 
 	public Collection<Usuario> getUsuarios() {
 		return usuarios;
