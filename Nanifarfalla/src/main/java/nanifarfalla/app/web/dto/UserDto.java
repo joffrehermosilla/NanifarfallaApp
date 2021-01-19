@@ -3,6 +3,7 @@ package nanifarfalla.app.web.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import nanifarfalla.app.model.Distrito;
 import nanifarfalla.app.validation.PasswordMatches;
 import nanifarfalla.app.validation.ValidEmail;
 import nanifarfalla.app.validation.ValidPassword;
@@ -38,13 +39,14 @@ public class UserDto {
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-	private int distrito;
+	private Distrito distrito;
 	
-	public int getDistrito() {
+	
+	public Distrito getDistrito() {
 		return distrito;
 	}
 
-	public void setDistrito(int distrito) {
+	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
 	}
 	private Integer role;

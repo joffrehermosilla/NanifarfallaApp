@@ -119,18 +119,18 @@
 							<label class="col-md-3 col-form-label">I am a</label>
 							<div class="col-sm-9 pt-1">
 								<label class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" checked="" type="radio"
-									name="account_type" value="option1"> <span
+									<input class="custom-control-input" checked="" type="radio" id="1"
+									name="role" value="1"> <span
 									class="custom-control-label"> Buyer </span>
 								</label> <label
 									class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" type="radio"
-									name="account_type" value="option2"> <span
+									<input class="custom-control-input" type="radio" id="2"
+									name="role" value="2"> <span
 									class="custom-control-label"> Seller </span>
 								</label> <label
 									class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" type="radio"
-									name="account_type" value="option3"> <span
+									<input class="custom-control-input" type="radio" id="1"
+									name="role" value="3"> <span
 									class="custom-control-label"> Both </span>
 								</label>
 							</div>
@@ -138,7 +138,7 @@
 						<div class="form-row">
 
 							<!--combo box ubicacion.js.// -->
-							<div class=" myForm14 form-group col-md-6">
+							<div class=" myForm14 form-group col-md-6" hidden="true">
 
 								<label for="pais">Pais</label> <select id="comboboxPais"
 									class="form-control">
@@ -151,7 +151,7 @@
 								</select>
 							</div>
 							<!-- form-group end.// -->
-							<div class="myForm15 form-group col-md-6">
+							<div class="myForm15 form-group col-md-6" hidden="true">
 								<label for="comboboxProvincia">Provincia</label> <select
 									id="comboboxProvincia" class="form-control">
 									<option value="-1">Seleccione Provincia</option>
@@ -159,7 +159,7 @@
 
 								</select>
 							</div>
-							<div class="myForm16 form-group col-md-6">
+							<div class="myForm16 form-group col-md-6" hidden="true">
 								<label for="comboboxCiudad">Ciudad</label> <select
 									id="comboboxCiudad" class="form-control">
 									<option value="-1">Seleccione Ciudad</option>
@@ -168,7 +168,7 @@
 								</select>
 							</div>
 							<!-- form-group end.// -->
-							<div class=" form-group col-md-6">
+							<div class=" form-group col-md-6" hidden="true">
 								<label for="comboboxDistrito">Distrito</label> <select
 									id="comboboxDistrito" class="form-control">
 									<option value="-1">Seleccione Distrito</option>
@@ -214,10 +214,10 @@
 
 							<!-- form-group end.// -->
 							<div class="form-group col-md-6">
-								<label>Ciudad</label> <select id="idDistrito" name="idDistrito"
-									class="form-control">
+								<label path="mDistrito">Distrito</label> 
+								<select id="idDistrito" name="idDistrito"
+									class="form-control" path="mDistrito">
 									<option value="-1">Seleccione Distrito</option>
-
 
 								</select>
 							</div>

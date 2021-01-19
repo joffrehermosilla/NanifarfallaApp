@@ -220,11 +220,9 @@ public class UsuarioController {
 	@PostMapping(value = "/save")
 	@ResponseBody
 	public String guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
-			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("district") int codigo_distrito) {
-
-		// model.addAttribute("listaprovincia",
-		// provinciaService.findByFkcodigo_pais(codigo_pais));
-		model.addAttribute("listaprovincia", provinciaService.findByPaisIdParamsNative(codigo_distrito));
+			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("role") String role,@RequestParam("idDistrito") int idDistrito) {
+		System.out.println("Opcion role: /"+ role);
+		System.out.println("idDistrito es: /"+ idDistrito);
 		// Pendiente: Guardar el objeto noticia en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
@@ -239,9 +237,12 @@ public class UsuarioController {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 
+		
+		int opcion = Integer.parseInt(role);
+		
 		LOGGER.debug("Registering user account with information: {}", accountDto);
 
-		final Usuario registered = userService.registerNewUserAccount(accountDto, codigo_distrito);
+		final Usuario registered = userService.registerNewUserAccount(accountDto, opcion, idDistrito);
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 		System.out.println("Recibiendo objeto Usuarios: " + registered);
@@ -251,7 +252,7 @@ public class UsuarioController {
 		attributes.addFlashAttribute("mensaje",
 				"El usuario fue registrado espera la autorizacion " + new GenericResponse("success"));
 		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
-		return "redirect:/";
+		return "/";
 	}
 
 	@InitBinder
