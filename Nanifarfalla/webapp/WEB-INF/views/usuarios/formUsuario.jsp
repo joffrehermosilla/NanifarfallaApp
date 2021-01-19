@@ -136,84 +136,90 @@
 							</div>
 						</div>
 						<div class="form-row">
-						
-							<!--combo box ubicacion.js.// -->
-						<div class=" myForm14 form-group col-md-6">
 
-								<label for="pais">Pais</label> 
-								<select id="comboboxPais"
-									class="form-control" >
+							<!--combo box ubicacion.js.// -->
+							<div class=" myForm14 form-group col-md-6">
+
+								<label for="pais">Pais</label> <select id="comboboxPais"
+									class="form-control">
 									<option value="-1">Seleccione Pais</option>
 									<c:forEach items="${listapais}" var="pais" varStatus="t">
 
 										<option value="${pais.codigo_pais}">${pais.nombre_pais}</option>
-										
+
 									</c:forEach>
 								</select>
 							</div>
 							<!-- form-group end.// -->
-							<div class="form-group col-md-6">
-								<label for="comboboxDepartamento">Provincia</label>
-								 <select id="comboboxDepartamento"  class="form-control">
-								<option value="-1">Seleccione Provincia</option>
+							<div class="myForm15 form-group col-md-6">
+								<label for="comboboxProvincia">Provincia</label> <select
+									id="comboboxProvincia" class="form-control">
+									<option value="-1">Seleccione Provincia</option>
 
-									
+
 								</select>
 							</div>
+							<div class="myForm16 form-group col-md-6">
+								<label for="comboboxCiudad">Ciudad</label> <select
+									id="comboboxCiudad" class="form-control">
+									<option value="-1">Seleccione Ciudad</option>
+
+
+								</select>
+							</div>
+							<!-- form-group end.// -->
+							<div class=" form-group col-md-6">
+								<label for="comboboxDistrito">Distrito</label> <select
+									id="comboboxDistrito" class="form-control">
+									<option value="-1">Seleccione Distrito</option>
+
+
+								</select>
+							</div>
+
+
 							<!--combo box cargarubigeo.js.// -->
 							<div class="form-group col-md-6">
 
-								<label >Pais</label> 
-								<select id="idPais"
-									name="idPais" class="form-control" onchange="buscarProvincias(this.value)">
+								<label>Pais</label> <select id="idPais" name="idPais"
+									class="form-control" onchange="buscarProvincias(this.value)">
 									<option value="-1">Seleccione Pais</option>
 									<c:forEach items="${listapais}" var="pais" varStatus="t">
 
 										<option value="${pais.codigo_pais}">${pais.nombre_pais}</option>
-										
+
 									</c:forEach>
 								</select>
 							</div>
 							<!-- form-group end.// -->
 							<div class="form-group col-md-6">
-								<label >Provincia</label>
-								 <select id="idProvincia" name="idProvincia" class="form-control">
-								<option value="-1">Seleccione Provincia</option>
+								<label>Provincia</label> <select id="idProvincia"
+									name="idProvincia" class="form-control"
+									onchange="buscarCiudades(this.value)">
+									<option value="-1">Seleccione Provincia</option>
 
-									
+
 								</select>
 							</div>
-						
-							<div class=" form-group col-md-6">
 
-								<label for="pais">Ciudad</label> <select id="" name=""
-									class="form-control">
+							<!-- form-group end.// -->
+							<div class="form-group col-md-6">
+								<label>Ciudad</label> <select id="idCiudad" name="idCiudad"
+									class="form-control" onchange="buscarDistritos(this.value)">
 									<option value="-1">Seleccione Ciudad</option>
-									<c:forEach items="${listaciudad}" var="ciudad" varStatus="t">
 
-										<option value="${ciudad.codigo_ciudad}">${ciudad.nombre_ciudad}</option>
 
-									</c:forEach>
 								</select>
 							</div>
+
 							<!-- form-group end.// -->
 							<div class="form-group col-md-6">
-								<form:label for="mDistrito.codigo_distrito" value="district"
-									path="mDistrito.codigo_distrito">Distrito</form:label>
-								<form:select id="mDistrito.codigo_distrito" class="form-control"
-									path="mDistrito.codigo_distrito" value="district"
-									required="required">
+								<label>Ciudad</label> <select id="idDistrito" name="idDistrito"
+									class="form-control">
 									<option value="-1">Seleccione Distrito</option>
 
-									<c:forEach items="${listadistrito}" var="distrito"
-										varStatus="t">
 
-										<form:option value="${distrito.codigo_distrito}">${distrito.nombre_distrito}</form:option>
-										<c:set var="district"
-											value="${urlUbigeo}?district=${distrito.codigo_distrito}" />
-										<a href="${urlUbigeo}?district=${distrito.codigo_distrito}"></a>
-									</c:forEach>
-								</form:select>
+								</select>
 							</div>
 							<!-- form-group end.// -->
 

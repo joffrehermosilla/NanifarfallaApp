@@ -2,7 +2,7 @@ package nanifarfalla.app.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +27,7 @@ public class Ciudad {
 
 	// int fkcodigo_provincia;
 	String nombre_ciudad;
-	Date version;
+
 
 	@OneToMany(mappedBy = "mCiudad", fetch = FetchType.EAGER)
 	private transient Collection<Distrito> distritos = new ArrayList<>();
@@ -74,12 +74,6 @@ public class Ciudad {
 		this.nombre_ciudad = nombre_ciudad;
 	}
 
-	public Date getVersion() {
-		return version;
-	}
 
-	public void setVersion(Date version) {
-		this.version = version;
-	}
 
 }

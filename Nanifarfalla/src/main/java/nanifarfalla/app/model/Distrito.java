@@ -25,7 +25,6 @@ public class Distrito {
 	Ciudad mCiudad;
 //	int fkcodigo_ciudad;
 	String nombre_distrito;
-	Date version;
 
 	@OneToMany(mappedBy = "mDistrito", fetch = FetchType.EAGER)
 	private transient Collection<Usuario> usuarios = new ArrayList<>();
@@ -53,6 +52,11 @@ public class Distrito {
 
 	}
 
+	public Distrito(int codigo_distrito, String nombre_distrito) {
+		this.codigo_distrito = codigo_distrito;
+		this.nombre_distrito = nombre_distrito;
+	}
+
 	public int getCodigo_distrito() {
 		return codigo_distrito;
 	}
@@ -75,14 +79,6 @@ public class Distrito {
 
 	public void setNombre_distrito(String nombre_distrito) {
 		this.nombre_distrito = nombre_distrito;
-	}
-
-	public Date getVersion() {
-		return version;
-	}
-
-	public void setVersion(Date version) {
-		this.version = version;
 	}
 
 }

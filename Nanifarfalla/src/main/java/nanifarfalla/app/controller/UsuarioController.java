@@ -29,6 +29,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
+import nanifarfalla.app.model.Ciudad;
+import nanifarfalla.app.model.Distrito;
 import nanifarfalla.app.model.Pais;
 import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.model.Provincia;
@@ -47,8 +49,6 @@ import javax.validation.Valid;
 import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
 
 import nanifarfalla.app.security.ISecurityUserService;
-
-
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -126,40 +126,97 @@ public class UsuarioController {
 	@RequestMapping(value = "/cargarPais/{codigo_pais}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarPais(@PathVariable("codigo_pais") int codigo_pais, HttpServletResponse response) {
-		
-		System.out.println("buscarPorPais path variable /" + codigo_pais);
+
+		System.out.println("cargarPais path variable /" + codigo_pais);
 		Gson gson = new Gson();
 		response.setContentType("text/plain;charset=UTF-8");
-		 return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
-		//return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
+		return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
+		// return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
+	}
+
+	@RequestMapping(value = "/cargarProvincia/{codigo_provincia}", method = RequestMethod.GET)
+	@ResponseBody
+	public String cargarProvincia(@PathVariable("codigo_provincia") int codigo_provincia,
+			HttpServletResponse response) {
+
+		System.out.println("cargarProvincia path variable /" + codigo_provincia);
+		Gson gson = new Gson();
+		response.setContentType("text/plain;charset=UTF-8");
+		// return
+		// gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_provincia));
+
+		return gson.toJson(ciudadService.findByProvinciaIdParamsNative(codigo_provincia));
+		// return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
+	}
+
+	@RequestMapping(value = "/cargarCiudad/{codigo_ciudad}", method = RequestMethod.GET)
+	@ResponseBody
+	public String cargarCiudad(@PathVariable("codigo_ciudad") int codigo_ciudad, HttpServletResponse response) {
+
+		System.out.println("cargarCiudad path variable /" + codigo_ciudad);
+		Gson gson = new Gson();
+		response.setContentType("text/plain;charset=UTF-8");
+		// return
+		// gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_provincia));
+
+		// return
+		// gson.toJson(ciudadService.findByProvinciaIdParamsNative(codigo_provincia));
+		// return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
+
+		return gson.toJson(distritoService.findByCiudadIdParamsNative(codigo_ciudad));
 	}
 
 	@GetMapping("/cargarPais")
 	@ResponseBody
 	public String cargarPaispost(@RequestParam("country") int codigo_pais) {
 		Gson gson = new Gson();
-
+		System.out.println("cargarPais RequestParam  /" + codigo_pais);
 		return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
 	}
 
-	
-	@GetMapping (value = "/buscarPorPais")
-	public @ResponseBody List<Provincia> buscarPorPais(@RequestParam("idPais") int idPais){	
+	@GetMapping(value = "/buscarPorPais")
+	public @ResponseBody List<Provincia> buscarPorPais(@RequestParam("idPais") int idPais) {
 		System.out.println("buscarPorPais/" + idPais);
-	   //return provinciaService.findByFkcodigo_pais(idPais);
-	//   return provinciaService.findByPaisIdParamsNative(idPais);
-	 //  return provinciaService.BuscaPaisporClase(idPais);
-	   
-	  // return provinciaService.findByCountry(idPais);
-	   
-	   
+		// return provinciaService.findByFkcodigo_pais(idPais);
+		// return provinciaService.findByPaisIdParamsNative(idPais);
+		// return provinciaService.BuscaPaisporClase(idPais);
+
+		// return provinciaService.findByCountry(idPais);
+
 		return provinciaService.BuscarPaisClaseconParam(idPais);
-		
-		
+
 	}
-	
-	
-	
+
+	@GetMapping(value = "/buscarPorProvincia")
+	public @ResponseBody List<Ciudad> buscarPorProvincia(@RequestParam("idProvincia") int idProvincia) {
+		System.out.println("buscarPorProvincia/" + idProvincia);
+		// return provinciaService.findByFkcodigo_pais(idPais);
+		// return provinciaService.findByPaisIdParamsNative(idPais);
+		// return provinciaService.BuscaPaisporClase(idPais);
+
+		// return provinciaService.findByCountry(idPais);
+
+		// return provinciaService.BuscarPaisClaseconParam(idProvincia);
+
+		return ciudadService.BuscarProvinciaClaseconParam(idProvincia);
+
+	}
+
+	@GetMapping(value = "/buscarPorCiudad")
+	public @ResponseBody List<Distrito> buscarPorCiudad(@RequestParam("idCiudad") int idCiudad) {
+		System.out.println("buscarPorCiudad/" + idCiudad);
+		// return provinciaService.findByFkcodigo_pais(idPais);
+		// return provinciaService.findByPaisIdParamsNative(idPais);
+		// return provinciaService.BuscaPaisporClase(idPais);
+
+		// return provinciaService.findByCountry(idPais);
+
+		// return provinciaService.BuscarPaisClaseconParam(idProvincia);
+
+		// return ciudadService.BuscarProvinciaClaseconParam(idProvincia);
+		return distritoService.BuscarCiudadClaseconParam(idCiudad);
+	}
+
 	@PostMapping(value = "/save")
 	@ResponseBody
 	public String guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
@@ -184,7 +241,7 @@ public class UsuarioController {
 
 		LOGGER.debug("Registering user account with information: {}", accountDto);
 
-		final Usuario registered = userService.registerNewUserAccount(accountDto,codigo_distrito );
+		final Usuario registered = userService.registerNewUserAccount(accountDto, codigo_distrito);
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 		System.out.println("Recibiendo objeto Usuarios: " + registered);
