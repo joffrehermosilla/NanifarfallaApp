@@ -67,7 +67,7 @@ public class UserService implements IUserService {
 			throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
 		}
 		final Usuario user = new Usuario();
-		
+
 		user.setNombre_usuario(accountDto.getNombre_usuario());
 
 		user.setApellido_usuario(accountDto.getApellido_usuario());
@@ -80,10 +80,9 @@ public class UserService implements IUserService {
 		user.setUsing2FA(accountDto.isUsing2FA());
 
 		user.setmDistrito(accountDto.getDistrito());
-   
+
 		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
 		System.out.println("Role/es asociados" + user.getRoles());
-		
 
 		return userRepository.save(user);
 	}
@@ -94,7 +93,7 @@ public class UserService implements IUserService {
 			throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
 		}
 		final Usuario user = new Usuario();
-		final Distrito district = new Distrito();
+		final Distrito distritox = new Distrito();
 		user.setNombre_usuario(accountDto.getNombre_usuario());
 
 		user.setApellido_usuario(accountDto.getApellido_usuario());
@@ -105,24 +104,23 @@ public class UserService implements IUserService {
 		user.setEmail(accountDto.getEmail());
 
 		user.setUsing2FA(accountDto.isUsing2FA());
-		
-		if (district.getCodigo_distrito()==distrito){
-			user.setmDistrito(district);
-		}
-		user.setmDistrito(accountDto.getDistrito());
-		
-		
-		
-		
 
-		if(role==1) {
+		distritox.setCodigo_distrito(distrito);
+
+		accountDto.setDistrito(distritox);
+
+		user.setmDistrito(accountDto.getDistrito());
+
+		System.out.println("Codigo recibido del param = " + distrito + "El distrito elegido es = " + user.getmDistrito());
+
+		if (role == 1) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
-		}else if(role==2) {
+		} else if (role == 2) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_SELLER")));
-		}else if(role==3) {
-			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER"),roleRepository.findByName("ROLE_SELLER")));
+		} else if (role == 3) {
+			user.setRoles(
+					Arrays.asList(roleRepository.findByName("ROLE_BUYER"), roleRepository.findByName("ROLE_SELLER")));
 		}
-		
 
 		System.out.println("Role/es asociados" + user.getRoles());
 

@@ -45,9 +45,24 @@ public class UserDto {
 	public Distrito getDistrito() {
 		return distrito;
 	}
+	
+
+	
 
 	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
+	}
+	private int district;
+	
+	
+	
+	
+	public int getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(int district) {
+		this.district = district;
 	}
 	private Integer role;
 

@@ -68,6 +68,9 @@
 				<header class="mb-4">
 					<h4 class="card-title">Sign up</h4>
 				</header>
+				<c:if test="${mensaje!=null }">
+					<div class='alert alert-success' role="alert">${ mensaje}</div>
+				</c:if>
 				<form:form action="${urlForm}" method="post"
 					enctype="multipart/form-data" modelAttribute="usuario">
 					<fieldset>
@@ -119,8 +122,8 @@
 							<label class="col-md-3 col-form-label">I am a</label>
 							<div class="col-sm-9 pt-1">
 								<label class="custom-control custom-radio custom-control-inline">
-									<input class="custom-control-input" checked="" type="radio" id="1"
-									name="role" value="1"> <span
+									<input class="custom-control-input" checked="" type="radio"
+									id="1" name="role" value="1"> <span
 									class="custom-control-label"> Buyer </span>
 								</label> <label
 									class="custom-control custom-radio custom-control-inline">
@@ -214,9 +217,8 @@
 
 							<!-- form-group end.// -->
 							<div class="form-group col-md-6">
-								<label path="mDistrito">Distrito</label> 
-								<select id="idDistrito" name="idDistrito"
-									class="form-control" path="mDistrito">
+								<label path="mDistrito">Distrito</label> <select id="idDistrito"
+									name="idDistrito" class="form-control" path="mDistrito">
 									<option value="-1">Seleccione Distrito</option>
 
 								</select>
@@ -284,7 +286,7 @@
 							<div class="form-group" align="center">
 								<div class="form-buttons">
 									<div class="button">
-										<button type="submit" value="submit" class="btn btn-danger">Guardar</button>
+										<button href="${urlRoot}"  type="submit" value="submit" class="btn btn-danger">Guardar</button>
 									</div>
 								</div>
 

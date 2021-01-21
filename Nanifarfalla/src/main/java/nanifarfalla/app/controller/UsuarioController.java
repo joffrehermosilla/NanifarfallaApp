@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -219,14 +220,15 @@ public class UsuarioController {
 
 	@PostMapping(value = "/save")
 	@ResponseBody
-	public String guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
-			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("role") String role,@RequestParam("idDistrito") int idDistrito) {
-		System.out.println("Opcion role: /"+ role);
-		System.out.println("idDistrito es: /"+ idDistrito);
+	public ModelAndView  guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
+			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("role") String role,
+			@RequestParam("idDistrito") int idDistrito) {
+		System.out.println("Opcion role: /" + role);
+		System.out.println("idDistrito es: /" + idDistrito);
 		// Pendiente: Guardar el objeto noticia en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "page-index-1";
+			return new ModelAndView("page-index-1");
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
@@ -237,9 +239,8 @@ public class UsuarioController {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 
-		
 		int opcion = Integer.parseInt(role);
-		
+
 		LOGGER.debug("Registering user account with information: {}", accountDto);
 
 		final Usuario registered = userService.registerNewUserAccount(accountDto, opcion, idDistrito);
@@ -247,12 +248,11 @@ public class UsuarioController {
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 		System.out.println("Recibiendo objeto Usuarios: " + registered);
 
-		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
-
 		attributes.addFlashAttribute("mensaje",
 				"El usuario fue registrado espera la autorizacion " + new GenericResponse("success"));
+
 		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
-		return "/";
+		return new ModelAndView("redirect:/") ;
 	}
 
 	@InitBinder

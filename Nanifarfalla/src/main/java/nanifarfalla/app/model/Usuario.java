@@ -84,6 +84,10 @@ public class Usuario {
 //fkcodigo_estadousuario	
 
 
+
+	
+	
+	
 	public String getGenero() {
 		return genero;
 	}
