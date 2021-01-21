@@ -48,16 +48,16 @@ public class Cliente {
 	EstadoCliente mEstadoCliente;
 
 	@OneToMany(mappedBy = "mCliente")
-	private Collection<ClienteTienePedido> cliente_tiene_pedido = new ArrayList<>();
+	private transient Collection<ClienteTienePedido> cliente_tiene_pedido = new ArrayList<>();
 
 	@OneToMany(mappedBy = "mCliente")
-	private Collection<Contrato> contratos = new ArrayList<>();
+	private transient Collection<Contrato> contratos = new ArrayList<>();
 
 	@OneToMany(mappedBy = "mCliente")
-	private Collection<ClienteTienePreferencia> clientetienepreferencias = new ArrayList<>();
+	private transient Collection<ClienteTienePreferencia> clientetienepreferencias = new ArrayList<>();
 
 	@OneToMany(mappedBy = "mCliente")
-	private Collection<ClienteTieneCatalogo> clientetienecatalogos = new ArrayList<>();
+	private transient Collection<ClienteTieneCatalogo> clientetienecatalogos = new ArrayList<>();
 
 	public Collection<ClienteTieneCatalogo> getClientetienecatalogos() {
 		return clientetienecatalogos;
