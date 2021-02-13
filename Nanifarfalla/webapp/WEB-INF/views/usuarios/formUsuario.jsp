@@ -28,6 +28,7 @@
 <spring:url value="/resources" var="urlPublic"></spring:url>
 <spring:url value="/" var="urlRoot"></spring:url>
 <spring:url value="/usuarios/save" var="urlForm"></spring:url>
+<spring:url value="/usuarios/buscarPorCorreo" var="urlEmail"></spring:url>
 <spring:url value="/usuarios/create" var="urlCreate"></spring:url>
 <spring:url value="/usuarios/cargarPais" var="urlUbigeo"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
@@ -50,6 +51,7 @@
 <script type="text/javascript" src="${urlPublic}/js/ubicacion.js"></script>
 
 
+<script type="text/javascript" src="${urlPublic}/js/emailvalidator.js"></script>
 
 </head>
 
@@ -69,7 +71,7 @@
 					<h4 class="card-title">Sign up</h4>
 				</header>
 				<c:if test="${mensaje!=null }">
-					<div class='alert alert-success' role="alert">${ mensaje}</div>
+					<div class='alert alert-success' role="alert">${mensaje}</div>
 				</c:if>
 				<form:form action="${urlForm}" method="post"
 					enctype="multipart/form-data" modelAttribute="usuario">
@@ -106,13 +108,49 @@
 							<!-- form-group end.// -->
 						</div>
 						<!-- form-row end.// -->
-						<div class="form-group">
+
+						<div class="form-group myForm17">
 							<form:label path="email">Email</form:label>
 							<span><form:input type="email" path="email"
-									class="form-control" name="email" value="" required="required" /></span>
-							<small class="form-text text-muted">We'll never share
-								your email with anyone else.</small> <span id="emailError"
-								class="alert alert-danger col-sm-4" style="display: none"></span>
+									class="form-control email " name="email"
+									value=""
+									id="email" onblur="buscarPorCorreo(this.value)"
+									required="required" /></span> <small class="form-text text-muted">We'll
+								never share your email with anyone else.</small>
+
+
+							<div class="email_info">
+								<span id="email_info " style="display: none"
+									class="alert alert-danger col-sm-4   email_show"></span>
+								<ul>
+									<li id='specialx' class='invalidx'>Formato <strong>
+											de Mail valido!! </strong></li>
+								</ul>
+							</div>
+
+							<span contenteditable="true" id="form_error" class="form_error"></span>
+
+
+							<c:choose>
+								<c:when test="${form_error.value() == 'true'}">
+									<div class='alert ' role="alert" id="email">${confirmacion}
+										<p class=" incorrectMsg alert alert-danger  ">${mensajemail}
+											Correo Registrado. Utilizar otro</p>
+
+
+									</div>
+								</c:when>
+								<c:when test="${form_error.value() == false }">
+									<div class='alert alert-success' role="alert" id="email">${confirmacion}
+										<p class=" incorrectMsg">Correo no registrado. continuar
+											${mensajemailx}</p>
+
+									</div>
+								</c:when>
+								<c:otherwise>
+
+								</c:otherwise>
+							</c:choose>
 						</div>
 
 
@@ -238,6 +276,7 @@
 
 								<span id="passwordError" class="alert alert-danger col-sm-4"
 									style="display: none"></span>
+
 								<div class="col-sm-6 col-sm-offset-2" style="padding-top: 30px;">
 									<div class="pwstrength_viewport_progress"></div>
 								</div>
@@ -255,7 +294,8 @@
 									required="required" /> <span id="globalError"
 									class="alert alert-danger col-sm-4" style="display: none"></span>
 								<button class="pswd_show passwordButton btn btn-warning">Show</button>
-								<p class="incorrectMsg">passwords do not match!</p>
+								<p class="incorrectMsg alert alert-danger ">passwords do not
+									match!</p>
 							</div>
 
 							<div class="pswd_info">
@@ -286,7 +326,8 @@
 							<div class="form-group" align="center">
 								<div class="form-buttons">
 									<div class="button">
-										<button href="${urlRoot}"  type="submit" value="submit" class="btn btn-danger">Guardar</button>
+										<button href="${urlRoot}" type="submit" value="submit"
+											class="btn btn-danger">Guardar</button>
 									</div>
 								</div>
 
@@ -354,82 +395,6 @@
 
 
 
-	<script th:inline="javascript">
-var serverContext = [[@{/}]];
 
-$(document).ready(function () {
-	$('form').submit(function(event) {
-		register(event);
-	});
-	
-	$(":password").keyup(function(){
-		if($("#password_usuario").val() != $("#matchPassword").val()){
-	        $("#globalError").show().html(/*[[${PasswordMatches.user}]]*/);
-	    }else{
-	    	$("#globalError").html("").hide();
-	    }
-	});
-	
-	options = {
-		    common: {minChar:8},
-		    ui: {
-		    	showVerdictsInsideProgressBar:true,
-		    	showErrors:true,
-		    	errorMessages:{
-		    		  wordLength: /*[[${error.wordLength}]]*/,
-		    		  wordNotEmail: /*[[${error.wordNotEmail}]]*/,
-		    		  wordSequences: /*[[${error.wordSequences}]]*/,
-		    		  wordLowercase: /*[[${error.wordLowercase}]]*/,
-		    		  wordUppercase: /*[[${error.wordUppercase}]]*/,
-		    	          wordOneNumber: /*[[${error.wordOneNumber}]]*/,
-		    		  wordOneSpecialChar: /*[[${error.wordOneSpecialChar}]]*/
-		    		}
-		    	}
-		};
-	 $('#password').pwstrength(options);
-});
-
-function register(event){
-	event.preventDefault();
-    $(".alert").html("").hide();
-    $(".error-list").html("");
-    if($("#password_usuario").val() != $("#matchPassword").val()){
-    	$("#globalError").show().html(/*[[${PasswordMatches.user}]]*/);
-    	return;
-    }
-    var formData= $('form').serialize();
-    $.post(serverContext + "usuarios/registration",formData ,function(data){
-        if(data.message == "success"){
-            window.location.href = serverContext + "/login/successRegister.html";
-        }
-        
-    })
-    .fail(function(data) {
-        if(data.responseJSON.error.indexOf("MailError") > -1)
-        {
-            window.location.href = serverContext + "/login/emailError.html";
-        }
-        else if(data.responseJSON.error == "UserAlreadyExist"){
-            $("#emailError").show().html(data.responseJSON.message);
-        }
-        else if(data.responseJSON.error.indexOf("InternalError") > -1){
-            window.location.href = serverContext + "login?message=" + data.responseJSON.message;
-        }
-        else{
-        	var errors = $.parseJSON(data.responseJSON.message);
-            $.each( errors, function( index,item ){
-            	if (item.field){
-            		$("#"+item.field+"Error").show().append(item.defaultMessage+"<br/>");
-            	}
-            	else {
-            		$("#globalError").show().append(item.defaultMessage+"<br/>");
-            	}
-               
-            });
-        }
-    });
-}
-
-</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
+
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
 
@@ -33,6 +34,10 @@ public interface IUserService {
     void createPasswordResetTokenForUser(Usuario user, String token);
 
     Usuario findUserByEmail(String email);
+    
+    List<Usuario>  findByCorreo(String email);
+    
+    List<Usuario>  BuscarEmailParam(String email);
 
     PasswordRessetToken getPasswordResetToken(String token);
 
@@ -55,5 +60,6 @@ public interface IUserService {
 	List<Usuario> buscarTodas();
 	
 	void guardar(Usuario usuario);
+	boolean emailExists(final String email) ;
 
 }

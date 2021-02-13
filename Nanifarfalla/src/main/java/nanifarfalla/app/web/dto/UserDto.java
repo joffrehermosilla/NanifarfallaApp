@@ -1,5 +1,7 @@
 package nanifarfalla.app.web.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,7 +29,9 @@ public class UserDto {
 
 	@ValidEmail
 	@NotNull
+	@NotBlank(message = "Enter your email")
 	@Size(min = 1, message = "{Size.userDto.email}")
+	@Email(message = "Enter a valid email address")
 	private String email;
 
 	private boolean isUsing2FA;

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.ApplicationEventPublisher;
 
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ import com.google.gson.Gson;
 
 import nanifarfalla.app.model.Ciudad;
 import nanifarfalla.app.model.Distrito;
-import nanifarfalla.app.model.Pais;
+
 import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.model.Provincia;
 import nanifarfalla.app.model.Usuario;
@@ -109,12 +110,14 @@ public class UsuarioController {
 	private ISecurityUserService securityUserService;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Usuario usuario, Model model, @ModelAttribute Pais paises) {
+	public String crear(@ModelAttribute Usuario usuario, Model model, BindingResult bindingResult) {
 
 		model.addAttribute("listapais", paisService.buscarTodas());
-		model.addAttribute("listaprovincia", provinciaService.findByPaisIdParamsNative(paises.getCodigo_pais()));
-		model.addAttribute("listaciudad", ciudadService.buscarTodas());
-		model.addAttribute("listadistrito", distritoService.buscarTodas());
+
+		if (bindingResult.hasErrors()) {
+			return "/usuarios/formUsuario";
+		}
+
 		return "/usuarios/formUsuario";
 	}
 
@@ -218,9 +221,85 @@ public class UsuarioController {
 		return distritoService.BuscarCiudadClaseconParam(idCiudad);
 	}
 
+	@GetMapping(value = "/buscarPorEmail")
+	public @ResponseBody Usuario buscarPorEmail(@RequestParam("email") String email) {
+		System.out.println("buscarPorEmail   " + email);
+		// return provinciaService.findByFkcodigo_pais(idPais);
+		// return provinciaService.findByPaisIdParamsNative(idPais);
+		// return provinciaService.BuscaPaisporClase(idPais);
+
+		// return provinciaService.findByCountry(idPais);
+
+		return userService.findUserByEmail(email);
+
+	}
+
+	@RequestMapping(value = "/cargarCorreo/{email}", method = RequestMethod.GET)
+	@ResponseBody
+	public String cargarCorreo(@PathVariable("email") String email, HttpServletResponse response) {
+
+		System.out.println("cargarCorreo path variable /" + email);
+		Gson gson = new Gson();
+		response.setContentType("text/plain;charset=UTF-8");
+		return gson.toJson(userService.findByCorreo(email));
+		// return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
+	}
+
+	@GetMapping(value = "/buscarPorCorreo")
+	public @ResponseBody String buscarPorEmailList(@RequestParam("email") String email, RedirectAttributes attributes,
+			Model model) {
+		System.out.println("buscarPorCorreo   " + email);
+		ModelAndView mv = new ModelAndView();
+
+		String mensajemail = " mail actualmente registrado usar otro ";
+
+		String mensajemailx = "mail no registrado previamente continuar...";
+
+		if (userService.emailExists(email) == true) {
+			model.addAttribute("confirmacion", userService.emailExists(email));
+			mv.addObject("confirmacion", userService.emailExists(email));
+			model.addAttribute("mensajemail", mensajemail);
+
+			attributes.addFlashAttribute("mensaje", mensajemail);
+			mv.addObject("mensajemail", mensajemail);
+			System.out.println("resultado Boolean " + userService.emailExists(email));
+			System.out.println(" " + mensajemail);
+		} else {
+			model.addAttribute("confirmacion", userService.emailExists(email));
+			mv.addObject("confirmacion", userService.emailExists(email));
+			model.addAttribute("mensajemail", mensajemailx);
+			attributes.addFlashAttribute("mensaje", mensajemailx);
+			mv.addObject("mensajemail", mensajemailx);
+			System.out.println("resultado Boolean " + userService.emailExists(email));
+			System.out.println(" " + mensajemailx);
+		}
+
+		return "" + userService.emailExists(email);
+
+	}
+
+	@GetMapping(value = "/buscarPorMail")
+	public @ResponseBody List<Usuario> buscarPorEmailListx(@RequestParam("email") String email) {
+		System.out.println("buscarPorMail   " + email);
+		// return provinciaService.findByFkcodigo_pais(idPais);
+		// return provinciaService.findByPaisIdParamsNative(idPais);
+		// return provinciaService.BuscaPaisporClase(idPais);
+
+		// return provinciaService.findByCountry(idPais);
+		// System.out.println("List desde Query native CLase" +
+		// userService.findByCorreo(email));
+		// System.out.println("List desde Query Param " +
+		// userService.BuscarEmailParam(email));
+
+		// return userService.BuscarEmailParam(email);
+
+		return userService.findByCorreo(email);
+
+	}
+
 	@PostMapping(value = "/save")
 	@ResponseBody
-	public ModelAndView  guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
+	public ModelAndView guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
 			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("role") String role,
 			@RequestParam("idDistrito") int idDistrito) {
 		System.out.println("Opcion role: /" + role);
@@ -252,11 +331,14 @@ public class UsuarioController {
 				"El usuario fue registrado espera la autorizacion " + new GenericResponse("success"));
 
 		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
-		return new ModelAndView("redirect:/") ;
+		return new ModelAndView("redirect:/");
 	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		binder.registerCustomEditor(String.class, stringTrimmerEditor);
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}

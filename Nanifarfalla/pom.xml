@@ -1,6 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0, https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0, https://maven.apache.org/xsd/maven-4.0.0.xsd"> -->
+<project>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>joffre</groupId>
 	<artifactId>Nanifarfalla</artifactId>
@@ -14,7 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <joffre.jackson.version>2.11.2</joffre.jackson.version>
+		<joffre.jackson.version>2.11.2</joffre.jackson.version>
 		<joffre.logstash.version>4.8</joffre.logstash.version>
 		<joffre.jspapi.version>2.2</joffre.jspapi.version>
 		<joffre.springsecurity.version>5.2.0.RELEASE
@@ -28,7 +28,7 @@
 		</joffre.hibernatecore.version>
 		<joffre.datajpa.version>2.2.7.RELEASE</joffre.datajpa.version>
 		<joffre.gson.version>2.8.6</joffre.gson.version>
-		<joffre.richfaces.version>3.3.3.Final</joffre.richfaces.version>
+
 		<joffre.passay.version>1.0</joffre.passay.version>
 		<joffre.elapi.version>2.2</joffre.elapi.version>
 		<joffre.servletapi.version>4.0.1</joffre.servletapi.version>
@@ -112,11 +112,7 @@
 			<version>${joffre.passay.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.richfaces.framework</groupId>
-			<artifactId>richfaces-impl-jsf2</artifactId>
-			<version>${joffre.richfaces.version}</version>
-		</dependency>
+
 		<!-- Gson dependencies -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -239,11 +235,7 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 
 		</dependency>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
 
-		</dependency>
 
 
 	</dependencies>

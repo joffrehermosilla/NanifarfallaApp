@@ -15,7 +15,7 @@ import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.model.VerificationToken;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
-import nanifarfalla.app.repository.DistritoRepository;
+
 import nanifarfalla.app.repository.PasswordResetTokenRepository;
 import nanifarfalla.app.repository.RoleRepository;
 import nanifarfalla.app.repository.UserRepository;
@@ -34,9 +34,6 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	private DistritoRepository distritoRepository;
 
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
@@ -111,7 +108,8 @@ public class UserService implements IUserService {
 
 		user.setmDistrito(accountDto.getDistrito());
 
-		System.out.println("Codigo recibido del param = " + distrito + "El distrito elegido es = " + user.getmDistrito());
+		System.out
+				.println("Codigo recibido del param = " + distrito + "El distrito elegido es = " + user.getmDistrito());
 
 		if (role == 1) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
@@ -252,8 +250,8 @@ public class UserService implements IUserService {
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		return currentUser;
 	}
-
-	private boolean emailExists(final String email) {
+	@Override
+	public boolean emailExists(final String email) {
 		return userRepository.findByEmail(email) != null;
 	}
 
@@ -280,6 +278,19 @@ public class UserService implements IUserService {
 	public void guardar(Usuario usuario) {
 		userRepository.save(usuario);
 
+	}
+
+	@Override
+	public List<Usuario>  findByCorreo(String email) {
+		
+	
+		return userRepository.findByCorreo(email);
+	}
+
+	@Override
+	public List<Usuario> BuscarEmailParam(String email) {
+		// TODO Auto-generated method stub
+		return userRepository.BuscarEmailParam(email);
 	}
 
 }

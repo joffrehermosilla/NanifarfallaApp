@@ -16,10 +16,10 @@
 		<load-on-startup>1</load-on-startup>
 
 		<multipart-config>
-			<location>c:\tmp</location>
+			<location>/tmp</location>
 		</multipart-config>
 
-
+		<!-- <multipart-config> <location>c:\tmp</location> </multipart-config> -->
 	</servlet>
 
 
@@ -50,8 +50,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml,
-			/WEB-INF/spring/security.xml 
-			
+			/WEB-INF/spring/security.xml
+
 		</param-value>
 
 	</context-param>
