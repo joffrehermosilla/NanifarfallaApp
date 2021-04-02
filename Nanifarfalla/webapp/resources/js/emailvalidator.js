@@ -16,15 +16,17 @@ function buscarPorCorreo(email) {
 			span.empty();
 
 
-
-
 			if (data == "true") {
 	span.empty();
-				$('#form_error').append('<span  class=" incorrectMsg alert alert-danger " role="alert" id= "email" >' + 'Email Already Exist change another one' + '</span>');
+	$('#guardar').empty();
+				$('#form_error').append('<span  class=" incorrectMsg alert alert-danger " role="alert" id= "email" >' + 'Email ya está registrado usar otro' + '</span>');
+					$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger" disabled="disabled" >' + 'BLOCK' + '</button>');
 
 			} else {
 	span.empty();
-				$('#form_error').append('<span  class="alert alert-success" role="alert" id= "email" >' + 'Email doesnt exists...continue ' + '</span>');
+		$('#guardar').empty();
+				$('#form_error').append('<span  class="alert alert-success" role="alert" id= "email" >' + 'Email no registrado en BD continuar ' + '</span>');
+							$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger"  >' + 'Guardar' + '</button>');
 			}
 
 
@@ -32,6 +34,51 @@ function buscarPorCorreo(email) {
 		}
 	});
 }
+
+
+
+	var formData = $('form').serialize();
+		$.post("usuarios/save", formData, function(data) {
+			if (data.message == "success") {
+				window.location.href = "/login/successRegister";
+			}
+
+		});
+
+
+
+
+function generartoken() {
+
+	var span = $("#guardar"); // Referencia al <button> de guardar.
+	$.ajax({
+		method: 'POST',
+		data: { "email": email }, // Aqui mandamos al controlador el idPais seleccionado
+		url: "buscarPorCorreo?email =" + email,
+		success: function(data) {
+			span.empty();
+
+
+			if (data == "true") {
+	span.empty();
+	$('#guardar').empty();
+				$('#form_error').append('<span  class=" incorrectMsg alert alert-danger " role="alert" id= "email" >' + 'Email ya está registrado usar otro' + '</span>');
+					$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger" disabled="disabled" >' + 'BLOCK' + '</button>');
+
+			} else {
+	span.empty();
+		$('#guardar').empty();
+				$('#form_error').append('<span  class="alert alert-success" role="alert" id= "email" >' + 'Email no registrado en BD continuar ' + '</span>');
+							$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger"  >' + 'Guardar' + '</button>');
+			}
+
+
+
+		}
+	});
+}
+
+
 
 
 
@@ -68,7 +115,7 @@ $(document).ready(function() {
 		// (triggers whenever the password field is unselected)
 		$('.email_info').fadeOut('low');
 	});
-	$('.email').on('blur', function(e) {
+	$('.passwordButton').on('click', function(e) {
 		e.preventDefault();
 		if (data == "true") {
 			$('.incorrectMsg').show();
@@ -84,6 +131,10 @@ $(document).ready(function() {
 		}
 
 	});
+	
+	
+
+	
 
 
 	$('.email_show').click(function() {
@@ -96,22 +147,10 @@ $(document).ready(function() {
 			$('.email_show').html('Cambia Correo');
 		} else {
 			console.log("pswd");
-			email.attr('type', 'password');
+			email.attr('type', 'text');
 			$('.email_show').html('Show correo');
 		}
 	});
 
 	email.keyup(ruleValidator);
 });
-
-
-
-
-
-
-
-
-
-
-
-

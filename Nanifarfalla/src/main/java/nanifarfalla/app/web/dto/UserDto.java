@@ -1,11 +1,12 @@
 package nanifarfalla.app.web.dto;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import nanifarfalla.app.model.Distrito;
+import nanifarfalla.app.model.EstadoUsuario;
+import nanifarfalla.app.model.TipoUsuario;
 import nanifarfalla.app.validation.PasswordMatches;
 import nanifarfalla.app.validation.ValidEmail;
 import nanifarfalla.app.validation.ValidPassword;
@@ -44,8 +45,30 @@ public class UserDto {
 		this.email = email;
 	}
 	private Distrito distrito;
+	private EstadoUsuario estadousuario;
+	private TipoUsuario tipousuario;
 	
 	
+	
+	
+	
+	
+	public EstadoUsuario getEstadousuario() {
+		return estadousuario;
+	}
+
+	public void setEstadousuario(EstadoUsuario estadousuario) {
+		this.estadousuario = estadousuario;
+	}
+
+	public TipoUsuario getTipousuario() {
+		return tipousuario;
+	}
+
+	public void setTipousuario(TipoUsuario tipousuario) {
+		this.tipousuario = tipousuario;
+	}
+
 	public Distrito getDistrito() {
 		return distrito;
 	}

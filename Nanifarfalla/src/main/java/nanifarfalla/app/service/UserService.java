@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+
 import nanifarfalla.app.model.Distrito;
 import nanifarfalla.app.model.PasswordRessetToken;
 import nanifarfalla.app.model.Usuario;
@@ -29,6 +30,12 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
+import nanifarfalla.app.model.EstadoUsuario;
+
+import nanifarfalla.app.model.TipoUsuario;
+
 @Service
 public class UserService implements IUserService {
 
@@ -48,6 +55,8 @@ public class UserService implements IUserService {
 	private RoleRepository roleRepository;
 
 	private SessionRegistry sessionRegistry;
+	
+
 
 	public static final String TOKEN_INVALID = "invalidToken";
 	public static final String TOKEN_EXPIRED = "expired";
@@ -91,6 +100,9 @@ public class UserService implements IUserService {
 		}
 		final Usuario user = new Usuario();
 		final Distrito distritox = new Distrito();
+		final EstadoUsuario estadousuario = new EstadoUsuario();
+		final TipoUsuario tipousuario = new TipoUsuario();
+
 		user.setNombre_usuario(accountDto.getNombre_usuario());
 
 		user.setApellido_usuario(accountDto.getApellido_usuario());
@@ -108,6 +120,20 @@ public class UserService implements IUserService {
 
 		user.setmDistrito(accountDto.getDistrito());
 
+		estadousuario.setCodigo_estadousuario(1);
+
+		accountDto.setEstadousuario(estadousuario);
+
+		user.setmEstadoUsuario(accountDto.getEstadousuario());
+
+		tipousuario.setCodigo_tipousuario(1);
+		accountDto.setTipousuario(tipousuario);
+		user.setmTipoUsuario(accountDto.getTipousuario());
+
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+		user.setVersion(timestamp);
+
 		System.out
 				.println("Codigo recibido del param = " + distrito + "El distrito elegido es = " + user.getmDistrito());
 
@@ -122,6 +148,9 @@ public class UserService implements IUserService {
 
 		System.out.println("Role/es asociados" + user.getRoles());
 
+		
+		
+		
 		return userRepository.save(user);
 	}
 
@@ -250,6 +279,7 @@ public class UserService implements IUserService {
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		return currentUser;
 	}
+
 	@Override
 	public boolean emailExists(final String email) {
 		return userRepository.findByEmail(email) != null;
@@ -281,9 +311,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List<Usuario>  findByCorreo(String email) {
-		
-	
+	public List<Usuario> findByCorreo(String email) {
+
 		return userRepository.findByCorreo(email);
 	}
 
@@ -292,5 +321,15 @@ public class UserService implements IUserService {
 		// TODO Auto-generated method stub
 		return userRepository.BuscarEmailParam(email);
 	}
+	
+
+
+	  
+	
+	
+	
+	
+	
+	
 
 }

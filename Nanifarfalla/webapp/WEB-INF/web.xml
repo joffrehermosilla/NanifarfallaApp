@@ -21,7 +21,11 @@
 
 		<!-- <multipart-config> <location>c:\tmp</location> </multipart-config> -->
 	</servlet>
-
+	<!-- Evento Listener para permitir Pubhisher Patron de diseño Observador -->
+	<listener>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher
+		</listener-class>
+	</listener>
 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
@@ -61,6 +65,10 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
+
+
+
+
 
 
 

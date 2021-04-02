@@ -38,10 +38,21 @@
 		<joffre.aerogear.version>1.0.0</joffre.aerogear.version>
 		<joffre.junit.version>4.12</joffre.junit.version>
 		<joffre.mysql.version>5.1.48</joffre.mysql.version>
+
 	</properties>
 
 
 	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+
+
+
+
 		<!-- JUNIT VERSION 4.12 -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -239,6 +250,27 @@
 
 
 	</dependencies>
+
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<configuration>
+				<excludes>
+					<exclude>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok</artifactId>
+					</exclude>
+				</excludes>
+			</configuration>
+		</plugin>
+	</plugins>
+
+
+
+
+
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>

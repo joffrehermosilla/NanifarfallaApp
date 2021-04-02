@@ -73,7 +73,7 @@
 				<c:if test="${mensaje!=null }">
 					<div class='alert alert-success' role="alert">${mensaje}</div>
 				</c:if>
-				<form:form action="${urlForm}" method="post"
+				<form:form action="${urlForm}" method="post" id="form" class="form"
 					enctype="multipart/form-data" modelAttribute="usuario">
 					<fieldset>
 						<div class="form-group">
@@ -112,11 +112,10 @@
 						<div class="form-group myForm17">
 							<form:label path="email">Email</form:label>
 							<span><form:input type="email" path="email"
-									class="form-control email " name="email"
-									value=""
-									id="email" onblur="buscarPorCorreo(this.value)"
-									required="required" /></span> <small class="form-text text-muted">We'll
-								never share your email with anyone else.</small>
+									class="form-control email " name="email" value="" id="email"
+									onblur="buscarPorCorreo(this.value)" required="required" /></span> <small
+								class="form-text text-muted">We'll never share your
+								email with anyone else.</small>
 
 
 							<div class="email_info">
@@ -327,7 +326,7 @@
 								<div class="form-buttons">
 									<div class="button">
 										<button href="${urlRoot}" type="submit" value="submit"
-											class="btn btn-danger">Guardar</button>
+											id="guardar" class="btn btn-danger"></button>
 									</div>
 								</div>
 
@@ -392,6 +391,9 @@
 			</ul>
 		</div>
 	</spring:hasBindErrors>
+
+
+
 
 
 
