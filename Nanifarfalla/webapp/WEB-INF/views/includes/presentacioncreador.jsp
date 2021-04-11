@@ -10,6 +10,12 @@
 
 
 <spring:url value="/resources" var="urlPublic" />
+
+<jsp:include page="../includes/link.jsp"></jsp:include>
+
+<!-- custom javascript -->
+<jsp:include page="../includes/script.jsp"></jsp:include>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <div class="popup" onclick="myFunction()"></div>
 <nav class="navbar navbar-preview fixed-top">
 	<div
@@ -53,9 +59,8 @@
 						</p>
 					</button>
 					<div class="dropdown-divider"></div>
-					<button class="dropdown-block-item switch_price_prod"
-						data-type="" data-price="" data-price_label="$"
-						data-label="">
+					<button class="dropdown-block-item switch_price_prod" data-type=""
+						data-price="" data-price_label="$" data-label="">
 						<div
 							class="d-flex justify-content-between align-items-center mb-2">
 							<span>Catalogo Venta</span><span
@@ -73,8 +78,9 @@
 			<div class="btn-group d-none d-sm-flex">
 				<a class="dropdown-toggle text-gray-soft" js-price-dropdown="true"
 					href="#" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">In this site you dont pay anything just
-					contact with brand owners</a>
+					aria-expanded="false"> <fmt:message key="quality.lang" />
+
+				</a>
 				<div
 					class="dropdown-menu dropdown-menu--xl dropdown-menu--centered dropdown-menu--has-triangle">
 					<button class="dropdown-block-item switch_price_prod"
@@ -82,12 +88,16 @@
 						data-price_label="" data-label=" ">
 						<div
 							class="d-flex justify-content-between align-items-center mb-2">
-							<span>Before You Buy </span><span
+							<span> <fmt:message key="demo.lang" /></span><span
 								class="d-flex align-items-center"></span>
 						</div>
 						<ul class="fs-13 text-gray-soft mb-2">
-							<li>Use for a single product</li>
-							<li>Non-paying users only</li>
+							<li id="usuarioa"><a href="${contextRoot}/demoa"><fmt:message
+										key="benefita.lang" /></a></li>
+							<li id="usuariob"><a href="${contextRoot}/demob"><fmt:message
+										key="benefitb.lang" /></a></li>
+							<li id="usuarioc"><a href="${contextRoot}/democ"><fmt:message
+										key="benefitc.lang" /></a></li>
 						</ul>
 						<p class="fs-11 text-gray-soft">
 							Read the full <a href="">© Copyright 2020 All rights reserved</a>
@@ -95,12 +105,13 @@
 					</button>
 					<div class="dropdown-divider"></div>
 					<button class="dropdown-block-item switch_price_prod"
-						data-type="© Copyright 2020 All rights reserved" data-price="" data-price_label="$"
+						data-type="© Copyright 2020 All rights reserved" data-price=""
+						data-price_label="$"
 						data-label="© Copyright 2020 All rights reserved">
 						<div
 							class="d-flex justify-content-between align-items-center mb-2">
-							<span> Nanifarfalla</span><span
-								class="d-flex align-items-center">Terminos y Condiciones</span>
+							<span> Nanifarfalla</span><span class="d-flex align-items-center">Terminos
+								y Condiciones</span>
 						</div>
 						<ul class="fs-13 text-gray-soft mb-2">
 							<li>Use for a single product</li>

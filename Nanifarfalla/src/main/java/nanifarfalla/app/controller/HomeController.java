@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.Ceo;
@@ -157,6 +158,31 @@ public class HomeController {
 		// return "home";
 	}
 
+	@RequestMapping(value = "/demoa")
+	public ModelAndView demoa() {		
+		ModelAndView mv = new ModelAndView("/demo/demo");		
+		mv.addObject("title","usuario tipo A");
+		mv.addObject("userClickDemoA",true);
+		return mv;				
+	}	
+	
+	@RequestMapping(value = "/demob")
+	public ModelAndView demob() {		
+		ModelAndView mv = new ModelAndView("/demo/demo");		
+		mv.addObject("title","usuario tipo B");
+		mv.addObject("userClickDemoB",true);
+		return mv;				
+	}
+	
+	@RequestMapping(value = "/democ")
+	public ModelAndView democ() {		
+		ModelAndView mv = new ModelAndView("/demo/demo");		
+		mv.addObject("title","usuario tipo C");
+		mv.addObject("userClickDemoC",true);
+		return mv;				
+	}
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String mostrarLogin() {
 

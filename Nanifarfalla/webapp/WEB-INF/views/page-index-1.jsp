@@ -8,39 +8,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!-- Titulo -->
-<title>Nanifarfalla | Bienvenido</title>
+<title>${contextRoot}|<fmt:message key="welcome.lang" />
+
+</title>
 
 <spring:url value="/resources" var="urlPublic" />
 
-<!-- Styles CSS -->
-<jsp:include page="includes/link.jsp"></jsp:include>
 
-<!-- custom javascript -->
-<jsp:include page="includes/script.jsp"></jsp:include>
 
 
 
 </head>
 <body>
 	<header class="section-header">
-	
-		<section class="section-content padding-y-sm">
-		<div class="container">
-			<jsp:include page="includes/presentacioncreador.jsp"></jsp:include>
 
-		</div>
-		<!-- container .//  -->
-	</section>
-	<jsp:include page="includes/estadoymenu.jsp"></jsp:include>
-	
+		<section class="section-content padding-y-sm">
+			<div class="container">
+				<jsp:include page="includes/presentacioncreador.jsp"></jsp:include>
+
+			</div>
+			<!-- container .//  -->
+		</section>
+		<jsp:include page="includes/estadoymenu.jsp"></jsp:include>
+
 		<jsp:include page="includes/navbarheader.jsp"></jsp:include>
 
 	</header>
-	
-	
-		<!-- section-header.// -->
+
+
+	<!-- section-header.// -->
 
 
 
@@ -50,15 +48,15 @@
 
 			<div>
 
-			<jsp:include page="includes/carruselpromocional.jsp"></jsp:include> 
+				<jsp:include page="includes/carruselpromocional.jsp"></jsp:include>
 			</div>
 
 		</div>
 		<!-- container //  -->
 	</section>
 
-	
-	
+
+
 	<!-- ========================= SECTION INTRO END// ========================= -->
 
 
@@ -90,9 +88,9 @@
 		</div>
 		<!-- container .//  -->
 	</section>
-	
 
-	
+
+
 	<!-- ========================= SECTION CONTENT ========================= -->
 
 	<section class="section-content">
@@ -106,7 +104,7 @@
 
 			<div class="row">
 				<div class="col-md-3">
-					<div  class="card card-product-grid">
+					<div class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
 							src="${urlPublic}/images/items/1.jpg">
 						</a>
@@ -499,7 +497,7 @@
 
 
 	<!-- ========================= FOOTER ========================= -->
-	  <jsp:include page="includes/footer.jsp"></jsp:include>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 
 	<!-- ========================= FOOTER END // ========================= -->
 

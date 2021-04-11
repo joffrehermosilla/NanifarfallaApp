@@ -71,7 +71,7 @@
 
 <script src="${urlPublic}/js/ubicacion.js"></script>
 
-
+<script src="${urlPublic}/js/myapp.js"></script>
 
 
 
