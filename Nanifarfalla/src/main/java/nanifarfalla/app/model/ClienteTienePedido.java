@@ -50,10 +50,10 @@ public class ClienteTienePedido {
 	Usuario mUsuario;
 
 	@OneToMany(mappedBy = "mClientetienepedido")
-	private Collection<ProductoxPedido> productoxpedido = new ArrayList<>();
+	private transient Collection<ProductoxPedido> productoxpedido = new ArrayList<>();
 
 	@OneToMany(mappedBy = "mClienteTienePedido")
-	private Collection<Contrato> contratos = new ArrayList<>();
+	private transient Collection<Contrato> contratos = new ArrayList<>();
 //	int fkcodigo_usuario;
 //	int fkcodigo_cliente;
 //	int fkcodigo_vendedor;
@@ -74,6 +74,20 @@ public class ClienteTienePedido {
 	public ClienteTienePedido() {
 
 	}
+	
+	
+
+	public ClienteTienePedido(int codigo_pedido_web, Collection<ProductoxPedido> productoxpedido,
+			Collection<Contrato> contratos, Date fecha_pedido, int cantidad_producto) {
+		super();
+		this.codigo_pedido_web = codigo_pedido_web;
+		this.productoxpedido = productoxpedido;
+		this.contratos = contratos;
+		this.fecha_pedido = fecha_pedido;
+		this.cantidad_producto = cantidad_producto;
+	}
+
+
 
 	public Collection<Contrato> getContratos() {
 		return contratos;

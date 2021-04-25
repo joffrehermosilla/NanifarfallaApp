@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "linea")
@@ -21,8 +23,8 @@ public class Linea {
 	private int codigo_linea;
 	
 	
-	@OneToMany(mappedBy = "mLinea",fetch = FetchType.EAGER)
-	private Collection<Producto> productos = new ArrayList<>();
+	@OneToMany(mappedBy = "mLinea", fetch = FetchType.LAZY)
+	private transient Collection<Producto> productos = new ArrayList<>();
 	
 	public Collection<Producto> getProductos() {
 		return productos;
@@ -34,7 +36,7 @@ public class Linea {
 
 	private String nombre_linea;
 	private String foto_linea = "nanifarfalla.jpeg";
-	private Date fechacreacion;
+
 	private String claveApi;
 	private Date version;
 	
@@ -83,12 +85,6 @@ public class Linea {
 		this.foto_linea = foto_linea;
 	}
 
-	public Date getFechacreacion() {
-		return fechacreacion;
-	}
 
-	public void setFechacreacion(Date fechacreacion) {
-		this.fechacreacion = fechacreacion;
-	}
 
 }

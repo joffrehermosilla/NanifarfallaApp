@@ -26,26 +26,30 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 
 <c:set var="ceocentral"
 	value="${random.nextInt(fn:length(usuarios)) +1}" />
+	
 <c:set var="ceosize" value="${fn:length(usuarios)}" />
 <table>
 
 	<c:forEach var="usuario" items="${usuarios}" varStatus="counter">
 		<c:choose>
-			<c:when test="${usuario.codigo_usuario==ceocentral-1}">
-				<c:set var="ceolcodigo" value="${usuario.codigo_usuario}" />
-				<c:set var="ceolnombre" value="${usuario.nombre_usuario}" />
-				<c:set var="ceolpaterno" value="${usuario.apellido_usuario}" />
+			
+				<c:when test="${usuario.codigo_usuario==ceocentral-1}">
+			
 				
-				<c:set var="ceolmensaje" value="${usuario.mensaje_usuario}" />
-				<c:set var="ceolfoto" value="${usuario.foto_usuario}" />
+					<c:set var="ceolcodigo" value="${usuario.codigo_usuario}" />
+					<c:set var="ceolnombre" value="${usuario.nombre_usuario}" />
+					<c:set var="ceolpaterno" value="${usuario.apellido_usuario}" />
 
-			</c:when>
-
+					<c:set var="ceolmensaje" value="${usuario.mensaje_usuario}" />
+					<c:set var="ceolfoto" value="${usuario.foto_usuario}" />
+</c:when>
+			
+			
 			<c:when test="${usuario.codigo_usuario==ceocentral}">
 				<c:set var="ceocodigo" value="${usuario.codigo_usuario}" />
 				<c:set var="ceonombre" value="${usuario.nombre_usuario}" />
 				<c:set var="ceopaterno" value="${usuario.apellido_usuario}" />
-			
+
 				<c:set var="ceomensaje" value="${usuario.mensaje_usuario}" />
 				<c:set var="ceofoto" value="${usuario.foto_usuario}" />
 			</c:when>
@@ -54,7 +58,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 				<c:set var="ceorcodigo" value="${usuario.codigo_usuario}" />
 				<c:set var="ceornombre" value="${usuario.nombre_usuario}" />
 				<c:set var="ceorpaterno" value="${usuario.apellido_usuario}" />
-		
+
 				<c:set var="ceormensaje" value="${usuario.mensaje_usuario}" />
 				<c:set var="ceorfoto" value="${usuario.foto_usuario}" />
 			</c:when>
@@ -63,7 +67,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 				<c:set var="ceorcodigo" value="${ceocodigo}" />
 				<c:set var="ceornombre" value="${ceonombre}" />
 				<c:set var="ceorpaterno" value="${ceopaterno}" />
-				
+
 				<c:set var="ceormensaje" value="${ceomensaje}" />
 				<c:set var="ceorfoto" value="${ceofoto}" />
 			</c:when>
@@ -79,7 +83,8 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 		</tr>
 	</c:forEach>
 
-	<section class="container pt-md-3 pb-5 mb-md-3"style="align-content: center;">
+	<section class="container pt-md-3 pb-5 mb-md-3"
+		style="align-content: center;">
 		<div class="customer-feedback" style="align-content: center;">
 			<div class="container text-center" align="center">
 				<div class="row" align="center">
@@ -103,13 +108,12 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 								<div class="col-xs-12 col-sm-6 col-md-3">
 									<img src="${urlPublic}/images/${ceofoto}"
 										class="center-block img-circle" alt="Nanifarfalla Customer">
-									<h3 class="customer-name">${ceonombre}${ceopaterno}
-										</h3>
+									<h3 class="customer-name">${ceonombre}${ceopaterno}</h3>
 									<p>${ceomensaje}</p>
 									<span class="light-bg customer-rating"
-										data-rating="${ceocodigo}"> ${ceocodigo}
-										 <i class="fa fa-star	"></i>
-										 </span>
+										data-rating="${ceocodigo}"> ${ceocodigo} <i
+										class="fa fa-star	"></i>
+									</span>
 								</div>
 							</div>
 							<!-- /slider item -->
@@ -119,13 +123,12 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 								<div class="col-xs-12 col-sm-6 col-md-3">
 									<img src="${urlPublic}/images/${ceolfoto}"
 										class="center-block img-circle" alt="Nanifarfalla Customer">
-									<h3 class="customer-name">${ceolnombre}${ceolpaterno}
-										</h3>
+									<h3 class="customer-name">${ceolnombre}${ceolpaterno}</h3>
 									<p>${ceolmensaje}</p>
 									<span class="light-bg customer-rating"
-										data-rating="${ceorcodigo}"> ${ceolcodigo} 
-										 <i class="fa fa-star"></i>
-										</span>
+										data-rating="${ceorcodigo}"> ${ceolcodigo} <i
+										class="fa fa-star"></i>
+									</span>
 								</div>
 							</div>
 							<!-- /slider item -->
@@ -140,8 +143,7 @@ ${rand mod 2 == 0} and ${rand mod 2 == 1}-->
 								<div class="col-xs-12 col-sm-6 col-md-3">
 									<img src="${urlPublic}/images/${ceorfoto}}"
 										class="center-block  img-circle" alt="Nanifarfalla Customer">
-									<h3 class="customer-name">${ceornombre}${ceorpaterno}
-									</h3>
+									<h3 class="customer-name">${ceornombre}${ceorpaterno}</h3>
 									<p>${ceormensaje}</p>
 									<span class="light-bg customer-rating"
 										data-rating="${ceorcodigo}"> <i class="fa fa-star"></i>

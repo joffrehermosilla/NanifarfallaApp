@@ -22,8 +22,8 @@ public class EstadoProducto {
 	String claveApi;
 	Date version;
 
-	@OneToMany(mappedBy = "mEstadoProducto", fetch = FetchType.EAGER)
-	private Collection<Producto> productos = new ArrayList<>();
+	@OneToMany(mappedBy = "mEstadoProducto", fetch = FetchType.LAZY)
+	private transient Collection<Producto> productos = new ArrayList<>();
 
 	public EstadoProducto() {
 

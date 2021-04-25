@@ -24,6 +24,8 @@ public class TipoProducto {
 	String foto_ruta;
 	String claveApi;
 	Date version;
+	@OneToMany(mappedBy = "mTipoProducto", fetch = FetchType.LAZY)
+	private transient Collection<Producto> productos = new ArrayList<>();
 
 	public Collection<Producto> getProductos() {
 		return productos;
@@ -32,9 +34,6 @@ public class TipoProducto {
 	public void setProductos(Collection<Producto> productos) {
 		this.productos = productos;
 	}
-
-	@OneToMany(mappedBy = "mTipoProducto", fetch = FetchType.EAGER)
-	private Collection<Producto> productos = new ArrayList<>();
 
 	public TipoProducto() {
 

@@ -14,7 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<joffre.jackson.version>2.11.2</joffre.jackson.version>
+
 		<joffre.logstash.version>4.8</joffre.logstash.version>
 		<joffre.jspapi.version>2.2</joffre.jspapi.version>
 		<joffre.springsecurity.version>5.2.0.RELEASE
@@ -38,7 +38,7 @@
 		<joffre.aerogear.version>1.0.0</joffre.aerogear.version>
 		<joffre.junit.version>4.12</joffre.junit.version>
 		<joffre.mysql.version>5.1.48</joffre.mysql.version>
-
+		<joffre.jackson.version>2.11.2</joffre.jackson.version>
 	</properties>
 
 
@@ -109,6 +109,13 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${joffre.jackson.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${joffre.jackson.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>javax.el</groupId>

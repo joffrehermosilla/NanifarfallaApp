@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "area")
+@Table(name = "cliente_tiene_preferencia")
 public class ClienteTienePreferencia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +28,14 @@ public class ClienteTienePreferencia {
 	Date fecha_voto_preferencia;
 	int cantidad_puntos;
 	Date version;
+	private String claveApi;
+	public String getClaveApi() {
+		return claveApi;
+	}
+
+	public void setClaveApi(String claveApi) {
+		this.claveApi = claveApi;
+	}
 
 	public ClienteTienePreferencia() {
 

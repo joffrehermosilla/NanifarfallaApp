@@ -12,8 +12,7 @@
 		<!-- Declaramos todos los recursos que estaran protegidos -->
 		<intercept-url pattern="/anuncios/*"
 			access="hasAnyAuthority('ROLE_ADMIN')" />
-		<intercept-url pattern="/lineas/*"
-			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
+		
 		<intercept-url pattern="/alertas/*"
 			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
 		<intercept-url pattern="/productos/*"
@@ -22,6 +21,7 @@
 		<intercept-url pattern="/logout*" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
 		<intercept-url pattern="/signup/**" access="permitAll" />
+			<intercept-url pattern="/lineas/**" access="permitAll" />
 		<intercept-url pattern="/usuarios/registration*"
 			access="permitAll" />
 		<intercept-url pattern="/registrationConfirm*"

@@ -95,7 +95,7 @@
 									<c:forEach var="producto" items="${productos}">
 										<c:set var="i" value="${linea.codigo_linea}" />
 										<c:choose>
-											<c:when test="${i eq producto.fkcodigo_linea}">
+											<c:when test="${i eq producto.mLinea.codigo_linea}">
 												<ul class="list-menu">
 													<li><a href="../lineas/detalle">${producto.nombre_producto}</a></li>
 
@@ -268,7 +268,7 @@
 					<c:forEach var="producto" items="${productos}">
 						<c:set var="i" value="${linea.codigo_linea}" />
 						<c:choose>
-							<c:when test="${i eq producto.fkcodigo_linea}">
+							<c:when test="${i eq producto.mLinea.codigo_linea}">
 								<article class="card card-product-list">
 									<div class="row no-gutters">
 										<aside class="col-md-3">
@@ -363,7 +363,7 @@
 	<!-- ========================= FOOTER ========================= -->
 	<footer class="section-footer border-top padding-y">
 		<div class="container">
-			<p class="float-md-right"> Copyright 2019 All rights
+			<p class="float-md-right"> Copyright 2021 All rights
 				reserved</p>
 			<p>
 				<a href="#">Terms and conditions</a>

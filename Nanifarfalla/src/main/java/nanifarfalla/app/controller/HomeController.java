@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import nanifarfalla.app.exception.ProductNotFoundException;
 import nanifarfalla.app.model.Ceo;
-
+import nanifarfalla.app.model.Linea;
+import nanifarfalla.app.model.Producto;
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.service.IAlertaService;
 import nanifarfalla.app.service.IAnunciosService;
@@ -27,8 +30,8 @@ import nanifarfalla.app.service.IMenuService;
 import nanifarfalla.app.service.IProductoService;
 import nanifarfalla.app.service.IUserService;
 import nanifarfalla.app.util.Utileria;
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,6 +40,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author joffre
+ *
+ */
 @Controller
 public class HomeController {
 	@Autowired
@@ -56,11 +63,119 @@ public class HomeController {
 	private IUserService userService;
 
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String goHome() {
-		return "home";
+	/*
+	 * @RequestMapping(value = "/home", method = RequestMethod.GET) public String
+	 * goHome() { return "home"; }
+	 */
+
+	@RequestMapping(value = { "/page" })
+	public ModelAndView index() {
+		ModelAndView mv = new ModelAndView("ecommerce/listProducts");
+		mv.addObject("title", "Home");
+
+		logger.info("Inside PageController index method - INFO");
+		logger.debug("Inside PageController index method - DEBUG");
+
+		// passing the list of categories
+		mv.addObject("categories", serviceLineas.buscarTodas());
+
+		mv.addObject("userClickHome", true);
+		return mv;
 	}
+
+	@RequestMapping(value = "/about")
+	public ModelAndView about() {
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("title", "About Us");
+		mv.addObject("userClickAbout", true);
+		return mv;
+	}
+
+	@RequestMapping(value = "/contact")
+	public ModelAndView contact() {
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("title", "Contact Us");
+		mv.addObject("userClickContact", true);
+		return mv;
+	}
+
+	/*
+	 * Methods to load all the products and based on category
+	 */
+
+	@RequestMapping(value = "/show/all/products")
+	public ModelAndView showAllProducts() {
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("title", "All Products");
+
+		// passing the list of categories
+		mv.addObject("categories", serviceLineas.buscarTodas());
+	//	mv.addObject("productos", serviceLineas.buscarTodas());
+
+		mv.addObject("userClickAllProducts", true);
+		return mv;
+	}
+
+	@RequestMapping(value = "/show/category/{id}/products")
+	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
+		ModelAndView mv = new ModelAndView("page");
+
+		// categoryDAO to fetch a single category
+		Linea category = new Linea();
+
+		//category = serviceLineas.buscarPorId(id);
+    
+		category = (Linea) serviceLineas.findBycodigo_linea(id);
+		System.out.println("Linea elegida: "+category);
+		
+		mv.addObject("title", category.getNombre_linea());
+
+		// passing the list of categories
+		mv.addObject("categories", serviceLineas.buscarTodas());
+
+		// passing the single category object
+		mv.addObject("category", category);
+
+		mv.addObject("userClickCategoryProducts", true);
+		return mv;
+	}
+	
+	
+	
+	/*
+	 * Viewing a single product
+	 * */
+	
+	@RequestMapping(value = "/show/{id}/product") 
+	public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException {
+		
+		ModelAndView mv = new ModelAndView("page");
+		
+		Producto product = serviceProductos.buscarPorId(id);
+		
+		if(product == null) throw new ProductNotFoundException();
+		
+		// update the view count
+		
+		 // product.setViews(product.getViews() + 1); 
+		  
+		//  serviceProductos.update(product);
+		 
+		//---------------------------
+		
+		mv.addObject("title", product.getNombre_producto());
+		mv.addObject("product", product);
+		
+		mv.addObject("userClickShowProduct", true);
+		
+		
+		return mv;
+		
+	}
+	
+	
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String buscar(@RequestParam("fecha") String fecha, Model model) {
@@ -153,36 +268,36 @@ public class HomeController {
 		for (int i = 0; i < listaFechas.size(); i++) {
 			System.out.println(listaFechas.get(i));
 		}
+		
 
 		return "page-index-1";
 		// return "home";
 	}
 
 	@RequestMapping(value = "/demoa")
-	public ModelAndView demoa() {		
-		ModelAndView mv = new ModelAndView("/demo/demo");		
-		mv.addObject("title","usuario tipo A");
-		mv.addObject("userClickDemoA",true);
-		return mv;				
-	}	
-	
+	public ModelAndView demoa() {
+		ModelAndView mv = new ModelAndView("/demo/demo");
+		mv.addObject("title", "usuario tipo A");
+		mv.addObject("userClickDemoA", true);
+		return mv;
+	}
+
 	@RequestMapping(value = "/demob")
-	public ModelAndView demob() {		
-		ModelAndView mv = new ModelAndView("/demo/demo");		
-		mv.addObject("title","usuario tipo B");
-		mv.addObject("userClickDemoB",true);
-		return mv;				
+	public ModelAndView demob() {
+		ModelAndView mv = new ModelAndView("/demo/demo");
+		mv.addObject("title", "usuario tipo B");
+		mv.addObject("userClickDemoB", true);
+		return mv;
 	}
-	
+
 	@RequestMapping(value = "/democ")
-	public ModelAndView democ() {		
-		ModelAndView mv = new ModelAndView("/demo/demo");		
-		mv.addObject("title","usuario tipo C");
-		mv.addObject("userClickDemoC",true);
-		return mv;				
+	public ModelAndView democ() {
+		ModelAndView mv = new ModelAndView("/demo/demo");
+		mv.addObject("title", "usuario tipo C");
+		mv.addObject("userClickDemoC", true);
+		return mv;
 	}
-	
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String mostrarLogin() {
 
@@ -218,7 +333,6 @@ public class HomeController {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 
-
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
@@ -234,8 +348,6 @@ public class HomeController {
 
 		return "redirect:/login/users";
 	}
-
-	
 
 	private List<Ceo> getLista4() {
 

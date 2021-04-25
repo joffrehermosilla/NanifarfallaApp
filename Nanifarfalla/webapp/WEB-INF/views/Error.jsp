@@ -40,7 +40,7 @@
 	        <div class="container">
 	            <!-- Brand and toggle get grouped for better mobile display -->
 	            <div class="navbar-header">
-	                <a class="navbar-brand" href="${contextRoot}/home">Home</a>
+	                <a class="navbar-brand" href="${contextRoot}">Home</a>
 	            </div>
 			</div>
 		</nav>
@@ -78,7 +78,7 @@
 		</div>
 
 		
-	<!-- <%@include file="./shared/footer.jsp" %>  -->	
+	 <%@include file="./shared/footer.jsp" %>  
 
 	</div>
 		

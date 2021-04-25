@@ -35,7 +35,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto1.setFoto_ruta("nanifarfalla.jpg");
 			producto1.setColores_producto("Amarillo,Rojo,Azul");
 			producto1.setQr_producto("ruta del qr");
-			producto1.setPpv_producto(90.8);
+		//	producto1.setPpv_producto(90.8);
 			producto1.setPvf_producto(68.3);
 			producto1.setClaveApi("clave APi");
 			producto1.setVersion(formatter.parse("18-11-2019"));
@@ -51,7 +51,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto2.setFoto_ruta("nanifarfalla.jpg");
 			producto2.setColores_producto("turquesa,violeta,oro,plato");
 			producto2.setQr_producto("ruta del qr");
-			producto2.setPpv_producto(150.8);
+			//producto2.setPpv_producto(150.8);
 			producto2.setPvf_producto(68.3);
 			producto2.setClaveApi("clave APi");
 			producto2.setVersion(formatter.parse("18-11-2019"));
@@ -67,7 +67,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto3.setFoto_ruta("nanifarfalla.jpg");
 			producto3.setColores_producto("Amarillo,Rojo,Azul");
 			producto3.setQr_producto("ruta del qr");
-			producto3.setPpv_producto(90.8);
+		//	producto3.setPpv_producto(90.8);
 			producto3.setPvf_producto(68.3);
 			producto3.setClaveApi("clave APi");
 			producto3.setVersion(formatter.parse("18-11-2019"));
@@ -84,7 +84,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto4.setFoto_ruta("nanifarfalla.jpg");
 			producto4.setColores_producto("turquesa,violeta,oro,plato");
 			producto4.setQr_producto("ruta del qr");
-			producto4.setPpv_producto(150.8);
+			//producto4.setPpv_producto(150.8);
 			producto4.setPvf_producto(68.3);
 			producto4.setClaveApi("clave APi");
 			producto4.setVersion(formatter.parse("18-11-2019"));
@@ -102,7 +102,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto5.setFoto_ruta("nanifarfalla.jpg");
 			producto5.setColores_producto("Amarillo,Rojo,Azul");
 			producto5.setQr_producto("ruta del qr");
-			producto5.setPpv_producto(90.8);
+		//	producto5.setPpv_producto(90.8);
 			producto5.setPvf_producto(68.3);
 			producto5.setClaveApi("clave APi");
 			producto5.setVersion(formatter.parse("18-11-2019"));
@@ -118,7 +118,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto6.setFoto_ruta("nanifarfalla.jpg");
 			producto6.setColores_producto("turquesa,violeta,oro,plato");
 			producto6.setQr_producto("ruta del qr");
-			producto6.setPpv_producto(150.8);
+		//	producto6.setPpv_producto(150.8);
 			producto6.setPvf_producto(68.3);
 			producto6.setClaveApi("clave APi");
 			producto6.setVersion(formatter.parse("18-11-2019"));
@@ -135,7 +135,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto7.setFoto_ruta("nanifarfalla.jpg");
 			producto7.setColores_producto("Amarillo,Rojo,Azul");
 			producto7.setQr_producto("ruta del qr");
-			producto7.setPpv_producto(90.8);
+		//	producto7.setPpv_producto(90.8);
 			producto7.setPvf_producto(68.3);
 			producto7.setClaveApi("clave APi");
 			producto7.setVersion(formatter.parse("18-11-2019"));
@@ -151,7 +151,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto8.setFoto_ruta("nanifarfalla.jpg");
 			producto8.setColores_producto("turquesa,violeta,oro,plato");
 			producto8.setQr_producto("ruta del qr");
-			producto8.setPpv_producto(150.8);
+		//	producto8.setPpv_producto(150.8);
 			producto8.setPvf_producto(68.3);
 			producto8.setClaveApi("clave APi");
 			producto8.setVersion(formatter.parse("18-11-2019"));
@@ -167,7 +167,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto9.setFoto_ruta("nanifarfalla.jpg");
 			producto9.setColores_producto("Amarillo,Rojo,Azul");
 			producto9.setQr_producto("ruta del qr");
-			producto9.setPpv_producto(90.8);
+		//	producto9.setPpv_producto(90.8);
 			producto9.setPvf_producto(68.3);
 			producto9.setClaveApi("clave APi");
 			producto9.setVersion(formatter.parse("18-11-2019"));
@@ -183,7 +183,7 @@ public class ProductoServiceImpl implements IProductoService {
 			producto10.setFoto_ruta("nanifarfalla.jpg");
 			producto10.setColores_producto("turquesa,violeta,oro,plato");
 			producto10.setQr_producto("ruta del qr");
-			producto10.setPpv_producto(150.8);
+		//	producto10.setPpv_producto(150.8);
 			producto10.setPvf_producto(68.3);
 			producto10.setClaveApi("clave APi");
 			producto10.setVersion(formatter.parse("18-11-2019"));
@@ -244,6 +244,90 @@ public class ProductoServiceImpl implements IProductoService {
 	public void inserta(Collection<Producto> productos) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Producto get(int productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean add(Producto product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(Producto product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Producto product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Producto> getProductsByParam(String param, int count) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> listActiveProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> listActiveProductsByCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> getLatestActiveProducts(int count) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> getProductoByLinea(int idLinea) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> findByFkcodigo_linea(int codigo_linea) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> findByLinea(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> BuscaLineaporClase(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Producto> BuscarLineaClaseconParam(int codig_linea) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

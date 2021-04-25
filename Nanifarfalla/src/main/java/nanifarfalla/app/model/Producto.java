@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "producto")
 public class Producto {
@@ -21,13 +23,17 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_producto;
 	String nombre_producto;
+	//private int views;
+	//private int purchases;
+
 	double stock_producto;
 	String preparacion_producto;
 	String foto_ruta;
 	String colores_producto;
 	String qr_producto;
-	double ppv_producto;
+	double pvv_producto;
 	double pvf_producto;
+
 	String claveApi;
 	Date version;
 	Date ingreso_almacen_producto;
@@ -36,17 +42,6 @@ public class Producto {
 	String foto_ruta2;
 	String foto_ruta3;
 	String foto_ruta4;
-
-	public Collection<ProductoTieneColores> getProductoTieneColores() {
-		return productoTieneColores;
-	}
-
-	public void setProductoTieneColores(Collection<ProductoTieneColores> productoTieneColores) {
-		this.productoTieneColores = productoTieneColores;
-	}
-
-	@OneToMany(mappedBy = "mColores", fetch = FetchType.EAGER)
-	private Collection<ProductoTieneColores> productoTieneColores = new ArrayList<>();
 
 	@JoinColumn(name = "fkcodigo_tipoproducto", referencedColumnName = "codigo_tipoproducto")
 	@ManyToOne
@@ -60,14 +55,29 @@ public class Producto {
 	@ManyToOne
 	Linea mLinea;
 
-	@OneToMany(mappedBy = "mProducto", fetch = FetchType.LAZY)
-	private Collection<RecetaProductoTieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+	@OneToMany(mappedBy = "mProducto")
+	private transient Collection<ProductoxPedido> productoxpedido = new ArrayList<>();
 
 	@OneToMany(mappedBy = "mProducto")
-	private Collection<ClienteTienePreferencia> clientetienepreferencias = new ArrayList<>();
+	private transient Collection<RecetaProductoTieneInsumo> recetaproductostienenInsumo = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mProducto")
+	private transient Collection<ClienteTienePreferencia> clientetienepreferencias = new ArrayList<>();
+
+	@OneToMany(mappedBy = "mProducto")
+	private transient Collection<ProductoTieneColores> productoTieneColores = new ArrayList<>();
+
+	
 
 
 
+	public Collection<ProductoTieneColores> getProductoTieneColores() {
+		return productoTieneColores;
+	}
+
+	public void setProductoTieneColores(Collection<ProductoTieneColores> productoTieneColores) {
+		this.productoTieneColores = productoTieneColores;
+	}
 
 	public Collection<ClienteTienePreferencia> getClientetienepreferencias() {
 		return clientetienepreferencias;
@@ -85,9 +95,6 @@ public class Producto {
 		this.recetaproductostienenInsumo = recetaproductostienenInsumo;
 	}
 
-	@OneToMany(mappedBy = "mProducto")
-	private Collection<ProductoxPedido> productoxpedido = new ArrayList<>();
-
 	public Collection<ProductoxPedido> getProductoxpedido() {
 		return productoxpedido;
 	}
@@ -95,6 +102,18 @@ public class Producto {
 	public void setProductoxpedido(Collection<ProductoxPedido> productoxpedido) {
 		this.productoxpedido = productoxpedido;
 	}
+
+	/*
+	 * public int getViews() { return views; }
+	 * 
+	 * public void setViews(int views) { this.views = views; }
+	 */
+
+	/*
+	 * public int getPurchases() { return purchases; }
+	 * 
+	 * public void setPurchases(int purchases) { this.purchases = purchases; }
+	 */
 
 	public Linea getmLinea() {
 		return mLinea;
@@ -228,12 +247,12 @@ public class Producto {
 		this.qr_producto = qr_producto;
 	}
 
-	public double getPpv_producto() {
-		return ppv_producto;
+	public double getPvv_producto() {
+		return pvv_producto;
 	}
 
-	public void setPpv_producto(double ppv_producto) {
-		this.ppv_producto = ppv_producto;
+	public void setPvv_producto(double pvv_producto) {
+		this.pvv_producto = pvv_producto;
 	}
 
 	public double getPvf_producto() {
@@ -258,6 +277,12 @@ public class Producto {
 
 	public void setVersion(Date version) {
 		this.version = version;
+	}
+
+	public Producto(int codigo_producto, String nombre_producto) {
+
+		this.codigo_producto = codigo_producto;
+		this.nombre_producto = nombre_producto;
 	}
 
 }
