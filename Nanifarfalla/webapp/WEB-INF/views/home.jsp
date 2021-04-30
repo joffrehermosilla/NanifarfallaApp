@@ -1,106 +1,124 @@
+<!-- DataTable Bootstrap Script -->
+<script src="${js}/angular.js"></script>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<fmt:setLocale value="${param.lang}" />
-<fmt:setBundle basename="messages" />
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!-- DataTable Bootstrap Script -->
+<script src="${js}/productsController.js"></script>
+<div class="container" ng-app="ShoppingApp" ng-controller="ProductController as pCtrl" >
 
-<!-- Titulo -->
-<title>Nanifarfalla | Bienvenido</title>
+	<div class="row" ng-init="pCtrl.fetchProducts()">
 
-<spring:url value="/resources" var="urlPublic" />
-<!-- Styles CSS -->
-<jsp:include page="includes/link.jsp"></jsp:include>
-<!-- Styles CSS -->
-<jsp:include page="includes/script.jsp"></jsp:include>
-
-
-
-
-
-</head>
-
-<body>
-
-	<!--  Primer header comprende telefono - información importante - Boton de contacto e Idioma -->
-
-	<jsp:include page="includes/estadoymenu.jsp"></jsp:include>
-
-
-	<!--  Segundo NAVBAR PERMITE LA BUSQUEDA Y SELECCIONAR EL LOGEO -->
-	<jsp:include page="includes/logeoybusqueda.jsp"></jsp:include>
-
-	<!--  Carrusel promocional  -->
-	<jsp:include page="includes/carruselpromocional.jsp"></jsp:include>
-
-
-
-	<!-- Generar Container -->
-	<div class="container theme-showcase" role="main" align="left"
-		style="position: center;">
-
-		<!-- Busqueda principal lineas   -->
-		<jsp:include page="includes/busquedaprincipal.jsp"></jsp:include>
-
-
-
-
-		<!-- Busqueda principal lineas   -->
-		<jsp:include page="includes/carruselemprendedores.jsp"></jsp:include>
-
-
-		<!-- Comentarios tutorial tinajero   -->
-		<jsp:include page="includes/blog.jsp"></jsp:include>
-
-
-
-		<!-- Products grid (Trending products)-->
-		<jsp:include page="includes/catalogo.jsp"></jsp:include>
-
-		<!-- Banners-->
-		<jsp:include page="includes/banerpublicitario.jsp"></jsp:include>
-
-
-
-		<!-- Featured category (Hoodie)-->
-		<jsp:include page="includes/aleatoriocatalogo.jsp"></jsp:include>
-
-
-		<!-- Shop by brand-->
-		<jsp:include page="includes/shopbybrand.jsp"></jsp:include>
-
-		<!-- Blog + Instagram info cards-->
-		<jsp:include page="includes/followme.jsp"></jsp:include>
-
-		<!-- Toast: Added to Cart-->
-		<div class="toast-container toast-bottom-center">
-			<div class="toast mb-3" id="cart-toast" data-delay="5000"
-				role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="toast-header bg-success text-white">
-					<i class="czi-check-circle mr-2"></i>
-					<h6 class="font-size-sm text-white mb-0 mr-auto">Added to
-						cart!</h6>
-					<button class="close text-white ml-2 mb-1" type="button"
-						data-dismiss="toast" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="toast-body">This item has been added to your cart.</div>
-			</div>
+		<div class="col-md-3">
+			<%@include file="./shared/sidebar.jsp"%>
 		</div>
 
-		<jsp:include page="includes/presentacioncreador.jsp"></jsp:include>
+		<div class="col-md-9">
 
-		<!-- Footer-->
-		<jsp:include page="includes/footerblack.jsp"></jsp:include>
-		<jsp:include page="includes/footerwhite.jsp"></jsp:include>
-		<!-- FOOTER -->
+			<div class="row carousel-holder">
+
+				<div class="col-md-12">
+					<div id="carousel-example-generic" class="carousel slide"
+						data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#carousel-example-generic" data-slide-to="0"
+								class="active"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+						</ol>
+						<div class="carousel-inner">
+							
+							<div class="item active">
+								<img class="slide-image" src="${images}/banner1.jpg"
+									alt="">
+							</div>
+							<div class="item">
+								<img class="slide-image" src="${images}/banner2.jpg"
+									alt="">
+							</div>
+							<div class="item">
+								<img class="slide-image" src="${images}/banner3.jpg"
+									alt="">
+							</div>
+							<div class="item">
+								<img class="slide-image" src="${images}/banner4.jpg"
+									alt="">
+							</div>
+						</div>
+						<a class="left carousel-control" href="#carousel-example-generic"
+							data-slide="prev"> <span
+							class="glyphicon glyphicon-chevron-left"></span>
+						</a> <a class="right carousel-control"
+							href="#carousel-example-generic" data-slide="next"> <span
+							class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+					</div>
+				</div>
+
+			</div>
+
+				<div class="row">
+                	<div class="col-xs-12">
+                		<h3>Our Most Viewed Products</h3>
+                		<hr/>
+                	</div>
+                </div>
+
+                <div class="row is-table-row">
+                	
+                    <div class="col-sm-4" ng-repeat="product in pCtrl.mvProducts">                    	
+                        <div class="thumbnail">
+                            <img ng-src="${images}/{{product.code}}.jpg" alt="{{product.name}}" class="landingImg">
+                            <h5>{{product.name}}</h5>
+                            <hr/>
+                            <div class="caption">
+                                <h4 class="pull-right">&#8377; {{product.unitPrice}}</h4>
+                                <p>{{product.description}}</p>
+                                <a ng-href="${contextRoot}/show/{{product.id}}/product" class="btn btn-primary pull-right">View</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <h4>Checkout more products!</h4>
+                        <hr/>
+                        <a class="btn btn-primary" href="${contextRoot}/show/all/products">More Products</a>
+                    </div>
+
+                </div>
+				
+				<div class="row">
+                	<div class="col-xs-12">
+                		<h3>Our Most Purchased Products</h3>
+                		<hr/>
+                	</div>
+                </div>
+               <div class="row is-table-row">
+                	
+                    <div class="col-sm-4" ng-repeat="product in pCtrl.mpProducts">                    	
+                        <div class="thumbnail">
+                            <img ng-src="${images}/{{product.code}}.jpg" alt="{{product.name}}" class="landingImg">
+                            <h5>{{product.name}}</h5>
+                            <hr/>
+                            <div class="caption">
+                                <h4 class="pull-right">&#8377; {{product.unitPrice}}</h4>
+                                <p>{{product.description}}</p>
+                                <a ng-href="${contextRoot}/show/{{product.id}}/product" class="btn btn-primary pull-right">View</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <h4>Checkout more products!</h4>
+                        <hr/>
+                        <a class="btn btn-primary" href="${contextRoot}/show/all/products">More Products</a>
+                    </div>
+
+                </div>
+
+		</div>
+
 	</div>
 
-
-</Body>
-
-</html>
+</div>
+<!-- /.container -->

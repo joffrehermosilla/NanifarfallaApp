@@ -85,6 +85,16 @@ public class Linea {
 		this.foto_linea = foto_linea;
 	}
 
+	public Linea(int codigo_linea, String nombre_linea) {
+	
+		this.codigo_linea = codigo_linea;
+		this.nombre_linea = nombre_linea;
+	}
+
+	public Linea() {
+	
+	}
+
 
 
 }

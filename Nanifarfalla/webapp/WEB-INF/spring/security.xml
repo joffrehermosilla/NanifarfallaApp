@@ -21,6 +21,8 @@
 		<intercept-url pattern="/logout*" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
 		<intercept-url pattern="/signup/**" access="permitAll" />
+		<intercept-url pattern="/json/**" access="permitAll" />
+		<intercept-url pattern="/show/**" access="permitAll" />
 			<intercept-url pattern="/lineas/**" access="permitAll" />
 		<intercept-url pattern="/usuarios/registration*"
 			access="permitAll" />

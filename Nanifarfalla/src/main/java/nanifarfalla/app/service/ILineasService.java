@@ -16,6 +16,8 @@ public interface ILineasService  {
 	void inserta(Linea linea);
 	List<Producto> findProductobyLineaIdParamsNative(int idLinea);
 	List<Linea> findBycodigo_linea(int codigo_linea);
+	List<Linea> findByid_linea( int id);
+	
 	
 	Linea get(int id);
 	List<Linea> list();

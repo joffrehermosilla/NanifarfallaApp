@@ -123,20 +123,20 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("page");
 
 		// categoryDAO to fetch a single category
-		Linea category = new Linea();
-
+		List<Linea> category = serviceLineas.findByid_linea(id);
+	
 		//category = serviceLineas.buscarPorId(id);
     
-		category = (Linea) serviceLineas.findBycodigo_linea(id);
+	
 		System.out.println("Linea elegida: "+category);
 		
-		mv.addObject("title", category.getNombre_linea());
+		mv.addObject("title", category.get(id).getNombre_linea());
 
 		// passing the list of categories
-		mv.addObject("categories", serviceLineas.buscarTodas());
+		mv.addObject("lineas", serviceLineas.buscarTodas());
 
 		// passing the single category object
-		mv.addObject("category", category);
+		mv.addObject("lineaid", category.get(id).getCodigo_linea());
 
 		mv.addObject("userClickCategoryProducts", true);
 		return mv;
@@ -239,8 +239,10 @@ public class HomeController {
 
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value ={"/", "/home", "/index"}, method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
+		
+		
 		List<String> listaFechas = Utileria.getNextDays(4);
 		// List<String> listaFechas = Utileria.getPastDays(-4);
 //		System.out.println(listaFechas);
@@ -269,6 +271,8 @@ public class HomeController {
 			System.out.println(listaFechas.get(i));
 		}
 		
+		logger.info("Inside HomeController index method - INFO");
+		logger.debug("Inside HomeController index method - DEBUG");
 
 		return "page-index-1";
 		// return "home";

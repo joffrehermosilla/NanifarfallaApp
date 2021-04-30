@@ -1,26 +1,26 @@
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<spring:url value="/resources" var="urlPublic" />
-<spring:url var="css" value="${urlPublic}/ecommerce/assests/css" />
-<spring:url var="js" value="${urlPublic}/ecommerce/assests/js" />
-<spring:url var="images" value="/${urlPublic}/ecommerce/assests/images" />
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<spring:url var="css" value="/resources/ecommerce/assets/css" />
+<spring:url var="js" value="/resources/ecommerce/assets/js" />
+<spring:url var="images" value="/resources/ecommerce/assets/images" />
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<fmt:setLocale value="${param.lang}" />
+<fmt:setBundle basename="messages" />
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-<jsp:include page="./includes/link.jsp"></jsp:include>
-
-<!-- custom javascript -->
-<jsp:include page="./includes/script.jsp"></jsp:include>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Online Shopping Website Using Spring MVC and HibernateJPA">
-<meta name="author" content=" Joffre Hermosilla Salas">
+<meta name="description" content="Online Shopping Website Using Spring MVC and Hibernate">
+<meta name="author" content="Khozema Nullwala">
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
@@ -34,21 +34,18 @@
 </script>
 
 <!-- Bootstrap Core CSS -->
-<link href="${urlPublic}/ecommerce/assests/css/bootstrap.min.css" rel="stylesheet">
-
-<link href="${urlPublic}/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="${css}/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap Readable Theme -->
-<link href="${urlPublic}/ecommerce/assests/css/bootstrap-readable-theme.css" rel="stylesheet">
+<link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
 
 
 <!-- Bootstrap DataTables -->
-<link href="${urlPublic}/ecommerce/assests/css/dataTables.bootstrap.css" rel="stylesheet">
+<link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
 
 <!-- Custom CSS -->
-<link href="${urlPublic}/ecommerce/assests/css/myapp.css" rel="stylesheet">
+<link href="${css}/myapp.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,6 +57,10 @@
 </head>
 
 <body>
+
+
+
+
 	
 	<div class="se-pre-con"></div>
 	<div class="wrapper">
@@ -114,34 +115,26 @@
 		<%@include file="./shared/footer.jsp"%>
 
 		<!-- jQuery -->
-		<script src="${urlPublic}/ecommerce/assests/js/jquery.js"></script>
+		<script src="${js}/jquery.js"></script>
 
-		<script src="${urlPublic}/ecommerce/assests/js/jquery.validate.js"></script>
+		<script src="${js}/jquery.validate.js"></script>
 
 		<!-- Bootstrap Core JavaScript -->
-		<script src="${urlPublic}/ecommerce/assests/js/bootstrap.min.js"></script>
+		<script src="${js}/bootstrap.min.js"></script>
 		
 		<!-- DataTable Plugin -->
-		<script src="${urlPublic}/ecommerce/assests/js/jquery.dataTables.js"></script>
+		<script src="${js}/jquery.dataTables.js"></script>
 		
 		<!-- DataTable Bootstrap Script -->
-		<script src="${urlPublic}/ecommerce/assests/js/dataTables.bootstrap.js"></script>
+		<script src="${js}/dataTables.bootstrap.js"></script>
 		
 		<!-- DataTable Bootstrap Script -->
-		<script src="${urlPublic}/ecommerce/assests/js/bootbox.min.js"></script>
+		<script src="${js}/bootbox.min.js"></script>
 		
 		<!-- Self coded javascript -->
-		<script src="${urlPublic}/js/myapp.js"></script>
-		
-		
-		
+		<script src="${js}/myapp.js"></script>
 
 	</div>
-	
-	
-	
-	
-	
 
 </body>
 

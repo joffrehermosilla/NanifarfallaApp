@@ -118,5 +118,11 @@ public class LineasServiceImpl implements ILineasService {
 		return null;
 	}
 
+	@Override
+	public List<Linea> findByid_linea(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

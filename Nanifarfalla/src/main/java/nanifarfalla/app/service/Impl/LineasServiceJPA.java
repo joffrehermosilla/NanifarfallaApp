@@ -76,4 +76,10 @@ public class LineasServiceJPA implements ILineasService {
 		return linearepository.findBycodigo_linea(codigo_linea);
 	}
 
+	@Override
+	public List<Linea> findByid_linea(int id) {
+		// TODO Auto-generated method stub
+		return linearepository.findByid_linea(id);
+	}
+
 }
