@@ -9,18 +9,27 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-
+import nanifarfalla.app.model.Area;
+import nanifarfalla.app.model.Cliente;
+import nanifarfalla.app.model.Contrato;
 import nanifarfalla.app.model.Distrito;
+import nanifarfalla.app.model.EstadoCliente;
+import nanifarfalla.app.model.EstadoContrato;
 import nanifarfalla.app.model.PasswordRessetToken;
+import nanifarfalla.app.model.RegimenCliente;
 import nanifarfalla.app.model.Usuario;
+import nanifarfalla.app.model.Vendedor;
 import nanifarfalla.app.model.VerificationToken;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
-
+import nanifarfalla.app.repository.ClienteRepository;
+import nanifarfalla.app.repository.ContratoRepository;
 import nanifarfalla.app.repository.PasswordResetTokenRepository;
 import nanifarfalla.app.repository.RoleRepository;
 import nanifarfalla.app.repository.UserRepository;
+import nanifarfalla.app.repository.VendedorRepository;
 import nanifarfalla.app.repository.VerificationTokenRepository;
+import nanifarfalla.app.service.Impl.ClienteServiceJPA;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,6 +44,8 @@ import java.sql.Timestamp;
 import nanifarfalla.app.model.EstadoUsuario;
 
 import nanifarfalla.app.model.TipoUsuario;
+
+import nanifarfalla.app.util.Utileria;
 
 @Service
 public class UserService implements IUserService {
@@ -54,9 +65,10 @@ public class UserService implements IUserService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	private SessionRegistry sessionRegistry;
-	
+	@Autowired
+	private ClienteServiceJPA clienteservice;
 
+	private SessionRegistry sessionRegistry;
 
 	public static final String TOKEN_INVALID = "invalidToken";
 	public static final String TOKEN_EXPIRED = "expired";
@@ -98,10 +110,21 @@ public class UserService implements IUserService {
 		if (emailExists(accountDto.getEmail())) {
 			throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
 		}
+
 		final Usuario user = new Usuario();
+		final Usuario userx = new Usuario();
 		final Distrito distritox = new Distrito();
 		final EstadoUsuario estadousuario = new EstadoUsuario();
 		final TipoUsuario tipousuario = new TipoUsuario();
+
+		// Objetos cuando el usuario tiene rol de seller
+		final Cliente cliente = new Cliente();
+		final RegimenCliente regimencliente = new RegimenCliente();
+		final EstadoCliente estadocliente = new EstadoCliente();
+		final Contrato kontratox = new Contrato();
+		final EstadoContrato estadocontrato = new EstadoContrato();
+		final Area area = new Area();
+		final Vendedor vendedor = new Vendedor();
 
 		user.setNombre_usuario(accountDto.getNombre_usuario());
 
@@ -139,18 +162,50 @@ public class UserService implements IUserService {
 
 		if (role == 1) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
+
 		} else if (role == 2) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_SELLER")));
+
 		} else if (role == 3) {
 			user.setRoles(
 					Arrays.asList(roleRepository.findByName("ROLE_BUYER"), roleRepository.findByName("ROLE_SELLER")));
+
+			estadocliente.setCodigo_estadocliente(1);
+			accountDto.setEstadocliente(estadocliente);
+			cliente.setmEstadoCliente(accountDto.getEstadocliente());
+
+			regimencliente.setCodigo_regimencliente(1);
+			accountDto.setRegimencliente(regimencliente);
+			cliente.setmRegimen_cliente(accountDto.getRegimencliente());
+
+			int totalusuario = userRepository.findAll().size();
+			userx.setCodigo_usuario(totalusuario + 1);
+			accountDto.setUsuario(userx);
+			cliente.setmUsuario(accountDto.getUsuario());
+
+			cliente.setMensaje_cliente(user.getNombre_usuario() + " " + user.getApellido_usuario());
+
+			cliente.setVersion(timestamp);
+
+			System.out.println("Cliente creado " + cliente);
+			clienteservice.inserta(cliente);
+
+			estadocontrato.setCodigo_estadoContrato(2);
+			kontratox.setmEstadoContrato(estadocontrato);
+			kontratox.setmCliente(cliente);
+			kontratox.setmUsuario(user);
+			System.out.println("Contrato creado " + kontratox);
+			// contratorepository.save(kontratox);
+			vendedor.setmUsuario(user);
+			area.setCodigo_area(1);
+			vendedor.setmArea(area);
+			System.out.println("Vendedor creado " + kontratox);
+			// vendedorrepository.save(vendedor);
+
 		}
 
 		System.out.println("Role/es asociados" + user.getRoles());
 
-		
-		
-		
 		return userRepository.save(user);
 	}
 
@@ -321,15 +376,5 @@ public class UserService implements IUserService {
 		// TODO Auto-generated method stub
 		return userRepository.BuscarEmailParam(email);
 	}
-	
-
-
-	  
-	
-	
-	
-	
-	
-	
 
 }

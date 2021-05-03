@@ -92,6 +92,11 @@ public class Usuario {
 		return genero;
 	}
 
+	public Usuario(int codigo_usuario) {
+		
+		this.codigo_usuario = codigo_usuario;
+	}
+
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}

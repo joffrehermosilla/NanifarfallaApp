@@ -39,6 +39,20 @@ public class Utileria {
 		return nextDays;
 	}
 	
+	public static List<String> cuentaObjetos(Object object){
+
+	  int cont = 0;
+		List<String> cuentaobjetos = new ArrayList<String>();
+		while(!(object==null)) {
+			cuentaobjetos.add(""+cont++);
+			
+		}
+		
+		return cuentaobjetos;
+		
+	}
+	
+	
 	public static List<String> getPastDays(int count) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		// Today's Date

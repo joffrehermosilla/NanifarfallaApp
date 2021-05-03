@@ -8,4 +8,6 @@ public interface IClienteService {
 
 	public List<Cliente> findAll();
 	
+	void inserta(Cliente cliente);
+	
 }

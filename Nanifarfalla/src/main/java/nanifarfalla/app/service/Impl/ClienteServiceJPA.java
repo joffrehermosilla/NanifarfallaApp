@@ -25,4 +25,12 @@ public class ClienteServiceJPA implements IClienteService {
 		return clienteRepository.findAll();
 	}
 
+
+
+	@Override
+	public void inserta(Cliente cliente) {
+		clienteRepository.save(cliente);
+		
+	}
+
 }

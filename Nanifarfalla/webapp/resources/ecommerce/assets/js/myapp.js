@@ -73,30 +73,30 @@ $(function() {
 					},
 					columns : [
 							{
-								data : 'code',
+								data : 'codigo_producto',
 								bSortable : false,
 								mRender : function(data, type, row) {
 
 									return '<img src="' + window.contextRoot
-											+ '/resources/images/' + data
+											+ '/resources/ecommerce/assets/images/' + data
 											+ '.jpg" class="dataTableImg"/>';
 
 								}
 							},
 							{
-								data : 'name'
+								data : 'nombre_producto'
 							},
 							{
-								data : 'brand'
+								data : 'mLinea.nombre_linea'
 							},
 							{
-								data : 'unitPrice',
+								data : 'pvv_producto',
 								mRender : function(data, type, row) {
-									return '&#8377; ' + data
+									return 'S/. ' + data
 								}
 							},
 							{
-								data : 'quantity',
+								data : 'stock_producto',
 								mRender : function(data, type, row) {
 
 									if (data < 1) {
@@ -108,7 +108,7 @@ $(function() {
 								}
 							},
 							{
-								data : 'id',
+								data : 'codigo_producto',
 								bSortable : false,
 								mRender : function(data, type, row) {
 
@@ -170,22 +170,22 @@ $(function() {
 					           	{data: 'id'},
 
 
-					           	{data: 'code',
+					           	{data: 'codigo_producto',
 					           	 bSortable: false,
 					           		mRender: function(data,type,row) {
 					           			return '<img src="' + window.contextRoot
-										+ '/resources/images/' + data
+										+ '/resources/ecommerce/assets/images/' + data
 										+ '.jpg" class="dataTableImg"/>';					           			
 					           		}
 					           	},
 					           	{
-									data : 'name'
+									data : 'nombre_producto'
 								},
 								{
-									data : 'brand'
+									data : 'colores_producto'
 								},
 								{
-									data : 'quantity',
+									data : 'stock_producto',
 									mRender : function(data, type, row) {
 
 										if (data < 1) {
@@ -197,13 +197,13 @@ $(function() {
 									}
 								},
 								{
-									data : 'unitPrice',
+									data : 'pvv_producto',
 									mRender : function(data, type, row) {
-										return '&#8377; ' + data
+										return 'S/. ' + data
 									}
 								},
 								{
-									data : 'active',
+									data : 'mEstadoProducto.nombre_estado_producto',
 									bSortable : false,
 									mRender : function(data, type, row) {
 										var str = '';
@@ -218,7 +218,7 @@ $(function() {
 									}
 								},
 								{
-									data : 'id',
+									data : 'codigo_producto',
 									bSortable : false,
 									mRender : function(data, type, row) {
 

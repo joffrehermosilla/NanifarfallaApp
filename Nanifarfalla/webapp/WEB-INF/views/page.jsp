@@ -19,8 +19,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Online Shopping Website Using Spring MVC and Hibernate">
-<meta name="author" content="Khozema Nullwala">
+<meta name="description" content="Online Shopping Nanifarfalla Website RESTFUL Using Spring MVC and JPA Hibernate">
+<meta name="author" content="Joffre Hermosilla Salas">
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 

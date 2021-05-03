@@ -37,7 +37,7 @@
 					
 					<c:if test="${userClickCategoryProducts == true}">
 						<script>
-							window.categoryId = '${category.id}';
+							window.categoryId = '${category.codigo_linea}';
 						</script>
 					
 						<ol class="breadcrumb">
@@ -45,7 +45,7 @@
 
 							<li><a href="${contextRoot}/home">Home</a></li>
 							<li class="active">Category</li>
-							<li class="active">${category.name}</li>
+							<li class="active">${category.nombre_linea}</li>
 
 
 						</ol>
