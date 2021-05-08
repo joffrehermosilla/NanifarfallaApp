@@ -12,6 +12,8 @@ import nanifarfalla.app.model.Distrito;
 import nanifarfalla.app.model.EstadoCliente;
 import nanifarfalla.app.model.EstadoContrato;
 import nanifarfalla.app.model.EstadoUsuario;
+import nanifarfalla.app.model.MenuRoles;
+import nanifarfalla.app.model.MenuV1;
 import nanifarfalla.app.model.RegimenCliente;
 import nanifarfalla.app.model.TipoUsuario;
 import nanifarfalla.app.model.Usuario;
@@ -47,6 +49,10 @@ public class UserDto {
 	private String email;
 
 	private boolean isUsing2FA;
+	
+	private String ruta_foto;
+	
+	
 
 	public String getEmail() {
 		return email;
@@ -70,10 +76,36 @@ public class UserDto {
 
 	private Usuario usuario;
 	
+	private MenuV1 menuv1;
+	
+	private MenuRoles menuroles;
 	
 	
 	
-	
+	public String getRuta_foto() {
+		return ruta_foto;
+	}
+
+	public void setRuta_foto(String ruta_foto) {
+		this.ruta_foto = ruta_foto;
+	}
+
+	public MenuRoles getMenuroles() {
+		return menuroles;
+	}
+
+	public void setMenuroles(MenuRoles menuroles) {
+		this.menuroles = menuroles;
+	}
+
+	public MenuV1 getMenuv1() {
+		return menuv1;
+	}
+
+	public void setMenuv1(MenuV1 menuv1) {
+		this.menuv1 = menuv1;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

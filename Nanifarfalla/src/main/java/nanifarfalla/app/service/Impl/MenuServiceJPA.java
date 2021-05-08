@@ -58,7 +58,7 @@ public class MenuServiceJPA implements IMenuService {
 	@Override
 	public void guardar(MenuV1 menuv1) {
 		// TODO Auto-generated method stub
-
+		menuV1Repository.save(menuv1);
 	}
 
 	@Override

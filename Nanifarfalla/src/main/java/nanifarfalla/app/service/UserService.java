@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import nanifarfalla.app.model.Area;
 import nanifarfalla.app.model.Cliente;
 import nanifarfalla.app.model.Contrato;
@@ -22,14 +24,16 @@ import nanifarfalla.app.model.Vendedor;
 import nanifarfalla.app.model.VerificationToken;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
-import nanifarfalla.app.repository.ClienteRepository;
-import nanifarfalla.app.repository.ContratoRepository;
+
 import nanifarfalla.app.repository.PasswordResetTokenRepository;
 import nanifarfalla.app.repository.RoleRepository;
 import nanifarfalla.app.repository.UserRepository;
-import nanifarfalla.app.repository.VendedorRepository;
+
 import nanifarfalla.app.repository.VerificationTokenRepository;
 import nanifarfalla.app.service.Impl.ClienteServiceJPA;
+import nanifarfalla.app.service.Impl.ContratoServiceJPA;
+import nanifarfalla.app.service.Impl.MenuServiceJPA;
+import nanifarfalla.app.service.Impl.VendedorServiceJPA;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,11 +42,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 
 import nanifarfalla.app.model.EstadoUsuario;
-
+import nanifarfalla.app.model.MenuRoles;
+import nanifarfalla.app.model.MenuV1;
 import nanifarfalla.app.model.TipoUsuario;
 
 import nanifarfalla.app.util.Utileria;
@@ -67,6 +73,15 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private ClienteServiceJPA clienteservice;
+
+	@Autowired
+	private ContratoServiceJPA contratoservice;
+
+	@Autowired
+	private VendedorServiceJPA vendedorService;
+
+	@Autowired
+	private MenuServiceJPA menuService;
 
 	private SessionRegistry sessionRegistry;
 
@@ -106,7 +121,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public Usuario registerNewUserAccount(UserDto accountDto, int role, int distrito) throws UserAlreadyExistException {
+	public Usuario registerNewUserAccount(UserDto accountDto, int role, int distrito, MultipartFile multiPart,
+			HttpServletRequest request) throws UserAlreadyExistException {
 		if (emailExists(accountDto.getEmail())) {
 			throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
 		}
@@ -125,6 +141,9 @@ public class UserService implements IUserService {
 		final EstadoContrato estadocontrato = new EstadoContrato();
 		final Area area = new Area();
 		final Vendedor vendedor = new Vendedor();
+		final MenuV1 menuv1 = new MenuV1();
+		final MenuV1 menuv1x = new MenuV1();
+		final MenuRoles menuroles = new MenuRoles();
 
 		user.setNombre_usuario(accountDto.getNombre_usuario());
 
@@ -166,6 +185,53 @@ public class UserService implements IUserService {
 		} else if (role == 2) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_SELLER")));
 
+			estadocliente.setCodigo_estadocliente(1);
+			accountDto.setEstadocliente(estadocliente);
+			cliente.setmEstadoCliente(accountDto.getEstadocliente());
+
+			regimencliente.setCodigo_regimencliente(1);
+			accountDto.setRegimencliente(regimencliente);
+			cliente.setmRegimen_cliente(accountDto.getRegimencliente());
+
+			int totalusuario = userRepository.findAll().size();
+			userx.setCodigo_usuario(totalusuario + 1);
+			accountDto.setUsuario(userx);
+			cliente.setmUsuario(accountDto.getUsuario());
+
+			cliente.setMensaje_cliente(user.getNombre_usuario() + " " + user.getApellido_usuario());
+
+			cliente.setVersion(timestamp);
+
+			System.out.println("Cliente creado " + cliente);
+			clienteservice.inserta(cliente);
+
+			estadocontrato.setCodigo_estadoContrato(2);
+			accountDto.setEstadocontrato(estadocontrato);
+			kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
+
+			int totalcliente = clienteservice.findAll().size();
+			cliente.setCodigo_cliente(totalcliente + 1);
+			kontratox.setmCliente(cliente);
+
+			kontratox.setVersion(timestamp);
+			kontratox.setDescripcion(cliente.getMensaje_cliente());
+			kontratox.setmUsuario(accountDto.getUsuario());
+
+			System.out.println("Contrato creado " + kontratox);
+			contratoservice.guardar(kontratox);
+
+			// contratorepository.save(kontratox);
+
+			vendedor.setmUsuario(accountDto.getUsuario());
+
+			area.setCodigo_area(1);
+			accountDto.setArea(area);
+			vendedor.setmArea(accountDto.getArea());
+			System.out.println("Vendedor creado " + kontratox);
+			// vendedorrepository.save(vendedor);
+			vendedor.setVersion(timestamp);
+			vendedorService.guardar(vendedor);
+
 		} else if (role == 3) {
 			user.setRoles(
 					Arrays.asList(roleRepository.findByName("ROLE_BUYER"), roleRepository.findByName("ROLE_SELLER")));
@@ -191,20 +257,59 @@ public class UserService implements IUserService {
 			clienteservice.inserta(cliente);
 
 			estadocontrato.setCodigo_estadoContrato(2);
-			kontratox.setmEstadoContrato(estadocontrato);
+			accountDto.setEstadocontrato(estadocontrato);
+			kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
+
+			int totalcliente = clienteservice.findAll().size();
+			cliente.setCodigo_cliente(totalcliente + 1);
 			kontratox.setmCliente(cliente);
-			kontratox.setmUsuario(user);
+
+			kontratox.setVersion(timestamp);
+			kontratox.setDescripcion(cliente.getMensaje_cliente());
+			kontratox.setmUsuario(accountDto.getUsuario());
+
 			System.out.println("Contrato creado " + kontratox);
+			contratoservice.guardar(kontratox);
+
 			// contratorepository.save(kontratox);
-			vendedor.setmUsuario(user);
+
+			vendedor.setmUsuario(accountDto.getUsuario());
+
 			area.setCodigo_area(1);
-			vendedor.setmArea(area);
+			accountDto.setArea(area);
+			vendedor.setmArea(accountDto.getArea());
 			System.out.println("Vendedor creado " + kontratox);
 			// vendedorrepository.save(vendedor);
+			vendedor.setVersion(timestamp);
+			vendedorService.guardar(vendedor);
 
 		}
 
 		System.out.println("Role/es asociados" + user.getRoles());
+
+		int cantidadmenu = menuService.buscarTodas().size();
+		int codigomenu = cantidadmenu + 1;
+		menuv1.setId(codigomenu);
+		accountDto.setMenuv1(menuv1);
+		menuv1.setmMenuV1(accountDto.getMenuv1());
+		menuv1x.setId(2);
+		menuv1.setmMenuV1(menuv1x);
+		menuv1.setLft(2);
+		menuv1.setRgt(codigomenu + menuv1.getLft());
+		int usuariocreado = 1 + userRepository.findAll().size();
+		menuv1.setNombre("Usuarios registrados: " + usuariocreado);
+
+		menuv1.setVersion(timestamp);
+		menuService.guardar(menuv1);
+
+		if (!multiPart.isEmpty()) {
+			String ruta = "/resources/images/usuarios/" + userx.getCodigo_usuario() + "/" + cliente.getCodigo_cliente()
+					+ "/" + kontratox.getCodigo_contrato() + "/";
+			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, ruta);
+			user.setRuta_foto(nombreImagen);
+			accountDto.setRuta_foto(user.getRuta_foto());
+
+		}
 
 		return userRepository.save(user);
 	}

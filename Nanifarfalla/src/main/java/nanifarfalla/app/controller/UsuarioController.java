@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -50,10 +52,13 @@ import nanifarfalla.app.web.dto.PasswordDto;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.InvalidOldPasswordException;
 import nanifarfalla.app.web.util.GenericResponse;
+
+
 import javax.validation.Valid;
 import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
 
 import nanifarfalla.app.security.ISecurityUserService;
+
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -305,7 +310,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 	@PostMapping(value = "/save")
 	@ResponseBody
-	public ModelAndView guardar(@Valid final UserDto accountDto, Model model, BindingResult result,
+	public ModelAndView guardar(@Valid final UserDto accountDto, @RequestParam("archivoImagen") MultipartFile multiPart,Model model, BindingResult result,
 			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("role") String role,
 			@RequestParam("idDistrito") int idDistrito) {
 		/*
@@ -331,9 +336,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 
-		for (ObjectError error : result.getAllErrors()) {
-			System.out.println(error.getDefaultMessage() + " ");
-		}
+
 
 		int opcion = Integer.parseInt(role);
 
@@ -341,8 +344,15 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 		System.out.println("request.getLocal():" + request.getLocale());
 		System.out.println("getAppUrl(request):" + getAppUrl(request));
+		
 
-		final Usuario registered = userService.registerNewUserAccount(accountDto, opcion, idDistrito);
+		
+	
+		
+		
+		
+
+		final Usuario registered = userService.registerNewUserAccount(accountDto, opcion, idDistrito,multiPart, request);
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 

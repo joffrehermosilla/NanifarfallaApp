@@ -4,6 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
@@ -17,7 +20,7 @@ public interface IUserService {
 
     Usuario registerNewUserAccount(UserDto accountDto) throws UserAlreadyExistException;
     
-    Usuario registerNewUserAccount(UserDto accountDto, int role, int distrito) throws UserAlreadyExistException;
+    Usuario registerNewUserAccount(UserDto accountDto, int role, int distrito,MultipartFile multiPart,HttpServletRequest request) throws UserAlreadyExistException;
 
     Usuario getUser(String verificationToken);
 

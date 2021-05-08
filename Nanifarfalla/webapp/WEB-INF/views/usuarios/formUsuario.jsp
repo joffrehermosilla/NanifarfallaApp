@@ -36,7 +36,11 @@
 <script type="text/javascript" src="${urlPublic}/js/jquery.min.js"></script>
 
 
-
+<script>
+	function abrir(url) {
+		open(url, '', 'top=300,left=300,width=300,height=300');
+	}
+</script>
 
 
 
@@ -339,9 +343,15 @@
 							<label class="custom-control custom-checkbox"> <input
 								type="checkbox" class="custom-control-input" checked="">
 								<div class="custom-control-label">
-									I am agree with <a href="#">terms and contitions</a>
+									I am agree with <a href="javascript:abrir('pagina.html')">terms
+										and contitions</a>
 								</div>
 							</label>
+						</div>
+						<div class="form-group">
+							<label for="ruta_foto">Contrato</label> <input type="file"
+								id="archivoImagen" name="archivoImagen" />
+							<p class="help-block">Contrato Firmado</p>
 						</div>
 					</fieldset>
 					<!-- form-group end.// -->
