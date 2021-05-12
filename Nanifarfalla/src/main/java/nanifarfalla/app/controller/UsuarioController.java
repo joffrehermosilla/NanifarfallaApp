@@ -33,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
+import javassist.expr.Cast;
 import lombok.AllArgsConstructor;
 import nanifarfalla.app.email.EmailSender;
 import nanifarfalla.app.model.Ciudad;
@@ -52,19 +53,22 @@ import nanifarfalla.app.web.dto.PasswordDto;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.InvalidOldPasswordException;
 import nanifarfalla.app.web.util.GenericResponse;
-
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 import javax.validation.Valid;
 import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
 
 import nanifarfalla.app.security.ISecurityUserService;
 
-
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 
 import javax.servlet.ServletException;
 import org.springframework.context.MessageSource;
@@ -312,7 +316,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 	@ResponseBody
 	public ModelAndView guardar(@Valid final UserDto accountDto, @RequestParam("archivoImagen") MultipartFile multiPart,Model model, BindingResult result,
 			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("role") String role,
-			@RequestParam("idDistrito") int idDistrito) {
+			@RequestParam("idDistrito") int idDistrito) throws IOException {
 		/*
 		 * @PostMapping(value = "/save")
 		 * 
@@ -339,6 +343,8 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 
 		int opcion = Integer.parseInt(role);
+		
+		
 
 		LOGGER.debug("Registering user account with information: {}", accountDto);
 
@@ -350,8 +356,9 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 	
 		
 		
-		
 
+		
+		
 		final Usuario registered = userService.registerNewUserAccount(accountDto, opcion, idDistrito,multiPart, request);
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));

@@ -77,8 +77,8 @@
 				<c:if test="${mensaje!=null }">
 					<div class='alert alert-success' role="alert">${mensaje}</div>
 				</c:if>
-				<form:form action="${urlForm}" method="post" id="form" class="form"
-					enctype="multipart/form-data" modelAttribute="usuario">
+				<form:form action="${urlForm}" method="post" id="form"
+					class="form" enctype="multipart/form-data" modelAttribute="usuario">
 					<fieldset>
 						<div class="form-group">
 							<label for="codigo_usuario" path="codigo_usuario">Codigo
@@ -350,6 +350,7 @@
 						</div>
 						<div class="form-group">
 							<label for="ruta_foto">Contrato</label> <input type="file"
+							
 								id="archivoImagen" name="archivoImagen" />
 							<p class="help-block">Contrato Firmado</p>
 						</div>

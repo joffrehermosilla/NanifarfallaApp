@@ -185,52 +185,7 @@ public class UserService implements IUserService {
 		} else if (role == 2) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_SELLER")));
 
-			estadocliente.setCodigo_estadocliente(1);
-			accountDto.setEstadocliente(estadocliente);
-			cliente.setmEstadoCliente(accountDto.getEstadocliente());
-
-			regimencliente.setCodigo_regimencliente(1);
-			accountDto.setRegimencliente(regimencliente);
-			cliente.setmRegimen_cliente(accountDto.getRegimencliente());
-
-			int totalusuario = userRepository.findAll().size();
-			userx.setCodigo_usuario(totalusuario + 1);
-			accountDto.setUsuario(userx);
-			cliente.setmUsuario(accountDto.getUsuario());
-
-			cliente.setMensaje_cliente(user.getNombre_usuario() + " " + user.getApellido_usuario());
-
-			cliente.setVersion(timestamp);
-
-			System.out.println("Cliente creado " + cliente);
-			clienteservice.inserta(cliente);
-
-			estadocontrato.setCodigo_estadoContrato(2);
-			accountDto.setEstadocontrato(estadocontrato);
-			kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
-
-			int totalcliente = clienteservice.findAll().size();
-			cliente.setCodigo_cliente(totalcliente + 1);
-			kontratox.setmCliente(cliente);
-
-			kontratox.setVersion(timestamp);
-			kontratox.setDescripcion(cliente.getMensaje_cliente());
-			kontratox.setmUsuario(accountDto.getUsuario());
-
-			System.out.println("Contrato creado " + kontratox);
-			contratoservice.guardar(kontratox);
-
-			// contratorepository.save(kontratox);
-
-			vendedor.setmUsuario(accountDto.getUsuario());
-
-			area.setCodigo_area(1);
-			accountDto.setArea(area);
-			vendedor.setmArea(accountDto.getArea());
-			System.out.println("Vendedor creado " + kontratox);
-			// vendedorrepository.save(vendedor);
-			vendedor.setVersion(timestamp);
-			vendedorService.guardar(vendedor);
+			
 
 		} else if (role == 3) {
 			user.setRoles(
@@ -244,8 +199,10 @@ public class UserService implements IUserService {
 			accountDto.setRegimencliente(regimencliente);
 			cliente.setmRegimen_cliente(accountDto.getRegimencliente());
 
-			int totalusuario = userRepository.findAll().size();
-			userx.setCodigo_usuario(totalusuario + 1);
+			int totalusuario = userRepository.lastcode();
+			
+			System.out.println("codigo usuario: "+totalusuario);
+			userx.setCodigo_usuario(totalusuario);
 			accountDto.setUsuario(userx);
 			cliente.setmUsuario(accountDto.getUsuario());
 
@@ -260,8 +217,10 @@ public class UserService implements IUserService {
 			accountDto.setEstadocontrato(estadocontrato);
 			kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
 
-			int totalcliente = clienteservice.findAll().size();
-			cliente.setCodigo_cliente(totalcliente + 1);
+			int totalcliente = clienteservice.lastcode();
+			System.out.println("codigo_cliente "+totalcliente);
+			
+			cliente.setCodigo_cliente(totalcliente );
 			kontratox.setmCliente(cliente);
 
 			kontratox.setVersion(timestamp);
@@ -272,6 +231,8 @@ public class UserService implements IUserService {
 			contratoservice.guardar(kontratox);
 
 			// contratorepository.save(kontratox);
+			
+	
 
 			vendedor.setmUsuario(accountDto.getUsuario());
 
@@ -301,11 +262,20 @@ public class UserService implements IUserService {
 
 		menuv1.setVersion(timestamp);
 		menuService.guardar(menuv1);
+		int totalusuario = userRepository.lastcode()+1;
+		int totalcliente = clienteservice.lastcode() + 1;
+		int totalcantrato = contratoservice.lastcode() + 1;
 
 		if (!multiPart.isEmpty()) {
 			String ruta = "/resources/images/usuarios/" + userx.getCodigo_usuario() + "/" + cliente.getCodigo_cliente()
 					+ "/" + kontratox.getCodigo_contrato() + "/";
-			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, ruta);
+			String rutax = "/resources/images/usuarios/" + totalusuario + "/" + totalcliente
+			+ "/" +totalcantrato  + "/";
+			
+			System.out.println("ruta: "+ruta);
+			
+			System.out.println("rutax: "+rutax);
+			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, rutax);
 			user.setRuta_foto(nombreImagen);
 			accountDto.setRuta_foto(user.getRuta_foto());
 
@@ -481,5 +451,7 @@ public class UserService implements IUserService {
 		// TODO Auto-generated method stub
 		return userRepository.BuscarEmailParam(email);
 	}
+
+
 
 }

@@ -10,4 +10,5 @@ public interface IClienteService {
 	
 	void inserta(Cliente cliente);
 	
+	int lastcode();
 }

@@ -33,4 +33,12 @@ public class ClienteServiceJPA implements IClienteService {
 		
 	}
 
+
+
+	@Override
+	public int lastcode() {
+		// TODO Auto-generated method stub
+		return clienteRepository.lastcode();
+	}
+
 }

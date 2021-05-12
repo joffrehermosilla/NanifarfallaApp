@@ -9,5 +9,6 @@ public interface IContratoService {
 	List<Contrato> buscartodos();
 	void guardar(Contrato contrato);
 	
+	int lastcode();
 	
 }

@@ -41,23 +41,16 @@
 		<joffre.jackson.version>2.11.2</joffre.jackson.version>
 		<joffre.imagemagick.version>2.3.6</joffre.imagemagick.version>
 		<joffre.thumbnailator.version>0.4.14</joffre.thumbnailator.version>
+		<joffre.imgscalr.version>4.2</joffre.imgscalr.version>
+			<joffre.marvin.version>1.5.5</joffre.marvin.version>
 	</properties>
-
-
-
-
-
 
 
 
 	<dependencies>
 
-		<!-- Editor de Imagnes 
-		<dependency>
-			<groupId>org.alfresco</groupId>
-			<artifactId>alfresco-transform-imagemagick-boot</artifactId>
-			<version>${joffre.imagemagick.version}</version>
-		</dependency>-->
+		<!-- Editor de Imagnes <dependency> <groupId>org.alfresco</groupId> <artifactId>alfresco-transform-imagemagick-boot</artifactId> 
+			<version>${joffre.imagemagick.version}</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
 		<dependency>
@@ -65,17 +58,32 @@
 			<artifactId>thumbnailator</artifactId>
 			<version>${joffre.thumbnailator.version}</version>
 		</dependency>
-		
-			<!-- Administrador de Getter y Setter -->
+
+		<dependency>
+			<groupId>org.imgscalr</groupId>
+			<artifactId>imgscalr-lib</artifactId>
+			<version>${joffre.imgscalr.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.downgoon</groupId>
+			<artifactId>marvin</artifactId>
+			<version>${joffre.marvin.version}</version>
+			<type>pom</type>
+		</dependency>
+	 	<!-- <dependency>
+			<groupId>com.github.downgoon</groupId>
+			<artifactId>MarvinPlugins</artifactId>
+			<version>${joffre.marvin.version}</version>
+		</dependency> 
+
+ -->
+		<!-- Administrador de Getter y Setter -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-
-
-
 
 		<!-- JUNIT VERSION 4.12 -->
 		<dependency>

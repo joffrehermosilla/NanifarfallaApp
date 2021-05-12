@@ -28,4 +28,10 @@ public class ContratoServiceJPA implements IContratoService {
 		return contratoRepositor.findAll();
 	}
 
+	@Override
+	public int lastcode() {
+		// TODO Auto-generated method stub
+		return contratoRepositor.lastcode();
+	}
+
 }

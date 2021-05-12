@@ -42,6 +42,8 @@ public interface IUserService {
     
     List<Usuario>  BuscarEmailParam(String email);
 
+
+    
     PasswordRessetToken getPasswordResetToken(String token);
 
     Usuario getUserByPasswordResetToken(String token);

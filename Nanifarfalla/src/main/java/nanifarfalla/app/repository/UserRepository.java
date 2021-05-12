@@ -26,4 +26,7 @@ public interface UserRepository extends JpaRepository<Usuario, Integer> {
 	@Query("select u from Usuario u where u.email like :email")
 	 List<Usuario>  BuscarEmailParam(@Param("email") String email);
 
+	@Query(value = "select u.codigo_usuario from usuario u order by codigo_usuario DESC LIMIT 1", nativeQuery = true)
+	int lastcode();
+	
 }
