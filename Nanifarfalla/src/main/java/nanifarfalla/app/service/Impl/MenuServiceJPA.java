@@ -274,4 +274,16 @@ public class MenuServiceJPA implements IMenuService {
 		return MenuxNombrerMap;
 	}
 
+	@Override
+	public int lascode() {
+		// TODO Auto-generated method stub
+		return menuV1Repository.lastcode();
+	}
+
+	@Override
+	public void updatemenu(String name, int id) {
+		// TODO Auto-generated method stub
+		menuV1Repository.updatemenu(name, id);
+	}
+
 }

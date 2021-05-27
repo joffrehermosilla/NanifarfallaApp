@@ -3,6 +3,8 @@ package nanifarfalla.app.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,10 +18,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.jboss.aerogear.security.otp.api.Base32;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,11 +47,9 @@ public class Usuario {
 	private boolean enabled;
 	private boolean isUsing2FA;
 	private String secret;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "fkcodigo_usuario", referencedColumnName = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "fkcodigo_role", referencedColumnName = "codigo_role"))
 	private Collection<Role> roles;
-
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
 
@@ -78,22 +83,17 @@ public class Usuario {
 	TipoUsuario mTipoUsuario;
 //fkcodigo_tipousuario	
 	@JoinColumn(name = "fkcodigo_estadousuario", referencedColumnName = "codigo_estadousuario")
-	@ManyToOne
+	@ManyToOne	
 	EstadoUsuario mEstadoUsuario;
 
 //fkcodigo_estadousuario	
 
-
-
-	
-	
-	
 	public String getGenero() {
 		return genero;
 	}
 
 	public Usuario(int codigo_usuario) {
-		
+
 		this.codigo_usuario = codigo_usuario;
 	}
 
@@ -203,7 +203,6 @@ public class Usuario {
 		this.ruta_foto = ruta_foto;
 	}
 
-
 	public Distrito getmDistrito() {
 		return mDistrito;
 	}
@@ -292,9 +291,6 @@ public class Usuario {
 		this.nombre_usuario = nombre_usuario;
 	}
 
-
-
-
 	public String getApellido_usuario() {
 		return apellido_usuario;
 	}
@@ -322,8 +318,6 @@ public class Usuario {
 	public void setMensaje_usuario(String mensaje_usuario) {
 		this.mensaje_usuario = mensaje_usuario;
 	}
-
-
 
 	public boolean isEnable() {
 		return enabled;
@@ -363,11 +357,88 @@ public class Usuario {
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("Usuario [codigo_usuario=").append(codigo_usuario).append(", nombre_usuario=")
-				.append(nombre_usuario).append(", apellido_usuario=").append(apellido_usuario).append(", email_usuario=")
-				.append(email).append(", password_usuario=").append(password_usuario).append(", enabled=")
-				.append(enabled).append(", isUsing2FA2=").append(isUsing2FA).append(", secret=").append(secret)
-				.append(", roles=").append(roles).append("]");
+				.append(nombre_usuario).append(", apellido_usuario=").append(apellido_usuario)
+				.append(", email_usuario=").append(email).append(", password_usuario=").append(password_usuario)
+				.append(", enabled=").append(enabled).append(", isUsing2FA2=").append(isUsing2FA).append(", secret=")
+				.append(secret).append(", roles=").append(roles).append("]");
 		return builder.toString();
 	}
 
+	public Collection<? extends GrantedAuthority> getAuthoritiesz(final Collection<Role> roles) {
+
+		return getGrantedAuthorities(getPrivileges(roles));
+	}
+
+	private final List<String> getPrivileges(final Collection<Role> roles) {
+		final List<String> privileges = new ArrayList<String>();
+		final List<Privilege> collection = new ArrayList<Privilege>();
+		for (final Role role : roles) {
+			collection.addAll(role.getPrivileges());
+		}
+		for (final Privilege item : collection) {
+			privileges.add(item.getName());
+		}
+
+		return privileges;
+	}
+
+	private final List<GrantedAuthority> getGrantedAuthorities(final List<String> privileges) {
+		final List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		for (final String privilege : privileges) {
+			authorities.add(new SimpleGrantedAuthority(privilege));
+		}
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return ""+codigo_usuario;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return getAuthoritiesz(roles);
+	}
+
+	public Usuario(String nombre_usuario, String apellido_usuario, String password_usuario, String email,
+			boolean enabled, Collection<Role> roles) {
+	
+		this.nombre_usuario = nombre_usuario;
+		this.apellido_usuario = apellido_usuario;
+		this.password_usuario = password_usuario;
+		this.email = email;
+		this.enabled = enabled;
+		this.roles=roles;
+		
+	}
+
+	
+	
+	
 }

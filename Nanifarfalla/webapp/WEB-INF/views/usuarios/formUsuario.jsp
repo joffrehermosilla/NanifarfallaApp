@@ -34,7 +34,7 @@
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 <script type="text/javascript" src="${urlPublic}/js/jquery.min.js"></script>
-
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <script>
 	function abrir(url) {
@@ -77,8 +77,8 @@
 				<c:if test="${mensaje!=null }">
 					<div class='alert alert-success' role="alert">${mensaje}</div>
 				</c:if>
-				<form:form action="${urlForm}" method="post" id="form"
-					class="form" enctype="multipart/form-data" modelAttribute="usuario">
+				<form:form action="${urlForm}" method="post" id="form" class="form"
+					enctype="multipart/form-data" modelAttribute="usuario">
 					<fieldset>
 						<div class="form-group">
 							<label for="codigo_usuario" path="codigo_usuario">Codigo
@@ -350,7 +350,6 @@
 						</div>
 						<div class="form-group">
 							<label for="ruta_foto">Contrato</label> <input type="file"
-							
 								id="archivoImagen" name="archivoImagen" />
 							<p class="help-block">Contrato Firmado</p>
 						</div>
@@ -403,11 +402,43 @@
 		</div>
 	</spring:hasBindErrors>
 
+	<script>
+		var serverContext = '${contextRoot}';
 
+		function register(event) {
+			event.preventDefault();
 
+			var formData = $('form').serialize();
+			$.post(serverContext + "/usuarios/save", formData, function(data) {
+				if (data.message == "success") {
+					window.location.href = serverContext
+							+ "/login/successRegister.html";
+				}
 
+			});
+		}
 
+		function registerx(event) {
+			event.preventDefault();
 
+			$.ajax({
+				method : 'POST',
+				data : {
+					"data" : event
+				},
+				url : "/usuarios/save",
+				success : function(data) {
+
+					if (data.message == "success") {
+						window.location.href = serverContext
+								+ "/login/successRegister.html";
+					}
+
+				}
+			});
+
+		}
+	</script>
 
 </body>
 </html>

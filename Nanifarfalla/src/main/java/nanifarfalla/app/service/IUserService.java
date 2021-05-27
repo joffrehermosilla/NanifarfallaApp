@@ -22,6 +22,10 @@ public interface IUserService {
     
     Usuario registerNewUserAccount(UserDto accountDto, int role, int distrito,MultipartFile multiPart,HttpServletRequest request) throws UserAlreadyExistException;
 
+    
+    String registerNewUserAccountString(UserDto accountDto, int role, int distrito,MultipartFile multiPart,HttpServletRequest request) throws UserAlreadyExistException;
+
+    
     Usuario getUser(String verificationToken);
 
     void saveRegisteredUser(Usuario user);

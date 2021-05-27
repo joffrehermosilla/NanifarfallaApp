@@ -43,6 +43,7 @@
 		<joffre.thumbnailator.version>0.4.14</joffre.thumbnailator.version>
 		<joffre.imgscalr.version>4.2</joffre.imgscalr.version>
 			<joffre.marvin.version>1.5.5</joffre.marvin.version>
+				<joffre.javaxmail.version>1.6.2</joffre.javaxmail.version>
 	</properties>
 
 
@@ -101,6 +102,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		  <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${joffre.javaxmail.version}</version>
+            </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>

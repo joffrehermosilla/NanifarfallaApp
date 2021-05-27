@@ -27,13 +27,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
-import javassist.expr.Cast;
+
 import lombok.AllArgsConstructor;
 import nanifarfalla.app.email.EmailSender;
 import nanifarfalla.app.model.Ciudad;
@@ -53,15 +54,14 @@ import nanifarfalla.app.web.dto.PasswordDto;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.InvalidOldPasswordException;
 import nanifarfalla.app.web.util.GenericResponse;
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.name.Rename;
+
 
 import javax.validation.Valid;
 import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
 
 import nanifarfalla.app.security.ISecurityUserService;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -88,7 +88,7 @@ import org.springframework.ui.Model;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/usuarios")
-public class UsuarioController implements ApplicationListener<OnRegistrationCompleteEvent> {
+public class UsuarioController  {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
@@ -122,7 +122,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 	private JavaMailSender mailSender;
 
-	private EmailSender emailSender;
+
 
 	@GetMapping(value = "/create")
 	public String crear(@ModelAttribute Usuario usuario, Model model, BindingResult bindingResult) {
@@ -314,7 +314,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 	@PostMapping(value = "/save")
 	@ResponseBody
-	public ModelAndView guardar(@Valid final UserDto accountDto, @RequestParam("archivoImagen") MultipartFile multiPart,Model model, BindingResult result,
+	public GenericResponse  guardar(@Valid final UserDto accountDto, @RequestParam("archivoImagen") MultipartFile multiPart,Model model, BindingResult result,
 			RedirectAttributes attributes, HttpServletRequest request, @RequestParam("role") String role,
 			@RequestParam("idDistrito") int idDistrito) throws IOException {
 		/*
@@ -332,33 +332,22 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 		// Pendiente: Guardar el objeto noticia en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return new ModelAndView("page-index-1");
-			// return new GenericResponse("page-index-1");
+			//return new ModelAndView("page-index-1");
+		 return new GenericResponse("page-index-1");
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 
-
-
 		int opcion = Integer.parseInt(role);
 		
-		
-
 		LOGGER.debug("Registering user account with information: {}", accountDto);
 
 		System.out.println("request.getLocal():" + request.getLocale());
 		System.out.println("getAppUrl(request):" + getAppUrl(request));
 		
 
-		
-	
-		
-		
-
-		
-		
 		final Usuario registered = userService.registerNewUserAccount(accountDto, opcion, idDistrito,multiPart, request);
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
@@ -370,9 +359,14 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
 		System.out.println("La respuesta del generic response es: " + new GenericResponse("success"));
-		return new ModelAndView("redirect:/");
+		
+		
+		
+		
+		
+	//	return new ModelAndView("redirect:/");
 
-		// return new GenericResponse("success");
+		 return new GenericResponse("success");
 	}
 
 	@InitBinder
@@ -412,13 +406,13 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 			// }
 			authWithoutPassword(user);
 			model.addAttribute("message", messages.getMessage("message.accountVerified", null, locale));
-			return "redirect:/login/console.html?lang=" + locale.getLanguage();
+			return "redirect:/login/console?lang=" + locale.getLanguage();
 		}
 
 		model.addAttribute("message", messages.getMessage("auth.message." + result, null, locale));
 		model.addAttribute("expired", "expired".equals(result));
 		model.addAttribute("token", token);
-		return "redirect:/login/badUser.html?lang=" + locale.getLanguage();
+		return "redirect:/login/badUser?lang=" + locale.getLanguage();
 	}
 
 	// user activation - verification
@@ -455,7 +449,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 			model.addAttribute("message", messages.getMessage("auth.message." + result, null, locale));
 			return "redirect:/loginForm?lang=" + locale.getLanguage();
 		}
-		return "redirect:/login/updatePassword.html?lang=" + locale.getLanguage();
+		return "redirect:/login/updatePassword?lang=" + locale.getLanguage();
 	}
 
 	@PostMapping("/user/savePassword")
@@ -494,14 +488,14 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 	private SimpleMailMessage constructResendVerificationTokenEmail(final String contextPath, final Locale locale,
 			final VerificationToken newToken, final Usuario user) {
-		final String confirmationUrl = contextPath + "/registrationConfirm.html?token=" + newToken.getToken();
+		final String confirmationUrl = contextPath + "/login/registrationConfirm?token=" + newToken.getToken();
 		final String message = messages.getMessage("message.resendToken", null, locale);
 		return constructEmail("Resend Registration Token", message + " \r\n" + confirmationUrl, user);
 	}
 
 	private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale,
 			final String token, final Usuario user) {
-		final String url = contextPath + "/user/changePassword?id=" + user.getCodigo_usuario() + "&token=" + token;
+		final String url = contextPath + "/login/changePassword?id=" + user.getCodigo_usuario() + "&token=" + token;
 		final String message = messages.getMessage("message.resetPassword", null, locale);
 		return constructEmail("Reset Password", message + " \r\n" + url, user);
 	}
@@ -545,27 +539,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 
 	// cREACION DEL TOKEN Y EL ENVIO DE MAIL PARA CONFIRMACIONservice
 
-	@Override
-	public void onApplicationEvent(final OnRegistrationCompleteEvent event) {
-		this.confirmRegistration(event);
-	}
 
-	private void confirmRegistration(final OnRegistrationCompleteEvent event) {
-		final Usuario user = event.getUser();
-		final String token = UUID.randomUUID().toString();
-		userService.createVerificationTokenForUser(user, token);
-
-		System.out.println("probando si el listener escucha token generado: " + token);
-		final SimpleMailMessage email = constructEmailMessage(event, user, token);
-
-		final String confirmationUrl = event.getAppUrl() + "/login/registrationConfirm?token=" + token;
-	
-		System.out.println("cofirmationUrl " + confirmationUrl);
-		emailSender.send(user.getEmail(), buildEmail(user.getNombre_usuario(), confirmationUrl));
-		
-		mailSender.send(email);
-
-	}
 
 	//
 
@@ -573,7 +547,7 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 	  private final SimpleMailMessage constructEmailMessage(final OnRegistrationCompleteEvent event, final Usuario user, final String token) {
 	        final String recipientAddress = user.getEmail();
 	        final String subject = "Registration Confirmation";
-	        final String confirmationUrl = event.getAppUrl() + "/login/registrationConfirm?token=" + token;
+	        final String confirmationUrl = event.getAppUrl() + "/usuario/registrationConfirm?token=" + token;
 	        final String message = messages.getMessage("message.regSucc", null, event.getLocale());
 	        final SimpleMailMessage email = new SimpleMailMessage();
 	        email.setTo(recipientAddress);
@@ -584,41 +558,5 @@ public class UsuarioController implements ApplicationListener<OnRegistrationComp
 	    }
 	 
 
-	private String buildEmail(String name, String link) {
-		return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" + "\n"
-				+ "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" + "\n"
-				+ "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n"
-				+ "    <tbody><tr>\n" + "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" + "        \n"
-				+ "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n"
-				+ "          <tbody><tr>\n" + "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n"
-				+ "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n"
-				+ "                  <tbody><tr>\n" + "                    <td style=\"padding-left:10px\">\n"
-				+ "                  \n" + "                    </td>\n"
-				+ "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n"
-				+ "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Confirm your email</span>\n"
-				+ "                    </td>\n" + "                  </tr>\n" + "                </tbody></table>\n"
-				+ "              </a>\n" + "            </td>\n" + "          </tr>\n" + "        </tbody></table>\n"
-				+ "        \n" + "      </td>\n" + "    </tr>\n" + "  </tbody></table>\n"
-				+ "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n"
-				+ "    <tbody><tr>\n" + "      <td width=\"10\" height=\"10\" valign=\"middle\"></td>\n"
-				+ "      <td>\n" + "        \n"
-				+ "                <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n"
-				+ "                  <tbody><tr>\n"
-				+ "                    <td bgcolor=\"#1D70B8\" width=\"100%\" height=\"10\"></td>\n"
-				+ "                  </tr>\n" + "                </tbody></table>\n" + "        \n" + "      </td>\n"
-				+ "      <td width=\"10\" valign=\"middle\" height=\"10\"></td>\n" + "    </tr>\n"
-				+ "  </tbody></table>\n" + "\n" + "\n" + "\n"
-				+ "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n"
-				+ "    <tbody><tr>\n" + "      <td height=\"30\"><br></td>\n" + "    </tr>\n" + "    <tr>\n"
-				+ "      <td width=\"10\" valign=\"middle\"><br></td>\n"
-				+ "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n"
-				+ "        \n"
-				+ "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name
-				+ ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please click on the below link to activate your account: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\""
-				+ link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>"
-				+ "        \n" + "      </td>\n" + "      <td width=\"10\" valign=\"middle\"><br></td>\n"
-				+ "    </tr>\n" + "    <tr>\n" + "      <td height=\"30\"><br></td>\n" + "    </tr>\n"
-				+ "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" + "\n" + "</div></div>";
-	}
 
 }

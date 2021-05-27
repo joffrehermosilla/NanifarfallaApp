@@ -17,6 +17,7 @@
 	color: #000;
 }
 </style>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script th:src="@{/resources/pwstrength.js}"></script>
@@ -93,7 +94,7 @@
 	</div>
 
 	<script th:inline="javascript">
-var serverContext = "\/";
+var serverContext ='${contextRoot}';
 
 $(document).ready(function () {
 	$('form').submit(function(event) {

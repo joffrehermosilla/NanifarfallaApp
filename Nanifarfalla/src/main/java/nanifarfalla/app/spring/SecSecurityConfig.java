@@ -2,6 +2,7 @@ package nanifarfalla.app.spring;
 
 import nanifarfalla.app.repository.UserRepository;
 import nanifarfalla.app.security.CustomRememberMeServices;
+import nanifarfalla.app.security.MyUserDetailsService;
 import nanifarfalla.app.security.google2fa.CustomAuthenticationProvider;
 import nanifarfalla.app.security.google2fa.CustomWebAuthenticationDetailsSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,13 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserRepository userRepository;
 
     public SecSecurityConfig() {
-        super();
+        this.myUserDetailService = new MyUserDetailsService();
+		
     }
 
+    private final MyUserDetailsService myUserDetailService;
+    
+    
     
     @Bean
     @Override
@@ -81,7 +86,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login*","/login*", "/logout*", "/signin/*", "/signup/**", "/customLogin",
                         "/user/registration*", "/registrationConfirm*", "/expiredAccount*", "/registration*",
                         "/badUser*", "/user/resendRegistrationToken*" ,"/forgetPassword*", "/user/resetPassword*",
-                        "/user/changePassword*", "/emailError*", "/show/*", "/json/*", "/lineas/**", "/resources/**","/old/user/registration*","/successRegister*","/qrcode*").permitAll()
+                        "/user/changePassword*", "/emailError*", "/show/*","/usuarios/**", "/json/*", "/lineas/**", "/resources/**","/old/user/registration*","/successRegister*","/qrcode*").permitAll()
                 .antMatchers("/invalidSession*").anonymous()
                 .antMatchers("/user/updatePassword*","/user/savePassword*","/updatePassword*").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                 .anyRequest().hasAuthority("READ_PRIVILEGE")
@@ -119,10 +124,18 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider authProvider() {
-        final CustomAuthenticationProvider authProvider = new CustomAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(encoder());
-        return authProvider;
+		/*
+		 * final CustomAuthenticationProvider authProvider = new
+		 * CustomAuthenticationProvider();
+		 * authProvider.setUserDetailsService(userDetailsService);
+		 * authProvider.setPasswordEncoder(encoder());
+		 */
+    	DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    	provider.setPasswordEncoder(encoder());
+    	provider.setUserDetailsService(myUserDetailService);
+    	
+    	
+        return provider;
     }
 
     @Bean

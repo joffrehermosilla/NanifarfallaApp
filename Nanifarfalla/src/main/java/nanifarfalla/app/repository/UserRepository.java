@@ -29,4 +29,6 @@ public interface UserRepository extends JpaRepository<Usuario, Integer> {
 	@Query(value = "select u.codigo_usuario from usuario u order by codigo_usuario DESC LIMIT 1", nativeQuery = true)
 	int lastcode();
 	
+	
+	
 }

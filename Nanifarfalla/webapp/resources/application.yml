@@ -1,5 +1,0 @@
-spring:
-  banner:
-    location: classpath:banner/banner.txt
-    image:
-     location: classpath:fotocreador/nanifarfalla.jpeg

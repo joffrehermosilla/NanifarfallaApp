@@ -52,7 +52,7 @@ public class UserDto {
 	
 	private String ruta_foto;
 	
-	
+	private boolean enabled;
 
 	public String getEmail() {
 		return email;
@@ -82,6 +82,14 @@ public class UserDto {
 	
 	
 	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public String getRuta_foto() {
 		return ruta_foto;
 	}

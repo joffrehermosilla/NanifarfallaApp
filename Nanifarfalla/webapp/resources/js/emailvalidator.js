@@ -37,14 +37,6 @@ function buscarPorCorreo(email) {
 
 
 
-	var formData = $('form').serialize();
-		$.post("usuarios/save", formData, function(data) {
-			if (data.message == "success") {
-				window.location.href = "/login/successRegister";
-			}
-
-		});
-
 
 
 

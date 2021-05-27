@@ -30,7 +30,9 @@ public interface IMenuService {
 	
 	SetMultimap<String, MenuV1> MenuxNombrerMap();
 	
+	int lascode();
 	
+	void updatemenu(String name, int id);
 	
 	void guardar(MenuV1 menuv1);
 
