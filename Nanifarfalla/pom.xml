@@ -1,4 +1,4 @@
-<!--<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<!-- <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0, https://maven.apache.org/xsd/maven-4.0.0.xsd"> -->
 <project>
 	<modelVersion>4.0.0</modelVersion>
@@ -42,8 +42,8 @@
 		<joffre.imagemagick.version>2.3.6</joffre.imagemagick.version>
 		<joffre.thumbnailator.version>0.4.14</joffre.thumbnailator.version>
 		<joffre.imgscalr.version>4.2</joffre.imgscalr.version>
-			<joffre.marvin.version>1.5.5</joffre.marvin.version>
-				<joffre.javaxmail.version>1.6.2</joffre.javaxmail.version>
+		<joffre.marvin.version>1.5.5</joffre.marvin.version>
+		<joffre.javaxmail.version>1.6.2</joffre.javaxmail.version>
 	</properties>
 
 
@@ -72,13 +72,17 @@
 			<version>${joffre.marvin.version}</version>
 			<type>pom</type>
 		</dependency>
-	 	<!-- <dependency>
-			<groupId>com.github.downgoon</groupId>
-			<artifactId>MarvinPlugins</artifactId>
-			<version>${joffre.marvin.version}</version>
-		</dependency> 
+		<!-- <dependency> <groupId>com.github.downgoon</groupId> <artifactId>MarvinPlugins</artifactId> 
+			<version>${joffre.marvin.version}</version> </dependency> -->
 
- -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+
 		<!-- Administrador de Getter y Setter -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -102,11 +106,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-		  <dependency>
-                <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
-                <version>${joffre.javaxmail.version}</version>
-            </dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>${joffre.javaxmail.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -292,27 +296,7 @@
 
 		</dependency>
 
-
-
 	</dependencies>
-
-	<plugins>
-		<plugin>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-maven-plugin</artifactId>
-			<configuration>
-				<excludes>
-					<exclude>
-						<groupId>org.projectlombok</groupId>
-						<artifactId>lombok</artifactId>
-					</exclude>
-				</excludes>
-			</configuration>
-		</plugin>
-	</plugins>
-
-
-
 
 
 
@@ -326,4 +310,23 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
 </project>

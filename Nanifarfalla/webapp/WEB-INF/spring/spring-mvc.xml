@@ -7,12 +7,12 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="net.codejava.spring" />
+	<context:component-scan base-package="nanifarfalla.app" />
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="joffre.hermosilla@gmail.com" />
+		<property name="username" value="nanifarfalla@gmail.com" />
 		<property name="password" value="" />
 		<property name="javaMailProperties">
 			<props>

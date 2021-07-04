@@ -37,7 +37,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private HttpServletRequest request;
-	
 
 	public MyUserDetailsService() {
 		super();
@@ -66,14 +65,11 @@ public class MyUserDetailsService implements UserDetailsService {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
+
 	public String signUpUser(Usuario user) {
 
-		
 		return "";
 	}
-	
 
 	// UTIL
 

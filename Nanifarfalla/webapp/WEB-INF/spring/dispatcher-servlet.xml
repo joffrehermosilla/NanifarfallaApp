@@ -13,10 +13,6 @@
 	<context:component-scan
 		base-package="nanifarfalla.app.controller" />
 
-	
-
-
-
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean
@@ -34,13 +30,6 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
-
-
-
-
-
-
 
 
 	<mvc:resources mapping="/resources/**"

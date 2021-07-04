@@ -22,6 +22,8 @@ public class VerificationToken {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_verificationtoken;
+	
+	int user_id =0;
 	Date expiryDate;
 	String token;
 	@JoinColumn(name = "fkcodigo_usuario", referencedColumnName = "codigo_usuario")

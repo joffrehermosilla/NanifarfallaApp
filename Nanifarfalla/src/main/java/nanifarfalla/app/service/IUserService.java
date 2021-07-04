@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
-
+import nanifarfalla.app.model.NewLocationToken;
 import nanifarfalla.app.model.PasswordRessetToken;
 import nanifarfalla.app.model.Usuario;
 import nanifarfalla.app.model.VerificationToken;
@@ -70,5 +70,7 @@ public interface IUserService {
 	
 	void guardar(Usuario usuario);
 	boolean emailExists(final String email) ;
-
+	
+	 NewLocationToken isNewLoginLocation(String username, String ip);
+	    String isValidNewLocationToken(String token);
 }

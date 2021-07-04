@@ -40,7 +40,11 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
             errorMessage = messages.getMessage("auth.message.expired", null, locale);
         } else if (exception.getMessage().equalsIgnoreCase("blocked")) {
             errorMessage = messages.getMessage("auth.message.blocked", null, locale);
-        }
+        }else if (exception.getMessage()
+                .equalsIgnoreCase("unusual location")) {
+                errorMessage = messages.getMessage("auth.message.unusual.location", null, locale);
+            }
+
 
         request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, errorMessage);
     }

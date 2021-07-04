@@ -26,18 +26,19 @@ import nanifarfalla.app.model.VerificationToken;
 import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
-
+import nanifarfalla.app.repository.NewLocationTokenRepository;
 import nanifarfalla.app.repository.PasswordResetTokenRepository;
 import nanifarfalla.app.repository.RoleRepository;
+import nanifarfalla.app.repository.UserLocationRepository;
 import nanifarfalla.app.repository.UserRepository;
-
+import java.net.InetAddress;
 import nanifarfalla.app.repository.VerificationTokenRepository;
 import nanifarfalla.app.security.MyUserDetailsService;
 import nanifarfalla.app.service.Impl.ClienteServiceJPA;
 import nanifarfalla.app.service.Impl.ContratoServiceJPA;
 import nanifarfalla.app.service.Impl.MenuServiceJPA;
 import nanifarfalla.app.service.Impl.VendedorServiceJPA;
-
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,13 +50,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
-
+import org.springframework.core.env.Environment;
 import nanifarfalla.app.model.EstadoUsuario;
 import nanifarfalla.app.model.MenuRoles;
 import nanifarfalla.app.model.MenuV1;
+import nanifarfalla.app.model.NewLocationToken;
 import nanifarfalla.app.model.TipoUsuario;
-
+import nanifarfalla.app.model.UserLocation;
 import nanifarfalla.app.util.Utileria;
+
+import com.maxmind.geoip2.DatabaseReader;
 
 @Service
 public class UserService implements IUserService, ApplicationListener<OnRegistrationCompleteEvent> {
@@ -93,7 +97,20 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 	@Autowired
 	private MyUserDetailsService myUserDetailService;
-
+	
+	@Autowired
+	private Environment env;
+	
+ 
+	
+    @Autowired
+    private UserLocationRepository userLocationRepository;
+    
+    
+    @Autowired
+    private NewLocationTokenRepository newLocationTokenRepository;
+    
+    
 	public static final String TOKEN_INVALID = "invalidToken";
 	public static final String TOKEN_EXPIRED = "expired";
 	public static final String TOKEN_VALID = "valid";
@@ -261,7 +278,7 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 		int cantidadmenu = menuService.buscarTodas().size();
 		int codigomenu = cantidadmenu + 1;
-		System.out.println("codigo menu generado: "+codigomenu);
+		System.out.println("codigo menu generado: " + codigomenu);
 		menuv1.setId(codigomenu);
 		accountDto.setMenuv1(menuv1);
 		menuv1.setmMenuV1(accountDto.getMenuv1());
@@ -273,8 +290,8 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		menuv1.setNombre("Usuarios registrados: " + usuariocreado);
 
 		menuv1.setVersion(timestamp);
-		int ultimomenu = menuService.lascode()+1;
-		System.out.println("ultimomenu: "+ultimomenu);
+		int ultimomenu = menuService.lascode() + 1;
+		System.out.println("ultimomenu: " + ultimomenu);
 		/*
 		 * if(codigomenu ==ultimomenu) { menuService.updatemenu(menuv1.getNombre(),
 		 * codigomenu); }else { menuService.guardar(menuv1); }
@@ -301,27 +318,23 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 		myUserDetailService.signUpUser(new Usuario(accountDto.getNombre_usuario(), accountDto.getApellido_usuario(),
 				accountDto.getPassword_usuario(), accountDto.getEmail(), accountDto.isEnabled(), user.getRoles()));
-		
-		
-		
+
 		System.out.println("request.getLocal():" + request.getLocale());
 		System.out.println("getAppUrl(request):" + getAppUrl(request));
-		
-		
-		
-	//	 OnRegistrationCompleteEvent event = new OnRegistrationCompleteEvent(user, request.getLocale(), getAppUrl(request));
-		 
-	/*
-	 * final String confirmationUrl = getAppUrl(request) + "/usuarios/save?token=" ;
-	 * System.out.println("cofirmationUrl " + confirmationUrl);
-	 * emailSender.send(user.getEmail(), buildEmail(user.getNombre_usuario(),
-	 * confirmationUrl));
-	 */
-		
+
+		// OnRegistrationCompleteEvent event = new OnRegistrationCompleteEvent(user,
+		// request.getLocale(), getAppUrl(request));
+
+		/*
+		 * final String confirmationUrl = getAppUrl(request) + "/usuarios/save?token=" ;
+		 * System.out.println("cofirmationUrl " + confirmationUrl);
+		 * emailSender.send(user.getEmail(), buildEmail(user.getNombre_usuario(),
+		 * confirmationUrl));
+		 */
+
 		return userRepository.save(user);
 	}
 
-	
 	@Override
 	public String registerNewUserAccountString(UserDto accountDto, int role, int distrito, MultipartFile multiPart,
 			HttpServletRequest request) throws UserAlreadyExistException {
@@ -454,7 +467,7 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 		int cantidadmenu = menuService.buscarTodas().size();
 		int codigomenu = cantidadmenu + 1;
-		System.out.println("codigo menu generado: "+codigomenu);
+		System.out.println("codigo menu generado: " + codigomenu);
 		menuv1.setId(codigomenu);
 		accountDto.setMenuv1(menuv1);
 		menuv1.setmMenuV1(accountDto.getMenuv1());
@@ -466,8 +479,8 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		menuv1.setNombre("Usuarios registrados: " + usuariocreado);
 
 		menuv1.setVersion(timestamp);
-		int ultimomenu = menuService.lascode()+1;
-		System.out.println("ultimomenu: "+ultimomenu);
+		int ultimomenu = menuService.lascode() + 1;
+		System.out.println("ultimomenu: " + ultimomenu);
 		/*
 		 * if(codigomenu ==ultimomenu) { menuService.updatemenu(menuv1.getNombre(),
 		 * codigomenu); }else { menuService.guardar(menuv1); }
@@ -494,37 +507,29 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 		myUserDetailService.signUpUser(new Usuario(accountDto.getNombre_usuario(), accountDto.getApellido_usuario(),
 				accountDto.getPassword_usuario(), accountDto.getEmail(), accountDto.isEnabled(), user.getRoles()));
-		
-		
-		
-		
-	//	 OnRegistrationCompleteEvent event = new OnRegistrationCompleteEvent(user, request.getLocale(), getAppUrl(request));
-		 
-	
-	//  final String confirmationUrl = getAppUrl(request) + "/usuarios/save?token=" ;
 
-	 
+		// OnRegistrationCompleteEvent event = new OnRegistrationCompleteEvent(user,
+		// request.getLocale(), getAppUrl(request));
+
+		// final String confirmationUrl = getAppUrl(request) + "/usuarios/save?token=" ;
 
 		final String token = UUID.randomUUID().toString();
 		createVerificationTokenForUser(user, token);
-	
+
 		System.out.println("probando si el listener escucha token generado: " + token);
 
 		System.out.println("event.getLocal():" + request.getLocale());
 		System.out.println("getAppUrl(request):" + getAppUrl(request));
 		final String confirmationUrl = getAppUrl(request) + "/usuarios/registrationConfirm?token=" + token;
-	//	emailSender.send(accountDto.getEmail(), buildEmail(accountDto.getNombre_usuario(), getAppUrl(request)));
+		// emailSender.send(accountDto.getEmail(),
+		// buildEmail(accountDto.getNombre_usuario(), getAppUrl(request)));
 		System.out.println("cofirmationUrl " + confirmationUrl);
-	  
-		  emailSender.send(user.getEmail(), buildEmail(user.getNombre_usuario(),
-		  confirmationUrl));
-	  
+
+		emailSender.send(user.getEmail(), buildEmail(user.getNombre_usuario(), confirmationUrl));
+
 		return token;
 	}
-	
-	
-	
-	
+
 	@Override
 	public Usuario getUser(final String verificationToken) {
 		final VerificationToken token = tokenRepository.findByToken(verificationToken);
@@ -695,8 +700,6 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		return userRepository.BuscarEmailParam(email);
 	}
 
-
-
 	private String buildEmail(String name, String link) {
 		return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" + "\n"
 				+ "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" + "\n"
@@ -741,7 +744,7 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 	}
 
 	private void confirmRegistration(final OnRegistrationCompleteEvent event) {
-		
+
 		final Usuario usert = event.getUser();
 		final String token = UUID.randomUUID().toString();
 		createVerificationTokenForUser(usert, token);
@@ -751,14 +754,13 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		System.out.println("event.getLocal():" + event.getLocale());
 		System.out.println("getAppUrl(request):" + event.getAppUrl());
 		final String confirmationUrl = event.getAppUrl() + "/usuarios/registrationConfirm?token=" + token;
-	//	emailSender.send(accountDto.getEmail(), buildEmail(accountDto.getNombre_usuario(), getAppUrl(request)));
+		// emailSender.send(accountDto.getEmail(),
+		// buildEmail(accountDto.getNombre_usuario(), getAppUrl(request)));
 		System.out.println("cofirmationUrl " + confirmationUrl);
-		//emailSender.send(usert.getEmail(), buildEmail(usert.getNombre_usuario(), confirmationUrl));
-		//System.out.println("email send: "+emailSender.toString());
-		
-		
-		
-		
+		// emailSender.send(usert.getEmail(), buildEmail(usert.getNombre_usuario(),
+		// confirmationUrl));
+		// System.out.println("email send: "+emailSender.toString());
+
 		/*
 		 * final SimpleMailMessage email = constructEmailMessage(event, user, token);
 		 * 
@@ -773,29 +775,50 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 	}
 
-	
 	private String getAppUrl(HttpServletRequest request) {
 		return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 	}
 
+	@Override
+	public NewLocationToken isNewLoginLocation(String username, String ip) {
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		/*
+		 * if(!isGeoIpLibEnabled()) { return null; }
+		 * 
+		 * try { final InetAddress ipAddress = InetAddress.getByName(ip); final String
+		 * country = databaseReader.country(ipAddress) .getCountry() .getName();
+		 * System.out.println(country + "====****"); final Usuario user =
+		 * userRepository.findByEmail(username); final UserLocation loc =
+		 * userLocationRepository.findByCountryAndUser(country, user); if ((loc == null)
+		 * || !loc.isEnabled()) { return createNewLocationToken(country, user); } }
+		 * catch (final Exception e) { return null; }
+		 */
+        return null;
+	}
+
+	private boolean isGeoIpLibEnabled() {
+		return Boolean.parseBoolean(env.getProperty("geo.ip.lib.enabled"));
+	}
+
+	private NewLocationToken createNewLocationToken(String country, Usuario user) {
+		UserLocation loc = new UserLocation(country, user);
+		loc = userLocationRepository.save(loc);
+
+		final NewLocationToken token = new NewLocationToken(UUID.randomUUID().toString(), loc);
+		return newLocationTokenRepository.save(token);
+	}
+
+	@Override
+	public String isValidNewLocationToken(String token) {
+		  final NewLocationToken locToken = newLocationTokenRepository.findByToken(token);
+	        if (locToken == null) {
+	            return null;
+	        }
+	        UserLocation userLoc = locToken.getUserLocation();
+	        userLoc.setEnabled(true);
+	        userLoc = userLocationRepository.save(userLoc);
+	        newLocationTokenRepository.delete(locToken);
+	        return userLoc.getCountry();
+	}
+
 }

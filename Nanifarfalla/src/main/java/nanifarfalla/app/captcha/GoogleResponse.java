@@ -1,4 +1,3 @@
-
 package nanifarfalla.app.captcha;
 
 import com.fasterxml.jackson.annotation.*;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonPropertyOrder({ "success", "challenge_ts", "hostname", "error-codes" })
+@JsonPropertyOrder({ "success", "score", "action","challenge_ts", "hostname", "error-codes" })
 public class GoogleResponse {
 
     @JsonProperty("success")
@@ -18,19 +17,26 @@ public class GoogleResponse {
     private String challengeTs;
     @JsonProperty("hostname")
     private String hostname;
+    @JsonProperty("score")
+    private float score;
+    @JsonProperty("action")
+    private String action;
     @JsonProperty("error-codes")
     private ErrorCode[] errorCodes;
 
-    static enum ErrorCode {
-        MissingSecret, InvalidSecret, MissingResponse, InvalidResponse;
+    
+    enum ErrorCode {
+        MissingSecret, InvalidSecret, MissingResponse, InvalidResponse, BadRequest, TimeoutOrDuplicate;
 
-        private static Map<String, ErrorCode> errorsMap = new HashMap<String, ErrorCode>(4);
+        private static Map<String, ErrorCode> errorsMap = new HashMap<>(6);
 
         static {
             errorsMap.put("missing-input-secret", MissingSecret);
             errorsMap.put("invalid-input-secret", InvalidSecret);
             errorsMap.put("missing-input-response", MissingResponse);
-            errorsMap.put("invalid-input-response", InvalidResponse);
+            errorsMap.put("bad-request", InvalidResponse);
+            errorsMap.put("invalid-input-response", BadRequest);
+            errorsMap.put("timeout-or-duplicate", TimeoutOrDuplicate);
         }
 
         @JsonCreator
@@ -79,6 +85,26 @@ public class GoogleResponse {
         return errorCodes;
     }
 
+    @JsonProperty("score")
+    public float getScore() {
+        return score;
+    }
+
+    @JsonProperty("score")
+    public void setScore(float score) {
+        this.score = score;
+    }
+
+    @JsonProperty("action")
+    public String getAction() {
+        return action;
+    }
+
+    @JsonProperty("action")
+    public void setAction(String action) {
+        this.action = action;
+    }
+
     @JsonIgnore
     public boolean hasClientError() {
         final ErrorCode[] errors = getErrorCodes();
@@ -89,6 +115,7 @@ public class GoogleResponse {
             switch (error) {
             case InvalidResponse:
             case MissingResponse:
+            case BadRequest:
                 return true;
             default:
                 break;
@@ -99,6 +126,6 @@ public class GoogleResponse {
 
     @Override
     public String toString() {
-        return "GoogleResponse{" + "success=" + success + ", challengeTs='" + challengeTs + '\'' + ", hostname='" + hostname + '\'' + ", errorCodes=" + Arrays.toString(errorCodes) + '}';
+        return "GoogleResponse{" + "success=" + success + ", challengeTs='" + challengeTs + '\'' + ", hostname='" + hostname + '\''+ ", score='" + score + '\''+ ", action='" + action+ '\'' + ", errorCodes=" + Arrays.toString(errorCodes) + '}';
     }
 }

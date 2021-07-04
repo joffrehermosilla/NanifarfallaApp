@@ -19,9 +19,24 @@
       "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
     },
     {
+      "name": "google.recaptcha.key.secret-v3",
+      "type": "java.lang.String",
+      "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
+    },
+    {
       "name": "google.recaptcha.key.site",
       "type": "java.lang.String",
       "description": "A description for 'google.recaptcha.key.site'",
+      "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
+    },
+    {
+      "name": "google.recaptcha.key.site-v3",
+      "type": "java.lang.String",
+      "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
+    },
+    {
+      "name": "google.recaptcha.key.threshold",
+      "type": "java.lang.Float",
       "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
     },
     {

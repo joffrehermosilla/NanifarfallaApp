@@ -1,4 +1,4 @@
-package  nanifarfalla.app.captcha;
+package nanifarfalla.app.captcha;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

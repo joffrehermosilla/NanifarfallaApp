@@ -14,8 +14,8 @@
 <head>
 <body>
 <div class="container">
-    <h1 class="alert alert-success" th:text="#{message.regSucc}">success</h1>
-    <a th:href="@{/login}" th:text="#{label.login}">login</a>
+    <h1 class="alert alert-success" th:text="${message.regSucc}">success</h1>
+    <a th:href="@{/login}" th:text="${label.login}">login</a>
 </div>
 </body>
 </html>
