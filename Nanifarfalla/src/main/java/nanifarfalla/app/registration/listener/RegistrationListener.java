@@ -40,7 +40,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         service.createVerificationTokenForUser(user, token);
 
         
-        System.out.println("probando si el listener escucha token generado: "+token);
+        System.out.println("probando si el listener escucha token generado del RegistrationListener: "+token);
         final SimpleMailMessage email = constructEmailMessage(event, user, token);
         mailSender.send(email);
     }
