@@ -1,6 +1,7 @@
 package nanifarfalla.app.spring;
 
 import java.util.Locale;
+import java.util.Properties;
 
 import nanifarfalla.app.validation.EmailValidator;
 import nanifarfalla.app.validation.PasswordMatchesValidator;
@@ -10,6 +11,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.context.request.RequestContextListener;
@@ -24,7 +27,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-@ComponentScan(basePackages = { "nanifarfalla.app.web" })
+@ComponentScan(basePackages = { "nanifarfalla.app.web","nanifarfalla.app.controller","nanifarfalla.app.model","nanifarfalla.app.service","nanifarfalla.app.repository","nanifarfalla.app.email" })
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
 
@@ -118,5 +121,10 @@ public class MvcConfig implements WebMvcConfigurer {
         validator.setValidationMessageSource(messageSource);
         return validator;
     }
+    
+	
+
+	 
+    
 
 }

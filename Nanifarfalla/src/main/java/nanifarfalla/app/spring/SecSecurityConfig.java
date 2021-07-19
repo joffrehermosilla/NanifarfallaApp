@@ -3,12 +3,16 @@ package nanifarfalla.app.spring;
 import nanifarfalla.app.repository.UserRepository;
 import nanifarfalla.app.security.CustomRememberMeServices;
 import nanifarfalla.app.security.MyUserDetailsService;
-import nanifarfalla.app.security.google2fa.CustomAuthenticationProvider;
+
 import nanifarfalla.app.security.google2fa.CustomWebAuthenticationDetailsSource;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -153,4 +157,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         CustomRememberMeServices rememberMeServices = new CustomRememberMeServices("theKey", userDetailsService, new InMemoryTokenRepositoryImpl());
         return rememberMeServices;
     }
+    
+
+    
 }

@@ -3,20 +3,3 @@ spring:
     location: classpath:banner/banner.txt
     image:
      location: classpath:fotocreador/nanifarfalla.jpeg
-  mail:
-    host: localhost
-    port: 1025
-    username: hello
-    password: hello
-
-    properties:
-      mail:
-        smtp:
-          ssl:
-            trust: "*"
-          auth: true
-          starttls:
-            enable: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000

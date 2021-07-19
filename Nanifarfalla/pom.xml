@@ -44,6 +44,8 @@
 		<joffre.imgscalr.version>4.2</joffre.imgscalr.version>
 		<joffre.marvin.version>1.5.5</joffre.marvin.version>
 		<joffre.javaxmail.version>1.6.2</joffre.javaxmail.version>
+		<joffre.context.version>5.3.9</joffre.context.version>
+		<joffre.freemarker.version>2.3.27-incubating</joffre.freemarker.version>
 	</properties>
 
 
@@ -54,6 +56,15 @@
 			<version>${joffre.imagemagick.version}</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+
+		<!-- freemarker dependencies -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${joffre.freemarker.version}</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
@@ -115,7 +126,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${joffre.context.version}</version>
+		</dependency>
 		<!-- 2fa -->
 		<dependency>
 			<groupId>org.jboss.aerogear</groupId>

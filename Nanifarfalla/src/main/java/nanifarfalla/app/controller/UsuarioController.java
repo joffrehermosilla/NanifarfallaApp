@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Controller;
@@ -90,9 +91,10 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-//@RestController
-@Controller
+@RestController
+//@Controller
 @AllArgsConstructor
+//@ConfigurationProperties(value = "classpath:your-filename.yml")
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
@@ -129,15 +131,15 @@ public class UsuarioController {
 	private JavaMailSender mailSender;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Usuario usuario, Model model, BindingResult bindingResult) {
+	public ModelAndView crear(@ModelAttribute Usuario usuario, Model model, BindingResult bindingResult) {
 
 		model.addAttribute("listapais", paisService.buscarTodas());
 
 		if (bindingResult.hasErrors()) {
-			return "/usuarios/formUsuario";
+			return  new ModelAndView("/usuarios/formUsuario", "user", usuario);
 		}
 
-		return "/usuarios/formUsuario";
+		return  new ModelAndView("/usuarios/formUsuario", "user", usuario);
 	}
 
 	@GetMapping(value = "/registrar")
@@ -332,10 +334,10 @@ public class UsuarioController {
 		 */
 		System.out.println("Opcion role: /" + role);
 		System.out.println("idDistrito es: /" + idDistrito);
-		LOGGER.debug("Registering user account with information: {}", accountDto);
+		LOGGER.debug("Registering user account with information: {} desde el Controller UsuarioController con LOGGER", accountDto);
 		// Pendiente: Guardar el objeto noticia en la BD
 		if (result.hasErrors()) {
-			System.out.println("Existen errores");
+			System.out.println("Existen errores desde el Controller UsuarioController");
 			// return new ModelAndView("page-index-1");
 			ModelAndView mav = new ModelAndView("/login/registration", "user", accountDto);
 			String errMessage = messages.getMessage("message.regError", null, request.getLocale());
@@ -349,26 +351,27 @@ public class UsuarioController {
 
 		int opcion = Integer.parseInt(role);
 
-		LOGGER.debug("Registering user account with information: {}", accountDto);
+		LOGGER.debug("Registering user account with information: {}desde el Controller UsuarioController", accountDto);
 
-		System.out.println("request.getLocal():" + request.getLocale());
-		System.out.println("getAppUrl(request):" + getAppUrl(request));
+		System.out.println("request.getLocal():desde el Controller UsuarioController" + request.getLocale());
+		System.out.println("getAppUrl(request):desde el Controller UsuarioController" + getAppUrl(request));
 
 		final Usuario registered = userService.registerNewUserAccount(accountDto, opcion, idDistrito, multiPart,
 				request);
 		eventPublisher
 				.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 
-		System.out.println("Recibiendo objeto Usuarios: " + registered);
+		System.out.println("Recibiendo objeto Usuarios desde el Controller UsuarioController: " + registered);
 
 		attributes.addFlashAttribute("mensaje",
-				"El usuario fue registrado espera la autorizacion " + new GenericResponse("success"));
+				"El usuario fue registrado espera la autorizacion desde el Controller UsuarioController " + new GenericResponse("success"));
 
-		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
-		System.out.println("La respuesta del generic response es: " + new GenericResponse("success"));
+		System.out.println("Elementos en la lista despues de la insersion desde el Controller UsuarioController: " + userService.buscarTodas().size());
+		System.out.println("La respuesta del generic response desde el Controller UsuarioController es: " + new GenericResponse("success"));
 
 		// return new ModelAndView("redirect:/");
-
+		new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request));
+		System.out.println("creando mail desde Controller: "+	new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 		return new ModelAndView("/login/successRegister", "user", accountDto);
 	}
 
@@ -424,7 +427,7 @@ public class UsuarioController {
 		if (bindingResult.hasErrors()) {
 			return "/usuarios/successRegister";
 		}
-
+	
 		return "/usuarios/successRegister";
 	}
 
@@ -608,19 +611,7 @@ public class UsuarioController {
 
 	//
 
-	private final SimpleMailMessage constructEmailMessage(final OnRegistrationCompleteEvent event, final Usuario user,
-			final String token) {
-		final String recipientAddress = user.getEmail();
-		final String subject = "Registration Confirmation";
-		final String confirmationUrl = event.getAppUrl() + "/usuario/registrationConfirm?token=" + token;
-		final String message = messages.getMessage("message.regSucc", null, event.getLocale());
-		final SimpleMailMessage email = new SimpleMailMessage();
-		email.setTo(recipientAddress);
-		email.setSubject(subject);
-		email.setText(message + " \r\n" + confirmationUrl);
-		email.setFrom(env.getProperty("support.email"));
-		return email;
-	}
+
 
 	@GetMapping("/console")
 	public ModelAndView console(final HttpServletRequest request, final ModelMap model,

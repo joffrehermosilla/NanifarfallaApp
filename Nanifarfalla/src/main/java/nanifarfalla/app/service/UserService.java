@@ -6,12 +6,16 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import nanifarfalla.app.email.EmailSender;
+import nanifarfalla.app.email.EmailService;
 import nanifarfalla.app.model.Area;
 import nanifarfalla.app.model.Cliente;
 import nanifarfalla.app.model.Contrato;
@@ -31,15 +35,18 @@ import nanifarfalla.app.repository.PasswordResetTokenRepository;
 import nanifarfalla.app.repository.RoleRepository;
 import nanifarfalla.app.repository.UserLocationRepository;
 import nanifarfalla.app.repository.UserRepository;
-import java.net.InetAddress;
+
 import nanifarfalla.app.repository.VerificationTokenRepository;
 import nanifarfalla.app.security.MyUserDetailsService;
 import nanifarfalla.app.service.Impl.ClienteServiceJPA;
 import nanifarfalla.app.service.Impl.ContratoServiceJPA;
 import nanifarfalla.app.service.Impl.MenuServiceJPA;
 import nanifarfalla.app.service.Impl.VendedorServiceJPA;
-import org.springframework.beans.factory.annotation.Qualifier;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -48,9 +55,18 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
 import java.sql.Timestamp;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.MailSendException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.SimpleMailMessage;
+
 import nanifarfalla.app.model.EstadoUsuario;
 import nanifarfalla.app.model.MenuRoles;
 import nanifarfalla.app.model.MenuV1;
@@ -62,8 +78,9 @@ import nanifarfalla.app.util.Utileria;
 import com.maxmind.geoip2.DatabaseReader;
 
 @Service
-public class UserService implements IUserService, ApplicationListener<OnRegistrationCompleteEvent> {
-
+@PropertySource(value = { "classpath:application.properties" })
+public class UserService implements IUserService, EmailSender, ApplicationListener<OnRegistrationCompleteEvent> {
+	private final static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 	@Autowired
 	private UserRepository userRepository;
 
@@ -95,22 +112,44 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 	private SessionRegistry sessionRegistry;
 
+	private MessageSource messages;
+
+	@Autowired
+	private JavaMailSender mailSender;
+
 	@Autowired
 	private MyUserDetailsService myUserDetailService;
-	
+
 	@Autowired
 	private Environment env;
-	
- 
-	
-    @Autowired
-    private UserLocationRepository userLocationRepository;
-    
-    
-    @Autowired
-    private NewLocationTokenRepository newLocationTokenRepository;
-    
-    
+
+	@Autowired
+	private UserLocationRepository userLocationRepository;
+
+	@Autowired
+	private NewLocationTokenRepository newLocationTokenRepository;
+
+	@Value("${spring.mail.host}")
+	private String mailServerHost;
+
+	@Value("${spring.mail.port}")
+	private Integer mailServerPort;
+
+	@Value("${spring.mail.username}")
+	private String mailServerUsername;
+
+	@Value("${spring.mail.password}")
+	private String mailServerPassword;
+
+	@Value("${spring.mail.properties.mail.smtp.auth}")
+	private String mailServerAuth;
+
+	@Value("${spring.mail.properties.mail.smtp.starttls.enable}")
+	private String mailServerStartTls;
+
+	@Value("${spring.mail.templates.path}")
+	private String mailTemplatesPath;
+
 	public static final String TOKEN_INVALID = "invalidToken";
 	public static final String TOKEN_EXPIRED = "expired";
 	public static final String TOKEN_VALID = "valid";
@@ -176,13 +215,13 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		user.setApellido_usuario(accountDto.getApellido_usuario());
 
 		user.setPassword_usuario(passwordEncoder.encode(accountDto.getPassword_usuario()));
-		System.out.println("contraseña encriptada" + user.getPassword_usuario());
+		System.out.println("contraseña encriptada: " + user.getPassword_usuario());
 
 		accountDto.setEnabled(false);
 
 		user.setEnabled(accountDto.isEnabled());
 
-		System.out.println("Enabled: " + user.isEnable());
+		System.out.println("Enabled : " + user.isEnable());
 
 		user.setEmail(accountDto.getEmail());
 
@@ -319,8 +358,8 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		myUserDetailService.signUpUser(new Usuario(accountDto.getNombre_usuario(), accountDto.getApellido_usuario(),
 				accountDto.getPassword_usuario(), accountDto.getEmail(), accountDto.isEnabled(), user.getRoles()));
 
-		System.out.println("request.getLocal():" + request.getLocale());
-		System.out.println("getAppUrl(request):" + getAppUrl(request));
+		System.out.println("Desde UserService request.getLocal():" + request.getLocale());
+		System.out.println("Desde UserService getAppUrl(request):" + getAppUrl(request));
 
 		// OnRegistrationCompleteEvent event = new OnRegistrationCompleteEvent(user,
 		// request.getLocale(), getAppUrl(request));
@@ -516,7 +555,7 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		final String token = UUID.randomUUID().toString();
 		createVerificationTokenForUser(user, token);
 
-		System.out.println("probando si el listener escucha token generado: " + token);
+		System.out.println("probando si el listener escucha token generado desde el UserService: " + token);
 
 		System.out.println("event.getLocal():" + request.getLocale());
 		System.out.println("getAppUrl(request):" + getAppUrl(request));
@@ -572,6 +611,7 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		myToken.setmUsuario(user);
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		myToken.setVersion(timestamp);
+		System.out.println("Creacion del toke desde el void crateVerificationTokenForUser en UserService:" + myToken);
 		tokenRepository.save(myToken);
 	}
 
@@ -739,8 +779,27 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 	@Override
 	public void onApplicationEvent(final OnRegistrationCompleteEvent event) {
-		this.confirmRegistration(event);
+		this.confirmRegistrationx(event);
 		System.out.println("On Application Event");
+	}
+
+	private void confirmRegistrationx(final OnRegistrationCompleteEvent event) {
+		final Usuario user = event.getUser();
+		final String token = UUID.randomUUID().toString();
+		System.out.println("Usuario generado por event.getUser del confirmRegistrtation: " + user + " " + event);
+		System.out.println("probando si el listener escucha token generado: " + token);
+
+		System.out.println("event.getLocal():" + event.getLocale());
+		System.out.println("getAppUrl(request):" + event.getAppUrl());
+		createVerificationTokenForUser(user, token);
+		final String confirmationUrl = event.getAppUrl() + "/usuarios/registrationConfirm?token=" + token;
+
+		System.out.println("Desde el void En UserService cofirmationUrl " + confirmationUrl);
+
+		System.out.println("probando si el listener escucha token generado de UsuarioService: " + token);
+
+		send(user.getEmail(), buildEmail(user.getNombre_usuario(), confirmationUrl));
+
 	}
 
 	private void confirmRegistration(final OnRegistrationCompleteEvent event) {
@@ -754,25 +813,38 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		System.out.println("event.getLocal():" + event.getLocale());
 		System.out.println("getAppUrl(request):" + event.getAppUrl());
 		final String confirmationUrl = event.getAppUrl() + "/usuarios/registrationConfirm?token=" + token;
-		// emailSender.send(accountDto.getEmail(),
-		// buildEmail(accountDto.getNombre_usuario(), getAppUrl(request)));
-		System.out.println("cofirmationUrl " + confirmationUrl);
-		// emailSender.send(usert.getEmail(), buildEmail(usert.getNombre_usuario(),
-		// confirmationUrl));
-		// System.out.println("email send: "+emailSender.toString());
 
-		/*
-		 * final SimpleMailMessage email = constructEmailMessage(event, user, token);
-		 * 
-		 * 
-		 * 
-		 * System.out.println("cofirmationUrl " + confirmationUrl);
-		 * emailSender.send(user.getEmail(), buildEmail(user.getNombre_usuario(),
-		 * confirmationUrl));
-		 * 
-		 * mailSender.send(email);
-		 */
+		System.out.println("Desde el void En UserService cofirmationUrl " + confirmationUrl);
+		SimpleMailMessage email = new SimpleMailMessage();
 
+		final String recipientAddress = usert.getEmail();
+		final String subject = "Nanifarfalla Registration Confirmation";
+
+		final String message = messages.getMessage("message.regSucc", null, event.getLocale());
+		email.setTo(recipientAddress);
+		email.setSubject(subject);
+		email.setText(message + " \r\n" + confirmationUrl);
+		email.setFrom(env.getProperty("support.email"));
+
+		emailSender.send(usert.getNombre_usuario(), buildEmail(usert.getNombre_usuario(), confirmationUrl));
+
+	}
+
+	private SimpleMailMessage constructEmailMessage(final OnRegistrationCompleteEvent event, final Usuario user,
+			final String token) {
+		final String recipientAddress = user.getEmail();
+		final String subject = "Registration Confirmation from Nanifarfalla";
+		final String confirmationUrl = event.getAppUrl() + "/usuarios/registrationConfirm?token=" + token;
+		final String message = messages.getMessage("message.regSucc", null, event.getLocale());
+		final SimpleMailMessage email = new SimpleMailMessage();
+		email.setTo(recipientAddress);
+		email.setSubject(subject);
+		// email.setText(buildEmail(user.getNombre_usuario(), confirmationUrl) + " \r\n"
+		// + confirmationUrl);
+		email.setText(message + " \r\n" + confirmationUrl);
+
+		email.setFrom(env.getProperty("support.email"));
+		return email;
 	}
 
 	private String getAppUrl(HttpServletRequest request) {
@@ -793,7 +865,7 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 		 * || !loc.isEnabled()) { return createNewLocationToken(country, user); } }
 		 * catch (final Exception e) { return null; }
 		 */
-        return null;
+		return null;
 	}
 
 	private boolean isGeoIpLibEnabled() {
@@ -810,15 +882,73 @@ public class UserService implements IUserService, ApplicationListener<OnRegistra
 
 	@Override
 	public String isValidNewLocationToken(String token) {
-		  final NewLocationToken locToken = newLocationTokenRepository.findByToken(token);
-	        if (locToken == null) {
-	            return null;
-	        }
-	        UserLocation userLoc = locToken.getUserLocation();
-	        userLoc.setEnabled(true);
-	        userLoc = userLocationRepository.save(userLoc);
-	        newLocationTokenRepository.delete(locToken);
-	        return userLoc.getCountry();
+		final NewLocationToken locToken = newLocationTokenRepository.findByToken(token);
+		if (locToken == null) {
+			return null;
+		}
+		UserLocation userLoc = locToken.getUserLocation();
+		userLoc.setEnabled(true);
+		userLoc = userLocationRepository.save(userLoc);
+		newLocationTokenRepository.delete(locToken);
+		return userLoc.getCountry();
 	}
 
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		// mailSender.setHost(mailServerHost);
+		// mailSender.setPort(mailServerPort);
+		mailSender.setPort(587);
+
+		mailSender.setUsername("nanifarfalla@gmail.com");
+		mailSender.setPassword("rqvzxlrrwuacbxdz");
+
+		// mailSender.setUsername(mailServerUsername);
+		// mailSender.setPassword(mailServerPassword);
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		// props.put("mail.smtp.auth", mailServerAuth);
+		props.put("mail.smtp.starttls.enable", "true");
+		// props.put("mail.smtp.starttls.enable", mailServerStartTls);
+		props.put("mail.debug", "true");
+
+		return mailSender;
+	}
+
+	@Override
+	public void send(String to, String email) {
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+			helper.setText(email, true);
+			helper.setTo(to);
+			helper.setSubject("Confirm your email");
+			helper.setFrom("MailVerification@nanifarfalla.com.pe");
+			mailSender.send(mimeMessage);
+		} catch (MessagingException e) {
+			LOGGER.error("failed to send email", e);
+			throw new IllegalStateException("failed to send email");
+		}
+
+	}
+
+	/*
+	 * @Bean public JavaMailSender getJavaMailSenderx() { JavaMailSenderImpl
+	 * mailSender = new JavaMailSenderImpl();
+	 * 
+	 * mailSender.setHost(mailServerHost); mailSender.setPort(mailServerPort);
+	 * 
+	 * mailSender.setUsername(mailServerUsername);
+	 * mailSender.setPassword(mailServerPassword);
+	 * 
+	 * Properties props = mailSender.getJavaMailProperties();
+	 * props.put("mail.transport.protocol", "smtp"); props.put("mail.smtp.auth",
+	 * mailServerAuth); props.put("mail.smtp.starttls.enable", mailServerStartTls);
+	 * props.put("mail.debug", "true");
+	 * 
+	 * return mailSender; }
+	 */
 }
