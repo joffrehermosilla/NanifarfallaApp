@@ -82,16 +82,23 @@
 
 
 	<!-- <b:bean id="myAuthenticationSuccessHandler" class="nanifarfalla.app.security.MySimpleUrlAuthenticationSuccessHandler" 
-		/> -->
+		/>
 
 
 
-	<!-- <authentication-manager alias="authenticationManager"> <authentication-provider 
-		user-service-ref="userDetailsService" /> </authentication-manager> <b:bean 
-		id="userDetailsService" class="nanifarfalla.app.security.MyUserDetailsService" 
-		/> <b:bean id="authProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider"> 
-		<b:property name="userDetailsService" ref="userDetailsService" /> <b:property 
-		name="passwordEncoder" ref="passwordEncoder" /> </b:bean> -->
+	<authentication-manager
+		alias="authenticationManager">
+		<authentication-provider
+			user-service-ref="userDetailsService" />
+	</authentication-manager> -->
+	<b:bean id="userDetailsService"
+		class="nanifarfalla.app.security.MyUserDetailsService" />
+	<b:bean id="authProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<b:property name="userDetailsService"
+			ref="userDetailsService" />
+		<b:property name="passwordEncoder" ref="passwordEncoder" />
+	</b:bean>
 	<b:bean id="passwordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 		<b:constructor-arg value="11" />
