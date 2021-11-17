@@ -1,20 +1,15 @@
 package nanifarfalla.app.controller;
 
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
@@ -32,14 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.google.gson.Gson;
 import org.springframework.validation.Errors;
 import lombok.AllArgsConstructor;
-import nanifarfalla.app.email.EmailSender;
 import nanifarfalla.app.model.Ciudad;
 import nanifarfalla.app.model.Distrito;
-
 import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.model.Provincia;
 import nanifarfalla.app.model.Role;
@@ -50,25 +42,20 @@ import nanifarfalla.app.service.IDistritoService;
 import nanifarfalla.app.service.IPaisService;
 import nanifarfalla.app.service.IProvinciaService;
 import nanifarfalla.app.service.IUserService;
-
 import nanifarfalla.app.web.dto.PasswordDto;
 import nanifarfalla.app.web.dto.UserDto;
 import nanifarfalla.app.web.error.InvalidOldPasswordException;
 import nanifarfalla.app.web.error.UserAlreadyExistException;
 import nanifarfalla.app.web.util.GenericResponse;
-
 import javax.validation.Valid;
 import nanifarfalla.app.registration.OnRegistrationCompleteEvent;
-
 import nanifarfalla.app.security.ISecurityUserService;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import javax.servlet.ServletException;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
@@ -81,15 +68,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-
 import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @RestController
 //@Controller
@@ -129,6 +112,9 @@ public class UsuarioController {
 	private ISecurityUserService securityUserService;
 
 	private JavaMailSender mailSender;
+	
+	
+	//muestra la vista de registro de usuarios
 
 	@GetMapping(value = "/create")
 	public ModelAndView crear(@ModelAttribute Usuario usuario, Model model, BindingResult bindingResult) {
@@ -142,12 +128,19 @@ public class UsuarioController {
 		return  new ModelAndView("/usuarios/formUsuario", "user", usuario);
 	}
 
+	
+	
+	//vista de registro tutorial
+	
 	@GetMapping(value = "/registrar")
 	public String registrar(@ModelAttribute Usuario usuario) {
 
 		return "/login/registration";
 	}
 
+	
+	//cargar pais de la BD metodo get
+	
 	@RequestMapping(value = "/cargarPais/{codigo_pais}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarPais(@PathVariable("codigo_pais") int codigo_pais, HttpServletResponse response) {
@@ -159,6 +152,10 @@ public class UsuarioController {
 		// return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
 	}
 
+	
+	//cargar provincia de la BD metodo get
+	
+	
 	@RequestMapping(value = "/cargarProvincia/{codigo_provincia}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarProvincia(@PathVariable("codigo_provincia") int codigo_provincia,
@@ -173,6 +170,8 @@ public class UsuarioController {
 		return gson.toJson(ciudadService.findByProvinciaIdParamsNative(codigo_provincia));
 		// return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
 	}
+	
+	//cargar ciudad de la BD metodo get
 
 	@RequestMapping(value = "/cargarCiudad/{codigo_ciudad}", method = RequestMethod.GET)
 	@ResponseBody
@@ -190,6 +189,8 @@ public class UsuarioController {
 
 		return gson.toJson(distritoService.findByCiudadIdParamsNative(codigo_ciudad));
 	}
+	
+	//cargar pais de la BD metodo get con gson
 
 	@GetMapping("/cargarPais")
 	@ResponseBody
@@ -199,6 +200,9 @@ public class UsuarioController {
 		return gson.toJson(provinciaService.findByPaisIdParamsNative(codigo_pais));
 	}
 
+	
+	//cargar pais desde el service
+	
 	@GetMapping(value = "/buscarPorPais")
 	public @ResponseBody List<Provincia> buscarPorPais(@RequestParam("idPais") int idPais) {
 		System.out.println("buscarPorPais/" + idPais);
@@ -212,6 +216,9 @@ public class UsuarioController {
 
 	}
 
+	
+	//cargar provincia  desde el service
+	
 	@GetMapping(value = "/buscarPorProvincia")
 	public @ResponseBody List<Ciudad> buscarPorProvincia(@RequestParam("idProvincia") int idProvincia) {
 		System.out.println("buscarPorProvincia/" + idProvincia);
@@ -227,6 +234,9 @@ public class UsuarioController {
 
 	}
 
+	
+	//cargar ciudad  desde el service
+	
 	@GetMapping(value = "/buscarPorCiudad")
 	public @ResponseBody List<Distrito> buscarPorCiudad(@RequestParam("idCiudad") int idCiudad) {
 		System.out.println("buscarPorCiudad/" + idCiudad);
@@ -242,6 +252,10 @@ public class UsuarioController {
 		return distritoService.BuscarCiudadClaseconParam(idCiudad);
 	}
 
+	
+	
+	//buscar si usuario existe por el mail
+	
 	@GetMapping(value = "/buscarPorEmail")
 	public @ResponseBody Usuario buscarPorEmail(@RequestParam("email") String email) {
 		System.out.println("buscarPorEmail   " + email);
@@ -254,7 +268,9 @@ public class UsuarioController {
 		return userService.findUserByEmail(email);
 
 	}
-
+	
+	
+//verificar si el correo ya existe
 	@RequestMapping(value = "/cargarCorreo/{email}", method = RequestMethod.GET)
 	@ResponseBody
 	public String cargarCorreo(@PathVariable("email") String email, HttpServletResponse response) {
@@ -265,6 +281,8 @@ public class UsuarioController {
 		return gson.toJson(userService.findByCorreo(email));
 		// return "" + provinciaService.findByPaisIdParamsNative(codigo_pais);
 	}
+	
+	//segundo metodo para confirmar si existe el mail
 
 	@GetMapping(value = "/buscarPorCorreo")
 	public @ResponseBody String buscarPorEmailList(@RequestParam("email") String email, RedirectAttributes attributes,
@@ -298,6 +316,8 @@ public class UsuarioController {
 		return "" + userService.emailExists(email);
 
 	}
+	
+	//tercer metodo para definir si existe el correo
 
 	@GetMapping(value = "/buscarPorMail")
 	public @ResponseBody List<Usuario> buscarPorEmailListx(@RequestParam("email") String email) {
@@ -317,6 +337,9 @@ public class UsuarioController {
 		return userService.findByCorreo(email);
 
 	}
+	
+	
+	//Registrar al usuario 
 
 	@PostMapping(value = "/save")
 	@ResponseBody
@@ -407,6 +430,14 @@ public class UsuarioController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 
+	
+	
+	
+	
+	
+	
+	//metodo de registro que no se usa
+	
 	@PostMapping("/registration")
 	@ResponseBody
 	public GenericResponse registerUserAccount(@Valid final UserDto accountDto, final HttpServletRequest request) {
@@ -458,6 +489,8 @@ public class UsuarioController {
 	 * locale.getLanguage(); }
 	 */
 
+	
+	// metodo que no se usa
 	@GetMapping("/registrationConfirm")
 	public ModelAndView confirmRegistration(final HttpServletRequest request, final ModelMap model,
 			@RequestParam("token") final String token) throws UnsupportedEncodingException {
@@ -483,6 +516,8 @@ public class UsuarioController {
 
 	// user activation - verification
 
+	
+	// metodo que no se usa
 	@GetMapping("/user/resendRegistrationToken")
 	@ResponseBody
 	public GenericResponse resendRegistrationToken(final HttpServletRequest request,
@@ -494,6 +529,7 @@ public class UsuarioController {
 	}
 
 	// Reset password
+	// metodo que no se usa
 	@PostMapping("/user/resetPassword")
 	@ResponseBody
 	public GenericResponse resetPassword(final HttpServletRequest request,

@@ -1,4 +1,4 @@
-package nanifarfalla.app.model;
+	package nanifarfalla.app.model;
 
 import java.util.Date;
 
@@ -21,6 +21,7 @@ public class UserRoles {
 	Usuario mUsuario;
 	// int fkcodigo_usuario;
 
+	//int user_id = 0;
 	@JoinColumn(name = "fkcodigo_role", referencedColumnName = "codigo_role")
 	@ManyToOne
 	Role mRole;

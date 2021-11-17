@@ -20,13 +20,13 @@ import javax.persistence.Table;
 import org.jboss.aerogear.security.otp.api.Base32;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements UserDetails {
+public class Usuario {
 
-	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,6 +73,19 @@ public class Usuario implements UserDetails {
 
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserAlerta> useralertas = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private Collection<UserLocation> userlocation = new ArrayList<>();
+	
+	
+
+	public Collection<UserLocation> getUserlocation() {
+		return userlocation;
+	}
+
+	public void setUserlocation(Collection<UserLocation> userlocation) {
+		this.userlocation = userlocation;
+	}
 
 	@JoinColumn(name = "fkcodigo_distrito", referencedColumnName = "codigo_distrito")
 	@ManyToOne
@@ -86,6 +99,10 @@ public class Usuario implements UserDetails {
 	@ManyToOne	
 	EstadoUsuario mEstadoUsuario;
 
+	
+	
+	
+	
 //fkcodigo_estadousuario	
 
 	public String getGenero() {
@@ -390,42 +407,7 @@ public class Usuario implements UserDetails {
 		return authorities;
 	}
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return ""+codigo_usuario;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return email;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return getAuthoritiesz(roles);
-	}
-
+	
 	public Usuario(String nombre_usuario, String apellido_usuario, String password_usuario, String email,
 			boolean enabled, Collection<Role> roles) {
 	

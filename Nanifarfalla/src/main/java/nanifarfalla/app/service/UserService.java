@@ -117,7 +117,7 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 	@Autowired
 	private JavaMailSender mailSender;
 
-	@Autowired
+	//@Autowired
 	private MyUserDetailsService myUserDetailService;
 
 	@Autowired

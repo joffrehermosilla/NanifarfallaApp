@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nanifarfalla.app.email.EmailSender;
 import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.model.Role;
 import nanifarfalla.app.model.Usuario;
@@ -30,12 +29,12 @@ import lombok.AllArgsConstructor;
 @Transactional
 public class MyUserDetailsService implements UserDetailsService {
 
-	@Autowired
+	//@Autowired
 	private UserRepository userRepository;
 
 	private LoginAttemptService loginAttemptService;
 
-	@Autowired
+	//@Autowired
 	private HttpServletRequest request;
 
 	public MyUserDetailsService() {

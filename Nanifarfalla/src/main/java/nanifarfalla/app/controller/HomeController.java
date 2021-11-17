@@ -302,10 +302,11 @@ public class HomeController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	
+	//METODO DE LOGIN
+	@RequestMapping(value = "/formLogin" )
 	public String mostrarLogin() {
-
-		return "/login/formLogin";
+	return "login/formLogin";
 	}
 
 	@GetMapping(value = "/registro")
