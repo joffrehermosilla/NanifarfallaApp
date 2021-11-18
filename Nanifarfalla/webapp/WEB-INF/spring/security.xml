@@ -66,31 +66,17 @@
 
 	</http>
 
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="luis" password="{noop}luis123" authorities="BUYER" />
-				<user name="marisol" password="{noop}mari123"
-					authorities="BUYER, SELLER" />
-			</user-service>
-		</authentication-provider>
-
-
-	</authentication-manager>
+	<!-- <authentication-manager> <authentication-provider> <user-service> <user 
+		name="luis" password="{noop}luis123" authorities="BUYER" /> <user name="marisol" 
+		password="{noop}mari123" authorities="BUYER, SELLER" /> </user-service> </authentication-provider> 
+		</authentication-manager> -->
 
 
 
 
-	<!-- <b:bean id="myAuthenticationSuccessHandler" class="nanifarfalla.app.security.MySimpleUrlAuthenticationSuccessHandler" 
-		/>
 
 
 
-	<authentication-manager
-		alias="authenticationManager">
-		<authentication-provider
-			user-service-ref="userDetailsService" />
-	</authentication-manager> -->
 	<b:bean id="userDetailsService"
 		class="nanifarfalla.app.security.MyUserDetailsService" />
 	<b:bean id="authProvider"
@@ -105,7 +91,17 @@
 	</b:bean>
 
 
-
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select u.email as username,u.password_usuario as password, u.enabled as enabled from usuario u where u.email=?"
+				authorities-by-username-query="SELECT u.email as username, r.name as role 
+                                              FROM usuario u
+                                              INNER JOIN users_roles k ON u.codigo_usuario = k.fkcodigo_usuario
+                                              INNER JOIN role r ON k.fkcodigo_role = r.codigo_role
+                                              WHERE u.email = ?  " />
+		 </authentication-provider>
+	</authentication-manager>
 
 
 

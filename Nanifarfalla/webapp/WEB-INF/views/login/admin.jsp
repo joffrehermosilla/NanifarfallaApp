@@ -33,19 +33,19 @@
 	</nav>
 
 	<div class="container">
-		<p sec:authorize="!hasAuthority('WRITE_PRIVILEGE')">
+		<p sec:authorize="!hasAuthority('ROLE_BUYER')">
 			<fmt:message key="message.unauth" />
 			
 		</p>
 
-		<h1 sec:authorize="hasAuthority('WRITE_PRIVILEGE')">
+		<h1 sec:authorize="hasAuthority('ROLE_SELLER')">
 			<fmt:message key="label.pages.admin.message" />
 			
 		</h1>
 		
-		 <p sec:authorize="!hasAuthority('WRITE_PRIVILEGE')" th:text="${message.unauth}">unauth</p>   
+		 <p sec:authorize="!hasAuthority('ROLE_BUYER')" th:text="${message.unauth}">unauth</p>   
         
-     <h1 sec:authorize="hasAuthority('WRITE_PRIVILEGE')" th:text="${label.pages.admin.message}">admin</h1>
+     <h1 sec:authorize="hasAuthority('ROLE_SELLER')" th:text="${label.pages.admin.message}">admin</h1>
 	</div>
 </body>
 </html>
