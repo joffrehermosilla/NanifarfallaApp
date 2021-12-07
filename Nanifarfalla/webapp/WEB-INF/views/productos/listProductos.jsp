@@ -18,7 +18,7 @@
 <spring:url value="/productos/index" var="urlForm"></spring:url>
 <spring:url value="/productos/create" var="urlCreate" />
 <spring:url value="/lineas/create" var="lineaCreate" />
-<spring:url value="/productos" var="urlPeliculas" />
+<spring:url value="/productos" var="urlProductopaginate" />
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 </head>
@@ -57,27 +57,27 @@
 					<th>version</th>
 					<th>codigo Linea</th>
 				</tr>
-				<c:forEach var="producto" items="${productos.content}">
+				<c:forEach var="producto" items="${productos}">
 					<tr>
 						<td>Tabla Usuario</td>
 						<td>${producto.codigo_producto}</td>
 						<td>${producto.nombre_producto}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${producto.ingreso_almacen}" />
+								value="${producto.ingreso_almacen_producto}" />
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${producto.salida_almacen}" /></td>
+								value="${producto.salida_almacen_producto}" /></td>
 
 						<td>${producto.stock_producto}</td>
 						<td>${producto.preparacion_producto}</td>
 						<td>${producto.foto_ruta}</td>
 						<td>${producto.colores_producto}</td>
 						<td>${producto.qr_producto}</td>
-						<td>${producto.ppv_producto}</td>
+						<td>${producto.pvv_producto}</td>
 						<td>${producto.pvf_producto}</td>
 						<td>${producto.claveApi}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${producto.version}" /></td>
-						<td>${producto.fkcodigo_linea}</td>
+						<td>${producto.mLinea.nombre_linea}</td>
 
 
 						<td align="center">
@@ -106,10 +106,10 @@
 		<nav aria-label="Pagination">
 			<ul class="pagination justify-content-center font-weight-bold">
 				<li class="page-item"><a
-					href="${urlPeliculas}/indexPaginate?page=${productos.number - 1 }">[    Anterior   ] </a></li>
+					href="${urlProductopaginate}/indexPaginate?page=${productox.number - 1 }">[    Anterior   ] </a></li>
 				
 				<li class="page-item"><a
-					href="${urlPeliculas}/indexPaginate?page=${productos.number + 1 }">[   Siguiente   ]  </a></li>
+					href="${urlProductopaginate}/indexPaginate?page=${productox.number + 1 }">[   Siguiente   ]  </a></li>
 			</ul>
 		</nav>
 		<hr class="featurette-divider">

@@ -23,10 +23,7 @@ public class TipoAlerta {
 	Date version;
 
 	@OneToMany(mappedBy = "mTipoAlerta", fetch = FetchType.EAGER)
-	private Collection<Alerta> alertas = new ArrayList<>();
-
-	@OneToMany(mappedBy = "mTipoAlerta")
-	private Collection<UserAlerta> useralertas = new ArrayList<>();
+	private transient Collection<Alerta> alertas = new ArrayList<>();
 
 	public Collection<Alerta> getAlertas() {
 		return alertas;
@@ -34,14 +31,6 @@ public class TipoAlerta {
 
 	public void setAlertas(Collection<Alerta> alertas) {
 		this.alertas = alertas;
-	}
-
-	public Collection<UserAlerta> getUseralertas() {
-		return useralertas;
-	}
-
-	public void setUseralertas(Collection<UserAlerta> useralertas) {
-		this.useralertas = useralertas;
 	}
 
 	public int getCodigo_tipoalerta() {

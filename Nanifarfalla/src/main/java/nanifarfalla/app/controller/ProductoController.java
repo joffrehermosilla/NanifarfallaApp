@@ -118,10 +118,13 @@ public class ProductoController {
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
 		Page<Producto> lista = productoService.buscarTodas(page);
-		model.addAttribute("productos", lista);
+		model.addAttribute("productox", lista);
 		return "productos/listProductos";
 	}
 
+	
+
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

@@ -25,16 +25,33 @@ public class Alerta {
 	private Double precio;
 
 	private Date version;
+
 	@JoinColumn(name = "fkcodigo_tipoalerta", referencedColumnName = "codigo_tipoalerta")
 	@ManyToOne
 	TipoAlerta mTipoAlerta;
 
 	@OneToMany(mappedBy = "mAlerta")
-	private Collection<UserAlerta> useralertas = new ArrayList<>();
+	private transient Collection<UserAlerta> useralertas = new ArrayList<>();
 
 	// private int fkcodigo_tipoalerta;
 	public Alerta() {
 
+	}
+
+	public TipoAlerta getmTipoAlerta() {
+		return mTipoAlerta;
+	}
+
+	public void setmTipoAlerta(TipoAlerta mTipoAlerta) {
+		this.mTipoAlerta = mTipoAlerta;
+	}
+
+	public Collection<UserAlerta> getUseralertas() {
+		return useralertas;
+	}
+
+	public void setUseralertas(Collection<UserAlerta> useralertas) {
+		this.useralertas = useralertas;
 	}
 
 	public String getCategoria() {

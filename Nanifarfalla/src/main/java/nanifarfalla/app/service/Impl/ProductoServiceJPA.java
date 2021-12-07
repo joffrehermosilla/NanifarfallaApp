@@ -41,7 +41,7 @@ public class ProductoServiceJPA implements IProductoService{
 	@Override
 	public Page<Producto> buscarTodas(Pageable page) {
 		// TODO Auto-generated method stub
-		return null;
+		return productoRepository.findAll(page);
 	}
 
 	@Override
