@@ -24,6 +24,16 @@
 		<intercept-url pattern="/json/**" access="permitAll" />
 		<intercept-url pattern="/show/**" access="permitAll" />
 		<intercept-url pattern="/lineas/**" access="permitAll" />
+		
+	<!-- permisos ingresados el 14/12/2021 solo pruebas cambiar permitAll por hasAnyAuthority -->
+				<intercept-url pattern="/estadocatalogo/**" access="permitAll" />
+				<intercept-url pattern="/estadousuario/**" access="permitAll" />
+				<intercept-url pattern="/tipoimpuesto/**" access="permitAll" />
+				
+				
+				
+				
+				
 		<intercept-url pattern="/usuarios/registration*"
 			access="permitAll" />
 		<intercept-url pattern="/registrationConfirm*"
