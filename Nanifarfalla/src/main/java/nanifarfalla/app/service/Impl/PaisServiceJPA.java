@@ -16,8 +16,18 @@ public class PaisServiceJPA implements IPaisService {
 
 	@Override
 	public List<Pais> buscarTodas() {
-		// TODO Auto-generated method stub
 		return paisrepository.findAll();
 	}
+
+	@Override
+	public Pais save(Pais pais) {
+		return paisrepository.save(pais);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		paisrepository.deleteById(id);
+	}
+
 
 }
