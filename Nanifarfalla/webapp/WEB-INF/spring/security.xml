@@ -29,8 +29,10 @@
 				<intercept-url pattern="/estadocatalogo/**" access="permitAll" />
 				<intercept-url pattern="/estadousuario/**" access="permitAll" />
 				<intercept-url pattern="/tipoimpuesto/**" access="permitAll" />
-				
-				
+		<!-- permisos ingresados el 15/12/2021 solo pruebas cambiar permitAll por hasAnyAuthority -->			
+				<intercept-url pattern="/menus/**" access="permitAll" />
+				<intercept-url pattern="/estadoclientetienepedido/**" access="permitAll" />
+				<intercept-url pattern="/tipoimpuesto/**" access="permitAll" />
 				
 				
 				
