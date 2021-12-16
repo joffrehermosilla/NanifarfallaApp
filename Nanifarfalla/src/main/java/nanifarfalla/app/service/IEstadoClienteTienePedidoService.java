@@ -8,7 +8,7 @@ import nanifarfalla.app.model.EstadoClienteTienePedido;
 
 
 
-public interface IEstadoClienteTienePedido {
+public interface IEstadoClienteTienePedidoService {
 	void inserta(EstadoClienteTienePedido estadoclientetienepedido);
 	void actualiza(EstadoClienteTienePedido estadoclientetienepedido);
 	void elimina(EstadoClienteTienePedido estadoclientetienepedido);

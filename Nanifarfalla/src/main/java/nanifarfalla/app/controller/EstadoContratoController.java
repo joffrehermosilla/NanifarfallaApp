@@ -1,5 +1,6 @@
 package nanifarfalla.app.controller;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -19,51 +21,55 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import nanifarfalla.app.model.EstadoContrato;
+import nanifarfalla.app.service.IEstadoContratoService;
 
-import nanifarfalla.app.model.EstadoCatalogo;
 
-import nanifarfalla.app.service.IEstadoCatalogoService;
 
 @RestController
-@RequestMapping("/estadocatalogo")
-public class EstadoCatalogoController {
+@RequestMapping("/estadocontrato")
+public class EstadoContratoController {
 
 	@Autowired
-	IEstadoCatalogoService estadoCatalagoService;
-	
-	
+	IEstadoContratoService estadocontratoService;
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
 
-		List<EstadoCatalogo> estadocatalogo = estadoCatalagoService.buscarTodas();
-		model.addAttribute("estadocatalogoy", estadocatalogo);
+		List<EstadoContrato> esstadocontrato = estadocontratoService.buscarTodas();
+		model.addAttribute("esstadocontratoy", esstadocontrato);
 
-		return "estadocatalogo/listEstadoCatalogos";
+		return "esstadocontrato/listEstadoContratos";
 	}
-	
 	
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute  EstadoCatalogo estadocatalogo,Model model) {
-		List<EstadoCatalogo> estadocatalogos = estadoCatalagoService.buscarTodas();
-		model.addAttribute("estadocatalogoz", estadocatalogos);
-		return "estadocatalogo/formEstadoCatalogo";
+	public String crear(@ModelAttribute  EstadoContrato estadocontrato,Model model) {
+		List<EstadoContrato> estadocontratos = estadocontratoService.buscarTodas();
+		model.addAttribute("estadocontratoz", estadocontratos);
+		return "estadocontrato/formEstadoContrato";
 
 	}
+	
+	
+	
+	
 	
 	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute EstadoCatalogo estadocatalogos, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute EstadoContrato estadocontratos, BindingResult result, RedirectAttributes attributes,
 			 HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto estadocatalogos: " + estadocatalogos);
+		System.out.println("Recibiendo objeto estadocontratos: " + estadocontratos);
 		// Pendiente: Guardar el objeto producto en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "estadocatalogo/formEstadoCatalogo";
+			return "estadocontrato/formEstadoContrato";
 		}
 
 	
@@ -72,29 +78,24 @@ public class EstadoCatalogoController {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 		// serviceAnuncios.guardar(productos);
-		System.out.println("Recibiendo objeto EstadoCatologo: " + estadocatalogos);
+		System.out.println("Recibiendo objeto EstadoContrato: " + estadocontratos);
 
-		System.out.println("Elementos en la lista antes de la insersion: " + estadoCatalagoService.buscarTodas().size());
-		estadoCatalagoService.inserta(estadocatalogos);
-		System.out.println("Elementos en la lista despues de la insersion: " + estadoCatalagoService.buscarTodas().size());
+		System.out.println("Elementos en la lista antes de la insersion: " + estadocontratoService.buscarTodas().size());
+		estadocontratoService.inserta(estadocontratos);
+		System.out.println("Elementos en la lista despues de la insersion: " + estadocontratoService.buscarTodas().size());
 
 		// return "anuncios/formAnuncio";
-		attributes.addFlashAttribute("mensaje", "El EstadoCatalogo fue guardado");
+		attributes.addFlashAttribute("mensaje", "El EstadoContrato fue guardado");
 
-		return "redirect:/estadocatalogo/listEstadoCatalogo";
+		return "redirect:/estadocontrato/listEstadoContrato";
 	}
-	
-	
-	
-	
-	
 	
 
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<EstadoCatalogo> lista = estadoCatalagoService.buscarTodas(page);
-		model.addAttribute("estadocatalogox", lista);
-		return "estadocatalogo/listEstadoCatalogo";
+		Page<EstadoContrato> lista = estadocontratoService.buscarTodas(page);
+		model.addAttribute("estadocontratox", lista);
+		return "estadocontrato/listEstadoContrato";
 	}
 
 	
@@ -105,7 +106,5 @@ public class EstadoCatalogoController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
-	
-	
-	
+
 }

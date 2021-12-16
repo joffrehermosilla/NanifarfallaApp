@@ -10,12 +10,12 @@ import org.springframework.data.domain.Pageable;
 
 import nanifarfalla.app.model.EstadoUsuario;
 import nanifarfalla.app.repository.EstadoUsuarioRepository;
-import nanifarfalla.app.service.IEstadoUsuario;
+import nanifarfalla.app.service.IEstadoUsuarioService;
 
 
 
 @Service
-public class EstadoUsuarioServiceJPA implements IEstadoUsuario{
+public class EstadoUsuarioServiceJPA implements IEstadoUsuarioService{
 	@Autowired
 	EstadoUsuarioRepository estadousuariorepository;
 	

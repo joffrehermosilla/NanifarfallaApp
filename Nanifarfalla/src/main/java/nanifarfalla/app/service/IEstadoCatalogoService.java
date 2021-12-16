@@ -11,7 +11,7 @@ import nanifarfalla.app.model.EstadoCatalogo;
 
 
 
-public interface IEstadoCatalogo {
+public interface IEstadoCatalogoService {
 
 	void inserta(EstadoCatalogo estadocatalogo);
 	void actualiza(EstadoCatalogo estadocatalogo);

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.EstadoClienteTienePedido;
-import nanifarfalla.app.service.IEstadoClienteTienePedido;
+import nanifarfalla.app.service.IEstadoClienteTienePedidoService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +32,7 @@ public class EstadoClienteTienePedidoController {
 
 	
 	@Autowired 
-	IEstadoClienteTienePedido estadoclientetienepedidoService;
+	IEstadoClienteTienePedidoService estadoclientetienepedidoService;
 	
 	
 	@GetMapping("/index")

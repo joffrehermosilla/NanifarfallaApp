@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import nanifarfalla.app.model.EstadoCatalogo;
 import nanifarfalla.app.repository.EstadoCatalogoRepository;
-import nanifarfalla.app.service.IEstadoCatalogo;
+import nanifarfalla.app.service.IEstadoCatalogoService;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 
 
 @Service
-public class EstadoCatalogoServiceJPA implements IEstadoCatalogo {
+public class EstadoCatalogoServiceJPA implements IEstadoCatalogoService {
 	
 	
 	@Autowired

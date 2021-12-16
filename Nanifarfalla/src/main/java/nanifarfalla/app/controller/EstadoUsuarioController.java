@@ -29,7 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.EstadoUsuario;
 
-import nanifarfalla.app.service.IEstadoUsuario;
+import nanifarfalla.app.service.IEstadoUsuarioService;
 import nanifarfalla.app.util.Utileria;
 
 
@@ -38,7 +38,7 @@ import nanifarfalla.app.util.Utileria;
 public class EstadoUsuarioController {
 	
 	@Autowired
-	IEstadoUsuario estadousuarioservice;
+	IEstadoUsuarioService estadousuarioservice;
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {

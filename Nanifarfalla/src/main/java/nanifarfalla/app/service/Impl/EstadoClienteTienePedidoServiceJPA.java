@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import nanifarfalla.app.model.EstadoClienteTienePedido;
 import nanifarfalla.app.repository.EstadoClienteTienePedidoRepository;
-import nanifarfalla.app.service.IEstadoClienteTienePedido;
+import nanifarfalla.app.service.IEstadoClienteTienePedidoService;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 
 
 @Service
-public class EstadoClienteTienePedidoServiceJPA implements IEstadoClienteTienePedido {
+public class EstadoClienteTienePedidoServiceJPA implements IEstadoClienteTienePedidoService {
 
 	@Autowired
 	EstadoClienteTienePedidoRepository estadoclienttienepedidorepository;

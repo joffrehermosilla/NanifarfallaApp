@@ -3,8 +3,11 @@ package nanifarfalla.app.service.Impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import nanifarfalla.app.model.EstadoUsuario;
 import nanifarfalla.app.model.Linea;
 import nanifarfalla.app.model.Producto;
 import nanifarfalla.app.repository.LineaRepository;
@@ -16,16 +19,12 @@ public class LineasServiceJPA implements ILineasService {
 	@Autowired
 	private LineaRepository linearepository;
 	
-	@Override
-	public List<Linea> buscarTodas() {
-		// TODO Auto-generated method stub
-		return linearepository.findAll();
-	}
+	
 
 	@Override
 	public Linea buscarPorId(int idLinea) {
 		// TODO Auto-generated method stub
-		return  null;
+		return  linearepository.getOne(idLinea);
 	}
 
 	@Override
@@ -37,13 +36,13 @@ public class LineasServiceJPA implements ILineasService {
 	@Override
 	public Linea get(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return linearepository.getOne(id);
 	}
 
 	@Override
 	public List<Linea> list() {
 		// TODO Auto-generated method stub
-		return null;
+		return linearepository.findAll();
 	}
 
 	@Override
@@ -80,6 +79,18 @@ public class LineasServiceJPA implements ILineasService {
 	public List<Linea> findByid_linea(int id) {
 		// TODO Auto-generated method stub
 		return linearepository.findByid_linea(id);
+	}
+
+	@Override
+	public Page<Linea> buscarTodas(Pageable page) {
+		// TODO Auto-generated method stub
+		return linearepository.findAll(page);
+	}
+
+	@Override
+	public List<Linea> buscarTodas() {
+		// TODO Auto-generated method stub
+		return linearepository.findAll();
 	}
 
 }

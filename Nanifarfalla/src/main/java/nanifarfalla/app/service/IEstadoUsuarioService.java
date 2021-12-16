@@ -10,7 +10,7 @@ import nanifarfalla.app.model.EstadoUsuario;
 
 
 
-public interface IEstadoUsuario {
+public interface IEstadoUsuarioService {
 //Creación de CRUD con el formato Standard
 	
 	void inserta(EstadoUsuario estadousuario);
