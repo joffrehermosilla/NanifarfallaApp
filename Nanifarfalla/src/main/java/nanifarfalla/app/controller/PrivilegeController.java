@@ -26,33 +26,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import nanifarfalla.app.model.EstadoUsuario;
-
-import nanifarfalla.app.service.IEstadoUsuarioService;
+import nanifarfalla.app.model.Privilege;
+import nanifarfalla.app.service.IPrivelegeService;
 
 
 
 @RestController
-@RequestMapping("/estadousuario")
-public class EstadoUsuarioController {
-	
+@RequestMapping("/privilege")
+public class PrivilegeController {
+
 	@Autowired
-	IEstadoUsuarioService estadousuarioservice;
+	IPrivelegeService privilegeService;
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
 
-		List<EstadoUsuario> estadousuario = estadousuarioservice.buscarTodas();
-		model.addAttribute("estadousuarioy", estadousuario);
+		List<Privilege> privilege = privilegeService.buscarTodas();
+		model.addAttribute("privilegey", privilege);
 
-		return "estadousuario/listEstadoUsuario";
+		return "privilege/listPrivilege";
 	}
 	
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute  EstadoUsuario estadousuario,Model model) {
-		List<EstadoUsuario> estadousuarios = estadousuarioservice.buscarTodas();
-		model.addAttribute("estadousuarioz", estadousuarios);
-		return "estadousuario/formEstadoUsuario";
+	public String crear(@ModelAttribute  Privilege privilege,Model model) {
+		List<Privilege> privileges = privilegeService.buscarTodas();
+		model.addAttribute("privilegez", privileges);
+		return "privilege/formPrivilege";
 
 	}
 	
@@ -62,14 +61,14 @@ public class EstadoUsuarioController {
 	
 	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute EstadoUsuario estadousuarios, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute Privilege privileges, BindingResult result, RedirectAttributes attributes,
 			 HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto estadousuarios: " + estadousuarios);
+		System.out.println("Recibiendo objeto privileges: " + privileges);
 		// Pendiente: Guardar el objeto producto en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "estadousuario/formEstadoUsuario";
+			return "privilege/formPrivilege";
 		}
 
 	
@@ -78,24 +77,24 @@ public class EstadoUsuarioController {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 		// serviceAnuncios.guardar(productos);
-		System.out.println("Recibiendo objeto EstadoUsuario: " + estadousuarios);
+		System.out.println("Recibiendo objeto Privilege: " + privileges);
 
-		System.out.println("Elementos en la lista antes de la insersion: " + estadousuarioservice.buscarTodas().size());
-		estadousuarioservice.inserta(estadousuarios);
-		System.out.println("Elementos en la lista despues de la insersion: " + estadousuarioservice.buscarTodas().size());
+		System.out.println("Elementos en la lista antes de la insersion: " + privilegeService.buscarTodas().size());
+		privilegeService.inserta(privileges);
+		System.out.println("Elementos en la lista despues de la insersion: " + privilegeService.buscarTodas().size());
 
 		// return "anuncios/formAnuncio";
-		attributes.addFlashAttribute("mensaje", "El EstadoUsuario fue guardado");
+		attributes.addFlashAttribute("mensaje", "El Privilege fue guardado");
 
-		return "redirect:/estadousuario/listEstadoUsuario";
+		return "redirect:/privilege/listPrivilege";
 	}
 	
 
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<EstadoUsuario> lista = estadousuarioservice.buscarTodas(page);
-		model.addAttribute("estadousuariox", lista);
-		return "estadousuario/listEstadoUsuario";
+		Page<Privilege> lista = privilegeService.buscarTodas(page);
+		model.addAttribute("privilegex", lista);
+		return "privilege/listPrivilege";
 	}
 
 	

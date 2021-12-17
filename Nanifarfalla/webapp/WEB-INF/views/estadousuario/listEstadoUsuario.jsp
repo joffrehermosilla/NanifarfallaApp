@@ -27,71 +27,32 @@
 		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
 	</header>
 	<div class="container theme-showcase" role="main">
-		<h3>Listado de Estado de Catalogo</h3>
+		<h3>Listado de Estado de Usuario</h3>
 		<c:if test="${mensaje!=null }">
 			<div class='alert alert-success' role="alert">${ mensaje}</div>
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
-			title="Nuevo Anuncio">Nuevo</a><br> <br>
+			title="Nuevo Estado Usuario">Nuevo</a><br> <br>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
-					<th>Nombre Usuario</th>
-					<th>Codigo Anuncio</th>
-					<th>fecha inicio</th>
-					<th>fecha fin</th>
-					<th>Estatus</th>
-					<th>Precio</th>
-					<th>Mensaje Superior</th>
-					<th>Mensaje Inferior</th>
-					<th>Imagen 1</th>
-					<th>Imagen 2</th>
-					<th>estado del Mensaje</th>
-					<th>Link del Mensaje</th>
-					<th>Mensaje Principal</th>
-					<th>Tipo de Mensaje</th>
-					<th>Opciones</th>
+					<th>Codigo Estado Usuario</th>
+					<th>Nombre Estado Usuario</th>
+					<th>version</th>
+		
 				</tr>
-				<c:forEach var="anuncio" items="${anuncios}">
+				<c:forEach var="estadousuarioy" items="${estadousuarioy}">
 					<tr>
-						<td>Tabla Usuario</td>
-						<td>${anuncio.codigo_anuncio}</td>
+						<td>Tabla Estado Usuario</td>
+						<td>${estadousuarioy.codigo_estadousuario}</td>
+								<td>${estadousuarioy.nombre_estadousuario}</td>
+						
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${anuncio.version}" />
-						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${anuncio.version}" /></td>
+								value="${estadousuarioy.version}" /></td>
 
-						<td>${anuncio.fkcodigo_tipoalerta}</td>
-						<td>${anuncio.precio}</td>
-						<td>${anuncio.mensaje_anuncio}</td>
-						<td>${anuncio.pie_mensaje}</td>
-						<td>Ruta 1</td>
-						<td>Ruta 2</td>
+				
 
-						<td>Renovar/Bloquear/Esperar</td>
-						<td>Link de la ruta a donde va</td>
-						<td>${anuncio.anuncio_principal}</td>
-
-						<fmt:parseNumber var="i" value="${anuncio.fkcodigo_tipoalerta}" />
-						<c:choose>
-							<c:when test="${anuncio.fkcodigo_tipoalerta == 1}">
-								<td align="center"><span
-									class="badge badge-pill badge-danger">Importante</span></td>
-
-							</c:when>
-							<c:when test="${anuncio.fkcodigo_tipoalerta == 2}">
-								<td align="center"><span
-									class="badge badge-pill badge-info">Info</span></td>
-							</c:when>
-							<c:when test="${anuncio.fkcodigo_tipoalerta == 3}">
-								<td align="center"><span
-									class="badge badge-pill badge-warning">Alerta</span></td>
-							</c:when>
-							<c:otherwise>
-								<td align="center"><span
-									class="badge badge-pill badge-dark">Evento</span></td>
-							</c:otherwise>
-						</c:choose>
+				
 						<td align="center">
 							<table border="1">
 								<tr>

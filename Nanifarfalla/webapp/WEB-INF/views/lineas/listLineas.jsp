@@ -55,7 +55,7 @@
 						<td>Tabla Lineas</td>
 						<td>${linea.codigo_linea}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${linea.fechacreacion}" />
+								value="${linea.version}" />
 						<td>${linea.nombre_linea}</td>
 						<td>Renovar/Bloquear/Esperar</td>
 						<td>${linea.foto_linea}</td>
