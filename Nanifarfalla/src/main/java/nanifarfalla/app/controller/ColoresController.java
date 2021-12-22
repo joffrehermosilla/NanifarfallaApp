@@ -14,74 +14,71 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import nanifarfalla.app.model.Pais;
-import nanifarfalla.app.service.IPaisService;
+import nanifarfalla.app.model.Colores;
+import nanifarfalla.app.service.IColoresService;
 
 @RestController
-@RequestMapping(path="/pais")
-public class PaisController {
+@RequestMapping("/colores")
+public class ColoresController {
 
 	@Autowired
-	private IPaisService paisService;
+	IColoresService coloresService;
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisy", pais);
-		return "pais/listPais";
+		List<Colores> colores = coloresService.buscarTodas();
+		model.addAttribute("coloresy", colores);
+		return "colores/listColores";
 	}
 	
 	
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute  Pais paiss,Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisz", pais);
-		return "pais/formPais";
+	public String crear(@ModelAttribute  Colores coloress,Model model) {
+		List<Colores> colores = coloresService.buscarTodas();
+		model.addAttribute("coloresz", colores);
+		return "colores/formColores";
 	}
 
 	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute Pais pais, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute Colores colores, BindingResult result, RedirectAttributes attributes,
 			 HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto Pais: " + pais);
+		System.out.println("Recibiendo objeto Colores: " + colores);
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "pais/formPais";
+			return "colores/formColores";
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 		
-		System.out.println("Recibiendo objeto Pais: " + pais);
-		System.out.println("Elementos en la lista antes de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Recibiendo objeto Colores: " + colores);
+		System.out.println("Elementos en la lista antes de la insersion: " + coloresService.buscarTodas().size());
 		
-		paisService.inserta(pais);
+		coloresService.inserta(colores);
 		
-		System.out.println("Elementos en la lista despues de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Elementos en la lista despues de la insersion: " + coloresService.buscarTodas().size());
 
-		attributes.addFlashAttribute("mensaje", "El Pais fue guardado");
-		return "redirect:/pais/listPais";
+		attributes.addFlashAttribute("mensaje", "El Colores fue guardado");
+		return "redirect:/colores/listColores";
 	}
 	
 
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Pais> lista = paisService.buscarTodas(page);
-		model.addAttribute("paisx", lista);
-		return "pais/listPais";
+		Page<Colores> lista = coloresService.buscarTodas(page);
+		model.addAttribute("coloresx", lista);
+		return "colores/listColores";
 	}
 
 	

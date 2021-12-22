@@ -10,78 +10,76 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import nanifarfalla.app.model.Pais;
-import nanifarfalla.app.service.IPaisService;
+import nanifarfalla.app.model.LoteInsumo;
+import nanifarfalla.app.service.ILoteInsumoService;
 
-@RestController
-@RequestMapping(path="/pais")
-public class PaisController {
 
+@Controller
+@RequestMapping("/loteinsumo")
+public class LoteInsumoController {
+	
 	@Autowired
-	private IPaisService paisService;
+	ILoteInsumoService loteInsumoService;
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisy", pais);
-		return "pais/listPais";
+		List<LoteInsumo> loteinsumo = loteInsumoService.buscarTodas();
+		model.addAttribute("loteinsumoy", loteinsumo);
+		return "loteinsumo/listLoteInsumo";
 	}
 	
 	
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute  Pais paiss,Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisz", pais);
-		return "pais/formPais";
+	public String crear(@ModelAttribute  LoteInsumo loteinsumos,Model model) {
+		List<LoteInsumo> loteinsumo = loteInsumoService.buscarTodas();
+		model.addAttribute("loteinsumoz", loteinsumo);
+		return "loteinsumo/formLoteInsumo";
 	}
 
 	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute Pais pais, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute LoteInsumo loteinsumo, BindingResult result, RedirectAttributes attributes,
 			 HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto Pais: " + pais);
+		System.out.println("Recibiendo objeto LoteInsumo: " + loteinsumo);
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "pais/formPais";
+			return "loteinsumo/formLoteInsumo";
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 		
-		System.out.println("Recibiendo objeto Pais: " + pais);
-		System.out.println("Elementos en la lista antes de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Recibiendo objeto LoteInsumo: " + loteinsumo);
+		System.out.println("Elementos en la lista antes de la insersion: " + loteInsumoService.buscarTodas().size());
 		
-		paisService.inserta(pais);
+		loteInsumoService.inserta(loteinsumo);
 		
-		System.out.println("Elementos en la lista despues de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Elementos en la lista despues de la insersion: " + loteInsumoService.buscarTodas().size());
 
-		attributes.addFlashAttribute("mensaje", "El Pais fue guardado");
-		return "redirect:/pais/listPais";
+		attributes.addFlashAttribute("mensaje", "El LoteInsumo fue guardado");
+		return "redirect:/loteinsumo/listLoteInsumo";
 	}
 	
 
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Pais> lista = paisService.buscarTodas(page);
-		model.addAttribute("paisx", lista);
-		return "pais/listPais";
+		Page<LoteInsumo> lista = loteInsumoService.buscarTodas(page);
+		model.addAttribute("loteinsumox", lista);
+		return "loteinsumo/listLoteInsumo";
 	}
 
 	

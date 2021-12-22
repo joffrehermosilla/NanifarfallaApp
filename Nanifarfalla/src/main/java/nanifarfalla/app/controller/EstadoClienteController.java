@@ -14,74 +14,71 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import nanifarfalla.app.model.Pais;
-import nanifarfalla.app.service.IPaisService;
+import nanifarfalla.app.model.EstadoCliente;
+import nanifarfalla.app.service.IEstadoClienteService;
 
 @RestController
-@RequestMapping(path="/pais")
-public class PaisController {
+@RequestMapping("/estadocliente")
+public class EstadoClienteController {
 
 	@Autowired
-	private IPaisService paisService;
+	IEstadoClienteService estadoClienteService;
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisy", pais);
-		return "pais/listPais";
+		List<EstadoCliente> estadocliente = estadoClienteService.buscarTodas();
+		model.addAttribute("estadoclientey", estadocliente);
+		return "estadocliente/listEstadoCliente";
 	}
 	
 	
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute  Pais paiss,Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisz", pais);
-		return "pais/formPais";
+	public String crear(@ModelAttribute  EstadoCliente estadoclientes,Model model) {
+		List<EstadoCliente> estadocliente = estadoClienteService.buscarTodas();
+		model.addAttribute("estadoclientez", estadocliente);
+		return "estadocliente/formEstadoCliente";
 	}
 
 	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute Pais pais, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute EstadoCliente estadocliente, BindingResult result, RedirectAttributes attributes,
 			 HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto Pais: " + pais);
+		System.out.println("Recibiendo objeto EstadoCliente: " + estadocliente);
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "pais/formPais";
+			return "estadocliente/formEstadoCliente";
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 		
-		System.out.println("Recibiendo objeto Pais: " + pais);
-		System.out.println("Elementos en la lista antes de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Recibiendo objeto EstadoCliente: " + estadocliente);
+		System.out.println("Elementos en la lista antes de la insersion: " + estadoClienteService.buscarTodas().size());
 		
-		paisService.inserta(pais);
+		estadoClienteService.inserta(estadocliente);
 		
-		System.out.println("Elementos en la lista despues de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Elementos en la lista despues de la insersion: " + estadoClienteService.buscarTodas().size());
 
-		attributes.addFlashAttribute("mensaje", "El Pais fue guardado");
-		return "redirect:/pais/listPais";
+		attributes.addFlashAttribute("mensaje", "El EstadoCliente fue guardado");
+		return "redirect:/estadocliente/listEstadoCliente";
 	}
 	
 
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Pais> lista = paisService.buscarTodas(page);
-		model.addAttribute("paisx", lista);
-		return "pais/listPais";
+		Page<EstadoCliente> lista = estadoClienteService.buscarTodas(page);
+		model.addAttribute("estadoclientex", lista);
+		return "estadocliente/listEstadoCliente";
 	}
 
 	

@@ -23,7 +23,7 @@
 		<intercept-url pattern="/signup/**" access="permitAll" />
 		<intercept-url pattern="/json/**" access="permitAll" />
 		<intercept-url pattern="/show/**" access="permitAll" />
-		
+			
 		
 	<!-- permisos ingresados el 14/12/2021 solo pruebas cambiar permitAll por hasAnyAuthority -->
 				<intercept-url pattern="/estadocatalogo/**" access="permitAll" />
@@ -43,7 +43,20 @@
 				<intercept-url pattern="/regimencliente/**" access="permitAll" />
 				
 				
-				
+		<intercept-url pattern="/tipousuario/**" access="permitAll" />
+		<intercept-url pattern="/tipoalerta/**" access="permitAll" />
+		<intercept-url pattern="/estadoinsumo/**" access="permitAll" />
+		<intercept-url pattern="/tipoinsumo/**" access="permitAll" />
+		<intercept-url pattern="/estadoproducto/**" access="permitAll" />
+		<intercept-url pattern="/tipoproducto/**" access="permitAll" />
+		<intercept-url pattern="/estadocliente/**" access="permitAll" />
+		<intercept-url pattern="/loteinsumo/**" access="permitAll" />
+		<intercept-url pattern="/colores/**" access="permitAll" />
+		<intercept-url pattern="/presentacioninsumo/**" access="permitAll" />
+		<intercept-url pattern="/elaboracionproducto/**" access="permitAll" />
+		<intercept-url pattern="/facturactienepedido/**" access="permitAll" />
+		<intercept-url pattern="/promocionventa/**" access="permitAll" />
+		<intercept-url pattern="/pais/**" access="permitAll" />
 				
 				
 				

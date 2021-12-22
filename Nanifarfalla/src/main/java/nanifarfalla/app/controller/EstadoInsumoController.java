@@ -10,78 +10,75 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import nanifarfalla.app.model.Pais;
-import nanifarfalla.app.service.IPaisService;
+import nanifarfalla.app.model.EstadoInsumo;
+import nanifarfalla.app.service.IEstadoInsumoService;
 
-@RestController
-@RequestMapping(path="/pais")
-public class PaisController {
+@Controller
+@RequestMapping("/estadoinsumo")
+public class EstadoInsumoController {
 
 	@Autowired
-	private IPaisService paisService;
+	IEstadoInsumoService estadoInsumoService;
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisy", pais);
-		return "pais/listPais";
+		List<EstadoInsumo> estadoinsumo = estadoInsumoService.buscarTodas();
+		model.addAttribute("estadoinsumoy", estadoinsumo);
+		return "estadoinsumo/listEstadoInsumo";
 	}
 	
 	
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute  Pais paiss,Model model) {
-		List<Pais> pais = paisService.buscarTodas();
-		model.addAttribute("paisz", pais);
-		return "pais/formPais";
+	public String crear(@ModelAttribute  EstadoInsumo estadoinsumos,Model model) {
+		List<EstadoInsumo> estadoinsumo = estadoInsumoService.buscarTodas();
+		model.addAttribute("estadoinsumoz", estadoinsumo);
+		return "estadoinsumo/formEstadoInsumo";
 	}
 
 	
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute Pais pais, BindingResult result, RedirectAttributes attributes,
+	public String guardar(@ModelAttribute EstadoInsumo estadoinsumo, BindingResult result, RedirectAttributes attributes,
 			 HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto Pais: " + pais);
+		System.out.println("Recibiendo objeto EstadoInsumo: " + estadoinsumo);
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "pais/formPais";
+			return "estadoinsumo/formEstadoInsumo";
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 		
-		System.out.println("Recibiendo objeto Pais: " + pais);
-		System.out.println("Elementos en la lista antes de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Recibiendo objeto EstadoInsumo: " + estadoinsumo);
+		System.out.println("Elementos en la lista antes de la insersion: " + estadoInsumoService.buscarTodas().size());
 		
-		paisService.inserta(pais);
+		estadoInsumoService.inserta(estadoinsumo);
 		
-		System.out.println("Elementos en la lista despues de la insersion: " + paisService.buscarTodas().size());
+		System.out.println("Elementos en la lista despues de la insersion: " + estadoInsumoService.buscarTodas().size());
 
-		attributes.addFlashAttribute("mensaje", "El Pais fue guardado");
-		return "redirect:/pais/listPais";
+		attributes.addFlashAttribute("mensaje", "El EstadoInsumo fue guardado");
+		return "redirect:/estadoinsumo/listEstadoInsumo";
 	}
 	
 
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Pais> lista = paisService.buscarTodas(page);
-		model.addAttribute("paisx", lista);
-		return "pais/listPais";
+		Page<EstadoInsumo> lista = estadoInsumoService.buscarTodas(page);
+		model.addAttribute("estadoinsumox", lista);
+		return "estadoinsumo/listEstadoInsumo";
 	}
 
 	
