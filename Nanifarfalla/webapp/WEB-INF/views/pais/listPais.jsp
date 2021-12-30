@@ -39,11 +39,11 @@
 					<th>Codigo Pais</th>
 					<th>Nombre Pais</th>
 					<th>version</th>
-		
+		            <th>Acciones</th>
 				</tr>
 				<c:forEach var="paisy" items="${paisy}">
 					<tr>
-						<td>Tabla Pais</td>
+				
 						<td>${paisy.codigo_pais}</td>
 						<td>${paisy.nombre_pais}</td>
 						

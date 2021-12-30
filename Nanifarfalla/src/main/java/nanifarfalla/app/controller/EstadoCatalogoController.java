@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -27,7 +28,8 @@ import nanifarfalla.app.model.EstadoCatalogo;
 
 import nanifarfalla.app.service.IEstadoCatalogoService;
 
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/estadocatalogo")
 public class EstadoCatalogoController {
 
@@ -42,7 +44,7 @@ public class EstadoCatalogoController {
 		List<EstadoCatalogo> estadocatalogo = estadoCatalagoService.buscarTodas();
 		model.addAttribute("estadocatalogoy", estadocatalogo);
 
-		return "estadocatalogo/listEstadoCatalogos";
+		return "estadocatalogo/listEstadoCatalogo";
 	}
 	
 	
