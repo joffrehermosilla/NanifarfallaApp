@@ -16,7 +16,7 @@
 		<intercept-url pattern="/alertas/*"
 			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
 		<intercept-url pattern="/productos/*"
-			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
+			access="permitAll" />
 		<intercept-url pattern="/login*" access="permitAll" />
 		<intercept-url pattern="/logout*" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />

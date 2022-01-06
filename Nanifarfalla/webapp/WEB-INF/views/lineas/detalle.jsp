@@ -47,7 +47,7 @@
 	<!-- ========================= SECTION PAGETOP ========================= -->
 	<section class="section-pagetop bg">
 		<div class="container">
-			<h2 class="title-page">${linea.nombre_linea}</h2>
+			<h2 class="title-page">${producto.mLinea.nombre_linea}</h2>
 			<nav>
 				<ol class="breadcrumb text-white">
 					<li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -274,7 +274,7 @@
 										<aside class="col-md-3">
 											<a href="#" class="img-wrap"> <span
 												class="badge badge-danger"> NEW </span> <img
-												src="${urlPublic}/images/lineas/nanifarfalla/${linea.foto_linea}">
+												src="${urlPublic}/images/lineas/nanifarfalla/${producto.mLinea.foto_linea}">
 											</a>
 										</aside>
 										<!-- col.// -->
@@ -304,8 +304,8 @@
 										<aside class="col-sm-3">
 											<div class="info-aside">
 												<div class="price-wrap">
-													<span class="price h5"> $ ${producto.ppv_producto} </span>
-													<del class="price-old"> $ ${producto.pvf_producto}</del>
+													<span class="price h5"> ${producto.pvv_producto} </span>
+													<del class="price-old"> ${producto.pvf_producto}</del>
 												</div>
 												<!-- info-price-detail // -->
 												<p class="text-success">Free shipping</p>

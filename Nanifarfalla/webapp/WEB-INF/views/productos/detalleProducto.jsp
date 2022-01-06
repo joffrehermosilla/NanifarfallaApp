@@ -14,21 +14,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Creacion de Anuncios</title>
+<title>Creacion de Productos</title>
 <spring:url value="/resources" var="urlPublic"></spring:url>
-
+<spring:url value="/productos/detalle" var="urlDetalle" />
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
+	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 	<header class="section-header">
 		<div class="container">
 			<jsp:include page="../includes/presentacioncreador.jsp"></jsp:include>
 
 		</div>
 		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
-		
+
 	</header>
 	<section class="section-content padding-y">
 		<!-- container .//  -->
@@ -38,8 +38,7 @@
 				<aside class="col-md-6">
 					<article class="gallery-wrap">
 						<div class="img-big-wrap">
-							<img id="main-img"
-								src="${urlPublic}/images/items/1.jpg">
+							<img id="main-img" src="${urlPublic}/images/items/1.jpg">
 							<div id="zoom">
 								<img id="zoom-img" />
 							</div>
@@ -65,8 +64,10 @@
 				</aside>
 				<main class="col-md-6 border-left">
 					<article class="content-body">
+						<c:forEach var="producto" items="${productos}">
+							<h2 class="title">${producto.nombre_producto}</h2>
+						</c:forEach>
 
-						<h2 class="title">${producto.nombre_producto}</h2>
 
 						<div class="rating-wrap my-3">
 							<ul class="rating-stars">
