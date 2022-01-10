@@ -63,7 +63,7 @@ public class ProductoController {
 	public String mostrarDetalle(Model model, @RequestParam("codigo_producto") int codigo_producto) {
 		List<String> listaFechas = Utileria.getNextDays(4);
 		System.out.println("Buscamos el producto : " + codigo_producto);
-
+	
 		model.addAttribute("producto", productoService.buscarPorId(codigo_producto));
 		// model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
 		model.addAttribute("productos", productoService.buscarTodas());

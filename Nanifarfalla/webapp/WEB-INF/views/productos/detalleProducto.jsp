@@ -64,9 +64,19 @@
 				</aside>
 				<main class="col-md-6 border-left">
 					<article class="content-body">
-						<c:forEach var="producto" items="${productos}">
-							<h2 class="title">${producto.nombre_producto}</h2>
-						</c:forEach>
+
+						<h2 class="title">	utilizar ajax para que el JSON cargue la data 	<c:forEach var="producto" items="${productos}">
+										<c:set var="i" value="${producto.codigo_producto}" />
+										<c:choose>
+											<c:when test="${i eq producto.codigo_producto}">
+												<ul class="list-menu">
+													<li><a href="../lineas/detalle">${producto.nombre_producto} </a></li>
+
+												</ul>
+											</c:when>
+										</c:choose>
+									</c:forEach></h2>
+
 
 
 						<div class="rating-wrap my-3">
