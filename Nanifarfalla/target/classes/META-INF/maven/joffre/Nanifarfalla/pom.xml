@@ -36,7 +36,7 @@
 		<joffre.springwebmvc.version>5.2.8.RELEASE
 		</joffre.springwebmvc.version>
 		<joffre.aerogear.version>1.0.0</joffre.aerogear.version>
-		<joffre.junit.version>4.12</joffre.junit.version>
+		<joffre.junit.version>4.13.1</joffre.junit.version>
 		<joffre.mysql.version>5.1.48</joffre.mysql.version>
 		<joffre.jackson.version>2.11.2</joffre.jackson.version>
 		<joffre.imagemagick.version>2.3.6</joffre.imagemagick.version>
