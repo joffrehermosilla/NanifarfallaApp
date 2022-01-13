@@ -266,7 +266,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>${joffre.springsecurity.version}</version>
+
 		</dependency>
 
 		<dependency>

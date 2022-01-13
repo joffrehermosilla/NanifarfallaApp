@@ -16,6 +16,7 @@ import nanifarfalla.app.service.IEstadoUsuarioService;
 
 @Service
 public class EstadoUsuarioServiceJPA implements IEstadoUsuarioService{
+	
 	@Autowired
 	EstadoUsuarioRepository estadousuariorepository;
 	

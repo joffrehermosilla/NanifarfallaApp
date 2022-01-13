@@ -32,27 +32,29 @@
 			<div class='alert alert-success' role="alert">${ mensaje}</div>
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
-			title="Nuevo Estado Usuario">Nuevo</a><br> <br>
+			title="Nuevo Estado Usuario">Nuevo Estado Usuario</a><br> <br>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
 					<th>Codigo Estado Usuario</th>
 					<th>Nombre Estado Usuario</th>
-					<th>version</th>
-		
+
+					<th>Version</th>
+					<th>Modificar</th>
+
 				</tr>
 				<c:forEach var="estadousuarioy" items="${estadousuarioy}">
 					<tr>
-						<td>Tabla Estado Usuario</td>
+
 						<td>${estadousuarioy.codigo_estadousuario}</td>
-								<td>${estadousuarioy.nombre_estadousuario}</td>
-						
+						<td>${estadousuarioy.nombre_estadousuario}</td>
+
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${estadousuarioy.version}" /></td>
 
-				
 
-				
+
+
 						<td align="center">
 							<table border="1">
 								<tr>
