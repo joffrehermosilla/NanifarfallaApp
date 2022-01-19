@@ -1,48 +1,51 @@
 package nanifarfalla.app.service.Impl;
 
 import org.springframework.stereotype.Service;
-import java.util.List;
 
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
+import nanifarfalla.app.controller.EstadoUsuarioController;
 import nanifarfalla.app.model.EstadoUsuario;
 import nanifarfalla.app.repository.EstadoUsuarioRepository;
 import nanifarfalla.app.service.IEstadoUsuarioService;
 
-
-
 @Service
-public class EstadoUsuarioServiceJPA implements IEstadoUsuarioService{
-	
+public class EstadoUsuarioServiceJPA implements IEstadoUsuarioService {
+	private final static Logger LOGGER = LoggerFactory.getLogger(EstadoUsuarioServiceJPA.class);
 	@Autowired
 	EstadoUsuarioRepository estadousuariorepository;
-	
-	
+
 	@Override
 	public void inserta(EstadoUsuario estadousuario) {
 		// TODO Auto-generated method stub
-		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+		estadousuario.setVersion(timestamp);
+
 		estadousuariorepository.save(estadousuario);
-		
+
 	}
 
 	@Override
 	public void actualiza(EstadoUsuario estadousuario) {
 		// TODO Auto-generated method stub
-		
-		
-		
+
 	}
 
 	@Override
 	public void elimina(EstadoUsuario estadousuario) {
 		// TODO Auto-generated method stub
-		
+
 		estadousuariorepository.delete(estadousuario);
-		
+
 	}
 
 	@Override
@@ -86,7 +89,16 @@ public class EstadoUsuarioServiceJPA implements IEstadoUsuarioService{
 		// TODO Auto-generated method stub
 		return estadousuariorepository.findAll();
 	}
-	
-	
-	
+
+	@Override
+	public Optional<EstadoUsuario> buscarporId(int id) {
+		// TODO Auto-generated method stub
+		return estadousuariorepository.findById(id);
+	}
+
+	@Override
+	public void eliminar(int idEstadoUsuario) {
+		estadousuariorepository.deleteById(idEstadoUsuario);
+	}
+
 }

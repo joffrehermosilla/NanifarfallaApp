@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
@@ -27,6 +27,8 @@
 	<header class="section-header">
 		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
 	</header>
+
+
 	<div class="container theme-showcase" role="main">
 		<h3 class="blog-title">
 			<span class="label label-success">Crear Nueva Regla de Estado
@@ -46,7 +48,7 @@
 		</spring:hasBindErrors>
 
 
-${InstanciaEstadoUsuario}
+		${InstanciaEstadoUsuario}
 		<form:form action="${urlForm}" method="post" id="form" class="form"
 			enctype="multipart/form-data" modelAttribute="InstanciaEstadoUsuario">
 
@@ -58,17 +60,19 @@ ${InstanciaEstadoUsuario}
 							<c:set var="i" value="${estadousuarioz.codigo_estadousuario}" />
 						</c:forEach>
 						<div class="col-sm-2">
-							<input width="4" type="text" class="form-control" hidden="true"
-								path="codigo_estadousuario" id="codigo_estadousuario"
-								required="required" value="${i + 1}" />
+							<!--  	<form:input width="4" type="text" class="form-control"
+								hidden="true" path="codigo_estadousuario"
+								id="codigo_estadousuario" required="required" value="${i + 1}" />
+								-->
+							<form:hidden path="codigo_estadousuario" />
 						</div>
 
 						<div class="form-group">
-							<label for="nombre_estadousuario" path="nombre_estadousuario"
-								id="nombre_estadousuario">Regla del estado Usuario Crear
-								un nuevo Estado de Usuario</label> <input type="text"
-								class="form-control" path="nombre_estadousuario"
-								required="required"></input>
+							<form:label for="nombre_estadousuario"
+								path="nombre_estadousuario" id="nombre_estadousuario">Regla del estado Usuario Crear
+								un nuevo Estado de Usuario</form:label>
+							<form:input type="text" class="form-control"
+								path="nombre_estadousuario" required="required"></form:input>
 
 
 
@@ -76,6 +80,7 @@ ${InstanciaEstadoUsuario}
 
 
 						</div>
+						<div class="col-sm-2"></div>
 						<div>
 							<select id="nombre_estadousuario" class="form-control">
 								<option value="-1">Confirme Estado Usuario</option>
@@ -92,8 +97,8 @@ ${InstanciaEstadoUsuario}
 					<div class="button">
 						<button type="submit" value="submit" class="btn btn-danger href="${urlStart}">Guardar</button>
 					</div>
-					
-						
+
+
 				</div>
 			</fieldset>
 		</form:form>
