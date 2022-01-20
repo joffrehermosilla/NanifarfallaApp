@@ -46,8 +46,10 @@
 
 
 	<section class="section-content padding-y bg">
+
 		<div class="container">
 			<div class="row">
+
 				<aside class="col-md-4">
 
 					<!-- ============================ COMPONENT LOGIN 1  ================================= -->
@@ -60,7 +62,11 @@
 					<!-- ============================ COMPONENT LOGIN 2  ================================= -->
 
 					<div class="card">
+
 						<div class="card-body">
+							<c:if test="${mensajelogout!=null }">
+								<div class=' alert alert-primary' role="alert" align="center">${ mensajelogout}</div>
+							</c:if>
 							<h4 class="card-title mb-4"></h4>
 							<form name='form' action='${urlRoot}login' method='POST'>
 

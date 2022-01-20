@@ -1,6 +1,7 @@
 package nanifarfalla.app.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -71,6 +72,18 @@ public class ElaboracionProductoServiceJPA implements IElaboracionProductoServic
 	@Override
 	public List<ElaboracionProducto> buscarTodas() {
 		return elaboracionProductoRepository.findAll();
+	}
+
+	@Override
+	public void eliminar(int idElaboracionProducto) {
+		// TODO Auto-generated method stub
+		elaboracionProductoRepository.deleteById(idElaboracionProducto);
+	}
+
+	@Override
+	public Optional<ElaboracionProducto> buscarporId(int id) {
+		// TODO Auto-generated method stub
+		return elaboracionProductoRepository.findById(id);
 	}
 
 }

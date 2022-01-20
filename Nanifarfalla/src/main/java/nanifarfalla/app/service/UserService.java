@@ -117,8 +117,8 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 	@Autowired
 	private JavaMailSender mailSender;
 
-	
-	//importante que el @autowired siga porque permite el envio de confirmación por mail no BORRAR!!
+	// importante que el @autowired siga porque permite el envio de confirmación por
+	// mail no BORRAR!!
 	@Autowired
 	private MyUserDetailsService myUserDetailService;
 

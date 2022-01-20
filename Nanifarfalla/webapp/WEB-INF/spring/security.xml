@@ -15,52 +15,73 @@
 
 		<intercept-url pattern="/alertas/*"
 			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
-		<intercept-url pattern="/productos/*"
-			access="permitAll" />
+		<intercept-url pattern="/productos/*" access="permitAll" />
 		<intercept-url pattern="/login*" access="permitAll" />
 		<intercept-url pattern="/logout*" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
 		<intercept-url pattern="/signup/**" access="permitAll" />
 		<intercept-url pattern="/json/**" access="permitAll" />
 		<intercept-url pattern="/show/**" access="permitAll" />
-			
-		
-	<!-- permisos ingresados el 14/12/2021 solo pruebas cambiar permitAll por hasAnyAuthority -->
-				<intercept-url pattern="/estadocatalogo/**" access="permitAll" />
-				<intercept-url pattern="/estadousuario/**" access="permitAll" />
-				<intercept-url pattern="/tipoimpuesto/**" access="permitAll" />
-		<!-- permisos ingresados el 15/12/2021 solo pruebas cambiar permitAll por hasAnyAuthority -->			
-				<intercept-url pattern="/menus/**" access="permitAll" />
-				<intercept-url pattern="/estadoclientetienepedido/**" access="permitAll" />
-				<intercept-url pattern="/tipoimpuesto/**" access="permitAll" />
-				<!-- permisos ingresados el 17/12/2021 solo pruebas cambiar permitAll por hasAnyAuthority -->			
-				<intercept-url pattern="/lineas/**" access="permitAll" />
-				<intercept-url pattern="/area/**" access="permitAll" />
-				<intercept-url pattern="/estadocontrato/**" access="permitAll" />	
-					<intercept-url pattern="/privilege/**" access="permitAll" />
-				<intercept-url pattern="/menus/**" access="permitAll" />
-				<intercept-url pattern="/roles/**" access="permitAll" />	
-				<intercept-url pattern="/regimencliente/**" access="permitAll" />
-				
-				
-		<intercept-url pattern="/tipousuario/**" access="permitAll" />
-		<intercept-url pattern="/tipoalerta/**" access="permitAll" />
-		<intercept-url pattern="/estadoinsumo/**" access="permitAll" />
-		<intercept-url pattern="/tipoinsumo/**" access="permitAll" />
-		<intercept-url pattern="/estadoproducto/**" access="permitAll" />
-		<intercept-url pattern="/tipoproducto/**" access="permitAll" />
-		<intercept-url pattern="/estadocliente/**" access="permitAll" />
-		<intercept-url pattern="/loteinsumo/**" access="permitAll" />
+
+
+		<!-- permisos ingresados el 14/12/2021 solo pruebas cambiar permitAll por 
+			hasAnyAuthority -->
+		<intercept-url pattern="/estadocatalogo/**"
+			access="permitAll" />
+		<intercept-url pattern="/estadousuario/**"
+			access="permitAll" />
+
+		<!-- permisos ingresados el 15/12/2021 solo pruebas cambiar permitAll por 
+			hasAnyAuthority -->
+
+		<intercept-url pattern="/estadoclientetienepedido/**"
+			access="permitAll" />
+		<intercept-url pattern="/tipoimpuesto/**"
+			access="permitAll" />
+		<!-- permisos ingresados el 17/12/2021 solo pruebas cambiar permitAll por 
+			hasAnyAuthority -->
+		<intercept-url pattern="/lineas/**" access="permitAll" />
+		<intercept-url pattern="/area/**" access="permitAll" />
+		<intercept-url pattern="/estadocontrato/**"
+			access="permitAll" />
+		<intercept-url pattern="/privilege/**"
+			access="permitAll" />
+		<intercept-url pattern="/menus/**" access="permitAll" />
+		<intercept-url pattern="/roles/**" access="permitAll" />
+		<intercept-url pattern="/regimencliente/**"
+			access="permitAll" />
+
+
+		<intercept-url pattern="/tipousuario/**"
+			access="permitAll" />
+		<intercept-url pattern="/tipoalerta/**"
+			access="permitAll" />
+		<intercept-url pattern="/estadoinsumo/**"
+			access="permitAll" />
+		<intercept-url pattern="/tipoinsumo/**"
+			access="permitAll" />
+		<intercept-url pattern="/estadoproducto/**"
+			access="permitAll" />
+		<intercept-url pattern="/tipoproducto/**"
+			access="permitAll" />
+		<intercept-url pattern="/estadocliente/**"
+			access="permitAll" />
+		<intercept-url pattern="/loteinsumo/**"
+			access="permitAll" />
 		<intercept-url pattern="/colores/**" access="permitAll" />
-		<intercept-url pattern="/presentacioninsumo/**" access="permitAll" />
-		<intercept-url pattern="/elaboracionproducto/**" access="permitAll" />
-		<intercept-url pattern="/facturactienepedido/**" access="permitAll" />
-		<intercept-url pattern="/promocionventa/**" access="permitAll" />
+		<intercept-url pattern="/presentacioninsumo/**"
+			access="permitAll" />
+		<intercept-url pattern="/elaboracionproducto/**"
+			access="permitAll" />
+		<intercept-url pattern="/facturactienepedido/**"
+			access="permitAll" />
+		<intercept-url pattern="/promocionventa/**"
+			access="permitAll" />
 		<intercept-url pattern="/pais/**" access="permitAll" />
-				
-				
-				
-				
+
+
+
+
 		<intercept-url pattern="/usuarios/registration*"
 			access="permitAll" />
 		<intercept-url pattern="/registrationConfirm*"
@@ -94,7 +115,7 @@
 
 
 		<logout invalidate-session="false"
-			logout-success-url="/login/logout.html?logSucc=true"
+			logout-success-url="/formLogin"
 			logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID" />
 
 
@@ -137,7 +158,7 @@
                                               INNER JOIN users_roles k ON u.codigo_usuario = k.fkcodigo_usuario
                                               INNER JOIN role r ON k.fkcodigo_role = r.codigo_role
                                               WHERE u.email = ?  " />
-		 </authentication-provider>
+		</authentication-provider>
 	</authentication-manager>
 
 

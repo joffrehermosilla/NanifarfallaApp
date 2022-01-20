@@ -14,13 +14,15 @@ import org.springframework.stereotype.Component;
 @Component("myLogoutSuccessHandler")
 public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
 
-    @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        final HttpSession session = request.getSession();
-        if (session != null) {
-            session.removeAttribute("user");
-        }
+	@Override
+	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+		final HttpSession session = request.getSession();
+		if (session != null) {
+			session.removeAttribute("user");
+		}
 
-        response.sendRedirect("/logout.html?logSucc=true");
-    }
+		response.sendRedirect("/admin/logout");
+
+	}
 }
