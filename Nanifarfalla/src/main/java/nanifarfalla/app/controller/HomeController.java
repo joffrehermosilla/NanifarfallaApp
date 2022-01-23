@@ -46,6 +46,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class HomeController {
+	private final static Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	
+	
 	@Autowired
 	private ILineasService serviceLineas;
 	@Autowired

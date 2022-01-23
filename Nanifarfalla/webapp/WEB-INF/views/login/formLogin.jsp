@@ -82,11 +82,7 @@
 											<h4 class="form-signin-heading" style="color: red">Acceso
 												denegado</h4>
 										</c:if>
-										<a href="#" class="btn btn-facebook btn-block mb-2"> <i
-											class="fab fa-facebook-f"></i> &nbsp Sign in with Facebook
-										</a> <a href="#" class="btn btn-google btn-block mb-4"> <i
-											class="fab fa-google"></i> &nbsp Sign in with Google
-										</a>
+
 										<div class="form-group">
 											<div class="input-group">
 												<div class="input-group-prepend">

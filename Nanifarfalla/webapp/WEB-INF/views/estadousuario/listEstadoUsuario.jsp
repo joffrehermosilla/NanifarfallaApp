@@ -27,10 +27,8 @@
 
 </head>
 <body>
-	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
-	<header class="section-header">
-		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
-	</header>
+	
+	<header class="section-header"> </header>
 	<div class="container theme-showcase" role="main">
 		<h3>Listado de Estado de Usuario</h3>
 		<c:if test="${mensaje!=null }">
@@ -143,7 +141,7 @@
 
 		<hr class="featurette-divider">
 		<!-- /container -->
-		<jsp:include page="../includes/footer.jsp"></jsp:include>
+
 		<!-- Bootstrap core JavaScript -->
 	</div>
 

@@ -9,31 +9,32 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import nanifarfalla.app.model.ElaboracionProducto;
+import nanifarfalla.app.model.EstadoUsuario;
 import nanifarfalla.app.repository.ElaboracionProductoRepository;
 import nanifarfalla.app.service.IElaboracionProductoService;
 
 @Service
-public class ElaboracionProductoServiceJPA implements IElaboracionProductoService{
+public class ElaboracionProductoServiceJPA implements IElaboracionProductoService {
 
 	@Autowired
 	ElaboracionProductoRepository elaboracionProductoRepository;
-	
+
 	@Override
 	public void inserta(ElaboracionProducto elaboracionProducto) {
 		elaboracionProductoRepository.save(elaboracionProducto);
-		
+
 	}
 
 	@Override
 	public void actualiza(ElaboracionProducto elaboracionProducto) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void elimina(ElaboracionProducto elaboracionProducto) {
 		elaboracionProductoRepository.delete(elaboracionProducto);
-		
+
 	}
 
 	@Override

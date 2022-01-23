@@ -23,9 +23,9 @@
 </head>
 
 <body>
-	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
+
 	<header class="section-header">
-		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
+	
 	</header>
 
 
@@ -107,7 +107,7 @@
 		<hr class="featurette-divider">
 	</div>
 	<!-- /container -->
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
+
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

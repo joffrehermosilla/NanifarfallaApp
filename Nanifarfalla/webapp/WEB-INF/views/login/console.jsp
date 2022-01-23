@@ -11,7 +11,9 @@
 <spring:url value="/admin/logout" var="urlForm"></spring:url>
 <spring:url value="/estadousuario/indexPaginate?page=0"
 	var="urlEstadoUsuario"></spring:url>
-
+<spring:url value="/estadousuarioconsole" var="urlEstadoUsuario2"></spring:url>
+<spring:url value="/elaboracionproducto/indexPaginate?page=0"
+	var="urlElaboracionProducto"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 
@@ -19,9 +21,10 @@
 
 
 
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
+<script src="${urlPublic}/js/menuconsole.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
@@ -31,21 +34,7 @@
 <!-- Titulo -->
 <title>${contextRoot}-${title}|<fmt:message key="welcome.lang" /></title>
 
-<c:if test="userClickDemoA==true}">
-	<title>${contextRoot}-${title}|<fmt:message key="welcome.lang" />
 
-	</title>
-</c:if>
-<c:if test="userClickDemoB==true}">
-	<title>${contextRoot}-${title}|<fmt:message key="welcome.lang" />
-
-	</title>
-</c:if>
-<c:if test="userClickDemoC==true}">
-	<title>${contextRoot}-${title}|<fmt:message key="welcome.lang" />
-
-	</title>
-</c:if>
 
 
 
@@ -62,10 +51,9 @@
 
 <!-- Custom Theme Style -->
 <link href="${urlPublic}/build/css/custom.min.css" rel="stylesheet">
-<script>
-	window.menu = '${title}';
-</script>
 
+
+<script src="${urlPublic}/js/menuconsole.js"></script>
 </head>
 <header class="section-header">
 
@@ -85,6 +73,8 @@
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
+
+
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
@@ -196,7 +186,9 @@
 									<ul class="nav child_menu">
 										<li><a>STAKEHOLDERS<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li class="sub_menu"><a href="${urlEstadoUsuario}">ESTADO
+												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
+												<li class="estadousuario" id="estadousuario"><a
+													href="${urlEstadoUsuario2}" id="estadousuario">ESTADO
 														USUARIO </a></li>
 												<li><a href="#level2_1">Level Two</a></li>
 												<li><a href="#level2_2">Level Two</a></li>
@@ -204,10 +196,10 @@
 
 
 
-										<li><a>Level One<span class="fa fa-chevron-down"></span></a>
+										<li><a>MERCADERIA-SERVICIO<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li class="sub_menu"><a href="level2.html">Level
-														Two</a></li>
+												<li class="elaboracionproducto" id="elaboracionproducto"><a href="${urlElaboracionProducto }" id="elaboracionproducto">ELABORACION DEL PRODUCTO
+														</a></li>
 												<li><a href="#level2_1">Level Two</a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
@@ -345,7 +337,7 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12  ">
 							<div class="x_panel">
-								<div class="x_title">
+								<div class="x_title" style="height: 100%">
 									<h2>Plain Page</h2>
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i
@@ -363,19 +355,59 @@
 									</ul>
 									<div class="clearfix"></div>
 								</div>
-								<div class="x_content">Add content to the page ...</div>
+								<div class="x_content" id="plainpage">
+									Add content to the page ...
+									<!-- Carga la pagina plainPAGE donde habra condicionales que discriminaran los ID de <li id=""> en menuconsole.js -->
+									<%@include file="../login/plainpage.jsp"%>
+
+
+
+									<script>
+    var vista = document.getElementById('plainpage');
+    document.getElementById('estadousuario').addEventListener('click', function(e) {
+        e.preventDefault();
+        vista.innerHTML = `
+          <h1>Primera vista</h1>
+          <p>Aqui deberia mostrar el jsp include respectivo a Estado Usuario. Pero como carga con ruta de archivo y no ruta Mapping el Paginator no sale correcto. La mejor opcion sigue siendo usar el IFRAME</p>
+          <iframe src="${urlEstadoUsuario}" height="610" style="width: 100%" frameBorder="0"></iframe>
+          
+          `;
+       
+    });
+    document.getElementById('elaboracionproducto').addEventListener('click', function(e) {
+      e.preventDefault();
+      var dato = 'Un dato que puede provenir de un servicio web';
+      vista.innerHTML = `
+        <h1>Segunda vista vista</h1>
+        <p>${dato}</p>
+        <iframe src="${urlElaboracionProducto}" height="610" style="width: 100%" frameBorder="0" ></iframe>
+      `;
+    });
+  </script>
+
+								</div>
+
 							</div>
 						</div>
 					</div>
+
+
+
+
+
+
 				</div>
 			</div>
 			<!-- /page content -->
 
+
+
+
 			<!-- footer content -->
 			<footer>
 				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
+					Nanifarfalla - ECOMMERCE <a href="">Made by Joffre Hermosilla
+						Salas</a>
 				</div>
 				<div class="clearfix"></div>
 			</footer>
@@ -399,3 +431,4 @@
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
 </body>
 </html>
+
