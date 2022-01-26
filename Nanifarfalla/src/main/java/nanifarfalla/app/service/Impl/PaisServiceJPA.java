@@ -1,7 +1,11 @@
 package nanifarfalla.app.service.Impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,11 +17,18 @@ import nanifarfalla.app.service.IPaisService;
 
 @Service
 public class PaisServiceJPA implements IPaisService {
+	
+	private final static Logger LOGGER = LoggerFactory.getLogger(PaisServiceJPA.class);
+	
 	@Autowired
 	PaisRepository paisrepository;
 
 	@Override
 	public void inserta(Pais pais) {
+		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		pais.setVersion(timestamp);
+		
 		paisrepository.save(pais);
 	}
 
@@ -68,6 +79,16 @@ public class PaisServiceJPA implements IPaisService {
 	@Override
 	public List<Pais> buscarTodas() {
 		return paisrepository.findAll();
+	}
+
+	@Override
+	public void eliminar(int idPais) {
+		paisrepository.deleteById(idPais);		
+	}
+
+	@Override
+	public Optional<Pais> buscarporId(int id) {		
+		return paisrepository.findById(id);
 	}
 
 
