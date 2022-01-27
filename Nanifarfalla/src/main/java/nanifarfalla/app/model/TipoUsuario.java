@@ -25,6 +25,16 @@ public class TipoUsuario {
 	@OneToMany(mappedBy = "mTipoUsuario", fetch = FetchType.EAGER)
 	private Collection<Usuario> usuarios = new ArrayList<>();
 
+	
+	
+	public TipoUsuario(int codigo_tipousuario, String nombre_tipousuario, Date version, Collection<Usuario> usuarios) {
+		System.out.println("Inicio Model Constructor Tipo Usuario");
+		this.codigo_tipousuario = codigo_tipousuario;
+		this.nombre_tipousuario = nombre_tipousuario;
+		this.version = version;
+		this.usuarios = usuarios;
+	}
+
 	public Collection<Usuario> getUsuarios() {
 		return usuarios;
 	}
