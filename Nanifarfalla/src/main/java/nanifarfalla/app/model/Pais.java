@@ -12,9 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 @Table(name = "pais")
 public class Pais  {
+	private final static Logger LOGGER = LoggerFactory.getLogger(Pais.class);
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_pais;
@@ -34,7 +40,7 @@ public class Pais  {
 	}
 
 	public Pais() {
-
+		LOGGER.info("PAIS MODEL CARGADO");
 	}
 
 	public Pais(String nombre_pais) {

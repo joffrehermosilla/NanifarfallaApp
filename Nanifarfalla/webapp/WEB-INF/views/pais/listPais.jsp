@@ -149,7 +149,7 @@
 		</div>
 		<hr class="featurette-divider">
 		<!-- /container -->
-		<jsp:include page="../includes/footer.jsp"></jsp:include>
+
 		<!-- Bootstrap core JavaScript -->
 	</div>
 	<!-- /container -->

@@ -8,7 +8,13 @@
 <spring:url var="js" value="/resources/ecommerce/assets/js" />
 <spring:url var="images" value="/resources/ecommerce/assets/images" />
 
+<spring:url value="/estadousuario/indexPaginate?page=0"
+	var="urlEstadoUsuario"></spring:url>
 
+<spring:url value="/elaboracionproducto/indexPaginate?page=0"
+	var="urlElaboracionProducto"></spring:url>
+<spring:url value="/pais/indexPaginate?page=0"
+	var="urlPais"></spring:url>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <fmt:setLocale value="${param.lang}" />
@@ -17,7 +23,7 @@
 <html lang="en">
 
 <head>
-<script src="${urlPublic}/js"></script>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,13 +40,42 @@
 
 	window.contextRoot = '${contextRoot}'
 </script>
+<script>
+
+			var vista = document.getElementById('plainpage');
+			document.getElementById('estadousuario').addEventListener('click', function(e) {
+			e.preventDefault();
+			vista.innerHTML = `
+																		         
+		     <iframe src="${urlEstadoUsuario}" height="630" style="width: 100%" frameBorder="0"></iframe>
+																		          
+		    `;
+						
+			});
+									
+			document.getElementById('elaboracionproducto').addEventListener('click', function(e) {
+			e.preventDefault();
+
+			vista.innerHTML = `
+																		      
+	        <iframe src="${urlElaboracionProducto}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+	        `;
+			});
+
+			
+			document.getElementById('pais').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlPais}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
+
+</script>
 
 
 
-
-<script src="${urlPublic}/js/menuconsole.js"></script>
-
-<script src="${js}/menuconsole.js"></script>
 
 </head>
 
@@ -57,7 +92,7 @@
 		<%@include file="../shared/navbar.jsp"%>
 
 		<!-- Page Content -->
-		<iframe src="${urlEstadoUsuario}" height="610" style="width: 100%"></iframe>
+
 
 
 

@@ -12,28 +12,28 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 @Table(name = "estadousuario")
 public class EstadoUsuario {
-
+	private final static Logger LOGGER = LoggerFactory.getLogger(EstadoUsuario.class);
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_estadousuario;
-	
+
 	String nombre_estadousuario;
 
 	@OneToMany(mappedBy = "mEstadoUsuario", fetch = FetchType.EAGER)
 	private Collection<Usuario> usuarios = new ArrayList<>();
 
 	public EstadoUsuario() {
-System.out.println("Inicio Model Constructor Estado Usuario");
+
+		LOGGER.info("Inicio Model Constructor Estado Usuario");
 	}
-	
-	
 
 	Date version;
-	
-	
 
 	public EstadoUsuario(int codigo_estadousuario, String nombre_estadousuario, Collection<Usuario> usuarios,
 			Date version) {

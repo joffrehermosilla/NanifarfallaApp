@@ -4,28 +4,58 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "linea")
 public class Linea {
+	private final static Logger LOGGER = LoggerFactory.getLogger(Linea.class);
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_linea;
-	
-	
-	@OneToMany(mappedBy = "mLinea", fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "mLinea")
 	private transient Collection<Producto> productos = new ArrayList<>();
-	
+	@Column(name = "active")
+	private Byte isActive;
+
+	private String nombre_linea;
+	private String foto_linea = "nanifarfalla.jpeg";
+
+	private String foto_ruta;
+	private String claveApi;
+	private Date version;
+
+	// @Transient
+	// private Producto producto;
+
+	public String getFoto_ruta() {
+		return foto_ruta;
+	}
+
+	public boolean isActive() {
+		return isActive != null && isActive != 0;
+	}
+
+	public void setActive(boolean active) {
+		isActive = (byte) (active ? 1 : 0);
+	}
+
+	public void setFoto_ruta(String foto_ruta) {
+		this.foto_ruta = foto_ruta;
+	}
+
 	public Collection<Producto> getProductos() {
 		return productos;
 	}
@@ -34,15 +64,6 @@ public class Linea {
 		this.productos = productos;
 	}
 
-	private String nombre_linea;
-	private String foto_linea = "nanifarfalla.jpeg";
-
-	private String claveApi;
-	private Date version;
-	
-	//@Transient
-	//private Producto producto;
-
 	public Date getVersion() {
 		return version;
 	}
@@ -50,8 +71,6 @@ public class Linea {
 	public void setVersion(Date version) {
 		this.version = version;
 	}
-
-
 
 	public String getClaveApi() {
 		return claveApi;
@@ -86,15 +105,13 @@ public class Linea {
 	}
 
 	public Linea(int codigo_linea, String nombre_linea) {
-	
+
 		this.codigo_linea = codigo_linea;
 		this.nombre_linea = nombre_linea;
 	}
 
 	public Linea() {
-	
+		LOGGER.info("CARGANDO MODEL LINEA");
 	}
-
-
 
 }

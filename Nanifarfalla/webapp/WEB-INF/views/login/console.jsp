@@ -9,11 +9,7 @@
 <spring:url value="/" var="urlRoot"></spring:url>
 <spring:url value="/resources" var="urlPublic"></spring:url>
 <spring:url value="/admin/logout" var="urlForm"></spring:url>
-<spring:url value="/estadousuario/indexPaginate?page=0"
-	var="urlEstadoUsuario"></spring:url>
-<spring:url value="/estadousuarioconsole" var="urlEstadoUsuario2"></spring:url>
-<spring:url value="/elaboracionproducto/indexPaginate?page=0"
-	var="urlElaboracionProducto"></spring:url>
+
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 
@@ -24,7 +20,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<script src="${urlPublic}/js/menuconsole.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
@@ -53,7 +49,7 @@
 <link href="${urlPublic}/build/css/custom.min.css" rel="stylesheet">
 
 
-<script src="${urlPublic}/js/menuconsole.js"></script>
+<script src="${urlPublic}/js/menuconsole.js" type="text/javascript"></script>
 </head>
 <header class="section-header">
 
@@ -188,22 +184,31 @@
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
 												<li class="estadousuario" id="estadousuario"><a
-													href="${urlEstadoUsuario2}" id="estadousuario">ESTADO
+													href="" id="estadousuario">ESTADO
 														USUARIO </a></li>
-												<li><a href="#level2_1">Level Two</a></li>
+												<li><a href="#level2_1">LINEAS</a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
 
 
 
-										<li><a>MERCADERIA-SERVICIO<span class="fa fa-chevron-down"></span></a>
+										<li><a>MERCADERIA-SERVICIO<span
+												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li class="elaboracionproducto" id="elaboracionproducto"><a href="${urlElaboracionProducto }" id="elaboracionproducto">ELABORACION DEL PRODUCTO
-														</a></li>
+												<li class="elaboracionproducto" id="elaboracionproducto"><a
+													href="" id="elaboracionproducto">ELABORACION
+														DEL PRODUCTO </a></li>
 												<li><a href="#level2_1">Level Two</a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
-										<li><a href="#level1_2">Level One</a></li>
+										<li><a>GEOLOCALIZACION<span
+												class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<li class="pais" id="pais"><a
+													href="" id="pais">PAIS </a></li>
+												<li><a href="#level2_1">Level Two</a></li>
+												<li><a href="#level2_2">Level Two</a></li>
+											</ul></li>
 									</ul></li>
 								<li><a href="javascript:void(0)"><i
 										class="fa fa-laptop"></i> Landing Page <span
@@ -361,29 +366,9 @@
 									<%@include file="../login/plainpage.jsp"%>
 
 
+						
 
-									<script>
-    var vista = document.getElementById('plainpage');
-    document.getElementById('estadousuario').addEventListener('click', function(e) {
-        e.preventDefault();
-        vista.innerHTML = `
-          <h1>Primera vista</h1>
-          <p>Aqui deberia mostrar el jsp include respectivo a Estado Usuario. Pero como carga con ruta de archivo y no ruta Mapping el Paginator no sale correcto. La mejor opcion sigue siendo usar el IFRAME</p>
-          <iframe src="${urlEstadoUsuario}" height="610" style="width: 100%" frameBorder="0"></iframe>
-          
-          `;
-       
-    });
-    document.getElementById('elaboracionproducto').addEventListener('click', function(e) {
-      e.preventDefault();
-      var dato = 'Un dato que puede provenir de un servicio web';
-      vista.innerHTML = `
-        <h1>Segunda vista vista</h1>
-        <p>${dato}</p>
-        <iframe src="${urlElaboracionProducto}" height="610" style="width: 100%" frameBorder="0" ></iframe>
-      `;
-    });
-  </script>
+
 
 								</div>
 
@@ -413,7 +398,11 @@
 			</footer>
 			<!-- /footer content -->
 		</div>
+			<jsp:include page="../includes/footer.jsp"></jsp:include>
 	</div>
+
+
+
 
 	<!-- jQuery -->
 	<script src="${urlPublic}/vendors/jquery/dist/jquery.min.js"></script>
@@ -428,7 +417,7 @@
 	<!-- Custom Theme Scripts -->
 	<script src="${urlPublic}/build/js/custom.min.js"></script>
 	<!-- ========================= FOOTER ========================= -->
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
+
 </body>
 </html>
 

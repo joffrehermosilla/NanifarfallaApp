@@ -1,5 +1,6 @@
 package nanifarfalla.app.service.Impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import nanifarfalla.app.model.ElaboracionProducto;
-import nanifarfalla.app.model.EstadoUsuario;
+
 import nanifarfalla.app.repository.ElaboracionProductoRepository;
 import nanifarfalla.app.service.IElaboracionProductoService;
 
@@ -21,6 +22,10 @@ public class ElaboracionProductoServiceJPA implements IElaboracionProductoServic
 
 	@Override
 	public void inserta(ElaboracionProducto elaboracionProducto) {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+		elaboracionProducto.setVersion(timestamp);
+
 		elaboracionProductoRepository.save(elaboracionProducto);
 
 	}

@@ -495,7 +495,7 @@ function register(event){
         if(data.responseJSON.error.indexOf("MailError") > -1)
         {
             window.location.href = serverContext + "emailError.html";
-        }
+        }																																																														
         else if(data.responseJSON.error == "UserAlreadyExist"){
             $("#emailError").show().html(data.responseJSON.message);
         }

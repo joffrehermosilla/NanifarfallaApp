@@ -87,7 +87,7 @@ public class ElaboracionProductoController {
 				"Elementos en la lista despues de la insersion: " + elaboracionProductoService.buscarTodas().size());
 
 		attributes.addFlashAttribute("mensaje", "El ElaboracionProducto fue guardado");
-		return "redirect:/elaboracionproducto/listElaboracionProducto";
+		return "redirect:/elaboracionproducto/index";
 	}
 
 	@GetMapping(value = "/update/{id}")
@@ -96,7 +96,7 @@ public class ElaboracionProductoController {
 		model.addAttribute("InstanciaElaboracionProducto", estadoUsuario);
 		LOGGER.warn("ELABORACION DEL PRODUCTO FUE ACTUALIZADO");
 
-		return "estadousuario/formEstadoUsuario";
+		return "elaboracionproducto/formElaboracionProducto";
 	}
 
 	@GetMapping(value = "/delete/{id}")
@@ -109,7 +109,7 @@ public class ElaboracionProductoController {
 		// Pendiente: Guardar el objeto producto en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
-			return "estadousuario/formEstadoUsuario";
+			return "elaboracionproducto/formElaboracionProducto";
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
@@ -126,7 +126,7 @@ public class ElaboracionProductoController {
 
 		attributes.addFlashAttribute("mensajedelete", "El Elaboracion del producto fue eliminado");
 		LOGGER.warn("ELABORACION DEL PRODUCTO FUE ELIMINADO");
-		return "redirect:/estadousuario/index";
+		return "redirect:/elaboracionproducto/index";
 	}
 
 	@GetMapping(value = "/indexPaginate")
