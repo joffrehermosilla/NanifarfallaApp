@@ -18,8 +18,8 @@ public class Privilege {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_privilege;
-	String name
-	;
+	String name;
+
 	Date version;
 
 	// private Long id;
@@ -60,8 +60,6 @@ public class Privilege {
 	public void setCodigo_privilege(int codigo_privilege) {
 		this.codigo_privilege = codigo_privilege;
 	}
-
-
 
 	public String getName() {
 		return name;

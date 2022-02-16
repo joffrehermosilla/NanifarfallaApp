@@ -6,9 +6,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
+
+
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
+<head>
+<meta charset="utf-8">
+</head>
 <spring:url value="/resources" var="urlPublic" />
 
 <jsp:include page="../includes/link.jsp"></jsp:include>
@@ -31,7 +35,7 @@
 			<div class="btn-group d-none d-sm-flex">
 				<a class="dropdown-toggle text-gray-soft" js-price-dropdown="true"
 					href="#" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Made by Joffre Hermosilla Salas </a> <i
+					aria-expanded="false"> Design by Joffre Hermosilla Salas </a> <i
 					class="fa fa-power-off"> </i>
 				<div
 					class="dropdown-menu dropdown-menu--xl dropdown-menu--centered dropdown-menu--has-triangle">
@@ -125,9 +129,10 @@
 					name="license_type" value="Standard License"> <input
 					type="hidden" name="add-to-cart" value="">
 				<button type="submit" class=" btn btn-brand btn-block btn-checkout">
-					<span class="btn-text"> Show Your Own Products<span
-						class="btn__label btn__label--right"
-						js-price-value="main_price_div"> <b id="price_val"> </b></span></span>
+					<a href="http://facturas.nanifarfalla.com.pe:9090/"> <span
+						class="btn-text"> PAGINA EN CONSTRUCCIÓN<span
+							class="btn__label btn__label--right"
+							js-price-value="main_price_div"> <b id="price_val"> </b></span></a></span>
 				</button>
 			</form>
 			<a class="text-gray ml-3" href=""> <small> <i
@@ -139,3 +144,8 @@
 
 
 </nav>
+
+
+
+
+</html>

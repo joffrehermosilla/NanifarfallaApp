@@ -24,7 +24,7 @@ public class AnunciosServiceImpl implements IAnunciosService {
 			Anuncio anuncio1 = new Anuncio();
 			anuncio1.setCodigo_anuncio(1);
 			anuncio1.setAnuncio_principal("Este Anuncio principal 1");
-			anuncio1.setFkcodigo_tipoalerta(1);
+			//anuncio1.setFkcodigo_tipoalerta(1);
 			anuncio1.setLink_mensaje("http://facebook");
 			anuncio1.setMensaje_anuncio("importante");
 			anuncio1.setPie_mensaje("prueba 1");
@@ -35,7 +35,7 @@ public class AnunciosServiceImpl implements IAnunciosService {
 			Anuncio anuncio2 = new Anuncio();
 			anuncio2.setCodigo_anuncio(2);
 			anuncio2.setAnuncio_principal("Este Anuncio principal 2");
-			anuncio2.setFkcodigo_tipoalerta(2);
+			//anuncio2.setFkcodigo_tipoalerta(2);
 			anuncio2.setLink_mensaje("http://facebook");
 			anuncio2.setMensaje_anuncio("info");
 			anuncio2.setPie_mensaje("prueba 2");
@@ -46,7 +46,7 @@ public class AnunciosServiceImpl implements IAnunciosService {
 			Anuncio anuncio3 = new Anuncio();
 			anuncio3.setCodigo_anuncio(3);
 			anuncio3.setAnuncio_principal("Este Anuncio principal 3");
-			anuncio3.setFkcodigo_tipoalerta(3);
+		//	anuncio3.setFkcodigo_tipoalerta(3);
 			anuncio3.setLink_mensaje("http://facebook");
 			anuncio3.setMensaje_anuncio("alerta");
 			anuncio3.setPie_mensaje("prueba 3");
@@ -57,7 +57,7 @@ public class AnunciosServiceImpl implements IAnunciosService {
 			Anuncio anuncio4 = new Anuncio();
 			anuncio4.setCodigo_anuncio(4);
 			anuncio4.setAnuncio_principal("Este Anuncio principal 4");
-			anuncio4.setFkcodigo_tipoalerta(4);
+		//	anuncio4.setFkcodigo_tipoalerta(4);
 			anuncio4.setLink_mensaje("http://facebook");
 			anuncio4.setMensaje_anuncio("evento");
 			anuncio4.setPie_mensaje("prueba 4");

@@ -115,7 +115,7 @@ public class AuditoriaClienteTienePreferencia {
 		return fecha_voto_preferencia_new;
 	}
 
-	public void setFecha_voto_preferencia_new(Date fecha_voto_preferencia_new) {
+	public void setFecha_voto_auditoria_areapreferencia_new(Date fecha_voto_preferencia_new) {
 		this.fecha_voto_preferencia_new = fecha_voto_preferencia_new;
 	}
 

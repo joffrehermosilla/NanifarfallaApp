@@ -21,7 +21,17 @@ public class EstadoClienteTienePedido {
 	String nombre_estado_cliente_tiene_pedido;
 	String claveApi;
 	Date version;
+	String foto_ruta;
+	
+	
 
+	public String getFoto_ruta() {
+		return foto_ruta;
+	}
+
+	public void setFoto_ruta(String foto_ruta) {
+		this.foto_ruta = foto_ruta;
+	}
 
 	@OneToMany(mappedBy = "mEstadoClienteTienePedido", fetch = FetchType.EAGER)
 	private Collection<ClienteTienePedido> clientetienepedidos = new ArrayList<>();

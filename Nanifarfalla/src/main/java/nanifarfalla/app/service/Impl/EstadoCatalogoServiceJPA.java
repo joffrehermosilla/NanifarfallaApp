@@ -7,6 +7,7 @@ import nanifarfalla.app.repository.EstadoCatalogoRepository;
 import nanifarfalla.app.service.IEstadoCatalogoService;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -80,6 +81,19 @@ public class EstadoCatalogoServiceJPA implements IEstadoCatalogoService {
 	public List<EstadoCatalogo> buscarTodas() {
 		// TODO Auto-generated method stub
 		return estadocatalogorepository.findAll();
+	}
+
+	@Override
+	public void eliminar(int idEstadoCatalogo) {
+		// TODO Auto-generated method stub
+		estadocatalogorepository.deleteById(idEstadoCatalogo);
+		
+	}
+
+	@Override
+	public Optional<EstadoCatalogo> buscarporId(int id) {
+		// TODO Auto-generated method stub
+		return estadocatalogorepository.findById(id);
 	}
 
 }

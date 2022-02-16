@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,18 +32,24 @@ public class Anuncio {
 	private String link_mensaje = "";
 	private String ruta_imagen = "";
 	private Double precio = 0.0;
-	private int fkcodigo_tipoalerta;
+	
 	private Date version;
 
 	@OneToMany(mappedBy = "mAnuncio", fetch = FetchType.EAGER)
 	private Collection<UserAnuncios> useranuncios = new ArrayList<>();
 
+	@JoinColumn(name = "fkcodigo_tipoalerta", referencedColumnName = "codigo_tipoalerta")
+	@ManyToOne
+	TipoAlerta mTipoAlerta;
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Anuncios [codigo_anuncio=" + codigo_anuncio + ", mensaje_anuncio=" + mensaje_anuncio
 				+ ", anuncio_principal=" + anuncio_principal + ", pie_mensaje=" + pie_mensaje + ", link_mensaje="
 				+ link_mensaje + ", ruta_imagen=" + ruta_imagen + ", precio=" + precio + ", fkcodigo_tipoalerta="
-				+ fkcodigo_tipoalerta + ", version=" + version + "]";
+				+ ", version=" + version + "]";
 	}
 
 	public Collection<UserAnuncios> getUseranuncios() {
@@ -110,12 +118,14 @@ public class Anuncio {
 		this.precio = precio;
 	}
 
-	public int getFkcodigo_tipoalerta() {
-		return fkcodigo_tipoalerta;
+	
+
+	public TipoAlerta getmTipoAlerta() {
+		return mTipoAlerta;
 	}
 
-	public void setFkcodigo_tipoalerta(int fkcodigo_tipoalerta) {
-		this.fkcodigo_tipoalerta = fkcodigo_tipoalerta;
+	public void setmTipoAlerta(TipoAlerta mTipoAlerta) {
+		this.mTipoAlerta = mTipoAlerta;
 	}
 
 	public Date getVersion() {

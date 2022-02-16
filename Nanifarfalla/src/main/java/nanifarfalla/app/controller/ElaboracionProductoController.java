@@ -104,7 +104,7 @@ public class ElaboracionProductoController {
 			@ModelAttribute("InstanciaElaboracionProducto") ElaboracionProducto elaboracionProducto,
 			BindingResult result, Model model, RedirectAttributes attributes, HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto estadousuarios: " + elaboracionProducto);
+		System.out.println("Recibiendo objeto elaboracion producto: " + elaboracionProducto);
 
 		// Pendiente: Guardar el objeto producto en la BD
 		if (result.hasErrors()) {

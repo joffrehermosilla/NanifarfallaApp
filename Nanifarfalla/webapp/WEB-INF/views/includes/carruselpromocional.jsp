@@ -56,10 +56,12 @@
 				<li data-target="#carousel1_indicator" data-slide-to="3"></li> -->
 			</ol>
 
-			<div class="carousel-inner" align="center">
+		 <div class="carousel-inner" align="center"> 
+			
+			
 				<c:forEach items="${anuncios}" var="anuncios">
 					<c:choose>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==1}">
+						<c:when test="${anuncios.mTipoAlerta.codigo_tipoalerta==1}">
 							<div class="carousel-item active">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(235, 161, 112);" id="tns2-item0"
@@ -87,7 +89,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 
 													<div class="divefectomovimiento">
 														<ol>
@@ -100,7 +102,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol></ol>
 													<div class="divefectomovimiento">
 														<span>${anuncios.pie_mensaje}</span>
@@ -118,7 +120,7 @@
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==2}">
+						<c:when test="${anuncios.mTipoAlerta.codigo_tipoalerta==2}">
 							<div class="carousel-item">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(112, 224, 161);" id="tns2-item0"
@@ -146,7 +148,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -158,7 +160,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>
@@ -175,7 +177,7 @@
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==3}">
+						<c:when test="${anuncios.mTipoAlerta.codigo_tipoalerta==3}">
 							<div class="carousel-item">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(58, 175, 210);" id="tns2-item0"
@@ -203,7 +205,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -215,7 +217,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>
@@ -232,7 +234,7 @@
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${anuncios.fkcodigo_tipoalerta==4}">
+						<c:when test="${anuncios.mTipoAlerta.codigo_tipoalerta==4}">
 							<div class="carousel-item">
 								<div class="px-lg-5 tns-item tns-normal"
 									style="background-color: rgb(245, 177, 176);" id="tns2-item0"
@@ -260,7 +262,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message key="label.carrusel.encabezado${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -272,7 +274,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message key="label.carrusel.pie${anuncios.fkcodigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>

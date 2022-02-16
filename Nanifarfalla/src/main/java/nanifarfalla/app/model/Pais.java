@@ -28,6 +28,8 @@ public class Pais  {
 	String nombre_pais;
 
 	Date version;
+	
+	
 	@OneToMany(mappedBy = "mPais", fetch = FetchType.EAGER)
 	private transient Collection<Provincia> provincias = new ArrayList<>();
 

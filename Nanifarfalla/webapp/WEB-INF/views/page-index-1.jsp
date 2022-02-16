@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -12,7 +13,7 @@
 <title>${contextRoot}|<fmt:message key="welcome.lang" />
 
 </title>
-
+<meta charset="utf-8">
 <spring:url value="/resources" var="urlPublic" />
 
 

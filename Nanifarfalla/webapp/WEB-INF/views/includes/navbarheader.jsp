@@ -3,7 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <!DOCTYPE html>
@@ -105,7 +106,8 @@
 			<div class="col-lg-4 col-sm-6 col-12">
 				<div class="widgets-wrap float-md-right">
 					<div class="widget-header  mr-3">
-						<a href="${urlRoot}show/all/products" class="icon icon-sm rounded-circle border"><i
+						<a href="${urlRoot}show/all/products"
+							class="icon icon-sm rounded-circle border"><i
 							class="fa fa-shopping-cart"></i></a> <span
 							class="badge badge-pill badge-danger notify">0</span>
 					</div>
@@ -113,9 +115,11 @@
 						<a href="#" class="icon icon-sm rounded-circle border"><i
 							class="fa fa-user"></i> </a>
 						<div class="text">
-							<span class="text-muted">Welcome!  </span>
+							<span class="text-muted">Welcome! </span>
 							<div>
-								<a href="${urlRoot}formLogin">Sign in</a> <a href="${urlRoot}admin/logout">Salida</a>| <a href="${urlRoot}usuarios/create"> Register</a>
+								<a href="${urlRoot}formLogin">Sign in</a> <a
+									href="${urlRoot}admin/logout">Salida</a>| <a
+									href="${urlRoot}usuarios/create"> Register</a>
 							</div>
 						</div>
 					</div>
@@ -141,7 +145,7 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#main_nav" aria-controls="main_nav"
 			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
+			Made by Joffre Hermosilla Salas <span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="main_nav">
 			<ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
@@ -211,7 +215,7 @@
 																														<c:when test="${ dateDiff le 7}">
 																															<div class="ml-2">
 																																<span class="d-block text-heading">
-																																	Descuento/Informe/Usuario/Permiso 	${ dateDiff}
+																																	Descuento/Informe/Usuario/Permiso ${ dateDiff}
 																																	<span class="badge badge-success ml-2">New</span>
 																																</span><small class="d-block text-muted">Regular
 																																	updates</small>
@@ -239,8 +243,8 @@
 										<ul class="dropdown-menu">
 											<c:choose>
 												<c:when test="${menunietos.lft == menux.id}">
-												
-												
+
+
 													<li><a class="dropdown-item"
 														href="docs/dev-setup.html">
 															<div class="d-flex">
@@ -324,7 +328,23 @@
 						</c:when>
 					</c:choose>
 				</c:forEach>
+				<li><a class="dropdown-item"
+					href="http://nanifarfalla.com.pe:9090/">
+						<div class="d-flex">
+							<div class="lead text-muted pt-1">
+								<i class="czi-edit"></i>
+							</div>
+							<div class="ml-2">
+								<span class="d-block text-heading">Swagger<span
+									class="badge badge-success ml-2">v1.2</span></span><small
+									class="d-block text-muted">Regular updates</small>
+							</div>
+						</div>
+				</a></li>
 			</ul>
+
+
+
 		</div>
 		<!-- collapse .// -->
 	</div>

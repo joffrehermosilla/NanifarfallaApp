@@ -186,7 +186,9 @@
 												<li class="estadousuario" id="estadousuario"><a
 													href="" id="estadousuario">ESTADO
 														USUARIO </a></li>
-												<li><a href="#level2_1">LINEAS</a></li>
+												<li class="linea" id="linea"><a
+													href="" id="linea">LINEA
+														 </a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
 
@@ -198,7 +200,9 @@
 												<li class="elaboracionproducto" id="elaboracionproducto"><a
 													href="" id="elaboracionproducto">ELABORACION
 														DEL PRODUCTO </a></li>
-												<li><a href="#level2_1">Level Two</a></li>
+													<li class="estadocatalogo" id="estadocatalogo"><a
+													href="" id="estadocatalogo">ESTADO DE CATALOGO
+													 </a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span

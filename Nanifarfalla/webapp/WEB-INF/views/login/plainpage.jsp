@@ -13,8 +13,12 @@
 
 <spring:url value="/elaboracionproducto/indexPaginate?page=0"
 	var="urlElaboracionProducto"></spring:url>
-<spring:url value="/pais/indexPaginate?page=0"
-	var="urlPais"></spring:url>
+<spring:url value="/pais/indexPaginate?page=0" var="urlPais"></spring:url>
+
+<spring:url value="/lineas/indexPaginate?page=0" var="urlLinea"></spring:url>
+
+<spring:url value="/estadocatalogo/indexPaginate?page=0" var="urlEstadoCatalogo"></spring:url>
+
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <fmt:setLocale value="${param.lang}" />
@@ -71,6 +75,30 @@
 		        <iframe src="${urlPais}" height="620" style="width: 100%" frameBorder="0" ></iframe>
 		        `;
 				});
+			
+			
+			
+			document.getElementById('linea').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlLinea}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
+			
+			
+			document.getElementById('estadocatalogo').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlEstadoCatalogo}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
+			
+			
+			
 
 </script>
 

@@ -57,20 +57,19 @@
 </script>
 
 </head>
-<header class="section-header">
 
-	<section class="section-content padding-y-sm">
-		<div class="container">
-			<jsp:include page="../includes/presentacioncreador.jsp"></jsp:include>
 
-		</div>
-		<!-- container .//  -->
-	</section>
-	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
+<section class="section-content padding-y-sm">
+	<div class="container">
+		<jsp:include page="../includes/presentacioncreador.jsp"></jsp:include>
 
-	<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
+	</div>
+	<!-- container .//  -->
+</section>
+<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 
-</header>
+<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
+
 
 <body class="nav-md">
 	<div class="container body">

@@ -27,7 +27,7 @@
 
 
 </head>
-
+<meta charset="utf-8">
 <header class="section-header">
 
 	<section class="section-content padding-y-sm">

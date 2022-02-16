@@ -25,6 +25,18 @@ public class TipoAlerta {
 	@OneToMany(mappedBy = "mTipoAlerta", fetch = FetchType.EAGER)
 	private transient Collection<Alerta> alertas = new ArrayList<>();
 
+	@OneToMany(mappedBy = "mTipoAlerta", fetch = FetchType.EAGER)
+	private transient Collection<Anuncio> anuncios = new ArrayList<>();
+	
+	
+	public Collection<Anuncio> getAnuncios() {
+		return anuncios;
+	}
+
+	public void setAnuncios(Collection<Anuncio> anuncios) {
+		this.anuncios = anuncios;
+	}
+
 	public Collection<Alerta> getAlertas() {
 		return alertas;
 	}

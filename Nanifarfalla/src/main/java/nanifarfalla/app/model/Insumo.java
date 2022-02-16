@@ -38,6 +38,7 @@ public class Insumo {
 	String foto_ruta;
 	String claveApi;
 	Date version;
+	
 	@JoinColumn(name = "fk_codigo_estadoinsumo", referencedColumnName = "codigo_estadoinsumo")
 	@ManyToOne
 	EstadoInsumo mEstadoinsumo;
