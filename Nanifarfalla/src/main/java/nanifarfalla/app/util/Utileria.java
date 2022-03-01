@@ -16,26 +16,21 @@ import java.util.List;
 
 import java.awt.Image;
 
-
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
-
 
 /*
 import org.marvinproject.image.transform.scale.Scale;
 
 import marvin.image.MarvinImage;*/
 
-
 import org.imgscalr.Scalr;
-
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import net.coobird.thumbnailator.Thumbnails;
-
 
 public class Utileria {
 
@@ -132,48 +127,41 @@ public class Utileria {
 		// String rutaFinal =
 		// request.getServletContext().getRealPath("/resources/images/");
 		String rutaFinal = request.getServletContext().getRealPath(ruta);
-		
+
 		try {
 			// Formamos el nombre del archivo para guardarlo en el disco duro
-		
-			
+
 			File creardirectorio = new File(rutaFinal);
 			creardirectorio.mkdirs();
 			File imageFile = new File(rutaFinal + nombreFinal);
 
-			
-			
 			/*
 			 * File crearthumbnail = new File(nombreOriginal); Thumbnails.of(crearthumbnail)
 			 * .size(160, 160) .scale(0.25) .outputFormat("png") .toFile(nombreOriginal);
 			 */
-			
-		
-			System.out.println("Mostrar Path Absoluto: "+imageFile.getAbsolutePath());
-			System.out.println("Generar Ruta Absulta: "+imageFile.mkdirs());
-			System.out.println("Mostrar la Ruta"+imageFile.getPath());
+
+			System.out.println("Mostrar Path Absoluto: " + imageFile.getAbsolutePath());
+			System.out.println("Generar Ruta Absulta: " + imageFile.mkdirs());
+			System.out.println("Mostrar la Ruta" + imageFile.getPath());
 			// Aqui se guarda fisicamente el archivo en el disco duro
-			
-	
 
 			multiPart.transferTo(imageFile);
-			
-	        BufferedImage originalImage = ImageIO.read(imageFile);
-	        BufferedImage outputImage = resizeImage(originalImage, 200, 200);
-	        ImageIO.write(outputImage, "jpg", imageFile);
-			
-	        
-			/* COre Java
-			 * BufferedImage originalImage = ImageIO.read(new
+
+			BufferedImage originalImage = ImageIO.read(imageFile);
+			BufferedImage outputImage = resizeImage(originalImage, 200, 200);
+			ImageIO.write(outputImage, "jpg", imageFile);
+
+			/*
+			 * COre Java BufferedImage originalImage = ImageIO.read(new
 			 * File("src/main/resources/images/sampleImage.jpg")); BufferedImage outputImage
 			 * = resizeImageGraphics2d(originalImage, 200, 200); ImageIO.write(outputImage,
 			 * "jpg", new
 			 * File("src/main/resources/images/sampleImage-resized-graphics2d.jpg"));
 			 * 
 			 */
-	        
-			/*Core Java
-			 * BufferedImage originalImage = ImageIO.read(new
+
+			/*
+			 * Core Java BufferedImage originalImage = ImageIO.read(new
 			 * File("src/main/resources/images/sampleImage.jpg")); BufferedImage outputImage
 			 * = resizeImageScalade(originalImage, 200, 200); ImageIO.write(outputImage,
 			 * "jpg", new
@@ -181,16 +169,15 @@ public class Utileria {
 			 * 
 			 * 
 			 */
-	        
-	        
-			/* ImageScaler
-			 * BufferedImage originalImage = ImageIO.read(new
+
+			/*
+			 * ImageScaler BufferedImage originalImage = ImageIO.read(new
 			 * File("src/main/resources/images/sampleImage.jpg")); BufferedImage outputImage
 			 * = resizeImageScalr(originalImage, 200, 200); ImageIO.write(outputImage,
 			 * "jpg", new
 			 * File("src/main/resources/images/sampleImage-resized-imgscalr.jpg"));
 			 */
-	        
+
 			/*
 			 * 
 			 * BufferedImage originalImage = ImageIO.read(new
@@ -199,10 +186,7 @@ public class Utileria {
 			 * ImageIO.write(outputImage, "jpg", new
 			 * File("src/main/resources/images/sampleImage-resized-marvin.jpg"));
 			 */
-	        
-	        
-	        
-			
+
 			return nombreFinal;
 		} catch (IOException e) {
 			System.out.println("Error " + e.getMessage());
@@ -210,43 +194,33 @@ public class Utileria {
 		}
 	}
 
-	public static String remakePicture(String rutaFinal, File creardirectorio ) {
+	public static String remakePicture(String rutaFinal, File creardirectorio) {
 		Path thumbnailPath = Paths.get(rutaFinal).getParent();
 		Path fileName = Paths.get(rutaFinal).getFileName();
-		
-		String thumbnailFullPath=thumbnailPath + File.separator + "thumbnail" + File.separator+ fileName;
-		
-			
-			
-			try {
-				Thumbnails.of(creardirectorio)
-				.size(160, 160)
-				.outputFormat("png")
-				.outputQuality(0.60)
-				.toFile(thumbnailFullPath);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			return thumbnailFullPath;
+
+		String thumbnailFullPath = thumbnailPath + File.separator + "thumbnail" + File.separator + fileName;
+
+		try {
+			Thumbnails.of(creardirectorio).size(160, 160).outputFormat("png").outputQuality(0.60)
+					.toFile(thumbnailFullPath);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return thumbnailFullPath;
 	}
-	
-	
-   public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        Thumbnails.of(originalImage)
-            .size(targetWidth, targetHeight)
-            .outputFormat("jpg")
-            .outputQuality(0.90)
-            .toOutputStream(outputStream);
-        byte[] data = outputStream.toByteArray();
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
-        return ImageIO.read(inputStream);
-    }
-	
-	
+
+	public static BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight)
+			throws IOException {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		Thumbnails.of(originalImage).size(targetWidth, targetHeight).outputFormat("jpg").outputQuality(0.90)
+				.toOutputStream(outputStream);
+		byte[] data = outputStream.toByteArray();
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
+		return ImageIO.read(inputStream);
+	}
+
 	// Metodo para generar una cadena de longitud N de caracteres aleatorios.
 	public static String randomAlphaNumeric(int count) {
 		String CARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -257,38 +231,31 @@ public class Utileria {
 		}
 		return builder.toString();
 	}
-	
-	
-	
-  public  static BufferedImage resizeImageGraphics2d(BufferedImage originalImage, int targetWidth, int targetHeight) {
-        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = resizedImage.createGraphics();
-        graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
-        graphics2D.dispose();
-        return resizedImage;
-    }
-	
-	
-	
-  static BufferedImage resizeImageScalade(BufferedImage originalImage, int targetWidth, int targetHeight) {
-      Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
-      BufferedImage bufferedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-      bufferedImage.getGraphics()
-          .drawImage(resultingImage, 0, 0, null);
-      return bufferedImage;
-  }
 
-	
-	
-  public static BufferedImage simpleResizeImage(BufferedImage originalImage, int targetWidth) {
-      return Scalr.resize(originalImage, targetWidth);
-  }
+	public static BufferedImage resizeImageGraphics2d(BufferedImage originalImage, int targetWidth, int targetHeight) {
+		BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics2D graphics2D = resizedImage.createGraphics();
+		graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+		graphics2D.dispose();
+		return resizedImage;
+	}
 
-  public static BufferedImage resizeImageScalr(BufferedImage originalImage, int targetWidth, int targetHeight) {
-      return Scalr.resize(originalImage, Scalr.Method.AUTOMATIC, Scalr.Mode.AUTOMATIC, targetWidth, targetHeight, Scalr.OP_ANTIALIAS);
-  }
-	
-	
+	static BufferedImage resizeImageScalade(BufferedImage originalImage, int targetWidth, int targetHeight) {
+		Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
+		BufferedImage bufferedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+		bufferedImage.getGraphics().drawImage(resultingImage, 0, 0, null);
+		return bufferedImage;
+	}
+
+	public static BufferedImage simpleResizeImage(BufferedImage originalImage, int targetWidth) {
+		return Scalr.resize(originalImage, targetWidth);
+	}
+
+	public static BufferedImage resizeImageScalr(BufferedImage originalImage, int targetWidth, int targetHeight) {
+		return Scalr.resize(originalImage, Scalr.Method.AUTOMATIC, Scalr.Mode.AUTOMATIC, targetWidth, targetHeight,
+				Scalr.OP_ANTIALIAS);
+	}
+
 	/*
 	 * static BufferedImage resizeImageMarvin(BufferedImage originalImage, int
 	 * targetWidth, int targetHeight) { MarvinImage image = new
@@ -297,10 +264,26 @@ public class Utileria {
 	 * targetHeight); scale.process(image.clone(), image, null, null, false); return
 	 * image.getBufferedImageNoAlpha(); }
 	 */
-	
-	
-	
-	
-	
+
+	public static String consumoram() {
+
+		int dataSize = 1024 * 1024;
+
+		  Runtime runtime = Runtime.getRuntime();
+		  
+		   System.out.println ("Memoria máxima: " + runtime.maxMemory() / dataSize + "MB");
+		   System.out.println ("Memoria total: " + runtime.totalMemory() / dataSize + "MB");
+		   System.out.println ("Memoria libre: " + runtime.freeMemory() / dataSize + "MB");
+		   System.out.println ("Memoria usada: " + (runtime.totalMemory() - runtime.freeMemory()) / dataSize + "MB");
+		
+		
+		
+		
+		return "Memoria máxima: " + runtime.maxMemory() / dataSize + " MB " +
+				"Memoria total: " + runtime.totalMemory() / dataSize + " MB "+
+				"Memoria libre: " + runtime.freeMemory() / dataSize + " MB "+
+				"Memoria usada: " + (runtime.totalMemory() - runtime.freeMemory()) / dataSize + " MB";
+
+	}
 
 }

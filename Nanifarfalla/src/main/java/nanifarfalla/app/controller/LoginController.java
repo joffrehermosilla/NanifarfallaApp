@@ -15,7 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -29,7 +29,10 @@ public class LoginController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
 	@GetMapping(value = "/index")
-	public String mostrarPrincipalAdmin(Authentication authentication) {
+	public String mostrarPrincipalAdmin(Authentication authentication,RedirectAttributes attributes,
+			Model model) {
+		
+		boolean sesionactiva=false;
 		String sesionPerfil = "";
 		ArrayList<String> lista = new ArrayList<String>();
 		System.out.println("Username: " + authentication.getName());
@@ -50,16 +53,26 @@ public class LoginController {
 
 				sesionPerfil = "/login/console";
 				LOGGER.warn(sesionPerfil);
+				sesionactiva=true;
+				model.addAttribute("sesion", sesionactiva);
 				return sesionPerfil;
 			} else {
 				sesionPerfil = "/login/admin";
-				LOGGER.warn(sesionPerfil);
+				LOGGER.info(sesionPerfil);
+				sesionactiva=true;
+				model.addAttribute("sesion", sesionactiva);
+				
+				LOGGER.info("control de navbarheader: "+sesionactiva);
 				return sesionPerfil;
 			}
 		}
-
+		
+		
+		
+		attributes.addFlashAttribute("mensajelogeo", "Bienvenido "+authentication.getName());
 		LOGGER.info(sesionPerfil);
-		return sesionPerfil;
+		LOGGER.info(""+sesionactiva);
+		return "redirect:/"+sesionPerfil;
 
 	}
 

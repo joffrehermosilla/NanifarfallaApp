@@ -25,12 +25,13 @@
 			value="com.mysql.jdbc.Driver" />
 
 
-		<property name="url"
+		<!-- <property name="url"
 			value="jdbc:mysql://localhost:3306/nanifarfalla?useSSL=false" />
-	
-		<!-- <property name="url" value="jdbc:mysql://localhost:3306/nanifarfalla?useSSL=false" 
+		<property name="username" value="joffredeveloper" />
+		<property name="password" value="tesis2022" />-->
+		<property name="url" value="jdbc:mysql://localhost:3306/nanifarfalla?useSSL=false" 
 			/> <property name="username" value="admin" /> <property name="password" value="1234" 
-			/> -->
+			/> 
 
 	</bean>
 	<bean id="jpaVendorAdapter"

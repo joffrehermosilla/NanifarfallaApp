@@ -15,13 +15,14 @@
 <spring:url value="/resources" var="urlPublic" />
 <spring:url value="/menus/index" var="urlForm"></spring:url>
 <spring:url value="/" var="urlRoot" />
+<spring:url value="/admin/index" var="inicio"></spring:url>
+<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
 <nav
 	class="navbar navbar-preview navbar-dark navbar-expand p-0 bg-primary fixed-bottom">
 	<div class="container">
 		<ul class="navbar-nav d-none d-md-flex mr-auto">
-			<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Delivery</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">${memorias}</a></li>
+
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item"><a href="#" class="nav-link"><small>
@@ -112,17 +113,40 @@
 							class="badge badge-pill badge-danger notify">0</span>
 					</div>
 					<div class="widget-header icontext">
+
 						<a href="#" class="icon icon-sm rounded-circle border"><i
 							class="fa fa-user"></i> </a>
-						<div class="text">
-							<span class="text-muted">Welcome! </span>
-							<div>
-								<a href="${urlRoot}formLogin">Sign in</a> <a
-									href="${urlRoot}admin/logout">Salida</a>| <a
-									href="${urlRoot}usuarios/create"> Register</a>
-							</div>
-						</div>
 					</div>
+					<span class="text-muted" path="inicioregistro"
+						class="form-control inicioregistro " name="inicioregistro"
+						value="${sesion}" id="inicioregistro"
+						onmouseleave="cargarlogeo(this.value)" required="required">Welcome!
+						${sesion}" </span>
+
+					<c:set value="${sesion }" var="sesion" />
+
+
+					<%-- 	<spanclass="loginAparece" id="loginAparece"> <a
+									href="${urlRoot}formLogin">Sign in</a>
+
+								</span> <span class="logoutAparece" id="logoutAparece" hidden="true"><a
+									href="${urlRoot}admin/logout">Salida</a></span>| <span class="loginRegister"
+									id="loginRegister"><a href="${urlRoot}usuarios/create">
+										Register</a></span> --%>
+
+					<span contenteditable="true" id="logaparece" class="logaparece">
+						<a class="link" href="${urlRoot}formLogin"></a>
+
+
+					</span> <span contenteditable="true" id="logoutaparece"
+						class="logoutaparece"><a href="${urlRoot}admin/logout"></a></span>|
+
+
+
+					<span contenteditable="true" id="loginRegister"
+						class="loginRegister"></span>
+
+
 				</div>
 				<!-- widgets-wrap.// -->
 			</div>

@@ -3,18 +3,21 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 <title><fmt:message key="label.pages.home.title" /></title>
 </head>
 <body>
+
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -64,7 +67,7 @@
 <title>Website title - bootstrap html template</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
+<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
 <!-- jQuery -->
 <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
@@ -158,6 +161,9 @@
 
 	<!-- ========================= SECTION PAGETOP ========================= -->
 	<section class="section-pagetop bg">
+		<c:if test="${mensajelogeo!=null }">
+			<div class='alert alert-success' role="alert" align="center">${ mensajelogeo}</div>
+		</c:if>
 		<div class="container">
 			<h2 class="title-page">My account</h2>
 		</div>
@@ -293,7 +299,8 @@
 							<!-- row.// -->
 
 							<a href="#" class="btn btn-outline-primary"> See all orders </a>
-						</div>spring
+						</div>
+						spring
 						<!-- card-body .// -->
 					</article>
 					<!-- card.// -->

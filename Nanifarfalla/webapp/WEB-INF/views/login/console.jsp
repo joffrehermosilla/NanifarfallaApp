@@ -20,7 +20,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-
+<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
@@ -63,7 +63,9 @@
 	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 
 	<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
-
+	<c:if test="${mensajelogeo!=null }">
+		<div class='alert alert-success' role="alert" align="center">${ mensajelogeo}</div>
+	</c:if>
 </header>
 
 <body class="nav-md">
@@ -77,7 +79,9 @@
 						<a href="index.html" class="site_title"><i class="fa fa-home"></i>
 							<span>Nanifarfalla</span></a>
 					</div>
-
+					<c:if test="${mensajelogeo!=null }">
+						<div class='alert alert-success' role="alert" align="center">${ mensajelogeo}</div>
+					</c:if>
 					<div class="clearfix"></div>
 
 					<!-- menu profile quick info -->
@@ -183,12 +187,10 @@
 										<li><a>STAKEHOLDERS<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
-												<li class="estadousuario" id="estadousuario"><a
-													href="" id="estadousuario">ESTADO
-														USUARIO </a></li>
-												<li class="linea" id="linea"><a
-													href="" id="linea">LINEA
-														 </a></li>
+												<li class="estadousuario" id="estadousuario"><a href=""
+													id="estadousuario">ESTADO USUARIO </a></li>
+												<li class="linea" id="linea"><a href="" id="linea">LINEA
+												</a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
 
@@ -198,18 +200,17 @@
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<li class="elaboracionproducto" id="elaboracionproducto"><a
-													href="" id="elaboracionproducto">ELABORACION
-														DEL PRODUCTO </a></li>
-													<li class="estadocatalogo" id="estadocatalogo"><a
-													href="" id="estadocatalogo">ESTADO DE CATALOGO
-													 </a></li>
+													href="" id="elaboracionproducto">ELABORACION DEL
+														PRODUCTO </a></li>
+												<li class="estadocatalogo" id="estadocatalogo"><a
+													href="" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li class="pais" id="pais"><a
-													href="" id="pais">PAIS </a></li>
+												<li class="pais" id="pais"><a href="" id="pais">PAIS
+												</a></li>
 												<li><a href="#level2_1">Level Two</a></li>
 												<li><a href="#level2_2">Level Two</a></li>
 											</ul></li>
@@ -370,7 +371,7 @@
 									<%@include file="../login/plainpage.jsp"%>
 
 
-						
+
 
 
 
@@ -402,7 +403,7 @@
 			</footer>
 			<!-- /footer content -->
 		</div>
-			<jsp:include page="../includes/footer.jsp"></jsp:include>
+		<jsp:include page="../includes/footer.jsp"></jsp:include>
 	</div>
 
 

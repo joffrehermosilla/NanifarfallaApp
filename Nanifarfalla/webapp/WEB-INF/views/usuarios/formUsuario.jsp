@@ -57,6 +57,10 @@
 
 <script type="text/javascript" src="${urlPublic}/js/emailvalidator.js"></script>
 
+
+<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
+
+
 </head>
 
 <body>
@@ -118,23 +122,27 @@
 							<span><form:input type="email" path="email"
 									class="form-control email " name="email" value="" id="email"
 									onblur="buscarPorCorreo(this.value)" required="required" /></span> <small
-								class="form-text text-muted">We'll never share your
-								email with anyone else.</small>
+								contenteditable="true" id="specialx"
+								class="form-texttext-muted specialx">We'll never share
+								your email with anyone else.</small>
 
 
 							<div class="email_info">
-								<span id="email_info " style="display: none"
-									class="alert alert-danger col-sm-4   email_show"></span>
+								<span id="specialx " style="display: none" name="specialx"
+									class="alert alert-danger col-sm-4   email_show specialx"
+									contenteditable="true"></span>
 								<ul>
-									<li id='specialx' class='invalidx'>Formato <strong>
-											de Mail valido!! </strong></li>
+									<li id='specialx' class='invalidx' name="specialx"
+										for="specialx">Recordar usar formato correcto de correo <strong>
+											de Mail valido!! </strong>
+									</li>
 								</ul>
 							</div>
 
 							<span contenteditable="true" id="form_error" class="form_error"></span>
 
 
-							<c:choose>
+							<%-- 	<c:choose>
 								<c:when test="${form_error.value() == 'true'}">
 									<div class='alert ' role="alert" id="email">${confirmacion}
 										<p class=" incorrectMsg alert alert-danger  ">${mensajemail}
@@ -153,7 +161,7 @@
 								<c:otherwise>
 
 								</c:otherwise>
-							</c:choose>
+							</c:choose> --%>
 						</div>
 
 
@@ -389,6 +397,11 @@
 				dateFormat : 'dd-mm-yy'
 			});
 		});
+		
+	
+
+
+		
 	</script>
 
 	<spring:hasBindErrors name="usuario">
@@ -439,9 +452,9 @@
 
 		}
 	</script>
-	
-	
-<script th:inline="javascript">
+
+
+	<script th:inline="javascript">
 var serverContext = '${contextRoot}';
 
 $(document).ready(function () {
@@ -518,7 +531,7 @@ function register(event){
 }
 
 </script>
-	
+
 
 </body>
 </html>

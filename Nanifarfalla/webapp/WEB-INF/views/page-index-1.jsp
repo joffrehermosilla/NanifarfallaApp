@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
+
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!-- Titulo -->
 <title>${contextRoot}|<fmt:message key="welcome.lang" />
@@ -15,7 +17,8 @@
 </title>
 <meta charset="utf-8">
 <spring:url value="/resources" var="urlPublic" />
-
+<link rel="icon"
+	href="${urlPublic}/ecommerce/assets/images/pre-loader.gif">
 
 </head>
 <body>

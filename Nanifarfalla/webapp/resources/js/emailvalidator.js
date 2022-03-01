@@ -5,9 +5,21 @@ var email = [];
 var verifica = [];
 
 
+
+
+
+
+
+
+
 function buscarPorCorreo(email) {
 
 	var span = $("#form_error"); // Referencia al <select> de ciudades.
+
+	var small = $("#specialx");
+
+	var emailx = $("#email");
+
 	$.ajax({
 		method: 'GET',
 		data: { "email": email }, // Aqui mandamos al controlador el idPais seleccionado
@@ -17,23 +29,54 @@ function buscarPorCorreo(email) {
 
 
 			if (data == "true") {
-	span.empty();
-	$('#guardar').empty();
-				$('#form_error').append('<span  class=" incorrectMsg alert alert-danger " role="alert" id= "email" >' + 'Email ya está registrado usar otro' + '</span>');
-					$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger" disabled="disabled" >' + 'BLOCK' + '</button>');
+				span.empty();
+				$('#guardar').empty();
+				$('#form_error').append('<span  class=" alert alert alert-danger " role="alert" id= "email" >' + 'Email ya está registrado usar otro' + '</span>');
+				$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger" disabled="disabled >' + 'BLOCK' + '</button>');
 
 			} else {
-	span.empty();
-		$('#guardar').empty();
+				span.empty();
+				$('#guardar').empty();
 				$('#form_error').append('<span  class="alert alert-success" role="alert" id= "email" >' + 'Email no registrado en BD continuar ' + '</span>');
-							$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger"  >' + 'Guardar' + '</button>');
+				$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger"  >' + 'Guardar' + '</button>');
 			}
+
+			if (email.match(/[a-z0-9_\.][a-z0-9][@][a-z]/)) {
+				small.empty();
+
+				$('#specialx').append('<small name = "specialx" value = "" id = "specialx" class="form-text-success specialx"><strong>' + 'Formato de mail Correcto' + '</strong></small>');
+
+
+			} else {
+				small.empty();
+
+
+				$('#specialx').append('<small  name = "specialx" value = "" id = "specialx" class="form-text-warning specialx"><strong>' + 'Formato de mail Incorrecto ' + '<strong></small>');
+				emailx.empty();
+
+			}
+
+
+
+
+
 
 
 
 		}
 	});
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -52,16 +95,16 @@ function generartoken() {
 
 
 			if (data == "true") {
-	span.empty();
-	$('#guardar').empty();
+				span.empty();
+				$('#guardar').empty();
 				$('#form_error').append('<span  class=" incorrectMsg alert alert-danger " role="alert" id= "email" >' + 'Email ya está registrado usar otro' + '</span>');
-					$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger" disabled="disabled" >' + 'BLOCK' + '</button>');
+				$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger" disabled="disabled" >' + 'BLOCK' + '</button>');
 
 			} else {
-	span.empty();
-		$('#guardar').empty();
+				span.empty();
+				$('#guardar').empty();
 				$('#form_error').append('<span  class="alert alert-success" role="alert" id= "email" >' + 'Email no registrado en BD continuar ' + '</span>');
-							$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger"  >' + 'Guardar' + '</button>');
+				$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger"  >' + 'Guardar' + '</button>');
 			}
 
 
@@ -75,9 +118,8 @@ function generartoken() {
 
 
 $(document).ready(function() {
-	password = $('#password');
-	password2 = $('#password-verify');
-	email = $('#email');
+
+	var email = $('#email');
 
 
 	var ruleValidator = function() {
@@ -85,11 +127,13 @@ $(document).ready(function() {
 		//gets what is being input in the field and sets as variable
 
 		// character
-		if (pswd.match(/[a-z0-9_\.][a-z0-9][@][a-z]/)) {
+		if (email.match(/[a-z0-9_\.][a-z0-9][@][a-z]/)) {
 			$('#specialx').removeClass('invalid').addClass('valid');
 			console.log('log: ' + pswd);
 		} else {
 			$('#specialx').removeClass('valid').addClass('invalid');
+			$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger"  >' + 'Guardar' + '</button>');
+
 		}
 
 	}
@@ -123,10 +167,10 @@ $(document).ready(function() {
 		}
 
 	});
-	
-	
 
-	
+
+
+
 
 
 	$('.email_show').click(function() {

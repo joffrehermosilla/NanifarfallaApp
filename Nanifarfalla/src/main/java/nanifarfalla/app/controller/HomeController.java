@@ -244,7 +244,7 @@ public class HomeController {
 
 	@RequestMapping(value ={"/", "/home", "/index"}, method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
-		
+		boolean sesionactiva=false;
 		
 		List<String> listaFechas = Utileria.getNextDays(4);
 		// List<String> listaFechas = Utileria.getPastDays(-4);
@@ -258,6 +258,8 @@ public class HomeController {
 		// lineas.add("Mochilas");
 		// lineas.add("Neceser");
 		// lineas.add("Joyas");
+		String memorias = Utileria.consumoram();
+		model.addAttribute("memorias", memorias);
 		model.addAttribute("fechas", listaFechas);
 		model.addAttribute("fechabusqueda", dateformat.format(new Date()));
 		model.addAttribute("lineas", serviceLineas.buscarTodas());
@@ -276,7 +278,7 @@ public class HomeController {
 		
 		logger.info("Inside HomeController index method - INFO");
 		logger.debug("Inside HomeController index method - DEBUG");
-
+		model.addAttribute("sesion", sesionactiva);
 		return "page-index-1";
 		// return "home";
 	}
