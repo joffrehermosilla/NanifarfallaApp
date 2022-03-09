@@ -9,32 +9,68 @@ function cargarlogeo(inicioregistro) {
 	var span1 = $("#loginRegister");
 	var span2 = $("#logoutaparece");
 
+
+
 	$.ajax({
 		method: 'GET',
 		data: { "inicioregistro": inicioregistro }, //
 		url: "admin/index",
 		success: function(data) {
-			span.empty();
-			span2.empty();
+
 
 			if (inicioregistro == "true") {
-
-
-
-				$('#logoutaparece').append('<span2 class="logoutaparece" id="logoutaparece" ><a class="big-link3" href="admin/logout">' + 'Salida ' + '</a></span2>');
-
-			} else {
+				console.warn(inicioregistro + " " + ' Sesion Cerrada Cargado desde javscript debe aparecer true');
 				span.empty();
 				span1.empty();
 
+
+				$('#logaparece').append('<span class="logaparece" id="logaparece" ><a class="big-link" href="formLogin">' + 'Sign in | ' + '</a></span>');
+
+
+
+				$('#loginRegister').append('<span1 class="loginRegister" id="loginRegister" ><a class="big-link2" href="usuarios/create">' + ' Register' + '</a></span1>');
+
+
+
+
+
+
+
+			} else {
+
+				span.empty();
+				span1.empty();
 				span2.empty();
-
-				$('#logaparece').append('<span class="logaparece" id="logaparece" ><a class="big-link" href="formLogin">' + 'Sign in ' + '</a></span>');
-
+				console.log(inicioregistro + " " + ' Inicio de Sesion Cargado desde javscript debe aparecer false');
 
 
-				$('#loginRegister').append('<span1 class="loginRegister" id="loginRegister" ><a class="big-link2" href="usuarios/create">' + 'Register' + '</a></span1>');
+				switch (inicioregistro) {
+					case "true":
+						$('#logoutaparece').append('<span2 class="logoutaparece" id="logoutaparece" ><a class="big-link3" href="admin/logout">' + 'Logout | ' + '</a></span2>');
+
+						break;
+					case "false":
+						$('#logaparece').append('<span class="logaparece" id="logaparece" ><a class="big-link" href="formLogin">' + 'Sign in | ' + '</a></span>');
+
+
+						break;
+
+					default:
+						$('#logoutaparece').append('<span2 class="logoutaparece" id="logoutaparece" ><a class="big-link3" href="admin/logout">' + 'Login | ' + '</a></span2>');
+
+				}
+
+
+
+
+				$('#loginRegister').append('<span1 class="loginRegister" id="loginRegister" ><a class="big-link2" href="usuarios/create">' + ' Register' + '</a></span1>');
+
+
 			}
+
+
+
+
 
 
 
@@ -57,19 +93,19 @@ function cargarlogeo(inicioregistro) {
 
 			$('#loginRegister').on('click', '.link2', function(e) {
 				alert("clicked");
-				$('#loginRegister').append('<a class="link2" href="usuarios/create">' + 'Register' + '</a>');
+				$('#loginRegister').append('<a class="link2" href="usuarios/create">' + ' Register' + '</a>');
 
 			});
 
 
 			$('.big-link3').click(function(e) {
-				$('#logoutaparece').append('<a class="link3" href="admin/logout">' + 'Salida' + '</a>');
+				$('#logoutaparece').append('<a class="link3" href="admin/logout">' + 'Login' + '</a>');
 				span2.empty();
 			});
 
 			$('#logoutaparece').on('click', '.link3', function(e) {
 				alert("clicked");
-				$('#logoutaparece').append('<a class="link3" href="admin/logout">' + 'Salida' + '</a>');
+				$('#logoutaparece').append('<a class="link3" href="admin/logout">' + 'Login' + '</a>');
 
 			});
 

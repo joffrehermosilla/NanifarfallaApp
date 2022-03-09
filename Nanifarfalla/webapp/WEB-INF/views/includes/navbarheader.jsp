@@ -105,6 +105,30 @@
 			</div>
 			<!-- col.// -->
 			<div class="col-lg-4 col-sm-6 col-12">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				<div class="widgets-wrap float-md-right">
 					<div class="widget-header  mr-3">
 						<a href="${urlRoot}show/all/products"
@@ -115,13 +139,24 @@
 					<div class="widget-header icontext">
 
 						<a href="#" class="icon icon-sm rounded-circle border"><i
-							class="fa fa-user"></i> </a>
+							class="fa fa-user"></i> </a> <span class="text-muted inicioregistro"
+							path="inicioregistro" name="inicioregistro" value=" "
+							id="inicioregistro" onmouseleave="cargarlogeo(${sesion})"
+							required="required"> Welcome! ${sesion} </span>
+
+
+						<div class="row align-items-center input-group w-100"">
+							<span contenteditable="true" id="logaparece" class="logaparece">
+							</span> <span contenteditable="true" id="logoutaparece"
+								class="logoutaparece"></span> <span contenteditable="true"
+								id="loginRegister" class="loginRegister"> </span>
+						</div>
 					</div>
-					<span class="text-muted" path="inicioregistro"
-						class="form-control inicioregistro " name="inicioregistro"
-						value="${sesion}" id="inicioregistro"
-						onmouseleave="cargarlogeo(this.value)" required="required">Welcome!
-						${sesion}" </span>
+
+
+
+
+
 
 					<c:set value="${sesion }" var="sesion" />
 
@@ -134,22 +169,57 @@
 									id="loginRegister"><a href="${urlRoot}usuarios/create">
 										Register</a></span> --%>
 
-					<span contenteditable="true" id="logaparece" class="logaparece">
-						<a class="link" href="${urlRoot}formLogin"></a>
-
-
-					</span> <span contenteditable="true" id="logoutaparece"
-						class="logoutaparece"><a href="${urlRoot}admin/logout"></a></span>|
-
-
-
-					<span contenteditable="true" id="loginRegister"
-						class="loginRegister"></span>
 
 
 				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				<!-- widgets-wrap.// -->
 			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			<!-- col.// -->
 		</div>
 		<!-- row.// -->

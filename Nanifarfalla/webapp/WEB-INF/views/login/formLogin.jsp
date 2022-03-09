@@ -23,9 +23,6 @@
 <!-- Styles CSS -->
 <jsp:include page="../includes/script.jsp"></jsp:include>
 
-
-
-
 </head>
 <meta charset="utf-8">
 <header class="section-header">

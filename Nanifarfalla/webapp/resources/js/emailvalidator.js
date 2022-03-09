@@ -26,15 +26,19 @@ function buscarPorCorreo(email) {
 		url: "buscarPorCorreo?email =" + email,
 		success: function(data) {
 			span.empty();
-
+			console.log(data + 'Cargado desde javscript');
 
 			if (data == "true") {
+				console.log(data + " " + ' Cargado desde javscript');
+			
 				span.empty();
 				$('#guardar').empty();
 				$('#form_error').append('<span  class=" alert alert alert-danger " role="alert" id= "email" >' + 'Email ya está registrado usar otro' + '</span>');
 				$('#guardar').append('<button  type="submit" value="submit" id="guardar" class="btn btn-danger" disabled="disabled >' + 'BLOCK' + '</button>');
 
 			} else {
+				console.warn(data + " " + ' Cargado desde javscript');
+		
 				span.empty();
 				$('#guardar').empty();
 				$('#form_error').append('<span  class="alert alert-success" role="alert" id= "email" >' + 'Email no registrado en BD continuar ' + '</span>');

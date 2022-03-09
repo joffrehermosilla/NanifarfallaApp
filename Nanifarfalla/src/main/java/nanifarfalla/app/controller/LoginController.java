@@ -29,10 +29,9 @@ public class LoginController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
 	@GetMapping(value = "/index")
-	public String mostrarPrincipalAdmin(Authentication authentication,RedirectAttributes attributes,
-			Model model) {
-		
-		boolean sesionactiva=false;
+	public String mostrarPrincipalAdmin(Authentication authentication, RedirectAttributes attributes, Model model) {
+
+		boolean sesionactiva = false;
 		String sesionPerfil = "";
 		ArrayList<String> lista = new ArrayList<String>();
 		System.out.println("Username: " + authentication.getName());
@@ -53,38 +52,49 @@ public class LoginController {
 
 				sesionPerfil = "/login/console";
 				LOGGER.warn(sesionPerfil);
-				sesionactiva=true;
+				sesionactiva = true;
 				model.addAttribute("sesion", sesionactiva);
 				return sesionPerfil;
 			} else {
 				sesionPerfil = "/login/admin";
 				LOGGER.info(sesionPerfil);
-				sesionactiva=true;
+				sesionactiva = true;
 				model.addAttribute("sesion", sesionactiva);
-				
-				LOGGER.info("control de navbarheader: "+sesionactiva);
+
+				LOGGER.info("control de navbarheader: " + sesionactiva);
 				return sesionPerfil;
 			}
 		}
-		
-		
-		
-		attributes.addFlashAttribute("mensajelogeo", "Bienvenido "+authentication.getName());
+
+		attributes.addFlashAttribute("mensajelogeo", "Bienvenido " + authentication.getName());
 		LOGGER.info(sesionPerfil);
-		LOGGER.info(""+sesionactiva);
-		return "redirect:/"+sesionPerfil;
+		LOGGER.info("" + sesionactiva);
+		return "redirect:/" + sesionPerfil;
 
 	}
 
 	@GetMapping(value = "/logout")
-	public String logout(HttpServletRequest request, RedirectAttributes attributes) {
+	public String logout(HttpServletRequest request, RedirectAttributes attributes, Model model) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 		logoutHandler.logout(request, null, null);
 
+		boolean sesionactiva = false;
+
+		model.addAttribute("sesion", sesionactiva);
 		attributes.addFlashAttribute("mensajelogout", "Sesion Cerrada Correctamente");
 		LOGGER.info("LOGOUT CIERRE DE SESIÓN CORRECTA");
 
 		return "redirect:/formLogin";
+	}
+	
+	
+	@RequestMapping(value = "/admin/index")
+	public String mostrarLogin(Model model) {
+
+		boolean sesionactiva = true;
+
+		model.addAttribute("sesion", sesionactiva);
+		return "login/formLogin";
 	}
 
 	@InitBinder

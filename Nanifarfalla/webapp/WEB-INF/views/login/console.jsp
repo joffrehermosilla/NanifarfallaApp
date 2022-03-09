@@ -20,7 +20,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">

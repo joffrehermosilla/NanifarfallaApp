@@ -47,8 +47,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class HomeController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-	
-	
+
 	@Autowired
 	private ILineasService serviceLineas;
 	@Autowired
@@ -115,7 +114,7 @@ public class HomeController {
 
 		// passing the list of categories
 		mv.addObject("categories", serviceLineas.buscarTodas());
-	//	mv.addObject("productos", serviceLineas.buscarTodas());
+		// mv.addObject("productos", serviceLineas.buscarTodas());
 
 		mv.addObject("userClickAllProducts", true);
 		return mv;
@@ -127,12 +126,11 @@ public class HomeController {
 
 		// categoryDAO to fetch a single category
 		List<Linea> category = serviceLineas.findByid_linea(id);
-	
-		//category = serviceLineas.buscarPorId(id);
-    
-	
-		System.out.println("Linea elegida: "+category);
-		
+
+		// category = serviceLineas.buscarPorId(id);
+
+		System.out.println("Linea elegida: " + category);
+
 		mv.addObject("title", category.get(id).getNombre_linea());
 
 		// passing the list of categories
@@ -144,41 +142,37 @@ public class HomeController {
 		mv.addObject("userClickCategoryProducts", true);
 		return mv;
 	}
-	
-	
-	
+
 	/*
 	 * Viewing a single product
-	 * */
-	
-	@RequestMapping(value = "/show/{id}/product") 
+	 */
+
+	@RequestMapping(value = "/show/{id}/product")
 	public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException {
-		
+
 		ModelAndView mv = new ModelAndView("page");
-		
+
 		Producto product = serviceProductos.buscarPorId(id);
-		
-		if(product == null) throw new ProductNotFoundException();
-		
+
+		if (product == null)
+			throw new ProductNotFoundException();
+
 		// update the view count
-		
-		 // product.setViews(product.getViews() + 1); 
-		  
-		//  serviceProductos.update(product);
-		 
-		//---------------------------
-		
+
+		// product.setViews(product.getViews() + 1);
+
+		// serviceProductos.update(product);
+
+		// ---------------------------
+
 		mv.addObject("title", product.getNombre_producto());
 		mv.addObject("product", product);
-		
+
 		mv.addObject("userClickShowProduct", true);
-		
-		
+
 		return mv;
-		
+
 	}
-	
-	
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String buscar(@RequestParam("fecha") String fecha, Model model) {
@@ -242,10 +236,10 @@ public class HomeController {
 
 	}
 
-	@RequestMapping(value ={"/", "/home", "/index"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
-		boolean sesionactiva=false;
-		
+		boolean sesionactiva = false;
+
 		List<String> listaFechas = Utileria.getNextDays(4);
 		// List<String> listaFechas = Utileria.getPastDays(-4);
 //		System.out.println(listaFechas);
@@ -275,7 +269,7 @@ public class HomeController {
 		for (int i = 0; i < listaFechas.size(); i++) {
 			System.out.println(listaFechas.get(i));
 		}
-		
+
 		logger.info("Inside HomeController index method - INFO");
 		logger.debug("Inside HomeController index method - DEBUG");
 		model.addAttribute("sesion", sesionactiva);
@@ -307,11 +301,14 @@ public class HomeController {
 		return mv;
 	}
 
-	
-	//METODO DE LOGIN
-	@RequestMapping(value = "/formLogin" )
-	public String mostrarLogin() {
-	return "login/formLogin";
+	// METODO DE LOGIN
+	@RequestMapping(value = "/formLogin")
+	public String mostrarLogin(Model model) {
+
+		boolean sesionactiva = false;
+
+		model.addAttribute("sesion", sesionactiva);
+		return "login/formLogin";
 	}
 
 	@GetMapping(value = "/registro")

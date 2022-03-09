@@ -67,7 +67,7 @@
 <title>Website title - bootstrap html template</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
+
 <!-- jQuery -->
 <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
