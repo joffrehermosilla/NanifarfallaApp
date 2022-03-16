@@ -19,7 +19,7 @@
 <spring:url value="/resources" var="urlPublic" />
 <link rel="icon"
 	href="${urlPublic}/ecommerce/assets/images/pre-loader.gif">
-
+<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
 </head>
 <body>
 	<header class="section-header">

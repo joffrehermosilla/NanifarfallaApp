@@ -1,8 +1,4 @@
 
-
-
-
-
 function cargarlogeo(inicioregistro) {
 
 	var span = $("#logaparece"); //
@@ -15,15 +11,7 @@ function cargarlogeo(inicioregistro) {
 
 
 	if (inicioregistro == 'false') {
-		console.warn(inicioregistro + " " + ' Sesion Cerrada Cargado desde javscript debe aparecer true');
-		span.empty();
-		span1.empty();
-		$('#logoutaparece').append('<span2 class="logoutaparece" id="logoutaparece" ><a class="big-link3" href="admin/logout">' + 'Logout | ' + '</a></span2>');
 
-
-
-
-	} else {
 
 		span.empty();
 		span1.empty();
@@ -40,6 +28,19 @@ function cargarlogeo(inicioregistro) {
 
 
 		$('#loginRegister').append('<span1 class="loginRegister" id="loginRegister" ><a class="big-link2" href="usuarios/create">' + ' Register' + '</a></span1>');
+
+
+
+	} else {
+		console.warn(inicioregistro + " " + ' Sesion Cerrada Cargado desde javscript debe aparecer true');
+		span.empty();
+		span1.empty();
+		span2.empty();
+		$('#logoutaparece').append('<span2 class="logoutaparece" id="logoutaparece" ><a class="big-link3" href="admin/logout">' + 'Logout  ' + '</a></span2>');
+
+
+
+
 
 
 	}

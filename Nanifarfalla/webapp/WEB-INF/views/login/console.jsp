@@ -50,6 +50,7 @@
 
 
 <script src="${urlPublic}/js/menuconsole.js" type="text/javascript"></script>
+<script type="text/javascript" src="${urlPublic}/js/regla2.js"></script>
 </head>
 <header class="section-header">
 
@@ -66,6 +67,9 @@
 	<c:if test="${mensajelogeo!=null }">
 		<div class='alert alert-success' role="alert" align="center">${ mensajelogeo}</div>
 	</c:if>
+
+
+
 </header>
 
 <body class="nav-md">

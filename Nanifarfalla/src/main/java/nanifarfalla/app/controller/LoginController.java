@@ -73,7 +73,7 @@ public class LoginController {
 
 	}
 
-	@GetMapping(value = "/logout")
+	@GetMapping(value = "/admin/logout")
 	public String logout(HttpServletRequest request, RedirectAttributes attributes, Model model) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 		logoutHandler.logout(request, null, null);

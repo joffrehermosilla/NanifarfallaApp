@@ -16,7 +16,7 @@
 <spring:url value="/menus/index" var="urlForm"></spring:url>
 <spring:url value="/" var="urlRoot" />
 <spring:url value="/admin/index" var="inicio"></spring:url>
-<script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
+
 <nav
 	class="navbar navbar-preview navbar-dark navbar-expand p-0 bg-primary fixed-bottom">
 	<div class="container">
@@ -112,44 +112,44 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<div class="widgets-wrap float-md-right">
-					<div class="widget-header  mr-3">
-						<a href="${urlRoot}show/all/products"
-							class="icon icon-sm rounded-circle border"><i
-							class="fa fa-shopping-cart"></i></a> <span
-							class="badge badge-pill badge-danger notify">0</span>
-					</div>
-					<div class="widget-header icontext">
-
-						<a href="#" class="icon icon-sm rounded-circle border"><i
-							class="fa fa-user"></i> </a> <span class="text-muted inicioregistro"
-							path="inicioregistro" name="inicioregistro" value=" "
-							id="inicioregistro" onmouseleave="cargarlogeo(${sesion})"
-							required="required"> Welcome! ${sesion} </span>
 
 
-						<div class="row align-items-center input-group w-100"">
-							<span contenteditable="true" id="logaparece" class="logaparece">
-							</span> <span contenteditable="true" id="logoutaparece"
-								class="logoutaparece"></span> <span contenteditable="true"
-								id="loginRegister" class="loginRegister"> </span>
+
+
+
+
+
+					<div class="row align-items-center input-group w-100"">
+						<div class="widget-header icontext">
+							<div class="widget-header  mr-3">
+								<a href="${urlRoot}show/all/products"
+									class="icon icon-sm rounded-circle border"><i
+									class="fa fa-shopping-cart"></i></a> <span
+									class="badge badge-pill badge-danger notify">0</span>
+							</div>
+
+							<a href="#" class="icon icon-sm rounded-circle border"><i
+								class="fa fa-user"></i> </a> <span class="text-muted inicioregistro"
+								path="inicioregistro" name="inicioregistro" value=" "
+								id="inicioregistro" onmouseleave="cargarlogeo(${sesion})"
+								required="required"> Welcome! </span>
+							<div class="widget-header  mr-3">
+								<table>
+									<tr>
+										<td><span contenteditable="true" id="logaparece"
+											class="logaparece"> </span> <span contenteditable="true"
+											id="logoutaparece" class="logoutaparece"></span></td>
+										<td><span contenteditable="true" id="loginRegister"
+											class="loginRegister"> </span></td>
+									</tr>
+								</table>
+
+
+
+
+
+							</div>
 						</div>
 					</div>
 
@@ -239,7 +239,7 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#main_nav" aria-controls="main_nav"
 			aria-expanded="false" aria-label="Toggle navigation">
-			Made by Joffre Hermosilla Salas <span class="navbar-toggler-icon"></span>
+			Design by Joffre Hermosilla Salas <span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="main_nav">
 			<ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">

@@ -557,8 +557,8 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 		 */
 		menuService.guardar(menuv1);
 		int totalusuario = userRepository.lastcode() + 1;
-		int totalcliente = clienteservice.lastcode() + 1;
-		int totalcantrato = contratoservice.lastcode() + 1;
+		int totalcliente = clienteservice.lastcode() ;
+		int totalcantrato = contratoservice.lastcode();
 
 		if (!multiPart.isEmpty()) {
 			String ruta = "/resources/images/usuarios/" + userx.getCodigo_usuario() + "/" + cliente.getCodigo_cliente()
@@ -776,12 +776,12 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 	}
 
 	private String buildEmail(String name, String link) {
-		return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" + "\n"
+		return "<img src='http://nanifarfalla.com.pe/resources/images/frontend/iconos/mainsite/logos/LOGO-PAPELERIA.png' ><div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#838185\">\n" + "\n"
 				+ "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" + "\n"
 				+ "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n"
-				+ "    <tbody><tr>\n" + "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" + "        \n"
+				+ "    <tbody><tr>\n" + "      <td width=\"100%\" height=\"53\" bgcolor=\"#838185\">\n" + "        \n"
 				+ "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n"
-				+ "          <tbody><tr>\n" + "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n"
+				+ "          <tbody><tr>\n" + "            <td width=\"70\" bgcolor=\"#838185\" valign=\"middle\">\n"
 				+ "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n"
 				+ "                  <tbody><tr>\n" + "                    <td style=\"padding-left:10px\">\n"
 				+ "                  \n" + "                    </td>\n"
@@ -804,14 +804,14 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 				+ "      <td width=\"10\" valign=\"middle\"><br></td>\n"
 				+ "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n"
 				+ "        \n"
-				+ "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name
-				+ ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please click on the below link to activate your account: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\""
+				+ "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#838185\">Hi " + name
+				+ ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#838185\"> Thank you for registering. Please click on the below link to activate your account: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\""
 				+ link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>"
 				+ "        \n" + "      </td>\n" + "      <td width=\"10\" valign=\"middle\"><br></td>\n"
 				+ "    </tr>\n" + "    <tr>\n" + "      <td height=\"30\"><br></td>\n" + "    </tr>\n"
 				+ "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" + "\n" + "</div></div>";
 	}
-
+	
 	@Override
 	public void onApplicationEvent(final OnRegistrationCompleteEvent event) {
 		this.confirmRegistrationx(event);

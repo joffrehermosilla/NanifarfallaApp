@@ -1,8 +1,4 @@
 
-
-
-
-
 function cargarlogeo(inicioregistro) {
 
 	var span = $("#logaparece"); //
@@ -32,10 +28,6 @@ function cargarlogeo(inicioregistro) {
 
 
 
-
-
-
-		$('#logaparece').append('<span class="logaparece" id="logaparece" ><a class="big-link" href="formLogin">' + ' SignIn|' + ' ' + '</a></span>');
 
 
 

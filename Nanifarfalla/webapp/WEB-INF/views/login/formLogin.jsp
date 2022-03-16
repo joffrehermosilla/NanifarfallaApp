@@ -37,7 +37,7 @@
 	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 
 	<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
-
+<script type="text/javascript" src="${urlPublic}/js/regla3.js"></script>
 </header>
 <body>
 
