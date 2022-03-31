@@ -33,8 +33,7 @@
 		<joffre.elapi.version>2.2</joffre.elapi.version>
 		<joffre.servletapi.version>4.0.1</joffre.servletapi.version>
 		<joffre.jstl.version>1.2</joffre.jstl.version>
-		<joffre.springwebmvc.version>5.2.8.RELEASE
-		</joffre.springwebmvc.version>
+		<joffre.springwebmvc.version>5.3.18</joffre.springwebmvc.version>
 		<joffre.aerogear.version>1.0.0</joffre.aerogear.version>
 		<joffre.junit.version>4.12</joffre.junit.version>
 		<joffre.mysql.version>5.1.48</joffre.mysql.version>
