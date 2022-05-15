@@ -42,8 +42,7 @@
 			hasAnyAuthority -->
 		<intercept-url pattern="/lineas/**" access="permitAll" />
 		<intercept-url pattern="/area/**" access="permitAll" />
-		<intercept-url pattern="/estadocontrato/**"
-			access="permitAll" />
+		<intercept-url pattern="/estadocontrato/**" access="permitAll" />
 		<intercept-url pattern="/privilege/**"
 			access="permitAll" />
 		<intercept-url pattern="/menus/**" access="permitAll" />

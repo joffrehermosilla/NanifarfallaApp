@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -27,7 +28,8 @@
 <spring:url value="/tipoalerta/indexPaginate?page=0"
 	var="urlTipoAlerta"></spring:url>
 
-
+<spring:url value="/estadocontrato/indexPaginate?page=0"
+	var="urlEstadoContrato"></spring:url>
 
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -125,7 +127,14 @@
 		        `;
 				});
 			
+			document.getElementById('estadocontrato').addEventListener('click', function(e) {
+				e.preventDefault();
 
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlEstadoContrato}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
 </script>
 
 

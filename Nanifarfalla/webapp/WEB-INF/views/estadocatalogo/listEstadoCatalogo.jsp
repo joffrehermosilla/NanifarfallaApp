@@ -38,7 +38,7 @@
 			<div class='alert alert-danger' role="alert" align="center">${mensajedelete}</div>
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
-			title="Nuevo Elaboracion Producto">Nuevo Estado de Catalogo</a><br>
+			title="Nuevo Estado Catalogo">Nuevo Estado de Catalogo</a><br>
 		<br>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">

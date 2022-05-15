@@ -38,12 +38,6 @@ public class TipoAlertaServiceJPA implements ITipoAlertaService {
 	}
 
 	@Override
-	public boolean guardar(TipoAlerta tipoalerta) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public List<TipoAlerta> buscarTodas() {
 		return tipoAlertaRepository.findAll();
 	}
@@ -51,18 +45,6 @@ public class TipoAlertaServiceJPA implements ITipoAlertaService {
 	@Override
 	public Page<TipoAlerta> buscarTodas(Pageable page) {
 		return tipoAlertaRepository.findAll(page);
-	}
-
-	@Override
-	public void actualiza(TipoAlerta tipoalerta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void elimina(TipoAlerta tipoalerta) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -75,6 +57,24 @@ public class TipoAlertaServiceJPA implements ITipoAlertaService {
 	public Optional<TipoAlerta> buscarporId(int id) {
 		// TODO Auto-generated method stub
 		return tipoAlertaRepository.findById(id);
+	}
+
+	@Override
+	public boolean guardar(TipoAlerta tipoalerta) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void actualiza(TipoAlerta tipoalerta) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void elimina(TipoAlerta tipoalerta) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override

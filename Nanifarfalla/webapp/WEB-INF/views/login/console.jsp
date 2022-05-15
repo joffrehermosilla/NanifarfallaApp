@@ -117,11 +117,12 @@
 										<li><a href="index2.html">Dashboard2</a></li>
 										<li><a href="index3.html">Dashboard3</a></li>
 									</ul></li>
-								<li><a><i class="fa fa-edit"></i> Forms <span
+								<li><a><i class="fa fa-edit"></i> Contratos<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li><a href="form.html">General Form</a></li>
-										<li><a href="form_advanced.html">Advanced Components</a></li>
+										<li class="estadocontrato" id="estadocontrato"><a href=""
+											id="estadocontrato">ESTADO CONTRATO</a></li>
+
 										<li><a href="form_validation.html">Form Validation</a></li>
 										<li><a href="form_wizards.html">Form Wizard</a></li>
 										<li><a href="form_upload.html">Form Upload</a></li>
@@ -212,6 +213,9 @@
 													href="" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
 												<li class="tipoalerta" id="tipoalerta"><a href=""
 													id="tipoalerta">TIPO ALERTA </a></li>
+
+
+
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span
 												class="fa fa-chevron-down"></span></a>
