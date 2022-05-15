@@ -195,7 +195,9 @@
 													id="estadousuario">ESTADO USUARIO </a></li>
 												<li class="linea" id="linea"><a href="" id="linea">LINEA
 												</a></li>
-												<li><a href="#level2_2">Level Two</a></li>
+												<li class="tipousuario" id="tipousuario"><a href=""
+													id="tipousuario">TIPO USUARIO </a></li>
+
 											</ul></li>
 
 
@@ -208,7 +210,8 @@
 														PRODUCTO </a></li>
 												<li class="estadocatalogo" id="estadocatalogo"><a
 													href="" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
-												<li><a href="#level2_2">Level Two</a></li>
+												<li class="tipoalerta" id="tipoalerta"><a href=""
+													id="tipoalerta">TIPO ALERTA </a></li>
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span
 												class="fa fa-chevron-down"></span></a>
@@ -400,8 +403,8 @@
 			<!-- footer content -->
 			<footer>
 				<div class="pull-right">
-					Nanifarfalla - ECOMMERCE <a href="">Made by Joffre Hermosilla
-						Salas</a>
+					Nanifarfalla - ECOMMERCE <a href="">designed by Joffre
+						Hermosilla Salas</a>
 				</div>
 				<div class="clearfix"></div>
 			</footer>
