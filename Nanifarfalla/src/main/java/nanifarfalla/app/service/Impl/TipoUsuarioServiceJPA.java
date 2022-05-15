@@ -80,7 +80,7 @@ public class TipoUsuarioServiceJPA implements ITipoUsuarioService{
 	public List<TipoUsuario> buscarTodas() {
 		return tipoUsuarioRepository.findAll();
 	}
-	null
+
 	@Override
 	public void eliminar(int idTipoUsuario) {
 		tipoUsuarioRepository.deleteById(idTipoUsuario);			
