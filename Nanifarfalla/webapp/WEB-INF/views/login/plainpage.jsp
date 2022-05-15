@@ -17,7 +17,17 @@
 
 <spring:url value="/lineas/indexPaginate?page=0" var="urlLinea"></spring:url>
 
-<spring:url value="/estadocatalogo/indexPaginate?page=0" var="urlEstadoCatalogo"></spring:url>
+<spring:url value="/estadocatalogo/indexPaginate?page=0"
+	var="urlEstadoCatalogo"></spring:url>
+
+<spring:url value="/tipousuario/indexPaginate?page=0"
+	var="urlTipoUsuario"></spring:url>
+
+
+<spring:url value="/tipoalerta/indexPaginate?page=0"
+	var="urlTipoAlerta"></spring:url>
+
+
 
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -97,7 +107,23 @@
 		        `;
 				});
 			
+			document.getElementById('tipousuario').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlTipoUsuario}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
 			
+			document.getElementById('tipoalerta').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlTipoAlerta}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
 			
 
 </script>
