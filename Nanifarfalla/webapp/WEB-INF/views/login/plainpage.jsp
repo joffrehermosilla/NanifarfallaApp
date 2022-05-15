@@ -28,8 +28,12 @@
 <spring:url value="/tipoalerta/indexPaginate?page=0"
 	var="urlTipoAlerta"></spring:url>
 
+<<<<<<< HEAD
 <spring:url value="/estadocontrato/indexPaginate?page=0"
 	var="urlEstadoContrato"></spring:url>
+=======
+
+>>>>>>> 97a582c3e446088999d8b732618856df8c483747
 
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />

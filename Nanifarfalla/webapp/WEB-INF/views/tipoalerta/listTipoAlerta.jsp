@@ -38,7 +38,11 @@
 			<div class='alert alert-danger' role="alert" align="center">${mensajedelete}</div>
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
+<<<<<<< HEAD
 			title="Nuevo Tipo Alerta">Nuevo Tipo Alerta</a><br> <br>
+=======
+			title="Nuevo Estado Usuario">Nuevo Tipo Alerta</a><br> <br>
+>>>>>>> 97a582c3e446088999d8b732618856df8c483747
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
