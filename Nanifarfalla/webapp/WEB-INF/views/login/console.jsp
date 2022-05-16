@@ -189,6 +189,15 @@
 								<li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
+										<li><a>REGLAS<span class="fa fa-chevron-down"></span></a>
+											<ul class="nav child_menu">
+												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
+												<li class="privilege" id="privilege"><a href=""
+													id="privilege">PRIVILEGIOS</a></li>
+											</ul></li>
+
+
+
 										<li><a>STAKEHOLDERS<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
@@ -213,12 +222,7 @@
 													href="" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
 												<li class="tipoalerta" id="tipoalerta"><a href=""
 													id="tipoalerta">TIPO ALERTA </a></li>
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> 97a582c3e446088999d8b732618856df8c483747
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span
 												class="fa fa-chevron-down"></span></a>

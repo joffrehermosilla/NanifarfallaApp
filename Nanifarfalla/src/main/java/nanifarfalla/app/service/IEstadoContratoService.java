@@ -15,7 +15,7 @@ public interface IEstadoContratoService {
 
 	void inserta(EstadoContrato estadocontrato);
 
-	void actualiza(EstadoContrato estadocontrato);
+
 
 	void elimina(EstadoContrato estadocontrato);
 

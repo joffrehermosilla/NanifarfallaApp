@@ -48,24 +48,13 @@ public class TipoAlertaServiceJPA implements ITipoAlertaService {
 	}
 
 	@Override
-	public void eliminar(int idTipoAlerta) {
-		// TODO Auto-generated method stub
-		tipoAlertaRepository.deleteById(idTipoAlerta);
-	}
-
-	@Override
-	public Optional<TipoAlerta> buscarporId(int id) {
-		// TODO Auto-generated method stub
-		return tipoAlertaRepository.findById(id);
-	}
-
-	@Override
 	public boolean guardar(TipoAlerta tipoalerta) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
+
 	public void actualiza(TipoAlerta tipoalerta) {
 		// TODO Auto-generated method stub
 
@@ -75,32 +64,6 @@ public class TipoAlertaServiceJPA implements ITipoAlertaService {
 	public void elimina(TipoAlerta tipoalerta) {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public boolean add(TipoAlerta tipoalerta) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-<<<<<<< HEAD
-	public boolean update(TipoAlerta tipoalerta) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-=======
-	public void actualiza(TipoAlerta tipoalerta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void elimina(TipoAlerta tipoalerta) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -128,7 +91,7 @@ public class TipoAlertaServiceJPA implements ITipoAlertaService {
 	}
 
 	@Override
->>>>>>> 97a582c3e446088999d8b732618856df8c483747
+
 	public boolean delete(TipoAlerta tipoalerta) {
 		// TODO Auto-generated method stub
 		return false;

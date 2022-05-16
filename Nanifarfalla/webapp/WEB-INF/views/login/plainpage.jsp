@@ -25,15 +25,15 @@
 	var="urlTipoUsuario"></spring:url>
 
 
-<spring:url value="/tipoalerta/indexPaginate?page=0"
-	var="urlTipoAlerta"></spring:url>
+<spring:url value="/tipoalerta/indexPaginate?page=0" var="urlTipoAlerta"></spring:url>
 
-<<<<<<< HEAD
+
 <spring:url value="/estadocontrato/indexPaginate?page=0"
 	var="urlEstadoContrato"></spring:url>
-=======
 
->>>>>>> 97a582c3e446088999d8b732618856df8c483747
+
+<spring:url value="/privilege/indexPaginate?page=0" var="urlPrivilege"></spring:url>
+
 
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -139,6 +139,18 @@
 		        <iframe src="${urlEstadoContrato}" height="620" style="width: 100%" frameBorder="0" ></iframe>
 		        `;
 				});
+			
+			document.getElementById('privilege').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlPrivilege}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
+			
+			
+			
 </script>
 
 
