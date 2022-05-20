@@ -34,7 +34,7 @@
 
 <spring:url value="/privilege/indexPaginate?page=0" var="urlPrivilege"></spring:url>
 
-
+<spring:url value="/menus/indexPaginate?page=0" var="urlMenu"></spring:url>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <fmt:setLocale value="${param.lang}" />
@@ -149,7 +149,14 @@
 		        `;
 				});
 			
-			
+			document.getElementById('menu').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlMenu}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
 			
 </script>
 

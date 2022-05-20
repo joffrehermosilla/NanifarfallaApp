@@ -3,18 +3,30 @@ package nanifarfalla.app.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.MenuV1;
 
@@ -24,24 +36,30 @@ import nanifarfalla.app.util.Utileria;
 @Controller
 @RequestMapping("/menus")
 public class MenuV1Controller {
+	private final static Logger LOGGER = LoggerFactory.getLogger(MenuV1Controller.class);
+
 	@Autowired
 	private IMenuService menuservice;
 
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute MenuV1 menu, Model model) {
-		List<MenuV1> menus = menuservice.buscarTodas();
-		model.addAttribute("menus", menus);
+	public String crear(@ModelAttribute("InstanciaMenuV1") MenuV1 menu, Model model, BindingResult result) {
+		if (result.hasErrors()) {
+			System.out.println("Existen errores");
+			return "menus/formMenu";
+		}
+		for (ObjectError error : result.getAllErrors()) {
+			System.out.println(error.getDefaultMessage() + " ");
+		}
+		List<MenuV1> menuz = menuservice.buscarTodas();
+		model.addAttribute("menuz", menuz);
+		LOGGER.info("formMenu para crear nuevo Estado Contrato");
 
 		return "menus/formMenu";
-
 	}
 
 	@GetMapping("/index")
-	public String mostrarIndex(Model model) {
+	public String mostrarIndex(@ModelAttribute("InstanciaMenuV1") MenuV1 menu, Model model, BindingResult result) {
 
-		List<MenuV1> menus = menuservice.buscarTodas();
-
-		model.addAttribute("menus", menus);
 		System.out.println("Buscamos el menu concurrente nombre: " + menuservice.Concurrentenombre());
 		System.out.println("Buscamos el menu map Service : " + menuservice.map());
 		System.out.println("Buscamos el menu mapa service : " + menuservice.mapa());
@@ -53,7 +71,36 @@ public class MenuV1Controller {
 		menuservice.arbolHijos();
 		menuservice.loadChilds();
 		menuservice.JpaHijos();
+
+		List<MenuV1> menuy = menuservice.buscarTodas();
+		model.addAttribute("menuy", menuy);
+
 		return "menus/listMenus";
+	}
+
+	@PostMapping(value = "/save")
+	public String guardar(@ModelAttribute("InstanciaMenuV1") MenuV1 menu, BindingResult result,
+			RedirectAttributes attributes, HttpServletRequest request) {
+
+		System.out.println("Recibiendo objeto Menu: " + menu);
+		if (result.hasErrors()) {
+			System.out.println("Existen errores");
+			return "menus/formMenu";
+		}
+
+		for (ObjectError error : result.getAllErrors()) {
+			System.out.println(error.getDefaultMessage() + " ");
+		}
+
+		System.out.println("Recibiendo objeto Menu: " + menu);
+		System.out.println("Elementos en la lista antes de la insersion: " + menuservice.buscarTodas().size());
+
+		menuservice.inserta(menu);
+
+		System.out.println("Elementos en la lista despues de la insersion: " + menuservice.buscarTodas().size());
+
+		attributes.addFlashAttribute("mensaje", "El Menu fue guardado");
+		return "redirect:/menus/index";
 	}
 
 	@RequestMapping(value = "/detalle", method = RequestMethod.GET)
@@ -77,6 +124,53 @@ public class MenuV1Controller {
 //		model.addAttribute("precio", precio);
 		return "menus/detalleMenu";
 
+	}
+
+	@GetMapping(value = "/update/{id}")
+	public String editar(@PathVariable("id") int idMenu, Model model) {
+		Optional<MenuV1> menu = menuservice.obuscarporId(idMenu);
+		model.addAttribute("InstanciaMenuV1", menu);
+		LOGGER.warn("Menu fue actualizado");
+
+		return "menus/formMenu";
+	}
+
+	@GetMapping(value = "/delete/{id}")
+	public String eliminar(@PathVariable("id") int idMenu,
+			@ModelAttribute("InstanciaMenuV1") MenuV1 menu, BindingResult result, Model model,
+			RedirectAttributes attributes, HttpServletRequest request) {
+
+		System.out.println("Recibiendo objeto Menu: " + menu);
+
+		// Pendiente: Guardar el objeto producto en la BD
+		if (result.hasErrors()) {
+			System.out.println("Existen errores");
+			return "menus/formMenu";
+		}
+
+		for (ObjectError error : result.getAllErrors()) {
+			System.out.println(error.getDefaultMessage() + " ");
+		}
+
+		System.out.println("Eliminando objeto Menu: " + menu);
+		System.out.println("Elementos en la lista antes de la eliminación: " + menuservice.buscarTodas().size());
+
+		menuservice.eliminar(idMenu);
+
+		System.out.println("Elementos en la lista despues de la eliminación: " + menuservice.buscarTodas().size());
+		attributes.addFlashAttribute("mensajedelete", "El Menu fue eliminado");
+		LOGGER.warn("Menu fue eliminado");
+
+		return "redirect:/menus/index";
+	}
+
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		Page<MenuV1> lista = menuservice.buscarTodas(page);
+		model.addAttribute("menux", lista);
+		LOGGER.warn("Menu paginate cargado correctamente");
+
+		return "menus/listMenus";
 	}
 
 	@InitBinder

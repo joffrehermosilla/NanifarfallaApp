@@ -103,7 +103,7 @@ public class PrivilegeController {
 			@ModelAttribute("InstanciaPrivilege") Privilege privilege, BindingResult result, Model model,
 			RedirectAttributes attributes, HttpServletRequest request) {
 
-		System.out.println("Recibiendo objeto Estado Contrato: " + privilege);
+		System.out.println("Recibiendo objeto Privilege: " + privilege);
 
 		// Pendiente: Guardar el objeto producto en la BD
 		if (result.hasErrors()) {

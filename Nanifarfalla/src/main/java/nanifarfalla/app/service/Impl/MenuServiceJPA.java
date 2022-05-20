@@ -1,13 +1,18 @@
 package nanifarfalla.app.service.Impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.LinkedHashMultimap;
@@ -31,6 +36,9 @@ public class MenuServiceJPA implements IMenuService {
 
 	@Override
 	public void inserta(MenuV1 menuv1) {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+		menuv1.setVersion(timestamp);
 		HashMap<Integer, List<MenuV1>> hashMap = new HashMap<Integer, List<MenuV1>>();
 		if (!hashMap.containsKey(menuv1.getId())) {
 			List<MenuV1> list = new ArrayList<MenuV1>();
@@ -47,6 +55,7 @@ public class MenuServiceJPA implements IMenuService {
 		 * 
 		 * hashMap.get(locationId);
 		 */
+		menuV1Repository.save(menuv1);
 	}
 
 	@Override
@@ -111,69 +120,54 @@ public class MenuServiceJPA implements IMenuService {
 	@Override
 	public void JpaHijos() {
 
-		/*
-		 * MenuV1 menux = new MenuV1(); List<MenuV1> menulista =
-		 * menuV1Repository.findAll(); // Simple Grouping by a Single Column
-		 */ // Map<String, List<MenuV1>> menusByNombre =
-			// menulista.stream().collect(Collectors.groupingBy(MenuV1::getNombre));
+		MenuV1 menux = new MenuV1();
+		List<MenuV1> menulista = menuV1Repository.findAll(); // Simple Grouping by a Single Column
+		Map<String, List<MenuV1>> menusByNombre = menulista.stream().collect(Collectors.groupingBy(MenuV1::getNombre));
 		// Grouping by With a Complex Map Key Type
-		// Map<MenuV1, List<MenuV1>> postsPerPadreAndhijos = menulista.stream()
-		// .collect(Collectors.groupingBy(post -> new MenuV1(post.getId(),
-		// post.getNombre(), post.getmMenuV1(),
-		// post.getRuta(), post.getIcon(), post.getVersion(), post.getLft(),
-		// post.getRgt())));
+		Map<MenuV1, List<MenuV1>> postsPerPadreAndhijos = menulista.stream()
+				.collect(Collectors.groupingBy(post -> new MenuV1(post.getId(), post.getNombre(), post.getmMenuV1(),
+						post.getRuta(), post.getIcon(), post.getVersion(), post.getLft(), post.getRgt())));
 
 		// Modifying the Returned Map Value Type no funciona
-		/*
-		 * Map<String, Set<MenuV1>> postsPerNombre = menulista.stream()
-		 * .collect(groupingBy(MenuV1::getNombre, toSet()));
-		 */
+
+		// Map<String, Set<MenuV1>> postsPerNombre =
+		// menulista.stream().collect(groupingBy(MenuV1::getNombre, toSet()));
 
 		// Grouping by Multiple Fields
 
-		// Map<String, Map<String, List<MenuV1>>> mapa = menulista.stream()
+		Map<String, Map<String, List<MenuV1>>> mapa = menulista.stream()
+				.collect(Collectors.groupingBy(MenuV1::getNombre, Collectors.groupingBy(MenuV1::getNombre)));
+
+		Map<String, Map<Integer, List<MenuV1>>> map = menulista.stream()
+				.collect(Collectors.groupingBy(MenuV1::getNombre, Collectors.groupingBy(MenuV1::getId)));
+
+		// Getting the Average from Grouped Results Map<BlogPostType, Double>
+		// averageLikesPerType = posts.stream().collect(groupingBy(BlogPost::getType,
+		// averagingInt(BlogPost::getLikes)));
+
+		// Getting the Sum from Grouped Results Map<MenuV1, Integer> likesPerType =
+		// menulista.stream().collect(groupingBy(MenuV1::getType,
+		// Collectors.summingInt(MenuV1::getLikes)));
+
+		// Getting the Maximum or Minimum from Grouped Result
+		// Map<Integer, Optional<MenuV1>> maxLikesPerPostType = menulista.stream()
 		// .collect(Collectors.groupingBy(MenuV1::getNombre,
-		// Collectors.groupingBy(MenuV1::getNombre)));
+		// maxBy(Collectors.summingInt(MenuV1::getLft))));
 
-		// Map<String, Map<Integer, List<MenuV1>>> map = menulista.stream()
-		// .collect(Collectors.groupingBy(MenuV1::getNombre,
-		// Collectors.groupingBy(MenuV1::getId)));
-
-		/*
-		 * //Getting the Average from Grouped Results Map<BlogPostType, Double>
-		 * averageLikesPerType = posts.stream() .collect(groupingBy(BlogPost::getType,
-		 * averagingInt(BlogPost::getLikes)));
-		 */
-
-		/*
-		 * //Getting the Sum from Grouped Results Map<MenuV1, Integer> likesPerType =
-		 * menulista.stream() .collect(groupingBy(MenuV1::getType,
-		 * Collectors.summingInt(MenuV1::getLikes)));
-		 */
-
-		/*
-		 * //Getting the Maximum or Minimum from Grouped Result Map<Integer,
-		 * Optional<MenuV1>> maxLikesPerPostType = menulista.stream()
-		 * .collect(Collectors.groupingBy(MenuV1::getNombre,
-		 * maxBy(Collectors.summingInt(MenuV1::getLft))));
-		 */
-
-		/*
-		 * //Getting a Summary for an Attribute of Grouped Results Map<BlogPostType,
-		 * IntSummaryStatistics> likeStatisticsPerType = posts.stream()
-		 * .collect(groupingBy(BlogPost::getType, summarizingInt(BlogPost::getLikes)));
-		 */
+		// Getting a Summary for an Attribute of Grouped Results
+		// Map<BlogPostType, IntSummaryStatistics> likeStatisticsPerType =
+		// posts.stream().collect(groupingBy(BlogPost::getType,
+		// summarizingInt(BlogPost::getLikes)));
 
 		// Concurrent Grouping by Collector
-		/*
-		 * ConcurrentMap<String, List<MenuV1>> Concurrentenombre =
-		 * menulista.parallelStream()
-		 * .collect(Collectors.groupingByConcurrent(MenuV1::getNombre));
-		 * 
-		 * SetMultimap<String, MenuV1> MenuxNombrerMap = LinkedHashMultimap.create(); //
-		 * .. other stuff, then whenever you need it:
-		 * MenuxNombrerMap.put(menux.getNombre(), menux);
-		 */
+
+		ConcurrentMap<String, List<MenuV1>> Concurrentenombre = menulista.parallelStream()
+				.collect(Collectors.groupingByConcurrent(MenuV1::getNombre));
+
+		SetMultimap<String, MenuV1> MenuxNombrerMap = LinkedHashMultimap.create();
+		// .. other stuff, then whenever you need it:
+
+		MenuxNombrerMap.put(menux.getNombre(), menux);
 
 	}
 
@@ -284,6 +278,44 @@ public class MenuServiceJPA implements IMenuService {
 	public void updatemenu(String name, int id) {
 		// TODO Auto-generated method stub
 		menuV1Repository.updatemenu(name, id);
+	}
+
+	@Override
+	public void elimina(MenuV1 menuv1) {
+		// TODO Auto-generated method stub
+		menuV1Repository.delete(menuv1);
+	}
+
+	@Override
+	public MenuV1 get(int menuv1Id) {
+		// TODO Auto-generated method stub
+		return menuV1Repository.getOne(menuv1Id);
+	}
+
+	@Override
+	public List<MenuV1> list() {
+		// TODO Auto-generated method stub
+		return menuV1Repository.findAll();
+	}
+
+	@Override
+	public Page<MenuV1> buscarTodas(Pageable page) {
+		// TODO Auto-generated method stub
+		return menuV1Repository.findAll(page);
+	}
+
+	@Override
+	public void eliminar(int menuv1Id) {
+		// TODO Auto-generated method stub
+
+		menuV1Repository.deleteById(menuv1Id);
+
+	}
+
+	@Override
+	public Optional<MenuV1> obuscarporId(int id) {
+		// TODO Auto-generated method stub
+		return menuV1Repository.findById(id);
 	}
 
 }

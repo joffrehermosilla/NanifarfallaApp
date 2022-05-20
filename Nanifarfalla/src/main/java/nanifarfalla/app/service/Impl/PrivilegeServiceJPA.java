@@ -6,6 +6,7 @@ import nanifarfalla.app.model.Privilege;
 import nanifarfalla.app.repository.PrivilegeRepository;
 import nanifarfalla.app.service.IPrivelegeService;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,9 @@ public class PrivilegeServiceJPA implements IPrivelegeService {
 	@Override
 	public void inserta(Privilege privelege) {
 		// TODO Auto-generated method stub
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
+		privelege.setVersion(timestamp);
 		privilegerepository.save(privelege);
 
 	}
