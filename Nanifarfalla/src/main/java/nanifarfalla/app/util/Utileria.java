@@ -7,13 +7,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-
+import java.util.Locale;
+import java.util.TimeZone;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
@@ -29,6 +31,10 @@ import org.imgscalr.Scalr;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -285,5 +291,24 @@ public class Utileria {
 				"Memoria usada: " + (runtime.totalMemory() - runtime.freeMemory()) / dataSize + " MB";
 
 	}
+	
+	public static DateFormat getLocalFormat() {
+		DateFormat dateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault());
+		dateFormat.setTimeZone(TimeZone.getDefault());
+		return dateFormat;
+	}
+
+	public static String printPrettyJSONString(Object o) {
+		try {
+			return new ObjectMapper()
+					.setDateFormat(getLocalFormat())
+					.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
+							false).writerWithDefaultPrettyPrinter()
+					.writeValueAsString(o);
+		} catch (JsonProcessingException e) {
+			return null;
+		}
+	}	
 
 }
