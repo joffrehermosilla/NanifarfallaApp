@@ -3,6 +3,7 @@ package nanifarfalla.app.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 import org.springframework.data.domain.Page;
@@ -71,5 +72,7 @@ public interface IMenuService {
 	void eliminar(int menuv1Id);
 
 	Optional<MenuV1> obuscarporId(int id);
+
+	Set<String> padresSet();
 
 }

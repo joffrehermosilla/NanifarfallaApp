@@ -58,9 +58,9 @@
 						</c:forEach>
 						<div class="col-sm-2">
 							<!--  	<form:input width="4" type="text" class="form-control"
-								hidden="true" path="id"
-								id="id" required="required" value="${i + 1}" />
-								-->
+								hidden="true" path="id" id="id"
+								required="required" value="${i + 1}" />-->
+
 							<form:hidden path="id" />
 						</div>
 
@@ -74,11 +74,18 @@
 
 						<div class="col-sm-2"></div>
 						<div>
-							<select id="mMenuV1.id" class="form-control">
+							<select name="padre" class="form-control"">
 								<option value="-1">Seleccione padre</option>
-									<c:forEach var="estadousuarioz" items="${estadousuarioz}">
-										<option value="-1">${estadousuarioz.mMenuV1.id}</option>
+
+								<c:forEach var="menuz" items="${menuz}">
+									<c:forEach var="setpadre" items="${setpadre}">
+										<c:choose>
+											<c:when test="${menuz.nombre == setpadre}">
+												<option value="${setpadre}">${setpadre}</option>
+											</c:when>
+										</c:choose>
 									</c:forEach>
+								</c:forEach>
 							</select>
 						</div>
 						<div class="form-group">
@@ -87,11 +94,11 @@
 							<form:input type="text" class="form-control" path="ruta"
 								required="required"></form:input>
 						</div>
-						
-						
-						
-						
-						
+
+
+
+
+
 					</div>
 
 				</div>

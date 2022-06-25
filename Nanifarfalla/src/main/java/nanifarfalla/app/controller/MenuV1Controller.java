@@ -2,8 +2,10 @@ package nanifarfalla.app.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,8 +53,13 @@ public class MenuV1Controller {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 		List<MenuV1> menuz = menuservice.buscarTodas();
+
+		Set<String> setpadre = menuservice.padresSet();
+
 		model.addAttribute("menuz", menuz);
-		LOGGER.info("formMenu para crear nuevo Estado Contrato");
+		model.addAttribute("setpadre", setpadre);
+
+		LOGGER.info("formMenu para crear nuevo Menu en ARBOL");
 
 		return "menus/formMenu";
 	}
@@ -79,8 +86,8 @@ public class MenuV1Controller {
 	}
 
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute("InstanciaMenuV1") MenuV1 menu, BindingResult result,
-			RedirectAttributes attributes, HttpServletRequest request) {
+	public String guardar(@RequestParam("padre") String padre, @ModelAttribute("InstanciaMenuV1") MenuV1 menu,
+			BindingResult result, RedirectAttributes attributes, HttpServletRequest request) {
 
 		System.out.println("Recibiendo objeto Menu: " + menu);
 		if (result.hasErrors()) {
@@ -94,6 +101,21 @@ public class MenuV1Controller {
 
 		System.out.println("Recibiendo objeto Menu: " + menu);
 		System.out.println("Elementos en la lista antes de la insersion: " + menuservice.buscarTodas().size());
+
+		int opcion = 0;
+		while (opcion <= menuservice.buscarTodas().size()) {
+			if (padre.equals(menu.getNombre())) {
+				opcion = menu.getId();
+			}
+			opcion++;
+		}
+		int cantidadmenu = menuservice.buscarTodas().size();
+		int codigomenu = cantidadmenu + 1;
+		// System.out.println("codigo menu generado: " + codigomenu);
+		LOGGER.info("codigo menu generado: " + codigomenu);
+		LOGGER.info("Id seleccionado del Padre: " + opcion);
+		menu.setId(codigomenu);
+		menu.setmMenuV1(menuservice.buscarporId(opcion));
 
 		menuservice.inserta(menu);
 
@@ -136,9 +158,8 @@ public class MenuV1Controller {
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	public String eliminar(@PathVariable("id") int idMenu,
-			@ModelAttribute("InstanciaMenuV1") MenuV1 menu, BindingResult result, Model model,
-			RedirectAttributes attributes, HttpServletRequest request) {
+	public String eliminar(@PathVariable("id") int idMenu, @ModelAttribute("InstanciaMenuV1") MenuV1 menu,
+			BindingResult result, Model model, RedirectAttributes attributes, HttpServletRequest request) {
 
 		System.out.println("Recibiendo objeto Menu: " + menu);
 

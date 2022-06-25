@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -137,8 +139,8 @@ public class MenuV1 {
 
 	@Override
 	public String toString() {
-		return "MenuV1 [id=" + id + ", nombre=" + nombre + ", mMenuV1=" + mMenuV1 + ", ruta="
-				+ ruta + ", icon=" + icon + ", version=" + version + ", lft=" + lft + ", rgt=" + rgt + "]";
+		return "MenuV1 [id=" + id + ", nombre=" + nombre + ", mMenuV1=" + mMenuV1 + ", ruta=" + ruta + ", icon=" + icon
+				+ ", version=" + version + ", lft=" + lft + ", rgt=" + rgt + "]";
 	}
 
 }

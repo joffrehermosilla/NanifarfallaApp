@@ -318,4 +318,10 @@ public class MenuServiceJPA implements IMenuService {
 		return menuV1Repository.findById(id);
 	}
 
+	@Override
+	public Set<String> padresSet() {
+		// TODO Auto-generated method stub
+		return menuV1Repository.padresSet();
+	}
+
 }
