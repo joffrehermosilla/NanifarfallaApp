@@ -78,14 +78,9 @@
 								<option value="-1">Seleccione padre</option>
 
 								<c:forEach var="menuz" items="${menuz}">
-									<c:forEach var="setpadre" items="${setpadre}">
-										<c:choose>
-											<c:when test="${menuz.nombre == setpadre}">
-												<option value="${setpadre}">${setpadre}</option>
-											</c:when>
-										</c:choose>
-									</c:forEach>
+									<option value="${menuz.id}">${menuz.nombre}</option>
 								</c:forEach>
+
 							</select>
 						</div>
 						<div class="form-group">

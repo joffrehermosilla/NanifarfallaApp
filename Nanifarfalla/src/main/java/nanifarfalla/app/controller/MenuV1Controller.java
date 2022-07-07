@@ -67,18 +67,6 @@ public class MenuV1Controller {
 	@GetMapping("/index")
 	public String mostrarIndex(@ModelAttribute("InstanciaMenuV1") MenuV1 menu, Model model, BindingResult result) {
 
-		System.out.println("Buscamos el menu concurrente nombre: " + menuservice.Concurrentenombre());
-		System.out.println("Buscamos el menu map Service : " + menuservice.map());
-		System.out.println("Buscamos el menu mapa service : " + menuservice.mapa());
-		System.out.println("Buscamos el menu menusByNombre : " + menuservice.menusByNombre());
-		System.out.println("Buscamos el menu menu por Nombre : " + menuservice.menusporNombre());
-		System.out.println("Buscamos el menu x NOMBRE : " + menuservice.menusxNombre());
-		System.out.println("Buscamos el menuxnombreMap() : " + menuservice.MenuxNombrerMap());
-		System.out.println("Buscamos el menu post perPadre Hijos: " + menuservice.postsPerPadreAndhijos());
-		menuservice.arbolHijos();
-		menuservice.loadChilds();
-		menuservice.JpaHijos();
-
 		List<MenuV1> menuy = menuservice.buscarTodas();
 		model.addAttribute("menuy", menuy);
 
@@ -102,20 +90,27 @@ public class MenuV1Controller {
 		System.out.println("Recibiendo objeto Menu: " + menu);
 		System.out.println("Elementos en la lista antes de la insersion: " + menuservice.buscarTodas().size());
 
-		int opcion = 0;
-		while (opcion <= menuservice.buscarTodas().size()) {
-			if (padre.equals(menu.getNombre())) {
-				opcion = menu.getId();
-			}
-			opcion++;
-		}
+		int opcion = Integer.parseInt(padre);
+		/*
+		 * while (opcion <= menuservice.buscarTodas().size()) { if
+		 * (padre.equals(menu.getNombre())) { opcion = menu.getId(); } opcion++; }
+		 */
+
+		System.out.println("padre valor desde el front: " + padre);
+		LOGGER.info("padre valor desde el front: " + padre);
+
 		int cantidadmenu = menuservice.buscarTodas().size();
 		int codigomenu = cantidadmenu + 1;
-		// System.out.println("codigo menu generado: " + codigomenu);
+		System.out.println("codigo menu generado: " + codigomenu);
 		LOGGER.info("codigo menu generado: " + codigomenu);
 		LOGGER.info("Id seleccionado del Padre: " + opcion);
+		System.out.println("Id seleccionado del Padre: " + opcion);
 		menu.setId(codigomenu);
-		menu.setmMenuV1(menuservice.buscarporId(opcion));
+		Optional<MenuV1> menux ;
+		menux = menuservice.obuscarporId(opcion);
+		LOGGER.info("menux padre insertado: " + menux);
+		LOGGER.info("menux padre insertado GET: " + menux.get());
+		menu.setmMenuV1(menux.get());
 
 		menuservice.inserta(menu);
 
