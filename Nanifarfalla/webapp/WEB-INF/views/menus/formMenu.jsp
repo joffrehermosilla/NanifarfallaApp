@@ -90,12 +90,12 @@
 								required="required"></form:input>
 						</div>
 
-
-
-
-
 					</div>
-
+					<div class="form-group">
+						<label for="ruta">Imagen Menu</label> <input type="file"
+							id="archivoImagen" name="archivoImagen" />
+						<p class="help-block">Elige Imagen</p>
+					</div>
 				</div>
 
 				<div class="form-buttons">

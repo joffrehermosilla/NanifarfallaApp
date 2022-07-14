@@ -6,8 +6,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.SetMultimap;
 
@@ -16,7 +19,7 @@ import nanifarfalla.app.model.MenuV1;
 import nanifarfalla.app.util.ArbolCadenas;
 
 public interface IMenuService {
-	void inserta(MenuV1 menuv1);
+	void inserta(MenuV1 menuv1,MultipartFile multiPart, HttpServletRequest request);
 
 	List<MenuV1> buscarTodas();
 
@@ -40,7 +43,7 @@ public interface IMenuService {
 
 	void updatemenu(String name, int id);
 
-	void guardar(MenuV1 menuv1);
+	void guardar(MenuV1 menuv1, MultipartFile multiPart,HttpServletRequest request);
 
 	MenuV1 buscarporId(int idMenuV1);
 

@@ -21,4 +21,7 @@ public interface MenuV1Repository extends JpaRepository<MenuV1, Integer> {
 
 	@Query("select  p.mMenuV1.nombre from MenuV1 p ")
 	Set<String> padresSet();
+	
+	
+
 }

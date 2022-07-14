@@ -10,23 +10,30 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
 
+import nanifarfalla.app.controller.MenuV1Controller;
 import nanifarfalla.app.model.MenuV1;
 import nanifarfalla.app.repository.MenuV1Repository;
 import nanifarfalla.app.service.IMenuService;
 import nanifarfalla.app.util.Arbol;
 import nanifarfalla.app.util.ArbolCadenas;
+import nanifarfalla.app.util.Utileria;
 
 @Service
 public class MenuServiceJPA implements IMenuService {
-
+	private final static Logger LOGGER = LoggerFactory.getLogger(MenuServiceJPA.class);
 	ArbolCadenas arbolcadenas;
 
 	Arbol arbolDato;
@@ -35,7 +42,7 @@ public class MenuServiceJPA implements IMenuService {
 	private MenuV1Repository menuV1Repository;
 
 	@Override
-	public void inserta(MenuV1 menuv1) {
+	public void inserta(MenuV1 menuv1,MultipartFile multiPart, HttpServletRequest request) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 		menuv1.setVersion(timestamp);
@@ -54,7 +61,30 @@ public class MenuServiceJPA implements IMenuService {
 		 * this:
 		 * 
 		 * hashMap.get(locationId);
+		 * 
+		 * 
+		 * 
+		 * 
 		 */
+
+		int totalmenu = menuV1Repository.lastcode() + 1;
+
+
+
+		if (!multiPart.isEmpty()) {
+			String ruta = "/resources/images/menus/" + menuv1.getId() + "/" + menuv1.getNombre() + "/";
+			String rutax = "/resources/images/menus/" + totalmenu + "/" + menuv1.getNombre() + "/";
+
+			// System.out.println("ruta: " + ruta);
+			LOGGER.info("ruta: " + ruta);
+			// System.out.println("rutax: " + rutax);
+			LOGGER.info("rutax: " + rutax);
+	
+			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, rutax);
+			menuv1.setRuta(rutax);
+
+		}
+
 		menuV1Repository.save(menuv1);
 	}
 
@@ -65,8 +95,25 @@ public class MenuServiceJPA implements IMenuService {
 	}
 
 	@Override
-	public void guardar(MenuV1 menuv1) {
+	public void guardar(MenuV1 menuv1, MultipartFile multiPart, HttpServletRequest request) {
 		// TODO Auto-generated method stub
+
+		int totalmenu = menuV1Repository.lastcode() + 1;
+
+		if (!multiPart.isEmpty()) {
+			String ruta = "/resources/images/menus/" + menuv1.getId() + "/" + menuv1.getNombre() + "/";
+			String rutax = "/resources/images/menus/" + totalmenu + "/" + menuv1.getNombre() + "/";
+
+			// System.out.println("ruta: " + ruta);
+			LOGGER.info("ruta: " + ruta);
+			// System.out.println("rutax: " + rutax);
+			LOGGER.info("rutax: " + rutax);
+
+			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, rutax);
+			menuv1.setRuta(rutax);
+
+		}
+
 		menuV1Repository.save(menuv1);
 	}
 

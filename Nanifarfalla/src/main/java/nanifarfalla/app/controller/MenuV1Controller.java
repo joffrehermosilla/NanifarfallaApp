@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.MenuV1;
@@ -74,8 +75,9 @@ public class MenuV1Controller {
 	}
 
 	@PostMapping(value = "/save")
-	public String guardar(@RequestParam("padre") String padre, @ModelAttribute("InstanciaMenuV1") MenuV1 menu,
-			BindingResult result, RedirectAttributes attributes, HttpServletRequest request) {
+	public String guardar(@RequestParam("padre") String padre, @RequestParam("archivoImagen") MultipartFile multiPart,
+			@ModelAttribute("InstanciaMenuV1") MenuV1 menu, BindingResult result, RedirectAttributes attributes,
+			HttpServletRequest request) {
 
 		System.out.println("Recibiendo objeto Menu: " + menu);
 		if (result.hasErrors()) {
@@ -106,13 +108,15 @@ public class MenuV1Controller {
 		LOGGER.info("Id seleccionado del Padre: " + opcion);
 		System.out.println("Id seleccionado del Padre: " + opcion);
 		menu.setId(codigomenu);
-		Optional<MenuV1> menux ;
+		Optional<MenuV1> menux;
 		menux = menuservice.obuscarporId(opcion);
 		LOGGER.info("menux padre insertado: " + menux);
 		LOGGER.info("menux padre insertado GET: " + menux.get());
 		menu.setmMenuV1(menux.get());
 
-		menuservice.inserta(menu);
+		menu.setLft(opcion);
+		menu.setRgt(codigomenu + opcion);
+		menuservice.inserta(menu, multiPart, request);
 
 		System.out.println("Elementos en la lista despues de la insersion: " + menuservice.buscarTodas().size());
 
