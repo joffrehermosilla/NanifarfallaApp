@@ -1,9 +1,11 @@
 package nanifarfalla.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 
 import nanifarfalla.app.model.Role;
 
@@ -17,8 +19,8 @@ public interface IRoleService {
 		void inserta(Role role);
 		void actualiza(Role role);
 		void elimina(Role role);
-		
-		
+		void eliminar (int idRole);
+		Optional<Role> buscarporId(int id);
 		Role get(int roleId);
 		List<Role> list();	
 		boolean add(Role role);

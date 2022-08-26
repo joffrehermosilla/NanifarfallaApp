@@ -36,6 +36,8 @@
 
 <spring:url value="/menus/indexPaginate?page=0" var="urlMenu"></spring:url>
 
+<spring:url value="/roles/indexPaginate?page=0" var="urlRole"></spring:url>
+
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
@@ -155,6 +157,14 @@
 				vista.innerHTML = `
 																			      
 		        <iframe src="${urlMenu}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
+			document.getElementById('menu').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlRole}" height="620" style="width: 100%" frameBorder="0" ></iframe>
 		        `;
 				});
 			
