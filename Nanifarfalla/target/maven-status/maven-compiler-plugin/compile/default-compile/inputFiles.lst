@@ -57,6 +57,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/DeviceMetadata.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/EstadoCatalogo.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Vendedor.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Order.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/web/error/InvalidOldPasswordException.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/security/CustomAuthenticationFailureHandler.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/ClienteTienePedidoRepository.java
@@ -91,6 +92,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/IRoleService.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaRole.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/Impl/FacturaCTienePedidoServiceJPA.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/BodyResponse.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/security/CustomRememberMeServices.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/RecetaProductoTieneInsumo.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/validation/PasswordMatchesValidator.java
@@ -101,6 +103,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Area.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/controller/DistritoController.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaClienteTienePreferencia.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/SeguridadRequest.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/ZonaRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/web/controller/RegistrationCaptchaController.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/IEstadoClienteTienePedidoService.java
@@ -129,6 +132,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaAlertaRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaRegimenCliente.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaEstadoCliente.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Antifraud.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/Impl/ProductoServiceImpl.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/ProductoxPedidoRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/controller/PrivilegeController.java
@@ -140,6 +144,8 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/ITipoImpuesto.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/ZonaTieneDistrito.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/captcha/ICaptchaService.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/CardHolder.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/AutorizacionResponse.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/security/MyCustomLoginAuthenticationSuccessHandler.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/web/dto/LineaDto.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaRecetaProductoTieneInsumoRepository.java
@@ -226,13 +232,18 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/IVendedorService.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaFacturaClienteTienePedidoRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaMenuV1Repository.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/controller/NiubizController.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Card.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/Impl/TipoUsuarioServiceJPA.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/ElaboracionProductoRepository.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/AutorizacionResquest.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/EstadoInsumo.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/IEstadoCatalogoService.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/captcha/CaptchaServiceV3.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/SesionResponse.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaMenuRoles.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/PasswordRessetToken.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/SesionRequest.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaClienteTienePreferenciaRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/RoleHasPrivilegesRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/Impl/PaisServiceJPA.java
@@ -270,6 +281,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/IAreaService.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/EstadoUsuarioRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/Impl/PrivilegeServiceJPA.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/Impl/NiubizServiceImpl.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/AreaRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaEstadoCatalogoRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/Impl/EstadoContratoServiceJPA.java
@@ -309,6 +321,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaEstadoProductoRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/email/EmailService.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/config/SessionLocaleFilter.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/util/Constantes.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/EstadoContratoRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaZonaTieneDistrito.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/IAnunciosService.java
@@ -342,6 +355,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaDistritoRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/auditorias/AuditoriaVendedorRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Privilege.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/service/INiubizService.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/controller/EstadoUsuarioController.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/ClienteTieneCatalogoRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Alerta.java
@@ -383,6 +397,7 @@
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/TipoImpuesto.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/repository/AlertaRepository.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/Usuario.java
+/home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/SeguridadResponse.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaZona.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/model/auditorias/AuditoriaClienteTienePedido.java
 /home/joffre/spring/proyectox/NanifarfallaApp/Nanifarfalla/src/main/java/nanifarfalla/app/web/error/RestResponseEntityExceptionHandler.java

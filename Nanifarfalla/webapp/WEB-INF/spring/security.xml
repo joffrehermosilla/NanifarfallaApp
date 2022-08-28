@@ -148,7 +148,7 @@
 	</b:bean>
 
 
-	<authentication-manager>
+	<authentication-manager alias="authenticationManager">
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select u.email as username,u.password_usuario as password, u.enabled as enabled from usuario u where u.email=?"

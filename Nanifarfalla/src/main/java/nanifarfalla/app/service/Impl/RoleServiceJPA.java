@@ -24,6 +24,8 @@ public class RoleServiceJPA implements IRoleService {
 		// TODO Auto-generated method stub
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		role.setVersion(timestamp);
+		Long id = (long) 0;
+		role.setId(id);
 		rolerepository.save(role);
 	}
 

@@ -194,7 +194,7 @@
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
 												<li class="privilege" id="privilege"><a href=""
 													id="privilege">PRIVILEGIOS</a></li>
-												<li class="role" id="role"><a href="" id="role">ROLES</a></li>
+												<li class="roles" id="roles"><a href="" id="roles">ROLES</a></li>
 											</ul></li>
 
 

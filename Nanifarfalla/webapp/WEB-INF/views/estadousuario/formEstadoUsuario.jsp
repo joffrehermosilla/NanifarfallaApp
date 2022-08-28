@@ -36,7 +36,7 @@
 		</h3>
 
 
-		<spring:hasBindErrors name="estadousuario">
+		<spring:hasBindErrors name="InstanciaEstadoUsuario">
 			<div class='alert alert-danger' role='alert'>
 				Por favor corrija los siguientes errores:
 				<ul>

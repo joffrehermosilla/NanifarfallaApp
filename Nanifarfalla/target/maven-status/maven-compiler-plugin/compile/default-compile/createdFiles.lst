@@ -49,6 +49,7 @@ nanifarfalla/app/service/IAnunciosService.class
 nanifarfalla/app/service/Impl/LoteInsumoServiceJPA.class
 nanifarfalla/app/repository/PaisRepository.class
 nanifarfalla/app/repository/auditorias/AuditoriaProductoRepository.class
+nanifarfalla/app/model/SesionResponse.class
 nanifarfalla/app/repository/UserAnunciosRepository.class
 nanifarfalla/app/repository/TipoImpuestoRepository.class
 nanifarfalla/app/repository/auditorias/AuditoriaPresentacionInsumoRepository.class
@@ -90,12 +91,14 @@ nanifarfalla/app/repository/auditorias/AuditoriaAnuncios.class
 nanifarfalla/app/repository/ContratoRepository.class
 nanifarfalla/app/controller/FacturaCTienePedidoController.class
 nanifarfalla/app/service/IRegimenCliente.class
+nanifarfalla/app/model/BodyResponse.class
 nanifarfalla/app/service/IMenuService.class
 nanifarfalla/app/repository/auditorias/AuditoriaContratoRepository.class
 nanifarfalla/app/repository/auditorias/AuditoriaEstadoCatalogoRepository.class
 nanifarfalla/app/service/IMenuRolesService.class
 nanifarfalla/app/repository/auditorias/AuditoriaTipoProductoRepository.class
 nanifarfalla/app/util/ListGroupBy.class
+nanifarfalla/app/model/AutorizacionResponse.class
 nanifarfalla/app/service/IPresentacionInsumoService.class
 nanifarfalla/app/repository/auditorias/AuditoriaInsumoRepository.class
 nanifarfalla/app/repository/ProductoRepository.class
@@ -107,6 +110,7 @@ nanifarfalla/app/model/Zona.class
 nanifarfalla/app/spring/ServiceConfig.class
 nanifarfalla/app/controller/LineasController.class
 nanifarfalla/app/controller/ColoresController.class
+nanifarfalla/app/model/SeguridadRequest.class
 nanifarfalla/app/service/IClienteService.class
 nanifarfalla/app/repository/auditorias/AuditoriaClienteTieneCatalogoRepository.class
 nanifarfalla/app/model/auditorias/AuditoriaClienteTieneCatalogo.class
@@ -168,6 +172,7 @@ nanifarfalla/app/config/SessionLocaleFilter.class
 nanifarfalla/app/model/Ciudad.class
 nanifarfalla/app/model/auditorias/AuditoriaPromocionVenta.class
 nanifarfalla/app/service/IEstadoCatalogoService.class
+nanifarfalla/app/model/SeguridadResponse.class
 nanifarfalla/app/repository/MenuV1Repository.class
 nanifarfalla/app/model/auditorias/AuditoriaEstadoUsuario.class
 nanifarfalla/app/model/auditorias/AuditoriaPresentacionInsumo.class
@@ -185,6 +190,8 @@ nanifarfalla/app/controller/EstadoCatalogoController.class
 nanifarfalla/app/repository/VerificationTokenRepository.class
 nanifarfalla/app/service/ILoteInsumoService.class
 nanifarfalla/app/spring/PersistenceJPAConfig.class
+nanifarfalla/app/model/SesionRequest.class
+nanifarfalla/app/util/Constantes.class
 nanifarfalla/app/web/util/GenericResponse.class
 nanifarfalla/app/controller/RoleController.class
 nanifarfalla/app/model/auditorias/AuditoriaEstadoClienteTienePedido.class
@@ -212,6 +219,7 @@ nanifarfalla/app/service/Impl/PresentacionInsumoServiceJPA.class
 nanifarfalla/app/model/EstadoContrato.class
 nanifarfalla/app/repository/DistritoRepository.class
 nanifarfalla/app/model/ClienteTieneCatalogo.class
+nanifarfalla/app/controller/NiubizController.class
 nanifarfalla/app/service/IPromocionVentaService.class
 nanifarfalla/app/model/Contrato.class
 nanifarfalla/app/model/TipoProducto.class
@@ -221,6 +229,7 @@ nanifarfalla/app/model/ProductoTieneColores.class
 nanifarfalla/app/service/Impl/EstadoClienteTienePedidoServiceJPA.class
 nanifarfalla/app/util/NodoCadena.class
 nanifarfalla/app/model/IgvVenta.class
+nanifarfalla/app/model/Order.class
 nanifarfalla/app/security/MyUserDetailsService.class
 nanifarfalla/app/model/auditorias/AuditoriaPrivilege.class
 nanifarfalla/app/service/IPrivelegeService.class
@@ -276,6 +285,7 @@ nanifarfalla/app/repository/EstadoClienteRepository.class
 nanifarfalla/app/validation/PasswordMatchesValidator.class
 nanifarfalla/app/service/ITipoImpuesto.class
 nanifarfalla/app/repository/ZonaTieneDistritoRepository.class
+nanifarfalla/app/model/Card.class
 nanifarfalla/app/service/IRoleService.class
 nanifarfalla/app/spring/MvcConfig.class
 nanifarfalla/app/repository/EstadoUsuarioRepository.class
@@ -286,6 +296,7 @@ nanifarfalla/app/repository/AreaRepository.class
 nanifarfalla/app/web/controller/RegistrationController.class
 nanifarfalla/app/model/auditorias/AuditoriaElaboracionProducto.class
 nanifarfalla/app/util/Nodo.class
+nanifarfalla/app/model/Antifraud.class
 nanifarfalla/app/service/Impl/DistritoServiceJPA.class
 nanifarfalla/app/model/auditorias/AuditoriaLoteInsumo.class
 nanifarfalla/app/security/AuthenticationFailureListener.class
@@ -322,6 +333,7 @@ nanifarfalla/app/repository/ProvinciaRepository.class
 nanifarfalla/app/model/EstadoProducto.class
 nanifarfalla/app/service/IUserService.class
 nanifarfalla/app/model/RecetaProductoTieneInsumo.class
+nanifarfalla/app/service/INiubizService.class
 nanifarfalla/app/model/auditorias/AuditoriaRegimenCliente.class
 nanifarfalla/app/model/auditorias/AuditoriaCliente.class
 nanifarfalla/app/service/ILineasService.class
@@ -365,6 +377,7 @@ nanifarfalla/app/repository/MenuRolesRepository.class
 nanifarfalla/app/controller/MenuConsolaController.class
 nanifarfalla/app/service/Impl/EstadoContratoServiceJPA.class
 nanifarfalla/app/repository/auditorias/AuditoriaEstadoContratoRepository.class
+nanifarfalla/app/model/CardHolder.class
 nanifarfalla/app/service/Impl/EstadoCatalogoServiceJPA.class
 nanifarfalla/app/repository/auditorias/AuditoriaAreaRepository.class
 nanifarfalla/app/validation/EmailValidator.class
@@ -384,6 +397,7 @@ nanifarfalla/app/config/CookieLocaleFilter.class
 nanifarfalla/app/repository/ClienteTienePreferenciaRepository.class
 nanifarfalla/app/repository/VendedorRepository.class
 nanifarfalla/app/model/PresentacionInsumo.class
+nanifarfalla/app/service/Impl/NiubizServiceImpl.class
 nanifarfalla/app/repository/TipoUsuarioRepository.class
 nanifarfalla/app/controller/TipoProductoController.class
 nanifarfalla/app/service/Impl/TipoImpuestoServiceJPA.class
@@ -397,6 +411,7 @@ nanifarfalla/app/security/AuthenticationSuccessEventListener.class
 nanifarfalla/app/model/Ceo.class
 nanifarfalla/app/model/auditorias/AuditoriaZonaTieneDistrito.class
 nanifarfalla/app/model/ClienteTienePedido.class
+nanifarfalla/app/model/AutorizacionResquest.class
 nanifarfalla/app/repository/PasswordResetTokenRepository.class
 nanifarfalla/app/model/MenuV1.class
 nanifarfalla/app/model/Alerta.class

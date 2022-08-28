@@ -33,7 +33,7 @@
 		</h3>
 
 
-		<spring:hasBindErrors name="role">
+		<spring:hasBindErrors name="InstanciaRole">
 			<div class='alert alert-danger' role='alert'>
 				Por favor corrija los siguientes errores:
 				<ul>
@@ -58,7 +58,7 @@
 						</c:forEach>
 						<div class="col-sm-2">
 							<!--  	<form:input width="4" type="text" class="form-control"
-								hidden="true" path="codigo_estadousuario"
+								hidden="true" path="codigo_role"
 								id="codigo_estadousuario" required="required" value="${i + 1}" />
 								-->
 							<form:hidden path="codigo_role" />

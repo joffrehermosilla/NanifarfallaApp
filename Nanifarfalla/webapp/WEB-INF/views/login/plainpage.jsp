@@ -159,7 +159,7 @@
 		        <iframe src="${urlMenu}" height="620" style="width: 100%" frameBorder="0" ></iframe>
 		        `;
 				});
-			document.getElementById('menu').addEventListener('click', function(e) {
+			document.getElementById('roles').addEventListener('click', function(e) {
 				e.preventDefault();
 
 				vista.innerHTML = `

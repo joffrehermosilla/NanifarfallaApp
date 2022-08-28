@@ -25,6 +25,7 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_role;
 	String name;
+	Long id;
 	Date version;
 	@OneToMany(mappedBy = "mRole")
 	private Collection<UserRoles> userRoles = new ArrayList<>();
@@ -120,6 +121,16 @@ public class Role {
 
 	public void setVersion(Date version) {
 		this.version = version;
+	}
+
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

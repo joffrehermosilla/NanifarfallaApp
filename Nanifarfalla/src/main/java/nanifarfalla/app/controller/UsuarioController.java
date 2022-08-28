@@ -67,7 +67,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
+//import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import java.util.Collection;
@@ -109,7 +109,7 @@ public class UsuarioController {
 	@Autowired
 	private Environment env;
 
-	private ISecurityUserService securityUserService;
+//	private ISecurityUserService securityUserService;
 
 	private JavaMailSender mailSender;
 	
@@ -621,14 +621,16 @@ public class UsuarioController {
 		}
 	}
 
-	public void authWithAuthManager(HttpServletRequest request, String username, String password) {
-		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
-		authToken.setDetails(new WebAuthenticationDetails(request));
-		Authentication authentication = authenticationManager.authenticate(authToken);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		// request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
-		// SecurityContextHolder.getContext());
-	}
+	/*
+	 * public void authWithAuthManager(HttpServletRequest request, String username,
+	 * String password) { UsernamePasswordAuthenticationToken authToken = new
+	 * UsernamePasswordAuthenticationToken(username, password);
+	 * authToken.setDetails(new WebAuthenticationDetails(request)); Authentication
+	 * authentication = authenticationManager.authenticate(authToken);
+	 * SecurityContextHolder.getContext().setAuthentication(authentication); //
+	 * request.getSession().setAttribute(HttpSessionSecurityContextRepository.
+	 * SPRING_SECURITY_CONTEXT_KEY, // SecurityContextHolder.getContext()); }
+	 */
 
 	/*
 	 * public void authWithoutPassword(Usuario user) { List<Privilege> privileges =
@@ -680,19 +682,17 @@ public class UsuarioController {
 		return new ModelAndView("badUser", model);
 	}
 
-	@GetMapping("/user/changePassword")
-	public ModelAndView showChangePasswordPage(final ModelMap model, @RequestParam("token") final String token) {
-		final String result = securityUserService.validatePasswordResetToken(token);
-
-		if (result != null) {
-			String messageKey = "auth.message." + result;
-			model.addAttribute("messageKey", messageKey);
-			return new ModelAndView("redirect:/login", model);
-		} else {
-			model.addAttribute("token", token);
-			return new ModelAndView("redirect:/updatePassword");
-		}
-	}
+	/*
+	 * @GetMapping("/user/changePassword") public ModelAndView
+	 * showChangePasswordPage(final ModelMap model, @RequestParam("token") final
+	 * String token) { final String result =
+	 * securityUserService.validatePasswordResetToken(token);
+	 * 
+	 * if (result != null) { String messageKey = "auth.message." + result;
+	 * model.addAttribute("messageKey", messageKey); return new
+	 * ModelAndView("redirect:/login", model); } else { model.addAttribute("token",
+	 * token); return new ModelAndView("redirect:/updatePassword"); } }
+	 */
 
 	@GetMapping("/updatePassword")
 	public ModelAndView updatePassword(final HttpServletRequest request, final ModelMap model,

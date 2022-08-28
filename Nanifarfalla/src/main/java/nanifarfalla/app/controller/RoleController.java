@@ -59,7 +59,7 @@ public class RoleController {
 		}
 		List<Role> rolez = roleService.buscarTodas();
 		model.addAttribute("rolez", rolez);
-		LOGGER.info("FORM ROLES PARA CREAR UN NUEVO EROL");
+		LOGGER.info("FORM ROLES PARA CREAR UN NUEVO ROL");
 		return "roles/formRole";
 
 	}
@@ -79,7 +79,7 @@ public class RoleController {
 			System.out.println(error.getDefaultMessage() + " ");
 		}
 
-		System.out.println("Recibiendo objeto EstadoUsuario: " + roles);
+		System.out.println("Recibiendo objeto Role: " + roles);
 
 		System.out.println("Elementos en la lista antes de la insersion: " + roleService.buscarTodas().size());
 		roleService.inserta(roles);
@@ -87,7 +87,7 @@ public class RoleController {
 
 		attributes.addFlashAttribute("mensaje", "El ROL fue guardado");
 		LOGGER.info("ROL FUE GUARDADO");
-		return "redirect:/roles/listRoles";
+		return "redirect:/roles/index";
 	}
 
 	@GetMapping(value = "/update/{id}")
