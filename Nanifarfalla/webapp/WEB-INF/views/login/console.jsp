@@ -102,8 +102,7 @@
 					</div>
 					<!-- /menu profile quick info -->
 
-					<br />
-
+					<br /> <a name="arriba"></a>
 					<!-- sidebar menu -->
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
@@ -120,7 +119,7 @@
 								<li><a><i class="fa fa-edit"></i> Contratos<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li class="estadocontrato" id="estadocontrato"><a href=""
+										<li class="estadocontrato" id="estadocontrato"><a href="#arriba"
 											id="estadocontrato">ESTADO CONTRATO</a></li>
 
 										<li><a href="form_validation.html">Form Validation</a></li>
@@ -192,9 +191,9 @@
 										<li><a>REGLAS<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
-												<li class="privilege" id="privilege"><a href=""
+												<li class="privilege" id="privilege"><a href="#arriba"
 													id="privilege">PRIVILEGIOS</a></li>
-												<li class="roles" id="roles"><a href="" id="roles">ROLES</a></li>
+												<li class="roles" id="roles"><a href="#arriba" id="roles">ROLES</a></li>
 											</ul></li>
 
 
@@ -202,11 +201,11 @@
 										<li><a>STAKEHOLDERS<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
-												<li class="estadousuario" id="estadousuario"><a href=""
+												<li class="estadousuario" id="estadousuario"><a href="#arriba"
 													id="estadousuario">ESTADO USUARIO </a></li>
-												<li class="linea" id="linea"><a href="" id="linea">LINEA
+												<li class="linea" id="linea"><a href="#arriba" id="linea">LINEA
 												</a></li>
-												<li class="tipousuario" id="tipousuario"><a href=""
+												<li class="tipousuario" id="tipousuario"><a href="#arriba"
 													id="tipousuario">TIPO USUARIO </a></li>
 
 											</ul></li>
@@ -217,18 +216,21 @@
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<li class="elaboracionproducto" id="elaboracionproducto"><a
-													href="" id="elaboracionproducto">ELABORACION DEL
+													href="#arriba" id="elaboracionproducto">ELABORACION DEL
+														PRODUCTO </a></li>
+														<li class="producto" id="producto"><a
+													href="#arriba" id="producto">
 														PRODUCTO </a></li>
 												<li class="estadocatalogo" id="estadocatalogo"><a
-													href="" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
-												<li class="tipoalerta" id="tipoalerta"><a href=""
+													href="#arriba" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
+												<li class="tipoalerta" id="tipoalerta"><a href="#arriba"
 													id="tipoalerta">TIPO ALERTA </a></li>
 
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li class="pais" id="pais"><a href="" id="pais">PAIS
+												<li class="pais" id="pais"><a href="#arriba" id="pais">PAIS
 												</a></li>
 												<li><a href="#level2_1">Level Two</a></li>
 												<li><a href="#level2_2">Level Two</a></li>

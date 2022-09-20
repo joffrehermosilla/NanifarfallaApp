@@ -2,6 +2,7 @@ package nanifarfalla.app.service.Impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -132,6 +133,18 @@ public class ProductoServiceJPA implements IProductoService{
 	public List<Producto> BuscarLineaClaseconParam(int codig_linea) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Optional<Producto> buscarporId(int id) {
+		// TODO Auto-generated method stub
+		return productoRepository.findById(id);
+	}
+
+	@Override
+	public void eliminar(int idProducto) {
+		// TODO Auto-generated method stub
+		productoRepository.deleteById(idProducto);
 	}
 
 }

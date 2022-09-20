@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -328,6 +329,18 @@ public class ProductoServiceImpl implements IProductoService {
 	public List<Producto> BuscarLineaClaseconParam(int codig_linea) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Optional<Producto> buscarporId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eliminar(int idProducto) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
