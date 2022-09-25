@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <!DOCTYPE html>
@@ -17,31 +18,30 @@
 <spring:url value="/resources" var="urlPublic"></spring:url>
 <spring:url value="/productos/index" var="urlForm"></spring:url>
 <spring:url value="/productos/create" var="urlCreate" />
-<spring:url value="/lineas/create" var="lineaCreate" />
-<spring:url value="/productos" var="urlProductopaginate" />
+<spring:url value="/productos/delete" var="urlDelete" />
+<spring:url value="/productos/update" var="urlEdit" />
+<spring:url value="/productos/" var="urlPaginate"></spring:url>
+
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
+
 </head>
 <body>
-	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
-	<header class="section-header">
-		<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
-	</header>
+
+	<header class="section-header"> </header>
 	<div class="container theme-showcase" role="main">
 		<h3>Listado de Productos</h3>
 		<c:if test="${mensaje!=null }">
-			<div class='alert alert-success' role="alert">${ mensaje}</div>
+			<div class='alert alert-success' role="alert" align="center">${ mensaje}</div>
+		</c:if>
+		<c:if test="${mensajedelete!=null }">
+			<div class='alert alert-danger' role="alert" align="center">${mensajedelete}</div>
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
-			title="Nuevo Producto">Nuevo</a> <a href="${lineaCreate}"
-			class="btn btn-success" role="button" title="Crear Linea">Crear
-			Linea</a> <br> <br>
+			title="Nuevo Producto">Nuevo Producto</a><br> <br>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
-
-
-					<th>Nombre Usuario</th>
 					<th>Codigo Producto</th>
 					<th>Nombre Producto</th>
 					<th>Ingreso Almacen</th>
@@ -57,66 +57,109 @@
 					<th>version</th>
 					<th>codigo Linea</th>
 				</tr>
-				<c:forEach var="producto" items="${productos}">
+
+				<c:forEach var="productoy" items="${productox.content}">
 					<tr>
-						<td>Tabla Usuario</td>
-						<td>${producto.codigo_producto}</td>
-						<td>${producto.nombre_producto}</td>
+						<td>${productoy.codigo_producto}</td>
+						<td>${productoy.nombre_producto}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${producto.ingreso_almacen_producto}" />
+								value="${productoy.ingreso_almacen_producto}" />
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${producto.salida_almacen_producto}" /></td>
+								value="${productoy.salida_almacen_producto}" /></td>
 
-						<td>${producto.stock_producto}</td>
-						<td>${producto.preparacion_producto}</td>
-						<td>${producto.foto_ruta}</td>
-						<td>${producto.colores_producto}</td>
-						<td>${producto.qr_producto}</td>
-						<td>${producto.pvv_producto}</td>
-						<td>${producto.pvf_producto}</td>
-						<td>${producto.claveApi}</td>
+						<td>${productoy.stock_producto}</td>
+						<td>${productoy.preparacion_producto}</td>
+						<td>${productoy.foto_ruta}</td>
+						<td>${productoy.colores_producto}</td>
+						<td>${productoy.qr_producto}</td>
+						<td>${productoy.pvv_producto}</td>
+						<td>${productoy.pvf_producto}</td>
+						<td>${productoy.claveApi}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${producto.version}" /></td>
-						<td>${producto.mLinea.nombre_linea}</td>
-
-
+								value="${productoy.version}" /></td>
+						<td>${productoy.mLinea.nombre_linea}</td>
 						<td align="center">
 							<table border="1">
 								<tr>
-									<td><a href="#" class="btn btn-success btn-sm"
-										role="button" title="Edit"> <span
-											class="glyphicon glyphicon-trash">Actualizar<i
-												class="fa fa-pencil"></i></span></a></td>
-								</tr>
-								<tr>
-									<td><a href="#" class="btn btn-danger btn-sm"
-										role="button" title="Eliminar"><span
-											class="glyphicon glyphicon-trash">Eliminar <i
-												class="fa fa-trash-o"></i>
-										</span></a></td>
+
+									<td><a href="${urlEdit}/${productoy.codigo_producto} "
+										class="btn btn-success btn-sm" role="button" title="Edit">
+
+											<ul class="navbar-nav">
+												<big>
+													<li class="nav-item"><i class="fa fa-pen"></i></li>
+
+
+												</big>
+											</ul></td>
+									</a>
+									</td>
+
+
+									<td><a href="${urlDelete}/${productoy.codigo_producto}"
+										onclick='return confirm("¿ Estás Seguro ?")'
+										class="btn btn-danger btn-sm" role="button" type="submit"
+										value="submit" title="Eliminar">
+											<ul class="navbar-nav">
+												<big>
+													<li class="nav-item"><i class="fa fa-trash"></i></li>
+
+
+												</big>
+											</ul></td>
+									</a>
+
+
 								</tr>
 
 							</table>
+
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
+			<div align="center">
+
+				<table border="0" align="center">
+					<tr>
+						<td>
+							<ul class="navbar-nav">
+								<li><a class="btn btn-left "
+									href="${urlPaginate}indexPaginate?page=${productox.number - 1 }"><big>
+											<li class="nav-item"><i
+												class="fas fa-arrow-alt-circle-left"></i></li>
+
+
+									</big></a></li>
+
+							</ul>
+						</td>
+						<td>
+							<ul class="navbar-nav">
+								<li><a class="btn btn-right "
+									href="${urlPaginate}indexPaginate?page=${productox.number + 1 }"><big>
+											<li class="nav-item"><i
+												class="fas fa-arrow-alt-circle-right"></i></li>
+
+
+									</big></a></li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+
+
+			</div>
 
 		</div>
-		<nav aria-label="Pagination">
-			<ul class="pagination justify-content-center font-weight-bold">
-				<li class="page-item"><a
-					href="${urlProductopaginate}/indexPaginate?page=${productox.number - 1 }">[    Anterior   ] </a></li>
-				
-				<li class="page-item"><a
-					href="${urlProductopaginate}/indexPaginate?page=${productox.number + 1 }">[   Siguiente   ]  </a></li>
-			</ul>
-		</nav>
+
 		<hr class="featurette-divider">
 		<!-- /container -->
-		<jsp:include page="../includes/footer.jsp"></jsp:include>
+
 		<!-- Bootstrap core JavaScript -->
 	</div>
+
+
 	<!-- /container -->
 </body>
 </html>

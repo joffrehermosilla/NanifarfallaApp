@@ -62,7 +62,7 @@ public class ProductoController {
 
 		List<Producto> productos = productoService.buscarTodas();
 		model.addAttribute("productoz", productos);
-		model.addAttribute("lineas", serviceLineas.buscarTodas());
+		//model.addAttribute("lineas", serviceLineas.buscarTodas());
 		LOGGER.info("FORM PRODUCTO PARA CREAR UN NUEVO PRODUCTO");
 		return "productos/formProducto";
 	}

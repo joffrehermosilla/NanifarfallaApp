@@ -23,8 +23,8 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_producto;
 	String nombre_producto;
-	//private int views;
-	//private int purchases;
+	//int views;
+	//int purchases;
 
 	double stock_producto;
 	String preparacion_producto;
@@ -67,10 +67,6 @@ public class Producto {
 	@OneToMany(mappedBy = "mProducto")
 	private transient Collection<ProductoTieneColores> productoTieneColores = new ArrayList<>();
 
-	
-
-
-
 	public Collection<ProductoTieneColores> getProductoTieneColores() {
 		return productoTieneColores;
 	}
@@ -101,19 +97,10 @@ public class Producto {
 
 	public void setProductoxpedido(Collection<ProductoxPedido> productoxpedido) {
 		this.productoxpedido = productoxpedido;
+
 	}
 
-	/*
-	 * public int getViews() { return views; }
-	 * 
-	 * public void setViews(int views) { this.views = views; }
-	 */
 
-	/*
-	 * public int getPurchases() { return purchases; }
-	 * 
-	 * public void setPurchases(int purchases) { this.purchases = purchases; }
-	 */
 
 	public Linea getmLinea() {
 		return mLinea;
@@ -188,7 +175,7 @@ public class Producto {
 	}
 
 	public Producto() {
-		System.out.println("Constructor Producto");
+		System.out.println("Constructor desde el Model Producto");
 	}
 
 	public int getCodigo_producto() {

@@ -9,6 +9,9 @@
 <spring:url var="js" value="/resources/ecommerce/assets/js" />
 <spring:url var="images" value="/resources/ecommerce/assets/images" />
 
+
+<spring:url value="/productos/indexPaginate?page=0" var="urlProducto"></spring:url>
+
 <spring:url value="/estadousuario/indexPaginate?page=0"
 	var="urlEstadoUsuario"></spring:url>
 
@@ -167,6 +170,16 @@
 		        <iframe src="${urlRole}" height="620" style="width: 100%" frameBorder="0" ></iframe>
 		        `;
 				});
+			document.getElementById('producto').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlProducto}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
+			
+			
 			
 </script>
 
