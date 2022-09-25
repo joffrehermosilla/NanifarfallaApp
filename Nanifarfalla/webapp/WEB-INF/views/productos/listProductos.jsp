@@ -49,12 +49,18 @@
 					<th>Stock del Producto</th>
 					<th>Preparacion del Producto</th>
 					<th>Imagen del Producto</th>
+					<th>Imagen del Producto1</th>
+					<th>Imagen del Producto2</th>
+					<th>Imagen del Producto3</th>
+					<th>Imagen del Producto4</th>
 					<th>Colores</th>
 					<th>Qr Producto</th>
 					<th>precio original</th>
 					<th>precio final</th>
 					<th>Clave Api</th>
 					<th>version</th>
+					<th>views</th>
+					<th>purchases</th>
 					<th>codigo Linea</th>
 				</tr>
 
@@ -70,6 +76,10 @@
 						<td>${productoy.stock_producto}</td>
 						<td>${productoy.preparacion_producto}</td>
 						<td>${productoy.foto_ruta}</td>
+						<td>${productoy.foto_ruta1}</td>
+						<td>${productoy.foto_ruta2}</td>
+						<td>${productoy.foto_ruta3}</td>
+						<td>${productoy.foto_ruta4}</td>
 						<td>${productoy.colores_producto}</td>
 						<td>${productoy.qr_producto}</td>
 						<td>${productoy.pvv_producto}</td>
@@ -77,6 +87,8 @@
 						<td>${productoy.claveApi}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${productoy.version}" /></td>
+								<td>${productoy.views}</td>
+									<td>${productoy.purchases}</td>
 						<td>${productoy.mLinea.nombre_linea}</td>
 						<td align="center">
 							<table border="1">

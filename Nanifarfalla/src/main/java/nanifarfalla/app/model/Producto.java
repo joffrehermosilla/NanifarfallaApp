@@ -23,8 +23,8 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_producto;
 	String nombre_producto;
-	//int views;
-	//int purchases;
+	Long views;
+	Long purchases;
 
 	double stock_producto;
 	String preparacion_producto;
@@ -101,6 +101,22 @@ public class Producto {
 	}
 
 
+
+	public Long getViews() {
+		return views;
+	}
+
+	public void setViews(Long views) {
+		this.views = views;
+	}
+
+	public Long getPurchases() {
+		return purchases;
+	}
+
+	public void setPurchases(Long purchases) {
+		this.purchases = purchases;
+	}
 
 	public Linea getmLinea() {
 		return mLinea;
