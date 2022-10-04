@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+
 import nanifarfalla.app.model.EstadoContrato;
 
 
@@ -15,9 +16,9 @@ public interface IEstadoContratoService {
 
 	void inserta(EstadoContrato estadocontrato);
 
-
-
 	void elimina(EstadoContrato estadocontrato);
+	
+	void actualiza(EstadoContrato estadocontrato);
 
 	EstadoContrato get(int estadocontratoId);
 

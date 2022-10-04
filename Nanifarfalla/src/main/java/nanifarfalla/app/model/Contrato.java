@@ -20,6 +20,7 @@ public class Contrato {
 	Double monto;
 	Date fecha_inicio;
 	Date fecha_fin;
+	
 	@JoinColumn(name = "fkcodigo_estadoContrato", referencedColumnName = "codigo_estadoContrato")
 	@ManyToOne
 	EstadoContrato mEstadoContrato;

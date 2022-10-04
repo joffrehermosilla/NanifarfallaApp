@@ -24,10 +24,12 @@ public class EstadoContrato {
 	String claveApi;
 	Date version;
 
-	@OneToMany(mappedBy = "mEstadoContrato", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mEstadoContrato", fetch = FetchType.LAZY)
 	private Collection<Contrato> contratos = new ArrayList<>();
 
 	public EstadoContrato() {
+
+		System.out.println("Inicio de las clase Estado Contrato");
 
 	}
 

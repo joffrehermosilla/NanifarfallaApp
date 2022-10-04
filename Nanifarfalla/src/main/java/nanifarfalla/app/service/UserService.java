@@ -40,6 +40,7 @@ import nanifarfalla.app.repository.VerificationTokenRepository;
 import nanifarfalla.app.security.MyUserDetailsService;
 import nanifarfalla.app.service.Impl.ClienteServiceJPA;
 import nanifarfalla.app.service.Impl.ContratoServiceJPA;
+import nanifarfalla.app.service.Impl.EstadoContratoServiceJPA;
 import nanifarfalla.app.service.Impl.MenuServiceJPA;
 import nanifarfalla.app.service.Impl.VendedorServiceJPA;
 
@@ -99,8 +100,11 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 	@Autowired
 	private ClienteServiceJPA clienteservice;
 
-	@Autowired
-	private ContratoServiceJPA contratoservice;
+	//@Autowired
+	//private ContratoServiceJPA contratoservice;
+	
+	//@Autowired
+	//private EstadoContratoServiceJPA estadoContratoService;
 
 	@Autowired
 	private VendedorServiceJPA vendedorService;
@@ -288,9 +292,10 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 			LOGGER.info("Cliente creado " + cliente);
 			clienteservice.inserta(cliente);
 
-			estadocontrato.setCodigo_estadoContrato(2);
+		//	estadocontrato.setCodigo_estadoContrato(2);
 			accountDto.setEstadocontrato(estadocontrato);
-			kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
+			LOGGER.info("estado contrato elegido:  " + estadocontrato.getDescripcion());
+		//	kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
 
 			int totalcliente = clienteservice.lastcode();
 			// System.out.println("codigo_cliente " + totalcliente);
@@ -305,7 +310,7 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 			// System.out.println("Contrato creado " + kontratox);
 			LOGGER.info("Contrato creado " + kontratox);
 
-			contratoservice.guardar(kontratox);
+			//contratoservice.guardar(kontratox);
 
 			// contratorepository.save(kontratox);
 
@@ -349,13 +354,12 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 
 		int totalusuario = userRepository.lastcode() + 1;
 		int totalcliente = clienteservice.lastcode() + 1;
-		int totalcantrato = contratoservice.lastcode() + 1;
+	//	int totalcantrato = contratoservice.lastcode() + 1;
 
 		if (!multiPart.isEmpty()) {
 			String ruta = "/resources/images/usuarios/" + userx.getCodigo_usuario() + "/" + cliente.getCodigo_cliente()
 					+ "/" + kontratox.getCodigo_contrato() + "/";
-			String rutax = "/resources/images/usuarios/" + totalusuario + "/" + totalcliente + "/" + totalcantrato
-					+ "/";
+			String rutax = "/resources/images/usuarios/" + totalusuario + "/" + totalcliente + "/" ;
 
 			// System.out.println("ruta: " + ruta);
 			LOGGER.info("ruta: " + ruta);
@@ -408,58 +412,68 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 		final Cliente cliente = new Cliente();
 		final RegimenCliente regimencliente = new RegimenCliente();
 		final EstadoCliente estadocliente = new EstadoCliente();
-		final Contrato kontratox = new Contrato();
-		final EstadoContrato estadocontrato = new EstadoContrato();
+		//final Contrato kontratox = new Contrato();
+		//final EstadoContrato estadocontrato = new EstadoContrato();
 		final Area area = new Area();
 		final Vendedor vendedor = new Vendedor();
 		final MenuV1 menuv1 = new MenuV1();
 		final MenuV1 menuv1x = new MenuV1();
 		final MenuRoles menuroles = new MenuRoles();
 
+		
+		///SETEO USUARIO
 		user.setNombre_usuario(accountDto.getNombre_usuario());
-
+		LOGGER.info("Definimos nombre de Usuario" + accountDto.getNombre_usuario());
 		user.setApellido_usuario(accountDto.getApellido_usuario());
-
+		LOGGER.info("Definimos nombre de Apellido" + accountDto.getApellido_usuario());
 		user.setPassword_usuario(passwordEncoder.encode(accountDto.getPassword_usuario()));
+
 		// System.out.println("contraseña encriptada" + user.getPassword_usuario());
 		LOGGER.info("contraseña encriptada" + user.getPassword_usuario());
 		accountDto.setEnabled(false);
-
-		user.setEnabled(accountDto.isEnabled());
+		LOGGER.info("Seteamos si es activo false ");
 
 		// System.out.println("Enabled: " + user.isEnable());
 		LOGGER.info("Enabled: " + user.isEnable());
 
 		user.setEmail(accountDto.getEmail());
-
+		LOGGER.info("correo asignado" + accountDto.getEmail());
 		user.setUsing2FA(accountDto.isUsing2FA());
 
+		
+		//SETEO UBIGEO
+		
 		distritox.setCodigo_distrito(distrito);
-
+		LOGGER.info("distrito asignado " + distrito);
 		accountDto.setDistrito(distritox);
 
 		user.setmDistrito(accountDto.getDistrito());
 
+		//SETEO ESTADO USUARIO
+		
 		estadousuario.setCodigo_estadousuario(1);
 
 		accountDto.setEstadousuario(estadousuario);
-
+		LOGGER.info("Estado usuario " + estadousuario);
 		user.setmEstadoUsuario(accountDto.getEstadousuario());
 
 		tipousuario.setCodigo_tipousuario(1);
 		accountDto.setTipousuario(tipousuario);
-		user.setmTipoUsuario(accountDto.getTipousuario());
 
+		user.setmTipoUsuario(accountDto.getTipousuario());
+		LOGGER.info("Tipo de Usuario " + accountDto.getTipousuario());
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 		user.setVersion(timestamp);
-
+		LOGGER.info("Fecha asignada " + timestamp);
 		// System.out
 		// .println("Codigo recibido del param = " + distrito + "El distrito elegido es
 		// = " + user.getmDistrito());
 
 		LOGGER.info("Codigo recibido del param = " + distrito + "El distrito elegido es = " + user.getmDistrito());
 
+		//SETEO ROLES
+		
 		if (role == 1) {
 			user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_BUYER")));
 
@@ -470,14 +484,20 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 			user.setRoles(
 					Arrays.asList(roleRepository.findByName("ROLE_BUYER"), roleRepository.findByName("ROLE_SELLER")));
 
+			LOGGER.info("Role Asignado " + role);
+			
+			//SETEO ESTADO CLIENTE
 			estadocliente.setCodigo_estadocliente(1);
 			accountDto.setEstadocliente(estadocliente);
+			
+			//SETEO CLIENTE
 			cliente.setmEstadoCliente(accountDto.getEstadocliente());
-
+			LOGGER.info("Estado Cliente " + accountDto.getEstadocliente());
+			//SETEO REGIMEN DEL CLIENTE
 			regimencliente.setCodigo_regimencliente(1);
 			accountDto.setRegimencliente(regimencliente);
 			cliente.setmRegimen_cliente(accountDto.getRegimencliente());
-
+			LOGGER.info("Regimen Cliente " + accountDto.getRegimencliente());
 			int totalusuario = userRepository.lastcode();
 
 			// System.out.println("codigo usuario: " + totalusuario);
@@ -486,6 +506,8 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 			accountDto.setUsuario(userx);
 			// cliente.setmUsuario(accountDto.getUsuario());
 
+			
+			//SETEO CLIENTE
 			cliente.setMensaje_cliente(user.getNombre_usuario() + " " + user.getApellido_usuario());
 
 			cliente.setVersion(timestamp);
@@ -496,10 +518,7 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 
 			clienteservice.inserta(cliente);
 
-			estadocontrato.setCodigo_estadoContrato(2);
-			accountDto.setEstadocontrato(estadocontrato);
-			kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
-
+		
 			int totalcliente = clienteservice.lastcode();
 			// System.out.println("codigo_cliente " + totalcliente);
 			LOGGER.info("codigo_cliente " + totalcliente);
@@ -507,14 +526,25 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 			cliente.setCodigo_cliente(totalcliente);
 			// kontratox.setmCliente(cliente);
 
-			kontratox.setVersion(timestamp);
-			kontratox.setDescripcion(cliente.getMensaje_cliente());
+			
+			//SETEO CONTRATO
+			
+	
+			//estadocontrato.setCodigo_estadoContrato(3);
+			//accountDto.setEstadocontrato(estadocontrato);
+			// kontratox.setmEstadoContrato(estadocontrato);
+		//	kontratox.setCodigo_contrato(totalcontrato + 1);
+			//kontratox.setmEstadoContrato(accountDto.getEstadocontrato());
+			//LOGGER.info("Estado Contrato " + accountDto.getEstadocontrato());
+			
+		//	kontratox.setVersion(timestamp);
+		//	kontratox.setDescripcion(cliente.getMensaje_cliente());
 			// kontratox.setmUsuario(accountDto.getUsuario());
-
+			
 			// System.out.println("Contrato creado " + kontratox);
-			LOGGER.info("Contrato creado " + kontratox);
+		//	LOGGER.info("Todavia no generar Contrato he comentado el 	contratoservice.inserta(kontratox) " + kontratox);
 
-			contratoservice.guardar(kontratox);
+		//	contratoservice.inserta(kontratox);
 
 			// contratorepository.save(kontratox);
 
@@ -524,10 +554,11 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 			accountDto.setArea(area);
 			vendedor.setmArea(accountDto.getArea());
 			// System.out.println("Vendedor creado " + kontratox);
-			LOGGER.info("Vendedor creado " + kontratox);
+	
 
 			// vendedorrepository.save(vendedor);
 			vendedor.setVersion(timestamp);
+			LOGGER.info("Vendedor creado " + vendedor);
 			vendedorService.guardar(vendedor);
 
 		}
@@ -560,16 +591,15 @@ public class UserService implements IUserService, EmailSender, ApplicationListen
 
 		int totalusuario = userRepository.lastcode() + 1;
 		int totalcliente = clienteservice.lastcode();
-		int totalcantrato = contratoservice.lastcode();
+		//int totalcontrato = contratoservice.lastcode();
 
 		if (!multiPart.isEmpty()) {
-			String ruta = "/resources/images/usuarios/" + userx.getCodigo_usuario() + "/" + cliente.getCodigo_cliente()
-					+ "/" + kontratox.getCodigo_contrato() + "/";
-			String rutax = "/resources/images/usuarios/" + totalusuario + "/" + totalcliente + "/" + totalcantrato
-					+ "/";
+		  String ruta = "/resources/images/usuarios/" + userx.getCodigo_usuario() + "/" + cliente.getCodigo_cliente()
+					+ "/" ; 
+			String rutax = "/resources/images/usuarios/" + totalusuario + "/" + totalcliente + "/" ;
 
 			// System.out.println("ruta: " + ruta);
-			LOGGER.info("ruta: " + ruta);
+	//		LOGGER.info("ruta: " + ruta);
 			// System.out.println("rutax: " + rutax);
 			LOGGER.info("rutax: " + rutax);
 			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, rutax);

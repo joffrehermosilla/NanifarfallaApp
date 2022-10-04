@@ -95,6 +95,12 @@ public class EstadoContratoServiceJPA implements IEstadoContratoService {
 		return false;
 	}
 
+	@Override
+	public void actualiza(EstadoContrato estadocontrato) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }
