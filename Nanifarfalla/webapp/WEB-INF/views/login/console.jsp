@@ -61,9 +61,10 @@
 		</div>
 		<!-- container .//  -->
 	</section>
-	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
+
 
 	<jsp:include page="../includes/navbarheader.jsp"></jsp:include>
+	<jsp:include page="../includes/estadoymenu.jsp"></jsp:include>
 	<c:if test="${mensajelogeo!=null }">
 		<div class='alert alert-success' role="alert" align="center">${ mensajelogeo}</div>
 	</c:if>
@@ -119,8 +120,8 @@
 								<li><a><i class="fa fa-edit"></i> Contratos<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li class="estadocontrato" id="estadocontrato"><a href="#arriba"
-											id="estadocontrato">ESTADO CONTRATO</a></li>
+										<li class="estadocontrato" id="estadocontrato"><a
+											href="#arriba" id="estadocontrato">ESTADO CONTRATO</a></li>
 
 										<li><a href="form_validation.html">Form Validation</a></li>
 										<li><a href="form_wizards.html">Form Wizard</a></li>
@@ -193,7 +194,8 @@
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
 												<li class="privilege" id="privilege"><a href="#arriba"
 													id="privilege">PRIVILEGIOS</a></li>
-												<li class="roles" id="roles"><a href="#arriba" id="roles">ROLES</a></li>
+												<li class="roles" id="roles"><a href="#arriba"
+													id="roles">ROLES</a></li>
 											</ul></li>
 
 
@@ -201,12 +203,12 @@
 										<li><a>STAKEHOLDERS<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
-												<li class="estadousuario" id="estadousuario"><a href="#arriba"
-													id="estadousuario">ESTADO USUARIO </a></li>
-												<li class="linea" id="linea"><a href="#arriba" id="linea">LINEA
-												</a></li>
-												<li class="tipousuario" id="tipousuario"><a href="#arriba"
-													id="tipousuario">TIPO USUARIO </a></li>
+												<li class="estadousuario" id="estadousuario"><a
+													href="#arriba" id="estadousuario">ESTADO USUARIO </a></li>
+												<li class="linea" id="linea"><a href="#arriba"
+													id="linea">LINEA </a></li>
+												<li class="tipousuario" id="tipousuario"><a
+													href="#arriba" id="tipousuario">TIPO USUARIO </a></li>
 
 											</ul></li>
 
@@ -218,13 +220,19 @@
 												<li class="elaboracionproducto" id="elaboracionproducto"><a
 													href="#arriba" id="elaboracionproducto">ELABORACION DEL
 														PRODUCTO </a></li>
-														<li class="producto" id="producto"><a
-													href="#arriba" id="producto">
-														PRODUCTO </a></li>
+												<li class="producto" id="producto"><a href="#arriba"
+													id="producto"> PRODUCTO </a></li>
 												<li class="estadocatalogo" id="estadocatalogo"><a
 													href="#arriba" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
-												<li class="tipoalerta" id="tipoalerta"><a href="#arriba"
-													id="tipoalerta">TIPO ALERTA </a></li>
+												<li class="tipoalerta" id="tipoalerta"><a
+													href="#arriba" id="tipoalerta">TIPO ALERTA </a></li>
+												
+												<li class="anuncios" id="anuncios"><a href="#arriba"
+													id="anuncios">ANUNCIO </a></li>
+													
+												<li class="alertas" id="alertas"><a href="#arriba"
+													id="alertas">ALERTA </a></li>	
+													
 
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span

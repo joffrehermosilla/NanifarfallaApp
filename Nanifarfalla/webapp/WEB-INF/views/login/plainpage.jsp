@@ -41,6 +41,11 @@
 
 <spring:url value="/roles/indexPaginate?page=0" var="urlRole"></spring:url>
 
+<spring:url value="/alertas/indexPaginate?page=0" var="urlAlerta"></spring:url>
+
+<spring:url value="/anuncios/indexPaginate?page=0" var="urlAnuncio"></spring:url>
+
+
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
@@ -178,8 +183,22 @@
 		        <iframe src="${urlProducto}" height="620" style="width: 100%" frameBorder="0" ></iframe>
 		        `;
 				});
-			
-			
+			document.getElementById('alertas').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlAlerta}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
+			document.getElementById('anuncios').addEventListener('click', function(e) {
+				e.preventDefault();
+
+				vista.innerHTML = `
+																			      
+		        <iframe src="${urlAnuncio}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+		        `;
+				});
 			
 </script>
 

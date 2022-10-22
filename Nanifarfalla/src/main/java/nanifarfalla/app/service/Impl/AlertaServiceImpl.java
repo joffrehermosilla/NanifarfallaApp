@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import nanifarfalla.app.model.Alerta;
 
@@ -89,13 +91,65 @@ public class AlertaServiceImpl implements IAlertaService {
 
 	}
 
+
+
 	@Override
-	public Alerta buscarporId(int idAlerta) {
-		for (Alerta a : lista) {
-			if (a.getCodigo_alerta() == idAlerta) {
-				return a;
-			}
-		}
+	public void actualiza(Alerta alerta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void elimina(Alerta alerta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(int idAlerta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Optional<Alerta> buscarporId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Alerta get(int alertagetId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Alerta> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean add(Alerta alerta) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(Alerta alerta) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Alerta alerta) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Page<Alerta> buscarTodas(Pageable page) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
