@@ -9,16 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import nanifarfalla.app.model.ClienteTienePedido;
 
+
+
 @Repository
 public interface ClienteTienePedidoRepository extends JpaRepository<ClienteTienePedido, Integer> {
-
-	@Query(value = "select * from cliente_tiene_pedido ctp "
-			+ "inner join usuario u 			  	 	  on u.codigo_usuario=ctp.fkcodigo_usuario "
-			+ "inner join factura_c_tiene_pedido fc 	  on fc.codigo_factura_cliente_tiene_pedido=ctp.fkcodigo_factura_cliente_tiene_pedido "
-			+ "inner join estado_cliente_tiene_pedido ec  on ec.codigo_estado_cliente_tiene_pedido=ctp.fkcodigo_estado_cliente_tiene_pedido "
-			+ "inner join cliente c 			  	 	  on c.codigo_cliente=ctp.fkcodigo_cliente "
-			+ "where u.codigo_usuario=:idCliente ", nativeQuery = true)
-	List<ClienteTienePedido> findPedidos(@Param("idCliente") int idCliente);
 	/*
 	 * @Query(value =
 	 * "select  x.codigo_pedido_web, x.fkcodigo_usuario, x.fkcodigo_cliente, x.fkcodigo_vendedor, x.fkcodigo_igv_venta,  x.fkcodigo_promocion_venta, "
@@ -58,5 +52,6 @@ public interface ClienteTienePedidoRepository extends JpaRepository<ClienteTiene
 	 * List<ClienteTienePedido> BuscarLineaClaseconParam(@Param("idLinea") int
 	 * codig_linea);
 	 */
-
+	
+	
 }

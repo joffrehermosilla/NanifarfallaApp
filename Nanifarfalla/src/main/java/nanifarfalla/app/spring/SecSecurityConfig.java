@@ -30,7 +30,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
-import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 @Configuration
 @ComponentScan(basePackages = { "nanifarfalla.app.security" })
@@ -88,7 +87,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/h2/**").permitAll() // to enable access to H2 db's console
-                .antMatchers("/login*","/login*","/pais/*", "/logout*", "/signin/*", "/signup/**", "/customLogin",
+                .antMatchers("/login*","/login*", "/logout*", "/signin/*", "/signup/**", "/customLogin",
                         "/user/registration*", "/registrationConfirm*", "/expiredAccount*", "/registration*",
                         "/badUser*", "/user/resendRegistrationToken*" ,"/forgetPassword*", "/user/resetPassword*",
                         "/user/changePassword*", "/emailError*", "/show/*","/usuarios/**", "/json/*", "/lineas/**", "/resources/**","/old/user/registration*","/successRegister*","/qrcode*").permitAll()
@@ -119,7 +118,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
              .and()
                 .rememberMe().rememberMeServices(rememberMeServices()).key("theKey")
              .and()
-                .headers().frameOptions().sameOrigin(); // this is needed to access the H2 db's console
+                .headers().frameOptions().disable(); // this is needed to access the H2 db's console
 
 
     // @formatter:on

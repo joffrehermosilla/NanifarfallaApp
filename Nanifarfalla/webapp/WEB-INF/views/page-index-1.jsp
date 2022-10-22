@@ -5,6 +5,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
+<spring:url value="/home" var="urlCreate" />
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -20,8 +22,12 @@
 <link rel="icon"
 	href="${urlPublic}/ecommerce/assets/images/pre-loader.gif">
 <script type="text/javascript" src="${urlPublic}/js/reglas.js"></script>
+
+
 </head>
 <body>
+
+
 	<header class="section-header">
 
 		<section class="section-content padding-y-sm">
@@ -30,10 +36,13 @@
 
 			</div>
 			<!-- container .//  -->
+			<jsp:include page="includes/estadoymenu.jsp"></jsp:include>
 		</section>
-		<jsp:include page="includes/estadoymenu.jsp"></jsp:include>
+
 
 		<jsp:include page="includes/navbarheader.jsp"></jsp:include>
+
+
 
 
 	</header>
@@ -50,6 +59,7 @@
 			<div>
 
 				<jsp:include page="includes/carruselpromocional.jsp"></jsp:include>
+
 			</div>
 
 		</div>
@@ -88,8 +98,9 @@
 
 		</div>
 		<!-- container .//  -->
-	</section>
 
+
+	</section>
 
 
 	<!-- ========================= SECTION CONTENT ========================= -->
@@ -491,6 +502,7 @@
 
 		</div>
 		<!-- container // -->
+
 	</section>
 	<!-- ========================= SECTION  END// ======================= -->
 

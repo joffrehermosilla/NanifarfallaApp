@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:schemaLocation="http://maven.apache.org/POM/4.0.0, https://maven.apache.org/xsd/maven-4.0.0.xsd"> 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:schemaLocation="http://maven.apache.org/POM/4.0.0, https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>joffre</groupId>
@@ -45,7 +46,10 @@
 		<joffre.marvin.version>1.5.5</joffre.marvin.version>
 		<joffre.javaxmail.version>1.6.2</joffre.javaxmail.version>
 		<joffre.context.version>5.3.9</joffre.context.version>
-		<joffre.freemarker.version>2.3.27-incubating</joffre.freemarker.version>
+		<joffre.freemarker.version>2.3.27-incubating
+		</joffre.freemarker.version>
+		<joffre.validationapi.version>2.0.1.Final
+		</joffre.validationapi.version>
 	</properties>
 
 
@@ -63,6 +67,7 @@
 			<artifactId>freemarker</artifactId>
 			<version>${joffre.freemarker.version}</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>net.coobird</groupId>
@@ -211,6 +216,13 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${joffre.hibernatecore.version}</version>
+		</dependency>
+
+		<!-- Validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${joffre.validationapi.version}</version>
 		</dependency>
 
 		<dependency>
@@ -364,9 +376,9 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			
-			
+
+
+
 		</plugins>
 
 	</build>

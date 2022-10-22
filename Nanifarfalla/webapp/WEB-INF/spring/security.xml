@@ -13,8 +13,10 @@
 		<intercept-url pattern="/anuncios/*"
 			access="hasAnyAuthority('ROLE_ADMIN')" />
 
-		<intercept-url pattern="/alertas/*"
-			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
+		<!-- <intercept-url pattern="/alertas/*" access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" 
+			/> -->
+
+		<intercept-url pattern="/alertas/*" access="permitAll" />
 		<intercept-url pattern="/productos/*" access="permitAll" />
 		<intercept-url pattern="/login*" access="permitAll" />
 		<intercept-url pattern="/logout*" access="permitAll" />
@@ -42,7 +44,8 @@
 			hasAnyAuthority -->
 		<intercept-url pattern="/lineas/**" access="permitAll" />
 		<intercept-url pattern="/area/**" access="permitAll" />
-		<intercept-url pattern="/estadocontrato/**" access="permitAll" />
+		<intercept-url pattern="/estadocontrato/**"
+			access="permitAll" />
 		<intercept-url pattern="/privilege/**"
 			access="permitAll" />
 		<intercept-url pattern="/menus/**" access="permitAll" />
@@ -79,8 +82,6 @@
 		<intercept-url pattern="/pais/**" access="permitAll" />
 
 
-
-
 		<intercept-url pattern="/usuarios/registration*"
 			access="permitAll" />
 		<intercept-url pattern="/registrationConfirm*"
@@ -93,8 +94,6 @@
 			access="permitAll" />
 		<intercept-url pattern="/invalidSession*"
 			access="isAnonymous()" />
-		<intercept-url pattern="/clienteTienePedido/**"
-			access="permitAll" />			
 
 
 
@@ -150,7 +149,8 @@
 	</b:bean>
 
 
-	<authentication-manager alias="authenticationManager">
+	<authentication-manager
+		alias="authenticationManager">
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select u.email as username,u.password_usuario as password, u.enabled as enabled from usuario u where u.email=?"
