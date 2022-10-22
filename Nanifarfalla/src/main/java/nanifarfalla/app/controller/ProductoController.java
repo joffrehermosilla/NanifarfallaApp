@@ -40,15 +40,18 @@ import nanifarfalla.app.util.Utileria;
 @RequestMapping("/productos")
 public class ProductoController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
-
+	
 	@Autowired
 	private IProductoService productoService;
 
 	@Autowired
 	private ILineasService serviceLineas;
 
+
+
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute("InstanciaProducto") Producto producto, Model model, BindingResult result) {
+	public String crear(@ModelAttribute("InstanciaProducto") Producto producto,
+			Model model, BindingResult result) {
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
 			return "productos/formProducto";
@@ -59,25 +62,27 @@ public class ProductoController {
 
 		List<Producto> productos = productoService.buscarTodas();
 		model.addAttribute("productoz", productos);
-		// model.addAttribute("lineas", serviceLineas.buscarTodas());
+		//model.addAttribute("lineas", serviceLineas.buscarTodas());
 		LOGGER.info("FORM PRODUCTO PARA CREAR UN NUEVO PRODUCTO");
 		return "productos/formProducto";
 	}
 
+
 	@GetMapping("/index")
-	public String mostrarIndex(@ModelAttribute("InstanciaProducto") Producto producto, Model model,
-			BindingResult result) {
+	public String mostrarIndex(@ModelAttribute("InstanciaProducto") Producto producto,
+			Model model, BindingResult result) {
 		List<Producto> productos = productoService.buscarTodas();
 		model.addAttribute("productoy", productos);
 		LOGGER.info("PRODUCTO FUE CARGADO");
 		return "productos/listProductos";
 	}
-
+	
+	
 	@RequestMapping(value = "/detalle", method = RequestMethod.GET)
 	public String mostrarDetalle(Model model, @RequestParam("codigo_producto") int codigo_producto) {
 		List<String> listaFechas = Utileria.getNextDays(4);
 		System.out.println("Buscamos el producto : " + codigo_producto);
-
+	
 		model.addAttribute("producto", productoService.buscarPorId(codigo_producto));
 		// model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
 		model.addAttribute("productos", productoService.buscarTodas());
@@ -97,18 +102,20 @@ public class ProductoController {
 	}
 
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute("InstanciaProducto") Producto producto, BindingResult result,
-			RedirectAttributes attributes, @RequestParam("archivoImagen") MultipartFile multiPart,
-			@RequestParam("archivoImagen1") MultipartFile multiPart1,
-			@RequestParam("archivoImagen2") MultipartFile multiPart2,
-			@RequestParam("archivoImagen3") MultipartFile multiPart3,
-			@RequestParam("archivoImagen4") MultipartFile multiPart4, HttpServletRequest request) {
+	public String guardar(@ModelAttribute("InstanciaProducto") Producto producto, BindingResult result, RedirectAttributes attributes,
+			@RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request) {
 
 		System.out.println("Recibiendo objeto productos: " + producto);
 		// Pendiente: Guardar el objeto producto en la BD
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
 			return "productos/formProducto";
+		}
+
+		if (!multiPart.isEmpty()) {
+			String nombreImagen = Utileria.guardarImagen(multiPart, request);
+
+			producto.setFoto_ruta(nombreImagen);
 		}
 
 		for (ObjectError error : result.getAllErrors()) {
@@ -118,7 +125,7 @@ public class ProductoController {
 		System.out.println("Recibiendo objeto Productos: " + producto);
 
 		System.out.println("Elementos en la lista antes de la insersion: " + productoService.buscarTodas().size());
-		productoService.inserta(producto, multiPart, multiPart1, multiPart2, multiPart3, multiPart4, request);
+		productoService.inserta(producto);
 		System.out.println("Elementos en la lista despues de la insersion: " + productoService.buscarTodas().size());
 
 		// return "anuncios/formAnuncio";
@@ -128,7 +135,6 @@ public class ProductoController {
 	}
 	
 	
-
 	@GetMapping(value = "/update/{id}")
 	public String editar(@PathVariable("id") int idProducto, Model model) {
 		Optional<Producto> producto = productoService.buscarporId(idProducto);
@@ -139,7 +145,8 @@ public class ProductoController {
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	public String eliminar(@PathVariable("id") int idProducto, @ModelAttribute("InstanciaProducto") Producto producto,
+	public String eliminar(@PathVariable("id") int idProducto,
+			@ModelAttribute("InstanciaProducto") Producto producto,
 			BindingResult result, Model model, RedirectAttributes attributes, HttpServletRequest request) {
 
 		System.out.println("Recibiendo objeto elaboracion producto: " + producto);
@@ -157,14 +164,18 @@ public class ProductoController {
 
 		System.out.println("Eliminando objeto  del Producto: " + producto);
 
-		System.out.println("Elementos en la lista antes de la eliminación: " + productoService.buscarTodas().size());
+		System.out.println(
+				"Elementos en la lista antes de la eliminación: " + productoService.buscarTodas().size());
 		productoService.eliminar(idProducto);
-		System.out.println("Elementos en la lista despues de la eliminación: " + productoService.buscarTodas().size());
+		System.out.println(
+				"Elementos en la lista despues de la eliminación: " + productoService.buscarTodas().size());
 
 		attributes.addFlashAttribute("mensajedelete", "El producto fue eliminado");
 		LOGGER.warn(" PRODUCTO FUE ELIMINADO");
 		return "redirect:/productos/index";
 	}
+
+	
 
 	@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
@@ -173,6 +184,9 @@ public class ProductoController {
 		return "productos/listProductos";
 	}
 
+	
+
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

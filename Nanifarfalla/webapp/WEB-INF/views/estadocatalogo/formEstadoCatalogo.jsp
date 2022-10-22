@@ -64,8 +64,8 @@
 
 						<div class="col-sm-2">
 							<!--  	<form:input width="4" type="text" class="form-control"
-								hidden="true" path="codigo_estadoCatalogo"
-								id="codigo_estadoCatalogo" required="required" value="${i + 1}" />
+								hidden="true" path="codigo_elaboracionproducto"
+								id="codigo_estadousuario" required="required" value="${i + 1}" />
 								-->
 							<form:hidden path="codigo_estadoCatalogo" />
 						</div>

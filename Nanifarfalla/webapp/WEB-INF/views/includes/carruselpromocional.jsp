@@ -16,11 +16,10 @@
 <section class="cz-carousel cz-controls-lg">
 	<nav class="navbar  navbar-expand-lg fixed top navbar-preview">
 
+	
 
 
-
-		<div id="carousel1_indicator" class="carousel slide"
-			data-ride="carousel">
+		<div id="carousel1_indicator" class="carousel slide" data-ride="carousel">
 
 			<ol class="carousel-indicators">
 				<!--	Solucion Joffre
@@ -57,9 +56,9 @@
 				<li data-target="#carousel1_indicator" data-slide-to="3"></li> -->
 			</ol>
 
-			<div class="carousel-inner" align="center">
-
-
+		 <div class="carousel-inner" align="center"> 
+			
+			
 				<c:forEach items="${anuncios}" var="anuncios">
 					<c:choose>
 						<c:when test="${anuncios.mTipoAlerta.codigo_tipoalerta==1}">
@@ -79,7 +78,7 @@
 											<figcaption>
 												<h2>${fechabusqueda}</h2>
 												<p>
-													<b>${anuncios.anuncio_principal}</b>
+													<b>${anuncios.anuncio_principal }</b>
 												</p>
 												<a href="#"></a>
 											</figcaption>
@@ -90,8 +89,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message
-														key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 
 													<div class="divefectomovimiento">
 														<ol>
@@ -104,8 +102,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message
-														key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol></ol>
 													<div class="divefectomovimiento">
 														<span>${anuncios.pie_mensaje}</span>
@@ -151,8 +148,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message
-														key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -164,8 +160,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message
-														key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>
@@ -210,8 +205,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message
-														key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -223,8 +217,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message
-														key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>
@@ -269,8 +262,7 @@
 											<div
 												class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
 												<h2 class="text-light font-weight-light pb-1 from-left">
-													<fmt:message
-														key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.encabezado${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.mensaje_anuncio}</span>
@@ -282,8 +274,7 @@
 												<p class="font-size-lg text-light pb-3 from-left delay-2">
 												<h3 class="font-size-lg text-light pb-3 from-left delay-2">
 
-													<fmt:message
-														key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
+													<fmt:message key="label.carrusel.pie${anuncios.mTipoAlerta.codigo_tipoalerta}" />
 													<ol>
 														<div class="divefectomovimiento">
 															<span>${anuncios.pie_mensaje}</span>

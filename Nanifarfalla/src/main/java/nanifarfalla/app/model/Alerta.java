@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "alertas")
 public class Alerta {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo_alerta;
@@ -36,10 +35,7 @@ public class Alerta {
 
 	// private int fkcodigo_tipoalerta;
 	public Alerta() {
-	
-		this.version = new Date();
-		
-		System.out.println("Constructor Alerta desde el model" + this.version);
+
 	}
 
 	public TipoAlerta getmTipoAlerta() {

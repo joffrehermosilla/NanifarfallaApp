@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-
-
+import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.exception.ProductNotFoundException;
-import nanifarfalla.app.model.Alerta;
 import nanifarfalla.app.model.Ceo;
 import nanifarfalla.app.model.Linea;
 import nanifarfalla.app.model.Producto;
@@ -50,10 +50,8 @@ public class HomeController {
 
 	@Autowired
 	private ILineasService serviceLineas;
-
 	@Autowired
 	private IAlertaService serviceAlertas;
-
 	@Autowired
 	private IAnunciosService serviceAnuncios;
 
@@ -180,20 +178,29 @@ public class HomeController {
 	public String buscar(@RequestParam("fecha") String fecha, Model model) {
 
 		List<String> listaFechas = Utileria.getNextDays(4);
+		// List<String> listaFechas = Utileria.getPastDays(-4);
+//	System.out.println(listaFechas);
 
+		// List<Linea> lineas = serviceLineas.buscarTodas();
+		// List<Alerta> alertas = getLista2();
+		// List<Anuncio> anuncios = getLista3();
 		List<Usuario> usuarios = getLista5();
 		List<Ceo> ceos = getLista4();
 
+		// lineas.add("Carteras");
+		// lineas.add("Mochilas");
+		// lineas.add("Neceser");
+		// lineas.add("Joyas");
 		model.addAttribute("fechas", listaFechas);
 		model.addAttribute("fechabusqueda", fecha);
-
+		// model.addAttribute("lineas", lineas);
 		model.addAttribute("lineas", serviceLineas.buscarTodas());
-
+		// model.addAttribute("alertas", alertas);
 		model.addAttribute("alertas", serviceAlertas.buscarTodas());
 
 		model.addAttribute("productos", serviceProductos.buscarTodas());
 
-	
+		// model.addAttribute("anuncios", anuncios);
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
@@ -234,32 +241,29 @@ public class HomeController {
 		boolean sesionactiva = false;
 
 		List<String> listaFechas = Utileria.getNextDays(4);
-
+		// List<String> listaFechas = Utileria.getPastDays(-4);
+//		System.out.println(listaFechas);
+		// List<Linea> lineas = serviceLineas.buscarTodas();
+		// List<Alerta> alertas = getLista2();
+		// List<Anuncio> anuncios = getLista3();
 		List<Usuario> usuarios = getLista5();
 		List<Ceo> ceos = getLista4();
-
-		/*
-		 * Page<Alerta> alerta = serviceAlertas.buscarTodas(page);
-		 * model.addAttribute("alertasx", alerta);
-		 * 
-		
-		 */
-
-		 List<Alerta> alertas = serviceAlertas.list();
-		  model.addAttribute("alertax", alertas);
-			logger.info("alertas son:" + alertas.toString());
+		// lineas.add("Carteras");
+		// lineas.add("Mochilas");
+		// lineas.add("Neceser");
+		// lineas.add("Joyas");
 		String memorias = Utileria.consumoram();
 		model.addAttribute("memorias", memorias);
 		model.addAttribute("fechas", listaFechas);
 		model.addAttribute("fechabusqueda", dateformat.format(new Date()));
 		model.addAttribute("lineas", serviceLineas.buscarTodas());
-
+		// model.addAttribute("alertas", alertas);
+		model.addAttribute("alertas", serviceAlertas.buscarTodas());
+		// model.addAttribute("anuncios", anuncios);
 		model.addAttribute("productos", serviceProductos.buscarTodas());
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
-		//model.addAttribute("alertas", serviceAlertas.buscarTodas());
-		logger.info("alertas son:" + serviceAlertas.buscarTodas());
 		model.addAttribute("menus", menuservice.buscarTodas());
 
 		for (int i = 0; i < listaFechas.size(); i++) {
@@ -315,7 +319,43 @@ public class HomeController {
 		return "/usuarios/formUsuario";
 	}
 
-	
+	@PostMapping(value = "/register")
+	public String guardar(@ModelAttribute Usuario usuarios, BindingResult result, RedirectAttributes attributes,
+			@RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request) {
+
+		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
+		// Pendiente: Guardar el objeto noticia en la BD
+		if (result.hasErrors()) {
+			System.out.println("Existen errores");
+			return "page-index-1";
+		}
+
+		if (!multiPart.isEmpty()) {
+			String nombreImagen = Utileria.guardarImagen(multiPart, request);
+
+			usuarios.setRuta_foto(nombreImagen);
+		}
+
+		for (ObjectError error : result.getAllErrors()) {
+			System.out.println(error.getDefaultMessage() + " ");
+		}
+
+		for (ObjectError error : result.getAllErrors()) {
+			System.out.println(error.getDefaultMessage() + " ");
+		}
+
+		System.out.println("Recibiendo objeto Usuarios: " + usuarios);
+
+		System.out.println("Elementos en la lista antes de la insersion: " + userService.buscarTodas().size());
+
+		System.out.println("Elementos en la lista despues de la insersion: " + userService.buscarTodas().size());
+
+		userService.guardar(usuarios);
+		attributes.addFlashAttribute("mensaje", "El usuario fue guardado");
+
+		return "redirect:/login/users";
+	}
+
 	private List<Ceo> getLista4() {
 
 		List<Ceo> lista = null;
@@ -403,5 +443,4 @@ public class HomeController {
 		}
 
 	}
-
 }

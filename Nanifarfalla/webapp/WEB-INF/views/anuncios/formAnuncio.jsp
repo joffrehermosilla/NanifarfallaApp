@@ -30,93 +30,92 @@
 			<span class="label label-success">Datos del Anuncio</span>
 		</h3>
 		<form:form action="${urlForm}" method="post"
-			enctype="multipart/form-data" modelAttribute="InstanciaAnuncio">
+			enctype="multipart/form-data" modelAttribute="anuncio">
 			<fieldset>
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="codigo_anuncio">Codigo Anuncio</label>
-							<c:forEach var="anuncio" items="${anunciosz}">
+							<c:forEach var="anuncio" items="${anuncios}">
 								<c:set var="i" value="${anuncio.codigo_anuncio}" />
 							</c:forEach>
 							<div class="col-sm-2">
-								<!--  	<form:input width="4" type="text" class="form-control"
-								hidden="true" path="codigo_anuncio"
-								id="codigo_anuncio" required="required" value="${i + 1}" />
-								-->
-								<form:hidden path="codigo_anuncio" />
+								<form:input width="4" type="text" class="form-control"
+									hidden="true" path="codigo_anuncio" id="codigo_anuncio"
+									required="required" value="${i + 1}" />
 							</div>
-							<div class="form-group">
-								<label for="mensaje_anuncio">Mensaje del Anuncio</label>
-								<form:input type="text" class="form-control"
-									path="mensaje_anuncio" id="mensaje_anuncio" required="required" />
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label for="version">Version</label>
-										<form:input type="date" class="form-control" path="version"
-											id="version" required="required"
-											pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" />
-									</div>
+						</div>
+						<div class="form-group">
+							<label for="mensaje_anuncio">Mensaje del Anuncio</label>
+							<form:input type="text" class="form-control"
+								path="mensaje_anuncio" id="mensaje_anuncio" required="required" />
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="version">Version</label>
+									<form:input type="date" class="form-control" path="version"
+										id="version" required="required"
+										pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" />
 								</div>
-
-								<label for="pie_mensaje">Pie de Mensaje </label>
-								<form:input type="text" class="form-control" path="pie_mensaje"
-									id="pie_mensaje" required="required" />
 							</div>
 
-							<div class="form-group">
-								<label for="ruta_imagen">Imagen</label> <input type="file"
-									id="archivoImagen" name="archivoImagen" />
-								<p class="help-block">Imagen del Anuncio</p>
-							</div>
+							<label for="pie_mensaje">Pie de Mensaje </label>
+							<form:input type="text" class="form-control" path="pie_mensaje"
+								id="pie_mensaje" required="required" />
 						</div>
-						<div class="col-sm-2">
-							<div class="form-group">
-								<label for="estatus">Estatus</label> <select id="estatus"
-									name="estatus" class="form-control">
-									<option value="importante">importante</option>
-									<option value="info">info</option>
-									<option value="alerta">alerta</option>
-									<option value="eventos">eventos</option>
-								</select> <label for="fkcodigo_tipoalerta">Categoria Anuncio: </label>
-								<form:select id="fkcodigo_tipoalerta" path="fkcodigo_tipoalerta"
-									class="form-control">
-									<c:forEach items="${anuncios}" var="anuncio">
 
-										<c:set var="i" value="${anuncio.fkcodigo_tipoalerta}" />
-										<c:choose>
-											<c:when test="${i eq 1}">
-												<form:option value="${i}">importante</form:option>
-											</c:when>
-											<c:when test="${i eq 2}">
-												<form:option value="${i}">info</form:option>
-											</c:when>
-											<c:when test="${i eq 3}">
-												<form:option value="${i}">alerta</form:option>
-											</c:when>
-											<c:otherwise>
-												<form:option value="${i}">eventos</form:option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</form:select>
-							</div>
+						<div class="form-group">
+							<label for="ruta_imagen">Imagen</label> <input type="file"
+								id="archivoImagen" name="archivoImagen" />
+							<p class="help-block">Imagen del Anuncio</p>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label for="anuncio_prinicipal">Anuncio Principal</label>
-								<form:textarea class="form-control" path="anuncio_principal"
-									id="anuncio_principal" rows="10"></form:textarea>
-							</div>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label for="estatus">Estatus</label> <select id="estatus"
+								name="estatus" class="form-control">
+								<option value="importante">importante</option>
+								<option value="info">info</option>
+								<option value="alerta">alerta</option>
+								<option value="eventos">eventos</option>
+							</select> <label for="fkcodigo_tipoalerta">Categoria Anuncio: </label>
+							<form:select id="fkcodigo_tipoalerta" path="fkcodigo_tipoalerta"
+								class="form-control">
+								<c:forEach items="${anuncios}" var="anuncio">
+
+									<c:set var="i" value="${anuncio.fkcodigo_tipoalerta}" />
+									<c:choose>
+										<c:when test="${i eq 1}">
+											<form:option value="${i}">importante</form:option>
+										</c:when>
+										<c:when test="${i eq 2}">
+											<form:option value="${i}">info</form:option>
+										</c:when>
+										<c:when test="${i eq 3}">
+											<form:option value="${i}">alerta</form:option>
+										</c:when>
+										<c:otherwise>
+											<form:option value="${i}">eventos</form:option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</form:select>
 						</div>
 					</div>
-					<div class="form-buttons">
-						<div class="button">
-							<button type="submit" class="btn btn-danger">Guardar</button>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="anuncio_prinicipal">Anuncio Principal</label>
+							<form:textarea class="form-control" path="anuncio_principal"
+								id="anuncio_principal" rows="10"></form:textarea>
 						</div>
 					</div>
+				</div>
+				<div class="form-buttons">
+					<div class="button">
+						<button type="submit" class="btn btn-danger">Guardar</button>
+					</div>
+				</div>
 			</fieldset>
 		</form:form>
 		<hr class="featurette-divider">

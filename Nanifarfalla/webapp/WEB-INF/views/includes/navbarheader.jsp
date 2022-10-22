@@ -17,9 +17,6 @@
 <spring:url value="/" var="urlRoot" />
 <spring:url value="/admin/index" var="inicio"></spring:url>
 
-
-
-
 <nav
 	class="navbar navbar-preview navbar-dark navbar-expand p-0 bg-primary fixed-bottom">
 	<div class="container">
