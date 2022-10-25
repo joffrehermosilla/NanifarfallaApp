@@ -22,8 +22,17 @@ public class EstadoClienteTienePedido {
 	String claveApi;
 	Date version;
 	String foto_ruta;
+//	private String estado;
 	
+
 	
+//	public String getEstado() {
+//		return estado;
+//	}
+//
+//	public void setEstado(String estado) {
+//		this.estado = estado;
+//	}
 
 	public String getFoto_ruta() {
 		return foto_ruta;

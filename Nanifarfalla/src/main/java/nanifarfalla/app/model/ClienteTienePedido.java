@@ -66,10 +66,15 @@ public class ClienteTienePedido {
 	Double precio_uni_desc_sin_igv;
 	Date fecha_pedido;
 	Date fecha_entrega;
-	int cantidad_producto;
+	Integer cantidad_producto;
 	Double monto_por_descuentos;
 	String claveApi;
 	Date version;
+	
+//	private String documento;
+//	private String estado;
+//	private Double precio_uni;
+
 
 	public ClienteTienePedido() {
 
@@ -88,6 +93,53 @@ public class ClienteTienePedido {
 	}
 
 
+//	public String getDocumento() {
+//		return documento;
+//	}
+//
+//
+//
+//	public void setDocumento(String documento) {
+//		this.documento = documento;
+//	}
+
+
+
+//	public String getEstado() {
+//		return estado;
+//	}
+//
+//
+//
+//	public void setEstado(String estado) {
+//		this.estado = estado;
+//	}
+
+
+
+//	public Double getPrecio_uni() {
+//		return precio_uni;
+//	}
+//
+//
+//
+//	public void setPrecio_uni(Double precio_uni) {
+//		this.precio_uni = precio_uni;
+//	}
+
+
+
+	public void setCodigo_pedido_web(int codigo_pedido_web) {
+		this.codigo_pedido_web = codigo_pedido_web;
+	}
+
+
+
+	public void setCantidad_producto(Integer cantidad_producto) {
+		this.cantidad_producto = cantidad_producto;
+	}
+
+
 
 	public Collection<Contrato> getContratos() {
 		return contratos;
@@ -97,11 +149,11 @@ public class ClienteTienePedido {
 		this.contratos = contratos;
 	}
 
-	public int getCodigo_pedido_web() {
+	public Integer getCodigo_pedido_web() {
 		return codigo_pedido_web;
 	}
 
-	public void setCodigo_pedido_web(int codigo_pedido_web) {
+	public void setCodigo_pedido_web(Integer codigo_pedido_web) {
 		this.codigo_pedido_web = codigo_pedido_web;
 	}
 

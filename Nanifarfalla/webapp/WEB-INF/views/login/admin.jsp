@@ -13,45 +13,47 @@
 <head>
 
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
 <title><fmt:message key="label.pages.home.title" /></title>
+<spring:url value="/clienteTienePedido/" var="buscarPedido"></spring:url>
+<link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css">
+
+
 </head>
 <body>
 
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" th:href="@{/homepage.html}"> <fmt:message
-						key="label.pages.home.title" /> <a class="navbar-brand"
-					th:href="@{/homepage.html}" th:text="${label.pages.home.title}">home</a>
+				<a class="navbar-brand" href="http://localhost:8080/Nanifarfalla/"> <fmt:message
+						key="label.pages.home.title" /> 
 				</a>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a th:href="@{/logout}"> <fmt:message
+				<li><a class="navbar-brand" href="http://localhost:8080/Nanifarfalla/formLogin"> <fmt:message
 							key="label.pages.logout" />
-				</a></li>
-				<li><a th:href="@{/logout}" th:text="${label.pages.logout}">logout</a>
+				</a>
 				</li>
 			</ul>
 		</div>
 	</nav>
 
 	<div class="container">
-		<p sec:authorize="!hasAuthority('ROLE_BUYER','ROLE_SELLER')">
-			<fmt:message key="message.unauth" />
-			Mensaje de ROLES comprador y vendedor
-		</p>
+<!-- 		<p sec:authorize="!hasAuthority('ROLE_BUYER','ROLE_SELLER')"> -->
+<%-- 			<fmt:message key="message.unauth" /> --%>
+<!-- 			Mensaje de ROLES comprador y vendedor -->
+<!-- 		</p> -->
 
 		<h1 sec:authorize="hasAuthority('ROLE_ADMIN')">
 			<fmt:message key="label.pages.admin.message" />
-			COmprador Vendedor
+<!-- 			COmprador Vendedor -->
 		</h1>
 
 		<p sec:authorize="!hasAuthority('ROLE_ADMIN')"
-			th:text="${message.unauth}">Mensaje de ADMIN</p>
+			th:text="${message.unauth}">Administración de Cuenta </p>
 
-		<h1 sec:authorize="hasAuthority('ROLE_BUYER','ROLE_SELLER')"
-			th:text="${label.pages.admin.message}">admin</h1>
+<!-- 		<h1 sec:authorize="hasAuthority('ROLE_BUYER','ROLE_SELLER')" -->
+<%-- 			th:text="${label.pages.admin.message}">admin</h1> --%>
 	</div>
 </body>
 </html>
@@ -64,7 +66,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Website title - bootstrap html template</title>
+<title>Sesion Usuario</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
@@ -87,6 +89,7 @@
 <!-- custom javascript -->
 <script src="js/script.js" type="text/javascript"></script>
 
+
 <script type="text/javascript">
 	/// some script
 
@@ -102,59 +105,59 @@
 <body>
 
 
-	<header class="section-header">
-		<section class="header-main border-bottom">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-2 col-4">
-						<a href="http://bootstrap-ecommerce.com" class="brand-wrap"> <img
-							class="logo" src="images/logo.png">
-						</a>
-						<!-- brand-wrap.// -->
-					</div>
-					<div class="col-lg-6 col-sm-12">
-						<form action="#" class="search">
-							<div class="input-group w-100">
-								<input type="text" class="form-control" placeholder="Search">
-								<div class="input-group-append">
-									<button class="btn btn-primary" type="submit">
-										<i class="fa fa-search"></i>
-									</button>
-								</div>
-							</div>
-						</form>
-						<!-- search-wrap .end// -->
-					</div>
+<!-- 	<header class="section-header"> -->
+<%-- 		<section class="header-main border-bottom"> --%>
+<!-- 			<div class="container"> -->
+<!-- 				<div class="row align-items-center"> -->
+<!-- 					<div class="col-lg-2 col-4"> -->
+<!-- 						<a href="http://bootstrap-ecommerce.com" class="brand-wrap"> <img -->
+<!-- 							class="logo" src="images/logo.png"> -->
+<!-- 						</a> -->
+<!-- 						brand-wrap.// -->
+<!-- 					</div> -->
+<!-- 					<div class="col-lg-6 col-sm-12"> -->
+<!-- 						<form action="#" class="search"> -->
+<!-- 							<div class="input-group w-100"> -->
+<!-- 								<input type="text" class="form-control" placeholder="Search"> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<button class="btn btn-primary" type="submit"> -->
+<!-- 										<i class="fa fa-search"></i> -->
+<!-- 									</button> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</form> -->
+<!-- 						search-wrap .end// -->
+<!-- 					</div> -->
 					<!-- col.// -->
-					<div class="col-lg-4 col-sm-6 col-12">
-						<div class="widgets-wrap float-md-right">
-							<div class="widget-header  mr-3">
-								<a href="#" class="icon icon-sm rounded-circle border"><i
-									class="fa fa-shopping-cart"></i></a> <span
-									class="badge badge-pill badge-danger notify">0</span>
-							</div>
-							<div class="widget-header icontext">
-								<a href="#" class="icon icon-sm rounded-circle border"><i
-									class="fa fa-user"></i></a>
-								<div class="text">
-									<span class="text-muted">Welcome!</span>
-									<div>
-										<a href="#">Sign in</a> | <a href="#"> Register</a>
-									</div>
-								</div>
-							</div>
+<!-- 					<div class="col-lg-4 col-sm-6 col-12"> -->
+<!-- 						<div class="widgets-wrap float-md-right"> -->
+<!-- 							<div class="widget-header  mr-3"> -->
+<!-- 								<a href="#" class="icon icon-sm rounded-circle border"><i -->
+<!-- 									class="fa fa-shopping-cart"></i></a> <span -->
+<!-- 									class="badge badge-pill badge-danger notify">0</span> -->
+<!-- 							</div> -->
+<!-- 							<div class="widget-header icontext"> -->
+<!-- 								<a href="#" class="icon icon-sm rounded-circle border"><i -->
+<!-- 									class="fa fa-user"></i></a> -->
+<!-- 								<div class="text"> -->
+<!-- 									<span class="text-muted">Welcome!</span> -->
+<!-- 									<div> -->
+<!-- 										<a href="#">Sign in</a> | <a href="#"> Register</a> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 
-						</div>
+<!-- 						</div> -->
 						<!-- widgets-wrap.// -->
-					</div>
+<!-- 					</div> -->
 					<!-- col.// -->
-				</div>
+<!-- 				</div> -->
 				<!-- row.// -->
-			</div>
+<!-- 			</div> -->
 			<!-- container.// -->
-		</section>
+<%-- 		</section> --%>
 		<!-- header-main .// -->
-	</header>
+<!-- 	</header> -->
 	<!-- section-header.// -->
 
 
@@ -164,9 +167,9 @@
 		<c:if test="${mensajelogeo!=null }">
 			<div class='alert alert-success' role="alert" align="center">${ mensajelogeo}</div>
 		</c:if>
-		<div class="container">
-			<h2 class="title-page">My account</h2>
-		</div>
+<!-- 		<div class="container"> -->
+<!-- 			<h2 class="title-page">Mi cuenta</h2> -->
+<!-- 		</div> -->
 		<!-- container //  -->
 	</section>
 	<!-- ========================= SECTION INTRO END// ========================= -->
@@ -175,22 +178,23 @@
 	<section class="section-content padding-y">
 		<div class="container">
 
-			<div class="row">
+			<div class="row" style="height: 100%;">
 				<aside class="col-md-3">
 					<ul class="list-group">
-						<a class="list-group-item active" href="#"> Account overview </a>
-						<a class="list-group-item" href="#"> My Orders </a>
-						<a class="list-group-item" href="#"> My wishlist </a>
-						<a class="list-group-item" href="#"> Return and refunds </a>
-						<a class="list-group-item" href="#">Settings </a>
-						<a class="list-group-item" href="#"> My Selling Items </a>
-						<a class="list-group-item" href="#"> Received orders </a>
+						<a class="list-group-item" href="#">Descripción de cuenta</a>
+						<a class="list-group-item active" href="#"> Mis Ordenes </a>
+						<a class="list-group-item" href="#"> Mi lista de deseos </a>
+						<a class="list-group-item" href="#"> Devoluciones y reembolsos </a>
+						<a class="list-group-item" href="#"> Ajustes </a>
+<!-- 						<a class="list-group-item" href="#"> My Selling Items </a> -->
+<!-- 						<a class="list-group-item" href="#"> Received orders </a> -->
 					</ul>
 				</aside>
+				
 				<!-- col.// -->
 				<main class="col-md-9">
 
-					<article class="card mb-3">
+					<article class="card mb-3" style="display: none">
 						<div class="card-body">
 
 							<figure class="icontext">
@@ -199,8 +203,8 @@
 										src="images/avatars/avatar3.jpg">
 								</div>
 								<div class="text">
-									<strong> Mr. Jackson Someone </strong> <br>
-									myloginname@gmail.com <br> <a href="#">Edit</a>
+									<strong> Sr. Joffre Hermosilla </strong> <br>
+									alhux2@gmail.com <br> <a href="#">Editar</a>
 								</div>
 							</figure>
 							<hr>
@@ -244,81 +248,66 @@
 						<!-- card-body .// -->
 					</article>
 					<!-- card.// -->
+			<div id="right-panel" class="right-panel" style="background: #f1f2f7;height: 100%;">
 
-					<article class="card  mb-3">
-						<div class="card-body">
-							<h5 class="card-title mb-4">Recent orders</h5>
-
-							<div class="row">
-								<div class="col-md-6">
-									<figure class="itemside  mb-3">
-										<div class="aside">
-											<img src="images/items/1.jpg" class="border img-sm">
-										</div>
-										<figcaption class="info">
-											<time class="text-muted">
-												<i class="fa fa-calendar-alt"></i> 12.09.2019
-											</time>
-											<p>Great item name goes here</p>
-											<span class="text-warning">Pending</span>
-										</figcaption>
-									</figure>
-								</div>
-								<!-- col.// -->
-								<div class="col-md-6">
-									<figure class="itemside  mb-3">
-										<div class="aside">
-											<img src="images/items/2.jpg" class="border img-sm">
-										</div>
-										<figcaption class="info">
-											<time class="text-muted">
-												<i class="fa fa-calendar-alt"></i> 12.09.2019
-											</time>
-											<p>Machine for kitchen to blend</p>
-											<span class="text-success">Departured</span>
-										</figcaption>
-									</figure>
-								</div>
-								<!-- col.// -->
-								<div class="col-md-6">
-									<figure class="itemside mb-3">
-										<div class="aside">
-											<img src="images/items/3.jpg" class="border img-sm">
-										</div>
-										<figcaption class="info">
-											<time class="text-muted">
-												<i class="fa fa-calendar-alt"></i> 12.09.2019
-											</time>
-											<p>Ladies bag original leather</p>
-											<span class="text-success">Shipped </span>
-										</figcaption>
-									</figure>
-								</div>
-								<!-- col.// -->
-							</div>
-							<!-- row.// -->
-
-							<a href="#" class="btn btn-outline-primary"> See all orders </a>
-						</div>
-						spring
-						<!-- card-body .// -->
-					</article>
-					<!-- card.// -->
-
+			        <div class="content" style="padding-top: 23px;">
+			            <div class="animated fadeIn">
+			                <div class="">
+			
+			                    <div class="col-md-12">
+			                        <div class="card">
+			                            <div class="card-header">
+			                                <strong class="card-title">Pedidos Realizados</strong>
+			                            </div>
+			                            <div class="card-body">
+			                                <table id="bootstrap-data-table" class="table table-striped table-bordered" style="font-size: 13px">
+			                                    <thead>
+			                                        <tr>
+												    	<th style="display: none;">Codigo</th>
+												    	<th>Numero</th>
+												    	<th>Estado</th>
+												    	<th>Precio</th>
+												    	<th>Cantidad</th>
+												        <th>Fecha Pedido</th>
+												        <th>Fecha Entrega</th> 
+												        <th ></th>
+			                                        </tr>
+			                                    </thead>
+			                                    <tbody>
+													<c:forEach items="${listVentas}" var="ls">
+													    <tr>
+													    	<td style="display: none;"><c:out value="${ls.codigo_pedido_web}"/></td>
+													    	<td><c:out value="${ls.mFactura_cliente_tiene_pedido.nombre_factura_cliente_tiene_pedido}"/></td>
+													    	<td><c:out value="${ls.mEstadoClienteTienePedido.nombre_estado_cliente_tiene_pedido}"/></td>
+													    	<td><c:out value="${ls.precio_uni_desc_igv}"/></td>
+													    	<td><c:out value="${ls.cantidad_producto}"/></td>
+													        <td><c:out value="${ls.fecha_pedido}"/></td>
+													        <td><c:out value="${ls.fecha_entrega}"/></td>
+													        <td><button type="button" class="btn btn-warning" style="font-size: 13px"><i class="far fa-eye"></i> Ver Detalle</button></td> 
+													    </tr>    
+													</c:forEach>							        
+			                                    </tbody>
+			                                </table>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			
+					</div>
 				</main>
-				<!-- col.// -->
 			</div>
-
 		</div>
-		<!-- container .//  -->
 	</section>
 	<!-- ========================= SECTION CONTENT END// ========================= -->
 
 
 	<!-- ========================= FOOTER ========================= -->
-	<footer class="section-footer border-top padding-y">
+	<footer class="section-footer border-top padding-y" style="position: fixed;bottom: 0px;width: 100%;
+		background: #f1f2f7;">
 		<div class="container">
-			<p class="float-md-right">&copy Copyright 2019 All rights
+			<p class="float-md-right">&copy Copyright 2022 All rights
 				reserved</p>
 			<p>
 				<a href="#">Terms and conditions</a>

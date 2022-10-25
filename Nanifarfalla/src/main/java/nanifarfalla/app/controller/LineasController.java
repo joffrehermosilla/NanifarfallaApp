@@ -30,8 +30,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.Linea;
-
+import nanifarfalla.app.model.SeguridadResponse;
+import nanifarfalla.app.model.SesionRequest;
+import nanifarfalla.app.model.SesionResponse;
 import nanifarfalla.app.service.ILineasService;
+import nanifarfalla.app.service.INiubizService;
 import nanifarfalla.app.service.IProductoService;
 import nanifarfalla.app.util.Utileria;
 
@@ -42,6 +45,9 @@ public class LineasController {
 	@Autowired
 	private ILineasService serviceLineas;
 
+	@Autowired
+	private INiubizService niubiz;
+	
 	@Autowired
 	private IProductoService productoService;
 
@@ -74,6 +80,22 @@ public class LineasController {
 			@RequestParam("fecha") String fecha) {
 		List<String> listaFechas = Utileria.getNextDays(4);
 		System.out.println("Buscamos las lineas : " + codigo_linea);
+
+		System.out.println("***1. API de Seguridad***");
+		Double montoTotal=20.0;
+		SeguridadResponse seguridadResponse=niubiz.seguridadPagoNiubiz();
+		model.addAttribute(seguridadResponse.getAccessToken());
+		System.out.println("***2. API de Sesion para JS***");
+		SesionRequest sesionRequest=new SesionRequest();
+		sesionRequest.setChannel("web");
+		sesionRequest.setAmount(montoTotal+"");
+		sesionRequest.setAccessToken(seguridadResponse.getAccessToken());		
+		SesionResponse sesionResponse =niubiz.sesionPagoNiubiz(sesionRequest);
+		model.addAttribute("sessionKey",sesionResponse.getSessionKey());		
+		model.addAttribute("canalSesion","web");
+		model.addAttribute("codigoComercio","456879852");			
+		model.addAttribute("montoTotal",montoTotal);
+		
 		System.out.println("creadas en las fechas : " + fecha);
 		model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
 

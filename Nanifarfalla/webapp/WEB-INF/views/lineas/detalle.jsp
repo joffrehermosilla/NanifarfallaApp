@@ -21,6 +21,8 @@
 <spring:url value="/lineas/create" var="lineaCreate" />
 <spring:url value="/niubiz/" var="niubiz" />
 <spring:url value="/" var="urlRoot" />
+<script type="text/javascript"
+	src="https://static-content-qas.vnforapps.com/vTokenSandbox/js/checkout.js?qa=true"></script>
 
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
@@ -311,8 +313,10 @@
 												<!-- info-price-detail // -->
 												<p class="text-success">Free shipping</p>
 												<br>
+																	<a type='button' id="niubiz"
+																		class="btn btn-primary"  >
+																		Pagar</a>												
 												<p>
-
 													<a
 														href="${urlRoot}productos/detalle?codigo_producto=${producto.codigo_producto}"
 														class="btn btn-primary">Realizar Compra</a> <a
@@ -372,10 +376,6 @@
 		</div>
 		<!-- //container -->
 
-
-
-
-
 		<hr class="featurette-divider">
 		<!-- /container -->
 		<jsp:include page="../includes/footer.jsp"></jsp:include>
@@ -383,31 +383,34 @@
 
 		<!-- /container -->
 </body>
-</html>
 <script type="text/javascript">
-	$(function() {
-		console.log(window.globalVar);
-		$("#niubiz").click(function() {
-			var codigoComercio = "[[${codigoComercio}]]";
-			var sesionKey = "[[${sesionResponse.sessionKey}]]";
-			var canalSesion = "[[${canalSesion}]]";
-			var montoTotal = "[[${montoTotal}]]";
-			VisanetCheckout.configure({
-				sessiontoken : sesionKey,
-				channel : canalSesion,
-				merchantid : codigoComercio,
-				purchasenumber : '2020100901',
-				amount : montoTotal,
-				expirationminutes : '5',
-				timeouturl : 'about:blank',
-				merchantlogo : 'img/comercio.png',
-				formbuttoncolor : '#000000',
-				action : '/confirmacion',
-				complete : function(params) {					
-					alert(JSON.stringify(params));
-				}
-			});
-			VisanetCheckout.open();
+
+	$("#niubiz").click(function() {
+		console.log("${codigoComercio}");
+		console.log("${sessionKey}");
+		console.log("${canalSesion}");
+		console.log("${montoTotal}");
+		var codigoComercio = "${codigoComercio}";
+		var sesionKey = "${sessionKey}";
+		var canalSesion = "${canalSesion}";
+		var montoTotal = "${montoTotal}";
+		VisanetCheckout.configure({
+			sessiontoken : sesionKey,
+			channel : canalSesion,
+			merchantid : codigoComercio,
+			purchasenumber : '2020100901',
+			amount : montoTotal,
+			expirationminutes : '5',
+			timeouturl : 'about:blank',
+			merchantlogo : 'https://proveedores.niubiz.com.pe/assets/media/logos/logo.png',
+			formbuttoncolor : '#000000',
+			action : '/confirmacion',
+			complete : function(params) {					
+				alert(JSON.stringify(params));
+			}
 		});
+		VisanetCheckout.open();
 	});
+
 </script>
+</html>

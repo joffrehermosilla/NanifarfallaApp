@@ -21,6 +21,7 @@ public class FacturaClienteTienePedido {
 	String nombre_factura_cliente_tiene_pedido;
 	String claveApi;
 	Date version;
+//	String documento;
 	
 	@OneToMany(mappedBy = "mFactura_cliente_tiene_pedido", fetch = FetchType.EAGER)
 	private Collection<ClienteTienePedido> clientetienepedidos = new ArrayList<>();
@@ -28,6 +29,16 @@ public class FacturaClienteTienePedido {
 	public Collection<ClienteTienePedido> getClientetienepedidos() {
 		return clientetienepedidos;
 	}
+
+//	public String getDocumento() {
+//		return documento;
+//	}
+//
+//
+//	public void setDocumento(String documento) {
+//		this.documento = documento;
+//	}
+
 
 	public void setClientetienepedidos(Collection<ClienteTienePedido> clientetienepedidos) {
 		this.clientetienepedidos = clientetienepedidos;

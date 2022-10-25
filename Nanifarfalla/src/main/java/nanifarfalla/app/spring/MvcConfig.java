@@ -11,10 +11,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -25,6 +27,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @ComponentScan(basePackages = { "nanifarfalla.app.web","nanifarfalla.app.controller","nanifarfalla.app.model","nanifarfalla.app.service","nanifarfalla.app.repository","nanifarfalla.app.email" })
@@ -123,6 +127,10 @@ public class MvcConfig implements WebMvcConfigurer {
     }
     
 	
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 	 
     

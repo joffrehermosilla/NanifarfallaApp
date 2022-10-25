@@ -5,11 +5,13 @@ import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,29 +24,12 @@ import nanifarfalla.app.service.INiubizService;
 import nanifarfalla.app.util.Constantes;
 import nanifarfalla.app.util.Utileria;
 
-@Service("iNiubizService")
+@Service
 public class NiubizServiceImpl implements INiubizService{
 
+	@Autowired
 	private RestTemplate restTemplate;
-	
-	@Value("${api.seguridad.niubiz}")
-	String urlSeguridad;
-	
-	@Value("${api.sesion.niubiz}")
-	String urlSesion;
-	
-	@Value("${api.autorizacion.niubiz}")
-	String urlAutorizacion;
-	
-	@Value("${codigo.comercio}")	
-	String codComercio;	
-	
-	@Value("${usuario}")	
-	String usuarioSeg;
-	
-	@Value("${pass}")	
-	String passSeg;
-	
+
 	
 	/**
 	 * Esta API permitirá generar un token de sesion para levantar formulario de pagos. 
@@ -63,7 +48,7 @@ public class NiubizServiceImpl implements INiubizService{
 		HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
 
 		ResponseEntity<SesionResponse> response = restTemplate.exchange(
-				urlSesion+codComercio, HttpMethod.POST, entity,
+				"https://apisandbox.vnforappstest.com/api.ecommerce/v2/ecommerce/token/session/"+"456879852", HttpMethod.POST, entity,
 				SesionResponse.class);
 
 		String responseJson = Utileria.printPrettyJSONString(response.getBody());
@@ -90,7 +75,7 @@ public class NiubizServiceImpl implements INiubizService{
 		HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
 
 		ResponseEntity<AutorizacionResponse> response = restTemplate.exchange(
-				urlAutorizacion+codComercio, HttpMethod.POST, entity,
+				"https://apisandbox.vnforappstest.com/api.authorization/v3/authorization/ecommerce/"+"456879852", HttpMethod.POST, entity,
 				AutorizacionResponse.class);
 
 		String responseJson = Utileria.printPrettyJSONString(response.getBody());
@@ -111,20 +96,23 @@ public class NiubizServiceImpl implements INiubizService{
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		
-		String originalCredenciales = usuarioSeg+":"+passSeg;
+		String originalCredenciales = "integraciones@niubiz.com.pe"+":"+"_7z3@8fF";
 		String encoded = Base64.getEncoder().encodeToString(originalCredenciales.getBytes());
 		headers.set(Constantes.HEADER_AUTHORIZATION, "Basic "+encoded);
 
 		HttpEntity<SeguridadResponse> entity = new HttpEntity<>(headers);
-
 		ResponseEntity<String> response = restTemplate.exchange(
-				urlSeguridad, HttpMethod.GET, entity,
+				"https://apisandbox.vnforappstest.com/api.security/v1/security", HttpMethod.GET, entity,
 				String.class);
-
 		System.out.println("Response API Seguridad: "+response.getBody());
 		responseSeg.setAccessToken(response.getBody());
 
 		return responseSeg;
+	}
+	
+	@Bean
+	public RestTemplate restTemplate() {
+	    return new RestTemplate();
 	}
 
 }
