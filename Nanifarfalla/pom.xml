@@ -50,6 +50,8 @@
 		</joffre.freemarker.version>
 		<joffre.validationapi.version>2.0.1.Final
 		</joffre.validationapi.version>
+				<joffre.webflow.version>2.5.1.RELEASE
+		</joffre.webflow.version>
 	</properties>
 
 
@@ -96,7 +98,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId>
+			<version>${joffre.webflow.version}</version>
+		</dependency>
 
 		<!-- Administrador de Getter y Setter -->
 		<dependency>

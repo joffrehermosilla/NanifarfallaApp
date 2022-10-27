@@ -12,7 +12,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#"> <img
+		<a class="navbar-brand" href="${flowExecutionUrl}&_eventId_home"> <img
 			src="${urlPublic}/images/nanifarfalla.jpeg" width="30" height="30"
 			class="d-inline-block align-top" alt=""> Nani <span
 			class="badge badge-pill badge-warning">far</span> <span

@@ -31,7 +31,8 @@
 
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/nanifarfalla?useSSL=false" />
-		<property name="username" value="root" />
+		<!-- <property name="username" value="root" />  HUGO HABILITA Y DESABILITA CUANDO HAGAS PUSH O PULL  -->
+			<property name="username" value="admin" /><!-- coNFIGRUGACION LOCAL DE JOFFRE -->
 		<property name="password" value="1234" />
 	</bean>
 	<bean id="jpaVendorAdapter"

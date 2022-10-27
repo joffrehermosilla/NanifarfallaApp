@@ -8,14 +8,8 @@
   ],
   "properties": [
     {
-      "name": "geo.ip.lib.enabled",
-      "type": "java.lang.String",
-      "description": "A description for 'geo.ip.lib.enabled'"
-    },
-    {
       "name": "google.recaptcha.key.secret",
       "type": "java.lang.String",
-      "description": "A description for 'google.recaptcha.key.secret'",
       "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
     },
     {
@@ -26,7 +20,6 @@
     {
       "name": "google.recaptcha.key.site",
       "type": "java.lang.String",
-      "description": "A description for 'google.recaptcha.key.site'",
       "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
     },
     {
@@ -38,16 +31,6 @@
       "name": "google.recaptcha.key.threshold",
       "type": "java.lang.Float",
       "sourceType": "nanifarfalla.app.captcha.CaptchaSettings"
-    },
-    {
-      "name": "purge.cron.expression",
-      "type": "java.lang.String",
-      "description": "A description for 'purge.cron.expression'"
-    },
-    {
-      "name": "support.email",
-      "type": "java.lang.String",
-      "description": "A description for 'support.email'"
     }
   ],
   "hints": []

@@ -3,12 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:wf="http://www.springframework.org/schema/webflow-config"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	    http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc
-		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/webflow-config
+		http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
 
 	<context:component-scan
 		base-package="nanifarfalla.app.controller" />
@@ -45,7 +48,35 @@
 				<prop key="java.lang.Exception">Error</prop>
 			</props>
 		</property>
-	</bean>	
+	</bean>
+
+	<!-- WEB FLOW CONFIGURATION -->
+	<!-- Entry Point for the flow -->
+	<wf:flow-executor id="flowExecutor" flow-registry="flowRegistry" />
+
+	<wf:flow-registry id="flowRegistry" base-path="/WEB-INF/views/flows"
+	flow-builder-services="flowBuilderServices">
+	<wf:flow-location-pattern value="/**/*-flow.xml"/>
+	</wf:flow-registry>
+
+   <wf:flow-builder-services id="flowBuilderServices"
+   view-factory-creator="viewFactoryCreator"/>
+
+
+
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+	<property name="flowExecutor" ref="flowExecutor"></property>
+	</bean>
+
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+	<property name="flowRegistry" ref="flowRegistry"></property>
+	</bean>
+
+	<bean id="viewFactoryCreator" class ="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+	<property name="viewResolvers" ref="viewResolver"/>
+	</bean>
+
+
 
 
 </beans>
