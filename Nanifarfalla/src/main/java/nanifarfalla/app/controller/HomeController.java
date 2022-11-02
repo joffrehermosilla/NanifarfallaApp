@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -193,7 +192,6 @@ public class HomeController {
 
 		model.addAttribute("productos", serviceProductos.buscarTodas());
 
-	
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
@@ -229,6 +227,15 @@ public class HomeController {
 
 	}
 
+	@RequestMapping(value = "/alertax")
+	public ModelAndView alertas() {
+		ModelAndView mv = new ModelAndView("/home");
+
+		mv.addObject("alertax", serviceAlertas.buscarTodas());
+
+		return mv;
+	}
+
 	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		boolean sesionactiva = false;
@@ -242,12 +249,12 @@ public class HomeController {
 		 * Page<Alerta> alerta = serviceAlertas.buscarTodas(page);
 		 * model.addAttribute("alertasx", alerta);
 		 * 
-		
+		 * 
 		 */
 
 		// List<Alerta> alertas = serviceAlertas.buscarTodas();
-		  model.addAttribute("alertas", serviceAlertas.buscarTodas());
-			logger.info("alertas son:" +serviceAlertas.buscarTodas());
+		model.addAttribute("alertas", serviceAlertas.buscarTodas());
+		logger.info("alertas son:" + serviceAlertas.buscarTodas());
 		String memorias = Utileria.consumoram();
 		model.addAttribute("memorias", memorias);
 		model.addAttribute("fechas", listaFechas);
@@ -258,7 +265,7 @@ public class HomeController {
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("ceos", ceos);
 		model.addAttribute("anuncios", serviceAnuncios.buscarTodas());
-		//model.addAttribute("alertas", serviceAlertas.buscarTodas());
+		// model.addAttribute("alertas", serviceAlertas.buscarTodas());
 		logger.info("alertas son:" + serviceAlertas.buscarTodas());
 		model.addAttribute("menus", menuservice.buscarTodas());
 
@@ -315,7 +322,6 @@ public class HomeController {
 		return "/usuarios/formUsuario";
 	}
 
-	
 	private List<Ceo> getLista4() {
 
 		List<Ceo> lista = null;

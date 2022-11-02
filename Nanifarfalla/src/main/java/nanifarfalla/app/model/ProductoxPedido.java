@@ -16,6 +16,7 @@ public class ProductoxPedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int codigo_producto_por_pedido;
+	
 	@JoinColumn(name = "fkcodigo_pedido_web", referencedColumnName = "codigo_pedido_web")
 	@ManyToOne
 	ClienteTienePedido mClientetienepedido;

@@ -6,6 +6,7 @@
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 <spring:url value="/home" var="urlCreate" />
+<spring:url value="/alertas/index" var="urlForm"></spring:url>
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">

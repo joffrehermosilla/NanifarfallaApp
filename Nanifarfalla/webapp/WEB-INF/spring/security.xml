@@ -13,10 +13,10 @@
 		<intercept-url pattern="/anuncios/*"
 			access="hasAnyAuthority('ROLE_ADMIN')" />
 
-		<!-- <intercept-url pattern="/alertas/*" access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" 
-			/> -->
+		<intercept-url pattern="/cart/*"
+			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
 
-		<intercept-url pattern="/alertas/*" access="permitAll" />
+		<intercept-url pattern="/alertas/**" access="permitAll" />
 		<intercept-url pattern="/productos/*" access="permitAll" />
 		<intercept-url pattern="/login*" access="permitAll" />
 		<intercept-url pattern="/logout*" access="permitAll" />

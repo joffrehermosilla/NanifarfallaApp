@@ -719,7 +719,7 @@ public class UsuarioController {
 		});
 
 		error.ifPresent(e -> model.addAttribute("error", e));
-
+		LOGGER.info("Logeo desde Controller UsuarioController "+ locale);
 		return new ModelAndView("login", model);
 	}
 
