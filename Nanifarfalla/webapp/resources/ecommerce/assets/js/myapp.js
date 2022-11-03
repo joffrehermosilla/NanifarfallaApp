@@ -120,7 +120,7 @@ $(function() {
 											+ '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
 
 									
-									if(userRole !== 'ADMIN') {
+									if(userRole !== 'ROLE_ADMIN') {
 										if (row.quantity < 1) {
 											str += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 										} else {

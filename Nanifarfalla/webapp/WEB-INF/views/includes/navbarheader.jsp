@@ -129,14 +129,14 @@
 								<a href="${urlRoot}show/all/products"
 									class="icon icon-sm rounded-circle border"><i
 									class="fa fa-shopping-cart"></i></a> <span
-									class="badge badge-pill badge-danger notify">0</span>
+									class="badge badge-pill badge-danger notify">${userModel.cart.cartLines}</span>
 							</div>
 
 							<a href="#" class="icon icon-sm rounded-circle border"><i
 								class="fa fa-user"></i> </a> <span class="text-muted inicioregistro"
 								path="inicioregistro" name="inicioregistro" value=" "
 								id="inicioregistro" onmouseleave="cargarlogeo(${sesion})"
-								required="required"> Welcome! </span>
+								required="required"> Welcome! ${userModel.fullName}</span>
 							<div class="widget-header  mr-3">
 								<table>
 									<tr>

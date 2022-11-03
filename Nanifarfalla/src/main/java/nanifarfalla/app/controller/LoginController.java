@@ -79,6 +79,7 @@ public class LoginController {
 		attributes.addFlashAttribute("mensajelogeo", "Bienvenido " + authentication.getName());
 		LOGGER.info(sesionPerfil);
 		LOGGER.info("" + sesionactiva);		
+		model.addAttribute("usuarioName", authentication.getName());
 		return "redirect:/" + sesionPerfil;
 
 	}

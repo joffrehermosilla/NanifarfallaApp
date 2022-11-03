@@ -38,10 +38,11 @@
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li id="login"><a href="${contextRoot}/login">Login
-				</a></li>
-				<li id="listProducts"><a href="${contextRoot}/register">Sign
-						Up </a></li>
+				<security:authorize access="isAnonymous()">
+					<li id="login"><a href="${contextRoot}/formLogin">Login </a></li>
+					<li id="listProducts"><a href="${contextRoot}/register">Sign
+							Up </a></li>
+				</security:authorize>
 				<li class="dropdown" id="userModel"><a
 					class="btn btn-default dropdown-toggle" href="javascript:void(0)"
 					id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
@@ -50,9 +51,9 @@
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						<security:authorize access="hasAuthority('ROLE_BUYER')">
 							<li id="cart"><a href="${contextRoot}/cart/show"> <span
-									class="glyphicon glyphicon-shopping-cart"></span>&#160;<span
-									class="badge">${userModel.cart.cartLines}</span> - &#8377;
-									${userModel.cart.grandTotal}
+									class="glyphicon glyphicon-shopping-cart"></span> &#160;<span
+									class="badge">${userModel.cart.cartLines}</span> -
+									${userModel.cart.grandTotal} &#36;
 							</a></li>
 							<li role="separator" class="divider"></li>
 						</security:authorize>
