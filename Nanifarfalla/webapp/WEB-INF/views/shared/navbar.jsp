@@ -50,8 +50,14 @@
 				</a>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						<security:authorize access="hasAuthority('ROLE_BUYER')">
-							<li id="cart"><a href="${contextRoot}/cart/show"> <span
-									class="glyphicon glyphicon-shopping-cart"></span> &#160;<span
+							<li id="cart"><a href="${contextRoot}/cart/show"
+								title="Crear Carrito de Compras"
+								onclick='return confirm("¿ DESEA COMPRAR ?").submit()'
+								class="myForm16">
+
+									<div for="mensajejavascriptajax" id="mensajejavascriptajax"></div>
+
+									<span class="glyphicon glyphicon-shopping-cart"></span> &#160;<span
 									class="badge">${userModel.cart.cartLines}</span> -
 									${userModel.cart.grandTotal} &#36;
 							</a></li>
@@ -68,4 +74,6 @@
 	<!-- /.container -->
 </nav>
 
+
+<script src="${urlPublic}/js/crearpedidoporusuario.js"></script>
 

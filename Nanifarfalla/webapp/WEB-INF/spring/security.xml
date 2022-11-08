@@ -16,6 +16,12 @@
 		<intercept-url pattern="/cart/*"
 			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER')" />
 
+
+		<intercept-url pattern="/clientetienepedido/**"
+			access="hasAnyAuthority('ROLE_ADMIN','ROLE_BUYER','ROLE_SELLER')" />
+
+
+
 		<intercept-url pattern="/alertas/**" access="permitAll" />
 		<intercept-url pattern="/productos/*" access="permitAll" />
 		<intercept-url pattern="/login*" access="permitAll" />

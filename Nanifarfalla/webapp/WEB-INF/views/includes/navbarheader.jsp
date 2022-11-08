@@ -425,19 +425,21 @@
 						</c:when>
 					</c:choose>
 				</c:forEach>
-				<li><a class="dropdown-item"
-					href="http://nanifarfalla.com.pe:9090/">
-						<div class="d-flex">
-							<div class="lead text-muted pt-1">
-								<i class="czi-edit"></i>
+				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
+					<li><a class="dropdown-item"
+						href="http://nanifarfalla.com.pe:9090/">
+							<div class="d-flex">
+								<div class="lead text-muted pt-1">
+									<i class="czi-edit"></i>
+								</div>
+								<div class="ml-2">
+									<span class="d-block text-heading">Swagger<span
+										class="badge badge-success ml-2">v1.2</span></span><small
+										class="d-block text-muted">Regular updates</small>
+								</div>
 							</div>
-							<div class="ml-2">
-								<span class="d-block text-heading">Swagger<span
-									class="badge badge-success ml-2">v1.2</span></span><small
-									class="d-block text-muted">Regular updates</small>
-							</div>
-						</div>
-				</a></li>
+					</a></li>
+				</sec:authorize>
 			</ul>
 
 
