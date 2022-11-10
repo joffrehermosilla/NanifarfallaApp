@@ -1,10 +1,12 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script>
 	window.userRole = '${userModel.role}';
 </script>
 <spring:url value="/resources" var="urlPublic" />
+<spring:url value="/anuncios/save" var="urlForm"></spring:url>
 <nav class="navbar navbar-inverse " role="navigation">
 
 	<div class="container">
@@ -49,18 +51,26 @@
 					aria-expanded="true"> ${userModel.fullName} <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						<security:authorize access="hasAuthority('ROLE_BUYER')">
-							<li id="cart"><a href="${contextRoot}/cart/show"
-								title="Crear Carrito de Compras"
-								onclick='return confirm("¿ DESEA COMPRAR ?").submit()'
-								class="myForm16">
-
-									<div for="mensajejavascriptajax" id="mensajejavascriptajax"></div>
-
-									<span class="glyphicon glyphicon-shopping-cart"></span> &#160;<span
-									class="badge">${userModel.cart.cartLines}</span> -
-									${userModel.cart.grandTotal} &#36;
-							</a></li>
+						<security:authorize access="hasAuthority('ROLE_ADMIN')">
+							<li id="cart"><form:form action="${urlForm}" method="post"
+									id="form" class="form" enctype="multipart/form-data"
+									modelAttribute="InstanciaClienteTienePedido">
+									<a href="${contextRoot}/cart/show" class="myForm22"
+										id="crearPedido"> <span
+										class="glyphicon glyphicon-shopping-cart"></span> &#160;<span
+										class="badge">${userModel.cart.cartLines}</span> -
+										${userModel.cart.grandTotal} &#36;
+									</a>
+									<div class="form-buttons">
+										<div class="button">
+											<button href="${urlRoot}" type="submit" value="submit"
+												id="guardar" class="btn btn-danger"
+												title="Crear Carrito de Compras"
+												onclick='return confirm("¿ DESEA COMPRAR ?").submit()'>create
+												New Cart</button>
+										</div>
+									</div>
+								</form:form></li>
 							<li role="separator" class="divider"></li>
 						</security:authorize>
 						<li id="logout"><a href="${contextRoot}/logout">Logout</a></li>
@@ -74,6 +84,27 @@
 	<!-- /.container -->
 </nav>
 
+<script type="text/javascript">
+	function submitform() {
+		document.forms["myform"].submit();
+	}
+	
+
+</script>
+
+
+<script type="text/javascript">
+var serverContext = '${contextRoot}';
+
+		function register() {
+		
+
+			var formData = $('form').serialize();
+			$.post(serverContext + "/clientetienepedido/save", formData, function(data) {
+				document.forms["form"].submit();
+			});
+
+			</script>
 
 <script src="${urlPublic}/js/crearpedidoporusuario.js"></script>
 

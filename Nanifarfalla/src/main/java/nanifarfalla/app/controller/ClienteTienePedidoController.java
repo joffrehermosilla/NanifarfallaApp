@@ -26,6 +26,8 @@ import nanifarfalla.app.service.UserService;
 @RequestMapping("/clientetienepedido")
 public class ClienteTienePedidoController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(ClienteTienePedidoController.class);
+	
+	
 	@Autowired
 	IClienteTienePedidoService clienteTienePedidoService;
 

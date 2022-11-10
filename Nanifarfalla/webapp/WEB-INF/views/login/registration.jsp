@@ -148,7 +148,24 @@ function register(event){
         {
             window.location.href = serverContext + "emailError.html";
         }
-        else if(data.responseJSON.error == "UserAlreadyExist"){
+        function registerx(event) {
+			event.preventDefault();
+
+			$.ajax({
+				method : 'POST',
+				data : {
+					"data" : event
+				},
+				url : "/usuarios/save",
+				success : function(data) {
+
+					if (data.message == "success") {
+						window.location.href = serverContext
+								+ "/usuarios/successRegister";
+					}
+
+				}
+			});else if(data.responseJSON.error == "UserAlreadyExist"){
             $("emailError").show().html(data.responseJSON.message);
         }
         else if(data.responseJSON.error.indexOf("InternalError") > -1){
