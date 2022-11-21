@@ -18,7 +18,7 @@ public interface IEstadoProductoService {
 	boolean add(EstadoProducto estadoProducto);
 	boolean update(EstadoProducto estadoProducto);
 	boolean delete(EstadoProducto estadoProducto);
-		
+
 	Page<EstadoProducto> buscarTodas(Pageable page);
 	List<EstadoProducto> buscarTodas();
 }

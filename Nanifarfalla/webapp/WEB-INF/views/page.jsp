@@ -107,7 +107,7 @@
 
 			<!-- Load only when user clicks manage product -->
 			<c:if test="${userClickShowCart == true}">
-				<%@include file="./ecommerce/cart.jsp"%>
+				<%@include file="./clientetienepedido/cart.jsp"%>
 			</c:if>
 
 		</div>

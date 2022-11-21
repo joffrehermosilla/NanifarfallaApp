@@ -226,13 +226,13 @@
 													href="#arriba" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
 												<li class="tipoalerta" id="tipoalerta"><a
 													href="#arriba" id="tipoalerta">TIPO ALERTA </a></li>
-												
+
 												<li class="anuncios" id="anuncios"><a href="#arriba"
 													id="anuncios">ANUNCIO </a></li>
-													
+
 												<li class="alertas" id="alertas"><a href="#arriba"
-													id="alertas">ALERTA </a></li>	
-													
+													id="alertas">ALERTA </a></li>
+
 
 											</ul></li>
 										<li><a>GEOLOCALIZACION<span
@@ -376,35 +376,47 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12  ">
 							<div class="x_panel">
-								<div class="x_title" style="height: 100%">
-									<h2>Plain Page</h2>
-									<ul class="nav navbar-right panel_toolbox">
-										<li><a class="collapse-link"><i
-												class="fa fa-chevron-up"></i></a></li>
-										<li class="dropdown"><a href="#" class="dropdown-toggle"
-											data-toggle="dropdown" role="button" aria-expanded="false"><i
-												class="fa fa-wrench"></i></a>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#">Settings 1</a> <a
-													class="dropdown-item" href="#">Settings 2</a>
-											</div></li>
-										<li><a class="close-link"><i class="fa fa-close"></i></a>
-										</li>
-									</ul>
-									<div class="clearfix"></div>
+
+								<div class="wrapper">
+									<%--Wrapper --%>
+
+									<div class="x_title" style="height: 100%">
+										<h2>Plain Page</h2>
+										<ul class="nav navbar-right panel_toolbox">
+											<li><a class="collapse-link"><i
+													class="fa fa-chevron-up"></i></a></li>
+											<li class="dropdown"><a href="#" class="dropdown-toggle"
+												data-toggle="dropdown" role="button" aria-expanded="false"><i
+													class="fa fa-wrench"></i></a>
+												<div class="dropdown-menu"
+													aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="#">Settings 1</a> <a
+														class="dropdown-item" href="#">Settings 2</a>
+												</div></li>
+											<li><a class="close-link"><i class="fa fa-close"></i></a>
+											</li>
+										</ul>
+										<div class="clearfix"></div>
+									</div>
+
+
+
+
+									<div class="x_content" id="plainpage">
+										Add content to the page ...
+										<!-- Carga la pagina plainPAGE donde habra condicionales que discriminaran los ID de <li id=""> en menuconsole.js -->
+										<%@include file="../login/plainpage.jsp"%>
+
+
+
+
+
+
+									</div>
 								</div>
-								<div class="x_content" id="plainpage">
-									Add content to the page ...
-									<!-- Carga la pagina plainPAGE donde habra condicionales que discriminaran los ID de <li id=""> en menuconsole.js -->
-									<%@include file="../login/plainpage.jsp"%>
+								<%--Wrapper --%>
 
 
-
-
-
-
-								</div>
 
 							</div>
 						</div>
@@ -450,6 +462,8 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${urlPublic}/build/js/custom.min.js"></script>
+
+	<script src="${urlPublic}/js/regla5.js"></script>
 	<!-- ========================= FOOTER ========================= -->
 
 </body>

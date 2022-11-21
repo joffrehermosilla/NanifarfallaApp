@@ -77,7 +77,7 @@
 			e.preventDefault();
 			vista.innerHTML = `
 																		         
-		     <iframe src="${urlEstadoUsuario}" height="630" style="width: 100%" frameBorder="0"></iframe>
+		     <iframe  src="${urlEstadoUsuario}" height="630" style="width: 100%" frameBorder="0" ></iframe>
 																		          
 		    `;
 						
@@ -222,7 +222,7 @@
 		<!-- Page Content -->
 
 
-
+		Aqui debe funcionar el js
 
 		<div class="content">
 
@@ -239,6 +239,10 @@
 
 				</title>
 			</c:if>
+			<c:if test="${userClickPais == true }">
+				<%@include file="../pais/listPais.jsp"%>
+			</c:if>
+
 		</div>
 
 
@@ -263,7 +267,7 @@
 		<script src="${js}/bootbox.min.js"></script>
 
 		<!-- Self coded javascript -->
-		<script src="${js}/myapp.js"></script>
+		<script src="${urlPublic}/js/regla5.js"></script>
 
 	</div>
 

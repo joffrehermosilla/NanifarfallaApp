@@ -30,7 +30,7 @@ public class GlobalController {
 	private ClienteTienePedido clienteTienePedido = null;
 	private ProductoxPedido productoxPedido = null;
 
-	@ModelAttribute("userModelx")
+	@ModelAttribute("userModel")
 	public UserModel getUserModel() {
 		if (session.getAttribute("userModelx") == null) {
 			// get the authentication object

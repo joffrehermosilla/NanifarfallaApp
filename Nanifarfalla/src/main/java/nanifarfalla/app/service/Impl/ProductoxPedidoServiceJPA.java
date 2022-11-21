@@ -121,4 +121,10 @@ public class ProductoxPedidoServiceJPA implements IProductoxpedidoService {
 		productoxPedidoRepository.save(productoxPedido);
 	}
 
+	@Override
+	public List<ProductoxPedido> list(int pedidoId) {
+		// TODO Auto-generated method stub
+		return productoxPedidoRepository.list(pedidoId);
+	}
+
 }

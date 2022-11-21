@@ -35,7 +35,7 @@ $(function() {
 	case 'Product Management':
 		$('#manageProduct').addClass('active');
 		break;
-	case 'Shopping Cart':
+	case 'User Cart':
 		$('#userModel').addClass('active');
 		break;		
 	default:

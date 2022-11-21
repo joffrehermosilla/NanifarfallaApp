@@ -12,9 +12,14 @@ import nanifarfalla.app.model.ProductoxPedido;
 @Repository
 public interface ProductoxPedidoRepository extends JpaRepository<ProductoxPedido, Integer> {
 
+	@Query("select p from ProductoxPedido p where p.mClientetienepedido.codigo_pedido_web = :pedidoId "
+			+ "AND p.mProducto.codigo_producto = :productoId ")
+	List<ProductoxPedido> getByProductoxPedidoAndClienteTienePedido(@Param("pedidoId") int pedidoId,
+			@Param("productoId") int productoId);
 	
-	@Query("select p from ProductoxPedido p where p.mClientetienepedido.codigo_pedido_web = :pedidoId " + 
-	"AND p.mProducto.codigo_producto = :productoId " )
-	List<ProductoxPedido> getByProductoxPedidoAndClienteTienePedido(@Param("pedidoId") int pedidoId , @Param("productoId") int productoId );
+	
+
+	@Query("select p from ProductoxPedido p where p.mClientetienepedido.codigo_pedido_web = :pedidoId ")
+	List<ProductoxPedido> list(@Param("pedidoId") int pedidoId);
 
 }

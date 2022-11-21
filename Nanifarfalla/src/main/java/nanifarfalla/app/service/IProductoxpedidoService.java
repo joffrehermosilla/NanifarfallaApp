@@ -17,6 +17,8 @@ public interface IProductoxpedidoService {
 
 	ProductoxPedido getByProductoxPedidoAndClienteTienePedido(int codigoPedidoWebId, int ProductoId);
 
+	List<ProductoxPedido> list(int pedidoId);
+
 	List<ProductoxPedido> buscarTodas();
 
 	void guardar(ProductoxPedido productoxPedido);

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import nanifarfalla.app.model.ClienteTienePedido;
-import nanifarfalla.app.model.Pedido;
+
 import nanifarfalla.app.repository.ClienteTienePedidoRepository;
 import nanifarfalla.app.service.IClienteTienePedidoService;
 

@@ -6,7 +6,7 @@
 	window.userRole = '${userModel.role}';
 </script>
 <spring:url value="/resources" var="urlPublic" />
-<spring:url value="/anuncios/save" var="urlForm"></spring:url>
+<spring:url value="/clientetienepedido/save" var="urlForm"></spring:url>
 <nav class="navbar navbar-inverse " role="navigation">
 
 	<div class="container">
@@ -42,7 +42,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<security:authorize access="isAnonymous()">
 					<li id="login"><a href="${contextRoot}/formLogin">Login </a></li>
-					<li id="listProducts"><a href="${contextRoot}/register">Sign
+					<li id="register"><a href="${contextRoot}/register">Sign
 							Up </a></li>
 				</security:authorize>
 				<li class="dropdown" id="userModel"><a
@@ -52,25 +52,23 @@
 				</a>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						<security:authorize access="hasAuthority('ROLE_ADMIN')">
-							<li id="cart"><form:form action="${urlForm}" method="post"
-									id="form" class="form" enctype="multipart/form-data"
-									modelAttribute="InstanciaClienteTienePedido">
-									<a href="${contextRoot}/cart/show" class="myForm22"
-										id="crearPedido"> <span
-										class="glyphicon glyphicon-shopping-cart"></span> &#160;<span
-										class="badge">${userModel.cart.cartLines}</span> -
-										${userModel.cart.grandTotal} &#36;
-									</a>
-									<div class="form-buttons">
-										<div class="button">
-											<button href="${urlRoot}" type="submit" value="submit"
-												id="guardar" class="btn btn-danger"
-												title="Crear Carrito de Compras"
-												onclick='return confirm("¿ DESEA COMPRAR ?").submit()'>create
-												New Cart</button>
-										</div>
+							<li id="cart"><a
+								href="${contextRoot}/clientetienepedido/show"> <span
+									class="glyphicon glyphicon-shopping-cart"></span> &#160;<span
+									class="badge">${userModel.cart.cartLines}</span> -
+									${userModel.cart.grandTotal} &#36;
+							</a>
+
+
+								<div class="form-buttons">
+									<div class="button">
+										<button href="${urlRoot}" type="submit" value="submit"
+											id="guardar" class="btn btn-danger"
+											title="Crear Carrito de Compras"
+											onclick='return confirm("¿ DESEA COMPRAR ?").submit()'>create
+											New Cart</button>
 									</div>
-								</form:form></li>
+								</div></li>
 							<li role="separator" class="divider"></li>
 						</security:authorize>
 						<li id="logout"><a href="${contextRoot}/logout">Logout</a></li>
