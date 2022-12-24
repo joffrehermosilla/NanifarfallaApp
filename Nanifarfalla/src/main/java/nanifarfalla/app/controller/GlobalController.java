@@ -55,7 +55,7 @@ public class GlobalController {
 						clienteTienePedido.setmUsuario(user);
 						productoxPedido.setmClientetienepedido(clienteTienePedido);
 
-						userModel.setCart(productoxPedido);
+						userModel.setCart(user.getCart());		
 					}
 
 					session.setAttribute("userModel", userModel);

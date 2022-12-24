@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,16 +17,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.jboss.aerogear.security.otp.api.Base32;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-
 
 	@Id
 	@Column(unique = true, nullable = false)
@@ -73,16 +73,19 @@ public class Usuario {
 
 	@OneToMany(mappedBy = "mUsuario")
 	private Collection<UserAlerta> useralertas = new ArrayList<>();
+
+	@OneToOne(mappedBy = "mUsuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Cart cart;
 	
 	@OneToMany(mappedBy = "user")
 	private Collection<UserLocation> userlocation = new ArrayList<>();
-	
-	
 
 	public Collection<UserLocation> getUserlocation() {
 		return userlocation;
 	}
 
+
+	
 	public void setUserlocation(Collection<UserLocation> userlocation) {
 		this.userlocation = userlocation;
 	}
@@ -96,13 +99,18 @@ public class Usuario {
 	TipoUsuario mTipoUsuario;
 //fkcodigo_tipousuario	
 	@JoinColumn(name = "fkcodigo_estadousuario", referencedColumnName = "codigo_estadousuario")
-	@ManyToOne	
+	@ManyToOne
 	EstadoUsuario mEstadoUsuario;
 
-	
-	
-	
-	
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
 //fkcodigo_estadousuario	
 
 	public String getGenero() {
@@ -407,20 +415,16 @@ public class Usuario {
 		return authorities;
 	}
 
-	
 	public Usuario(String nombre_usuario, String apellido_usuario, String password_usuario, String email,
 			boolean enabled, Collection<Role> roles) {
-	
+
 		this.nombre_usuario = nombre_usuario;
 		this.apellido_usuario = apellido_usuario;
 		this.password_usuario = password_usuario;
 		this.email = email;
 		this.enabled = enabled;
-		this.roles=roles;
-		
+		this.roles = roles;
+
 	}
 
-	
-	
-	
 }

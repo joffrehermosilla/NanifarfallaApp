@@ -11,15 +11,24 @@ public class UserModel implements Serializable {
 	private String fullName;
 	private Collection<Role> role;
 
-	private ProductoxPedido cart;
+	private ProductoxPedido cartx;
 	private ClienteTienePedido clienteTienePedido;
+	private Cart cart;
 
-	public ProductoxPedido getCart() {
+	public Cart getCart() {
 		return cart;
 	}
 
-	public void setCart(ProductoxPedido cart) {
+	public void setCart(Cart cart) {
 		this.cart = cart;
+	}
+
+	public ProductoxPedido getCartx() {
+		return cartx;
+	}
+
+	public void setCartx(ProductoxPedido cart) {
+		this.cartx = cart;
 	}
 
 	public ClienteTienePedido getClienteTienePedido() {
