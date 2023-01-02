@@ -70,7 +70,7 @@ public class ClienteTienePedidoController {
 		mv.addObject("title", "User Cart");
 		mv.addObject("userClickShowCart", true);
 		mv.addObject("cartLines", null);
-		// mv.addObject("cartLines", cartService.getCartLines());
+		//mv.addObject("cartLines", cartService.getCartLines());
 		// mv.addObject("estadocart",
 		// cartService.getCart().getmEstadoClienteTienePedido());
 		// mv.addObject("cartx", cartService.getCart());

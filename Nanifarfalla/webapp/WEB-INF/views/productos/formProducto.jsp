@@ -46,7 +46,7 @@
 		</spring:hasBindErrors>
 
 
-		${InstanciaElaboracionProducto}
+		${InstanciaProducto}
 		<form:form action="${urlForm}" method="post" id="form" class="form"
 			enctype="multipart/form-data" modelAttribute="InstanciaProducto">
 
@@ -66,7 +66,17 @@
 								-->
 							<form:hidden path="codigo_producto" />
 						</div>
+						<div>
+						
+							<select name="linea" class="form-control"">
+								<option value="-1">Seleccione linea</option>
 
+								<c:forEach var="productoz" items="${productoz}">
+									<option value="${productoz.mLinea.codigo_linea}">${productoz.mLinea.nombre_linea}</option>
+								</c:forEach>
+
+							</select>
+						</div>
 						<div class="form-group">
 							<form:label for="nombre_producto" path="nombre_producto"
 								id="nombre_producto">Nombre de Producto</form:label>

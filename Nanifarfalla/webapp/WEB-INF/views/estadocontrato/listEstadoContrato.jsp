@@ -21,7 +21,7 @@
 <spring:url value="/estadocontrato/delete" var="urlDelete" />
 <spring:url value="/estadocontrato/update" var="urlEdit" />
 <spring:url value="/estadocontrato/" var="urlPaginate"></spring:url>
-
+<spring:url value="/admin/index" var="urlAdmin"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 
@@ -39,6 +39,9 @@
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
 			title="Nuevo Estado Contrato">Nuevo Estado Contrato</a><br> <br>
+			
+					<a href="${urlAdmin}" class="btn btn-warn" role="button"
+			title="VOLVER MODULO">VOLVER MODULO DE ADMINISTRADOR</a><br> <br>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>

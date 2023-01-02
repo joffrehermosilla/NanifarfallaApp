@@ -21,7 +21,7 @@
 <spring:url value="/lineas/delete" var="urlDelete" />
 <spring:url value="/lineas/update" var="urlEdit" />
 <spring:url value="/lineas/" var="urlPaginate"></spring:url>
-
+<spring:url value="/admin/index" var="urlAdmin"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 
@@ -38,7 +38,11 @@
 			<div class='alert alert-danger' role="alert" align="center">${mensajedelete}</div>
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
-			title="Nueva LINEA">Nueva LINEA</a><br> <br>
+			title="Nueva LINEA">Nueva LINEA</a><br> <br> <a
+			href="${urlAdmin}" class="btn btn-warn" role="button"
+			title="VOLVER MODULO">VOLVER MODULO DE ADMINISTRADOR</a><br> <br>
+
+
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
@@ -57,10 +61,16 @@
 
 						<td>${lineay.codigo_linea}</td>
 						<td>${lineay.nombre_linea}</td>
-						<td>${lineay.foto_linea}</td>
-						<td>${lineay.foto_ruta}</td>
-						<td>${lineay.active}</td>
+						<td>${lineay.foto_linea}<img
+							src="${urlPublic}/images/${linea.foto_linea}" />
+						</td>
+						<td>${lineay.foto_ruta}
+						<img
+							src="${urlPublic}/images/${linea.foto_ruta}" />
 						
+						</td>
+						<td>${lineay.active}</td>
+
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${lineay.version}" /></td>
 
@@ -71,8 +81,7 @@
 							<table border="1">
 								<tr>
 
-									<td><a
-										href="${urlEdit}/${lineay.codigo_linea} "
+									<td><a href="${urlEdit}/${lineay.codigo_linea} "
 										class="btn btn-success btn-sm" role="button" title="Edit">
 
 											<ul class="navbar-nav">
@@ -86,8 +95,7 @@
 									</td>
 
 
-									<td><a
-										href="${urlDelete}/${lineay.codigo_linea}"
+									<td><a href="${urlDelete}/${lineay.codigo_linea}"
 										onclick='return confirm("¿ Estás Seguro ?")'
 										class="btn btn-danger btn-sm" role="button" type="submit"
 										value="submit" title="Eliminar">

@@ -119,7 +119,8 @@
 				<div class="col-md-3">
 					<div class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/1.jpg">
+						src="${urlPublic}/images/tesis/foto6.jpg">
+							
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Just another product name</a>
@@ -145,7 +146,7 @@
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/2.jpg">
+							src="${urlPublic}/images/tesis/foto7.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Some item name here</a>
@@ -171,7 +172,7 @@
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/3.jpg">
+							src="${urlPublic}/images/tesis/foto8.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Great product name here</a>
@@ -197,7 +198,7 @@
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/4.jpg">
+							src="${urlPublic}/images/tesis/foto9.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Just another product name</a>
@@ -243,7 +244,7 @@
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/5.jpg">
+							src="${urlPublic}/images/tesis/foto10.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Just another product name</a>
@@ -269,7 +270,7 @@
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/6.jpg">
+							src="${urlPublic}/images/tesis/foto11.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Some item name here</a>
@@ -295,7 +296,7 @@
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/7.jpg">
+							src="${urlPublic}/images/tesis/foto12.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Great product name here</a>
@@ -321,7 +322,7 @@
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
 						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/9.jpg">
+							src="${urlPublic}/images/tesis/foto13.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Just another product name</a>
@@ -367,8 +368,7 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
-						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/1.jpg">
+						<a href="#" class="img-wrap"> <img id="main-img" src="${urlPublic}/images/tesis/foto1.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Just another product name</a>
@@ -380,8 +380,7 @@
 				<!-- col.// -->
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
-						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/2.jpg">
+						<a href="#" class="img-wrap"> <img id="main-img" src="${urlPublic}/images/tesis/foto2.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Some item name here</a>
@@ -393,8 +392,7 @@
 				<!-- col.// -->
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
-						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/3.jpg">
+						<a href="#" class="img-wrap"> <img id="main-img" src="${urlPublic}/images/tesis/foto3.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Great product name here</a>
@@ -406,8 +404,7 @@
 				<!-- col.// -->
 				<div class="col-md-3">
 					<div href="#" class="card card-product-grid">
-						<a href="#" class="img-wrap"> <img
-							src="${urlPublic}/images/items/4.jpg">
+						<a href="#" class="img-wrap"><img id="main-img" src="${urlPublic}/images/tesis/foto4.jpg">
 						</a>
 						<figcaption class="info-wrap">
 							<a href="#" class="title">Just another product name</a>

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.Linea;
@@ -37,6 +38,7 @@ import nanifarfalla.app.service.ILineasService;
 import nanifarfalla.app.service.INiubizService;
 import nanifarfalla.app.service.IProductoService;
 import nanifarfalla.app.util.Utileria;
+import nanifarfalla.app.web.dto.LineaDto;
 
 @Controller
 @RequestMapping("/lineas")
@@ -47,7 +49,7 @@ public class LineasController {
 
 	@Autowired
 	private INiubizService niubiz;
-	
+
 	@Autowired
 	private IProductoService productoService;
 
@@ -82,20 +84,20 @@ public class LineasController {
 		System.out.println("Buscamos las lineas : " + codigo_linea);
 
 		System.out.println("***1. API de Seguridad***");
-		Double montoTotal=20.0;
-		SeguridadResponse seguridadResponse=niubiz.seguridadPagoNiubiz();
+		Double montoTotal = 20.0;
+		SeguridadResponse seguridadResponse = niubiz.seguridadPagoNiubiz();
 		model.addAttribute(seguridadResponse.getAccessToken());
 		System.out.println("***2. API de Sesion para JS***");
-		SesionRequest sesionRequest=new SesionRequest();
+		SesionRequest sesionRequest = new SesionRequest();
 		sesionRequest.setChannel("web");
-		sesionRequest.setAmount(montoTotal+"");
-		sesionRequest.setAccessToken(seguridadResponse.getAccessToken());		
-		SesionResponse sesionResponse =niubiz.sesionPagoNiubiz(sesionRequest);
-		model.addAttribute("sessionKey",sesionResponse.getSessionKey());		
-		model.addAttribute("canalSesion","web");
-		model.addAttribute("codigoComercio","456879852");			
-		model.addAttribute("montoTotal",montoTotal);
-		
+		sesionRequest.setAmount(montoTotal + "");
+		sesionRequest.setAccessToken(seguridadResponse.getAccessToken());
+		SesionResponse sesionResponse = niubiz.sesionPagoNiubiz(sesionRequest);
+		model.addAttribute("sessionKey", sesionResponse.getSessionKey());
+		model.addAttribute("canalSesion", "web");
+		model.addAttribute("codigoComercio", "456879852");
+		model.addAttribute("montoTotal", montoTotal);
+
 		System.out.println("creadas en las fechas : " + fecha);
 		model.addAttribute("linea", serviceLineas.buscarPorId(codigo_linea));
 
@@ -117,7 +119,11 @@ public class LineasController {
 
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute("InstanciaLinea") Linea linea, BindingResult result,
-			RedirectAttributes attributes, HttpServletRequest request) {
+			@RequestParam("archivoImagen1") MultipartFile multiPart1,
+			@RequestParam("archivoImagen2") MultipartFile multiPart2, RedirectAttributes attributes,
+			HttpServletRequest request) {
+
+		Authentication authentication;
 
 		System.out.println("Recibiendo objeto LINEAS: " + linea);
 		if (result.hasErrors()) {
@@ -132,7 +138,14 @@ public class LineasController {
 		System.out.println("Recibiendo objeto LINEA: " + linea);
 		System.out.println("Elementos en la lista antes de la insersion: " + serviceLineas.buscarTodas().size());
 
-		serviceLineas.inserta(linea);
+		// serviceLineas.inserta(linea);
+
+		LineaDto lineaDto = new LineaDto();
+
+		lineaDto.setCodigo_linea(linea.getCodigo_linea());
+		lineaDto.setNombre_linea(linea.getNombre_linea());
+
+		serviceLineas.registroLineaString(lineaDto, 1, multiPart1, multiPart2, request);
 
 		System.out.println("Elementos en la lista despues de la insersion: " + serviceLineas.buscarTodas().size());
 

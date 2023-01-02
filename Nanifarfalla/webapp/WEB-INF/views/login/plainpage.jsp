@@ -87,8 +87,8 @@
 			e.preventDefault();
 
 			vista.innerHTML = `
-																		      
-	        <iframe src="${urlElaboracionProducto}" height="620" style="width: 100%" frameBorder="0" ></iframe>
+				<div class="embed-responsive embed-responsive-16by9">														      
+	        <iframe src="${urlElaboracionProducto}" height="620" style="width: 100%" frameBorder="0" ></iframe></div>
 	        `;
 			});
 
@@ -246,7 +246,6 @@
 		</div>
 
 
-		<!-- Footer comes here -->
 
 
 		<!-- jQuery -->

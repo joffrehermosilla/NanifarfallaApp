@@ -15,11 +15,11 @@
 
 		<load-on-startup>1</load-on-startup>
 
-<!-- 		<multipart-config> -->
-<!-- 			<location>/tmp</location> -->
-<!-- 		</multipart-config> -->
+		<multipart-config> 
+ 			<location>/tmp</location> 
+		</multipart-config> 
 
-		<multipart-config> <location>c:\tmp</location> </multipart-config>
+	<!-- 		<multipart-config> <location>c:\tmp</location> </multipart-config> -->
 	</servlet>
 	<!-- Evento Listener para permitir Pubhisher Patron de diseño Observador -->
 	<listener>

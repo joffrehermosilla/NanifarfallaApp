@@ -21,7 +21,7 @@
 <spring:url value="/productos/delete" var="urlDelete" />
 <spring:url value="/productos/update" var="urlEdit" />
 <spring:url value="/productos/" var="urlPaginate"></spring:url>
-
+<spring:url value="/admin/index" var="urlAdmin"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 
@@ -39,6 +39,13 @@
 		</c:if>
 		<a href="${urlCreate}" class="btn btn-success" role="button"
 			title="Nuevo Producto">Nuevo Producto</a><br> <br>
+			
+			
+			
+			<a
+			href="${urlAdmin}" class="btn btn-warn" role="button"
+			title="VOLVER MODULO">VOLVER MODULO DE ADMINISTRADOR</a><br> <br>
+			
 		<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
 				<tr>
@@ -75,7 +82,12 @@
 
 						<td>${productoy.stock_producto}</td>
 						<td>${productoy.preparacion_producto}</td>
-						<td>${productoy.foto_ruta}</td>
+						<td>${urlPublic}/${productoy.foto_ruta}
+						<img
+			src="${urlPublic}/${productoy.foto_ruta}" width="30" height="30"
+			class="d-inline-block align-top" alt="">
+						</td>
+						
 						<td>${productoy.foto_ruta1}</td>
 						<td>${productoy.foto_ruta2}</td>
 						<td>${productoy.foto_ruta3}</td>

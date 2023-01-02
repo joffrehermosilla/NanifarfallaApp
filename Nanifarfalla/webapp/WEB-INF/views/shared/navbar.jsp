@@ -62,7 +62,7 @@
 
 								<div class="form-buttons">
 									<div class="button">
-										<button href="${urlRoot}" type="submit" value="submit"
+										<button href="${contextRoot}/admin/index" type="submit" value="submit"
 											id="guardar" class="btn btn-danger"
 											title="Crear Carrito de Compras"
 											onclick='return confirm("¿ DESEA COMPRAR ?").submit()'>create

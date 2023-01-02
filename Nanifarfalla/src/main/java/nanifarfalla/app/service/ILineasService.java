@@ -26,7 +26,12 @@ public interface ILineasService  {
 	List<Linea> findBycodigo_linea(int codigo_linea);
 	List<Linea> findByid_linea( int id);
 	 
-    String registerLineaString(LineaDto lineaDto, int active,MultipartFile multiPart,MultipartFile multiPartx,HttpServletRequest request,Authentication authentication);
+    String registerLineaString(LineaDto lineaDto, int active,
+    		MultipartFile multiPart,MultipartFile multiPartx,HttpServletRequest request,Authentication authentication);
+	
+	 
+    String registroLineaString(LineaDto lineaDto, int active,
+    		MultipartFile multiPart,MultipartFile multiPartx,HttpServletRequest request);
 	
 	Linea get(int id);
 	List<Linea> list();

@@ -110,16 +110,7 @@
 			<div class="col-lg-4 col-sm-6 col-12">
 
 
-
-
-
-
-
 				<div class="widgets-wrap float-md-right">
-
-
-
-
 
 
 
@@ -177,50 +168,8 @@
 				</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<!-- widgets-wrap.// -->
 			</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 			<!-- col.// -->
@@ -385,20 +334,21 @@
 													</div>
 											</a></li>
 											<li class="dropdown-divider"></li>
-											<li><a class="dropdown-item"
-												href="mailto:contact@createx.studio">
+											<li><a class="dropdown-item" href="${inicio}">
 													<div class="d-flex">
 														<div class="lead text-muted pt-1">
 															<i class="czi-help"></i>
 														</div>
 														<div class="ml-2">
-															<span class="d-block text-heading">Support</span><small
-																class="d-block text-muted">contact@createx.studio</small>
+															<span class="d-block text-heading">Modulo de
+																Administrador</span><small class="d-block text-muted">contact@createx.studio</small>
 														</div>
 													</div>
 											</a></li>
 										</ul>
+
 									</c:when>
+
 									<c:otherwise>
 										<div class="dropdown-menu px-2 pl-0 pb-4">
 											<div class="d-flex flex-wrap flex-md-nowrap">
@@ -425,21 +375,7 @@
 						</c:when>
 					</c:choose>
 				</c:forEach>
-				<sec:authorize access="hasAuthority('ROLE_ADMIN')">
-					<li><a class="dropdown-item"
-						href="http://nanifarfalla.com.pe:9090/">
-							<div class="d-flex">
-								<div class="lead text-muted pt-1">
-									<i class="czi-edit"></i>
-								</div>
-								<div class="ml-2">
-									<span class="d-block text-heading">Swagger<span
-										class="badge badge-success ml-2">v1.2</span></span><small
-										class="d-block text-muted">Regular updates</small>
-								</div>
-							</div>
-					</a></li>
-				</sec:authorize>
+
 			</ul>
 
 

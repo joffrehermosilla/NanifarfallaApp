@@ -74,12 +74,13 @@
 						</div>
 						<div class="form-group">
 							<label for="foto_linea">Foto de la Linea</label> <input
-								type="file" id="foto_linea" name="archivoImagen" />
+								type="file" id="foto_linea" name="archivoImagen1" />
 							<p class="help-block">Imagen de Servicio</p>
 						</div>
 						<div class="form-group">
 							<label for="foto_ruta" class="form-label">Segunda Foto </label> <input
-								class="form-control" type="file" id="foto_ruta" multiple>
+								class="form-control" type="file" id="foto_ruta"
+								name="archivoImagen2" multiple>
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3 col-form-label">Autorizar la Linea</label>
@@ -102,10 +103,8 @@
 						<div class="col-sm-2"></div>
 						<div>
 							<select id="nombre_linea" class="form-control">
-								<option value="-1">Confirme Linea Existente
-									existente</option>
-								<c:forEach var="lineaz"
-									items="${lineaz}">
+								<option value="-1">Confirme Linea Existente existente</option>
+								<c:forEach var="lineaz" items="${lineaz}">
 									<option value="-1">${lineaz.nombre_linea}</option>
 								</c:forEach>
 							</select>

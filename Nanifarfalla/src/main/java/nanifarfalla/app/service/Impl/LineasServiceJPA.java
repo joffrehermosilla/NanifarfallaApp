@@ -124,33 +124,29 @@ public class LineasServiceJPA implements ILineasService {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 		linea.setNombre_linea(lineaDto.getNombre_linea());
-         String rutasesion = linearepository.findRutaFicheroSesion(authentication.getName());
-         LOGGER.info("rutasesion: " + rutasesion);
-         
-         
+		String rutasesion = linearepository.findRutaFicheroSesion(authentication.getName());
+		LOGGER.info("rutasesion: " + rutasesion);
+
 		if (!multiPart.isEmpty()) {
-			String ruta = "/resources/images/" +rutasesion+"/"+linea.getNombre_linea() + "/"+"1";
-	
+			String ruta = "/resources/images/" + rutasesion + "/" + linea.getNombre_linea() + "/" + "1";
 
 			// System.out.println("ruta: " + ruta);
 			LOGGER.info("ruta primera foto: " + ruta);
 			// System.out.println("rutax: " + rutax);
-			
+
 			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, ruta);
 			linea.setFoto_linea(nombreImagen);
-			
 
 		}
 		if (!multiPartx.isEmpty()) {
-			String rutax = "/resources/images/" +rutasesion+"/"+linea.getNombre_linea() + "/"+"2";
+			String rutax = "/resources/images/" + rutasesion + "/" + linea.getNombre_linea() + "/" + "2";
 
 			// System.out.println("ruta: " + ruta);
 			LOGGER.info("ruta segunda foto: " + rutax);
 			// System.out.println("rutax: " + rutax);
-			
+
 			String nombreImagenx = Utileria.guardarImagenPlus(multiPartx, request, rutax);
 			linea.setFoto_ruta(nombreImagenx);
-			
 
 		}
 		linea.setVersion(timestamp);
@@ -165,6 +161,49 @@ public class LineasServiceJPA implements ILineasService {
 		// TODO Auto-generated method stub
 		LOGGER.info("ruta de SESION es:" + linearepository.findRutaFicheroSesion(usernamex));
 		return linearepository.findRutaFicheroSesion(usernamex);
+	}
+
+	@Override
+	public String registroLineaString(LineaDto lineaDto, int active, MultipartFile multiPart, MultipartFile multiPartx,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+
+		final Linea linea = new Linea();
+
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+		linea.setNombre_linea(lineaDto.getNombre_linea());
+
+		if (!multiPart.isEmpty()) {
+			String ruta = "/resources/images/" + linea.getNombre_linea();
+
+			// System.out.println("ruta: " + ruta);
+			LOGGER.info("ruta primera foto: " + ruta);
+			// System.out.println("rutax: " + rutax);
+
+			String nombreImagen = Utileria.guardarImagenPlus(multiPart, request, ruta);
+			linea.setFoto_linea(nombreImagen);
+
+		}
+		if (!multiPartx.isEmpty()) {
+			String rutax = "/resources/images/" + linea.getFoto_ruta();
+
+			// System.out.println("ruta: " + ruta);
+			LOGGER.info("ruta segunda foto: " + rutax);
+			// System.out.println("rutax: " + rutax);
+
+			String nombreImagenx = Utileria.guardarImagenPlus(multiPartx, request, rutax);
+			linea.setFoto_ruta(nombreImagenx);
+
+		}
+		linea.setVersion(timestamp);
+
+		LOGGER.info("LINEA CREADA");
+
+		linearepository.save(linea);
+
+		return "LINEA CREADA";
+
 	}
 
 }

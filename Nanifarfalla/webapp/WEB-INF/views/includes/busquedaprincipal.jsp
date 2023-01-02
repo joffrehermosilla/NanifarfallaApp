@@ -53,7 +53,7 @@
 				<div class="card" style="width: 18rem;">
 					<figure class="snip0015">
 						<img
-							src="${urlPublic}/images/lineas/nanifarfalla/${linea.foto_linea}" />
+							src="${urlPublic}/images/${linea.foto_linea}" />
 						<figcaption>
 							<h2><b>${linea.nombre_linea}</b>
 								<span>${linea.codigo_linea}</span> ${fechabusqueda}

@@ -38,7 +38,7 @@
 				<aside class="col-md-6">
 					<article class="gallery-wrap">
 						<div class="img-big-wrap">
-							<img id="main-img" src="${urlPublic}/images/items/1.jpg">
+							<img id="main-img" src="${urlPublic}/images/tesis/foto5.jpg">
 							<div id="zoom">
 								<img id="zoom-img" />
 							</div>

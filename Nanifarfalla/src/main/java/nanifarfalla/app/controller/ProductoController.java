@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.ElaboracionProducto;
+import nanifarfalla.app.model.Linea;
 import nanifarfalla.app.model.Producto;
 
 import nanifarfalla.app.service.ILineasService;
@@ -97,8 +98,8 @@ public class ProductoController {
 	}
 
 	@PostMapping(value = "/save")
-	public String guardar(@ModelAttribute("InstanciaProducto") Producto producto, BindingResult result,
-			RedirectAttributes attributes, @RequestParam("archivoImagen") MultipartFile multiPart,
+	public String guardar(@RequestParam("linea") String linea, @ModelAttribute("InstanciaProducto") Producto producto,
+			BindingResult result, RedirectAttributes attributes, @RequestParam("archivoImagen") MultipartFile multiPart,
 			@RequestParam("archivoImagen1") MultipartFile multiPart1,
 			@RequestParam("archivoImagen2") MultipartFile multiPart2,
 			@RequestParam("archivoImagen3") MultipartFile multiPart3,
@@ -116,6 +117,12 @@ public class ProductoController {
 		}
 		// serviceAnuncios.guardar(productos);
 		System.out.println("Recibiendo objeto Productos: " + producto);
+		Linea lineax = new Linea();
+
+		int opcion = Integer.parseInt(linea);
+
+		lineax= serviceLineas.buscarPorId(opcion);
+		producto.setmLinea(lineax);
 
 		System.out.println("Elementos en la lista antes de la insersion: " + productoService.buscarTodas().size());
 		productoService.inserta(producto, multiPart, multiPart1, multiPart2, multiPart3, multiPart4, request);
@@ -126,8 +133,6 @@ public class ProductoController {
 
 		return "redirect:/productos/index";
 	}
-	
-	
 
 	@GetMapping(value = "/update/{id}")
 	public String editar(@PathVariable("id") int idProducto, Model model) {

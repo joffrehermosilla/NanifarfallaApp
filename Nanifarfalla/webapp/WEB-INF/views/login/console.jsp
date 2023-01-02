@@ -9,11 +9,48 @@
 <spring:url value="/" var="urlRoot"></spring:url>
 <spring:url value="/resources" var="urlPublic"></spring:url>
 <spring:url value="/admin/logout" var="urlForm"></spring:url>
-
+<spring:url value="http://localhost:8080" var="local"></spring:url>
 <jsp:include page="../includes/link.jsp"></jsp:include>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 
 
+
+<spring:url value="/productos/indexPaginate?page=0" var="urlProducto"></spring:url>
+
+<spring:url value="/estadousuario/indexPaginate?page=0"
+	var="urlEstadoUsuario"></spring:url>
+
+<spring:url value="/elaboracionproducto/indexPaginate?page=0"
+	var="urlElaboracionProducto"></spring:url>
+<spring:url value="/pais/indexPaginate?page=0" var="urlPais"></spring:url>
+
+<spring:url value="/lineas/indexPaginate?page=0" var="urlLinea"></spring:url>
+
+<spring:url value="/estadocatalogo/indexPaginate?page=0"
+	var="urlEstadoCatalogo"></spring:url>
+
+<spring:url value="/tipousuario/indexPaginate?page=0"
+	var="urlTipoUsuario"></spring:url>
+
+<spring:url value="/estadousuario/indexPaginate?page=0"
+	var="urlEstadoUsuario"></spring:url>
+
+<spring:url value="/tipoalerta/indexPaginate?page=0" var="urlTipoAlerta"></spring:url>
+
+
+<spring:url value="/estadocontrato/indexPaginate?page=0"
+	var="urlEstadoContrato"></spring:url>
+
+
+<spring:url value="/privilege/indexPaginate?page=0" var="urlPrivilege"></spring:url>
+
+<spring:url value="/menus/indexPaginate?page=0" var="urlMenu"></spring:url>
+
+<spring:url value="/roles/indexPaginate?page=0" var="urlRole"></spring:url>
+
+<spring:url value="/alertas/indexPaginate?page=0" var="urlAlerta"></spring:url>
+
+<spring:url value="/anuncios/indexPaginate?page=0" var="urlAnuncio"></spring:url>
 
 
 
@@ -69,11 +106,17 @@
 		<div class='alert alert-success' role="alert" align="center">${ mensajelogeo}</div>
 	</c:if>
 
-
+	<script>
+		function abrir(url) {
+			open(url, '', 'top=300,left=300,width=300,height=300');
+		}
+	</script>
 
 </header>
 
 <body class="nav-md">
+
+	<div class="content"></div>
 	<div class="container body">
 		<div class="main_container">
 
@@ -92,8 +135,8 @@
 					<!-- menu profile quick info -->
 					<div class="profile clearfix">
 						<div class="profile_pic">
-							<img src="${urlPublic}/gentelella/images/img.jpg" alt="..."
-								class="img-circle profile_img">
+							<img src="${urlRoot}${urlPublic}/gentelella/images/img.jpg"
+								alt="..." class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
@@ -121,7 +164,8 @@
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li class="estadocontrato" id="estadocontrato"><a
-											href="#arriba" id="estadocontrato">ESTADO CONTRATO</a></li>
+											href="${local}${urlEstadoContrato}" id="estadocontrato">ESTADO
+												CONTRATO</a></li>
 
 										<li><a href="form_validation.html">Form Validation</a></li>
 										<li><a href="form_wizards.html">Form Wizard</a></li>
@@ -131,7 +175,7 @@
 								<li><a><i class="fa fa-desktop"></i> UI Elements <span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
-										<li class="menu" id="menu"><a href="#arriba" id="menu">MENU</a></li>
+										<li class="menu" id="menu"><a href="${local}${urlMenu}" id="menu">MENU</a></li>
 										<li><a href="media_gallery.html">Media Gallery</a></li>
 										<li><a href="typography.html">Typography</a></li>
 										<li><a href="icons.html">Icons</a></li>
@@ -192,9 +236,9 @@
 										<li><a>REGLAS<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
-												<li class="privilege" id="privilege"><a href="#arriba"
+												<li class="privilege" id="privilege"><a href="${local}${urlPrivilege}"
 													id="privilege">PRIVILEGIOS</a></li>
-												<li class="roles" id="roles"><a href="#arriba"
+												<li class="roles" id="roles"><a href="${local}${urlRole}"
 													id="roles">ROLES</a></li>
 											</ul></li>
 
@@ -204,11 +248,11 @@
 											<ul class="nav child_menu">
 												<!-- JavaScript Id Estado Usuario /resources/js/menuconsole.js -->
 												<li class="estadousuario" id="estadousuario"><a
-													href="#arriba" id="estadousuario">ESTADO USUARIO </a></li>
-												<li class="linea" id="linea"><a href="#arriba"
+													href="${local}${urlEstadoUsuario}" id="estadousuario">ESTADO USUARIO </a></li>
+												<li class="linea" id="linea"><a href="${local}${urlLinea}"
 													id="linea">LINEA </a></li>
 												<li class="tipousuario" id="tipousuario"><a
-													href="#arriba" id="tipousuario">TIPO USUARIO </a></li>
+													href="${local}${urlTipoUsuario}" id="tipousuario">TIPO USUARIO </a></li>
 
 											</ul></li>
 
@@ -218,12 +262,12 @@
 												class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
 												<li class="elaboracionproducto" id="elaboracionproducto"><a
-													href="#arriba" id="elaboracionproducto">ELABORACION DEL
+													href="${local}${urlElaboracionProducto}" id="elaboracionproducto">ELABORACION DEL
 														PRODUCTO </a></li>
-												<li class="producto" id="producto"><a href="#arriba"
+												<li class="producto" id="producto"><a href="${local}${urlProducto}"
 													id="producto"> PRODUCTO </a></li>
 												<li class="estadocatalogo" id="estadocatalogo"><a
-													href="#arriba" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
+													href="${local}${urlEstadoCatalogo}" id="estadocatalogo">ESTADO DE CATALOGO </a></li>
 												<li class="tipoalerta" id="tipoalerta"><a
 													href="#arriba" id="tipoalerta">TIPO ALERTA </a></li>
 
@@ -373,6 +417,7 @@
 
 					<div class="clearfix"></div>
 
+
 					<div class="row">
 						<div class="col-md-12 col-sm-12  ">
 							<div class="x_panel">
@@ -402,12 +447,15 @@
 
 
 
-									<div class="x_content" id="plainpage">
+
+									<div class="embed-responsive embed-responsive-16by9"
+										id="plainpage">
 										Add content to the page ...
 										<!-- Carga la pagina plainPAGE donde habra condicionales que discriminaran los ID de <li id=""> en menuconsole.js -->
-										<%@include file="../login/plainpage.jsp"%>
+									<!--  <%@include file="../login/plainpage.jsp"%>-->	
 
-
+										<!-- Loading the home content -->
+									
 
 
 
@@ -464,6 +512,8 @@
 	<script src="${urlPublic}/build/js/custom.min.js"></script>
 
 	<script src="${urlPublic}/js/regla5.js"></script>
+
+	<script src="${js}/myapp.js"></script>
 	<!-- ========================= FOOTER ========================= -->
 
 </body>

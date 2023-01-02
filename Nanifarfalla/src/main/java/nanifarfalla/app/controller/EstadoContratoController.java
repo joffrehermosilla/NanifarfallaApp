@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import nanifarfalla.app.model.EstadoContrato;
@@ -42,6 +42,10 @@ public class EstadoContratoController {
 			BindingResult result) {
 		List<EstadoContrato> estadocontratoy = estadocontratoService.buscarTodas();
 		model.addAttribute("estadocontratoy", estadocontratoy);
+		ModelAndView mv = new ModelAndView("plainpage");
+		mv.addObject("estadocontrato", "Estado Contrato");
+		mv.addObject("userClickEstadoContrato", true);
+		
 		return "estadocontrato/listEstadoContrato";
 	}
 
