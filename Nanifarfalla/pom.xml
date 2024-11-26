@@ -28,7 +28,7 @@
 		<joffre.hibernatecore.version>5.4.6.Final
 		</joffre.hibernatecore.version>
 		<joffre.datajpa.version>2.2.7.RELEASE</joffre.datajpa.version>
-		<joffre.gson.version>2.8.6</joffre.gson.version>
+		<joffre.gson.version>2.8.9</joffre.gson.version>
 
 		<joffre.passay.version>1.0</joffre.passay.version>
 		<joffre.elapi.version>2.2</joffre.elapi.version>
